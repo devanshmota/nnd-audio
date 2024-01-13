@@ -37,7 +37,7 @@ const Artists = () => {
     };
 
     return (
-        <div className="div_container py-3 px-5 d-flex flex-column">
+        <div className="div_container p-3 d-flex flex-column">
             <div className="container_arrow d-flex justify-content-between align-items-center">
                 <h2 className="titles_homepage m-0">Artists</h2>
                 <div className="d-flex align-items-center justify-content-center">

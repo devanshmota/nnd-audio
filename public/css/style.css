@@ -6696,7 +6696,7 @@ h2.widget-title:after {
 
 /* devansh styles */
 
-.login_container form input, select{
+/* .login_container form input, select{
 	border:none;
 	background-color: transparent;
     border-bottom: 1px solid gray;
@@ -6705,23 +6705,19 @@ h2.widget-title:after {
 	color: white;
 	width: 22rem;
 	outline: none;
-}
+} */
 
-#icon {
+/* #icon {
     position: absolute;
     font-size: 25px;
     color: var(--secondary-color);
-}
+} */
 
-.register_heading{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 
-.drpdwn_placeholder{
+
+/* .drpdwn_placeholder{
 	color: var(--icon-color);
-}
+} */
 
 .home_container{
 	margin-top: 5rem;
@@ -6825,8 +6821,8 @@ background-color: transparent;
 	flex-direction: column;
 	justify-content: center;
 	gap: 30px;
-	padding: 57px;
-	width: 31.25rem;
+	padding: 40px;
+	width: 25rem;
 	color: white;
 	background-color: var(--primary-color);
 	border-radius: 10px;
@@ -6835,21 +6831,26 @@ background-color: transparent;
 .login_form h2, p{
 	margin-bottom: 0 !important;
 }
-.login_form input{
+.login_form input,select,.frgt_container input{
 	border: none;
 	outline: none;
 	border-radius: 10px;
 	width: 100%;
 	padding-left: 40px;
-	padding-top: 12px;
-	padding-bottom: 12px;
+	padding-top: 7px;
+	padding-bottom: 7px;
 }
+.login_form select{
+	color: #757575;
+}
+
+
 .login_form button{
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;
 	width: 100%;
-	padding: 12px;
+	padding: 7px;
 	border-radius: 10px;
 }
 
@@ -6879,9 +6880,13 @@ background-color: transparent;
 .login_form .btn_container p {
 	text-align: center;
 }
+
+.login_form .input_container span{
+	text-decoration: underline;
+	cursor: pointer;
+}
 .login_form .btn_container p span{
 	color: var(--secondary-color);
-	text-decoration: underline;
 	cursor: pointer;
 }
 
@@ -6895,16 +6900,13 @@ background-color: transparent;
   align-items: center;
 }
 
-.login_form .email_icon {
-  position: absolute;
-  left: 15px; 
-}
-.login_form .password_icon {
+
+.login_form .all_icons {
   position: absolute;
   left: 15px; 
 }
 
-.login_form .email_icon,.password_icon,.eye_icon{
+.login_form .all_icons,.eye_icon{
 	color: var(--icon-color);
 }
 
@@ -6922,13 +6924,6 @@ background-color: transparent;
     font-size: xx-large;
 }
 
-body{
-	position: relative;
-}
-
-.wrapper{
-	position: absolute;
-}
 
 .modal-dialog {
     margin-left: 0 !important;
@@ -6936,4 +6931,28 @@ body{
 
 .fade.form.modal.show {
     background-color: transparent;
+}
+.modal-content{
+	background-color: transparent !important;
+}
+.modal-body {
+    display: flex;
+    justify-content: center;
+}
+.modal-dialog button {
+    position: static; 
+    height: auto; 
+}
+
+.modal-body,.modal-content{
+	padding: 0 !important;
+	padding-bottom: 0%;
+}
+
+.modal-dialog {
+    margin: 0 !important;
+}
+
+.entr_email{
+	text-align: center;
 }

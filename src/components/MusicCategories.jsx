@@ -65,7 +65,8 @@ const Music_categories = () => {
 
 
     return (
-        <div className="home_container py-3 px-5 d-flex flex-column">
+
+        <div className="home_container p-3 d-flex flex-column">
             <div className="container_arrow d-flex justify-content-between align-items-center">
                 <h2 className="titles_homepage m-0">Music Categories</h2>
 

@@ -11,9 +11,7 @@ import Radio from './Radio';
 
 
 const HomePage = () => {
-
-
-
+  
   return (
     <>
       <Sidebar />
@@ -23,8 +21,6 @@ const HomePage = () => {
       <Artists />
       <Lyricists />
       <Radio />
-
-
     </>
   )
 }

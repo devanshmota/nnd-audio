@@ -1,9 +1,9 @@
 'use client'
-
 // import { Dropdown, Space, Typography } from 'antd';
-import { FaUserAlt, FaUserPlus } from "react-icons/fa";
 import { useState } from "react";
-import MyModel from "./MyModel";
+import LoginModel from "./LoginModel";
+import RegisterModal from "./RegisterModal";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const items = [
   {
@@ -16,58 +16,52 @@ const items = [
   },
 ];
 
+const Header = ({ show }) => {
+  const[isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
+  const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
-const Header = () => {
+  const handleLoginClick = () => {
+    setIsLoginModalVisible(true);
+    setIsRegisterModalVisible(false);
+  };
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const handleRegisterClick = () => {
+    setIsLoginModalVisible(false);
+    setIsRegisterModalVisible(true);
+  };
 
   const handleLoginSignup = (e) => {
-    e.preventDefault()
-    setIsModalVisible(true);
+    e.preventDefault();
+    handleLoginClick(); 
   };
 
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-  };
+  const handleForgotPasswordClick = () => {
+    setIsLoginModalVisible(false);
+    setIsForgotPasswordVisible(true)
+  }
 
   return (
     <>
       <div className="ms_header">
-        {/* <div className="ms_top_left">
-            <div className="ms_top_search">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search Music Here.."
-              />
-              <span className="search_icon">
-                <img src="images/svg/search.svg" alt="" />
-              </span>
-            </div>
-            <div className="ms_top_trend">
-              <span><a href="#" className="ms_color">Trending Songs :</a></span>
-              <span className="top_marquee"
-                ><a href="#"
-                  >Dream your moments, Until I Met You, Gimme Some Courage, Dark
-                  Alley (+8 More)</a
-                ></span
-              >
-            </div>
-          </div> */}
+       
         <div className="ms_top_right">
           <div className="ms_top_lang">
-          
+
           </div>
           <div className="ms_top_btn">
             <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
           </div>
         </div>
-        {isModalVisible &&
-          <MyModel show={isModalVisible} onclose={handleModalClose} />
-        }
+        
+        <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick = {handleForgotPasswordClick} />
+
+        <RegisterModal show={isRegisterModalVisible} onHide={() => setIsRegisterModalVisible(false)} onLoginClick={handleLoginClick} />
+
+        <ForgotPasswordModal show={isForgotPasswordVisible} onHide={()=> setIsForgotPasswordVisible(false)} />
+
       </div>
-      
+
     </>
   )
 }

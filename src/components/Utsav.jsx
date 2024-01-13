@@ -13,7 +13,7 @@ const utshav = [
 
 const Utsav = () => {
     return (
-        <div className="div_container py-3 px-5 ">
+        <div className="div_container p-3">
             <div className="container_arrow container-fluid p-0">
                 <div className="row">
                     <div className="col-lg-12 d-flex justify-content-between align-items-center">
@@ -23,28 +23,28 @@ const Utsav = () => {
                 </div>
                 <div className="row mt-4">
                     <div className="col-lg-3">
-                        <Image src='/r_music1.jpg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                        <img src='/utshav_img_1.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                     </div>
                     <div className="col-lg-6">
                         <div className="row">
                             <div className="col-lg-4">
-                                <Image src='/utshav_img_1.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                <img src='/utshav_img_1.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                             </div>
                             <div className="col-lg-8">
-                                <Image src='/utshav_img_1.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                <img src='/utshav_img_1.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                             </div>
                         </div>
                         <div className="row mt-4">
                             <div className="col-lg-8">
-                                <Image src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                <img src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                             </div>
                             <div className="col-lg-4">
-                                <Image src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                <img src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-3">
-                        <Image src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
+                        <img src='/jula_shree_ghanshyam.jpeg' className="utshv_img" alt='utsav_img' width={0} height={0} />
                     </div>
                 </div>
             </div>
