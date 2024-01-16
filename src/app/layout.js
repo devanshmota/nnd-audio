@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
-// import './globals.css'
 import '../../public/css/style.css'
+import '../../public/css/responsive.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 

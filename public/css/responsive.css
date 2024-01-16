@@ -1,0 +1,79 @@
+@media screen and (min-width: 320px) and (max-width: 991px) {
+    .ms_top_btn {
+        display: none;
+    }
+}
+
+@media (min-width: 991px) {
+    .nnd__vertical_logo {
+        display: none;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .ms_top_btn {
+        display: none;
+    }
+
+    .home_container {
+
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+    }
+
+    .left_arrow {
+        right: 75px;
+    }
+
+    .right_arrow {
+        right: 58px;
+
+    }
+
+    .card-img-top {
+        width: 70% !important;
+    }
+
+    .view_all {
+        font-size: 14px;
+    }
+
+    /* .ms_header {
+        padding: 1rem 1rem;
+    } */
+
+    .div_container {
+
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+    .home_container {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+
+    .div_container {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 991px) {
+
+    .home_container {
+        margin-top: 3rem;
+    }
+
+}
+
+@media (max-width: 480px){
+    .ms_nav_close02{
+        right: -25px !important;
+    }
+}

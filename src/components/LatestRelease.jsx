@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
+import CategoryHeader from './CategoryHeader';
 
 const latest_rel = [
     { id: 1, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
@@ -36,25 +37,21 @@ const LatestRelease = () => {
 
 
     return (
-        <div className="div_container p-3 d-flex flex-column">
-            <div className="container_arrow d-flex justify-content-between align-items-center">
-                <h2 className="titles_homepage m-0">Latest Releases</h2>
-                <div className="d-flex align-items-center justify-content-center">
+        <div className="div_container d-flex flex-column">
 
-                    <Image className={`arrow left_arrow ${isBeginning ? 'disabled' : ''}`} src='/images/svg/left_arrow.svg' alt="arrow" width={10} height={10} onClick={handlePrev} />
-
-                    <Image className={`arrow right_arrow ${isEnd ? 'disabled' : ''}`} src='/images/svg/right_arrow.svg' alt="arrow" width={10} height={10} onClick={handleNext} />
-
-
-                </div>
-                <Link href='/releases' className="" >View all</Link>
-            </div>
+            <CategoryHeader 
+                title="Latest Releases"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}   
+                link="/latest-releases"
+            />
+            
             <Swiper
                 ref={lastestReleaseRef}
                 slidesPerView={5}
-                // loop={false}
                 spaceBetween={30}
-                // freeMode={true}
                 modules={[Pagination, Navigation]}
                 pagination={{
                     clickable: true
@@ -70,6 +67,23 @@ const LatestRelease = () => {
                 onReachEnd={() => {
                     setIsEnd(true);
                 }}
+                breakpoints={{
+                    320: {
+                        slidesPerView: 2,
+                    },
+                    576: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                    },
+                    992: {
+                        slidesPerView: 4,
+                    },
+                    1200: {
+                        slidesPerView: 5,
+                    },
+                }}
                 className='mySwiper w-100'
             >
                 <div className="div_container py-3 px-5 d-flex flex-row gap-5 " >
@@ -79,8 +93,8 @@ const LatestRelease = () => {
                             <SwiperSlide key={item} virtualIndex={index}>
 
 
-                                <div className="d-flex gap-3 mt-4 justify-content-center align-items-center">
-                                    <Image src={item.img} className="kirtan_img" alt={item.title} width={50} height={50} />
+                                <div className="d-flex gap-3 justify-content-center align-items-center">
+                                    <Image src={item.img} className="release_img" alt={item.title} width={50} height={50} />
                                     <div className="d-flex flex-column justify-content-center">
                                         <h6>
                                             <Link href='/kirtan'>{item.title}</Link>

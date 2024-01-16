@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
+import CategoryHeader from './CategoryHeader';
 
 const music_cat = [
     {
@@ -53,50 +54,34 @@ const Music_categories = () => {
         if (musicRef.current && !isBeginning) {
             musicRef.current.swiper.slidePrev();
         }
-       
+
     };
 
     const handleNext = () => {
         if (musicRef.current && !isEnd) {
             musicRef.current.swiper.slideNext();
         }
-      
+
     };
 
 
     return (
 
-        <div className="home_container p-3 d-flex flex-column">
-            <div className="container_arrow d-flex justify-content-between align-items-center">
-                <h2 className="titles_homepage m-0">Music Categories</h2>
+        <div className="home_container d-flex flex-column">
 
-                <div className="d-flex align-items-center justify-content-center">
-                    <Image src='/images/svg/left_arrow.svg' alt="arrow" className={`arrow left_arrow ${isBeginning ? 'disabled' : ''}`} width={10} height={10} onClick={handlePrev} />
-                    <Image src='/images/svg/right_arrow.svg' alt="arrow" className={`arrow right_arrow ${isEnd ? 'disabled' : ''}`} width={10} height={10} onClick={handleNext} style={{ opacity: isEnd ? 0.5 : 1 }} />
-                </div>
-
-
-                {/* <div className="d-flex align-items-center justify-content-center">
-
-            <button className='left_arrow arrow_btn' onClick={handlePrev} >
-              <FcPrevious />
-            </button>
-
-            <button className='right_arrow arrow_btn' onClick={handleNext}>
-              <FcNext />
-            </button>
-
-          </div> */}
-
-                <Link href='/music-categories'>View all</Link>
-            </div>
+            <CategoryHeader
+                title="Music Categories"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/music-categories"
+            />
 
             <Swiper
                 ref={musicRef}
                 slidesPerView={5}
-
                 spaceBetween={30}
-
                 modules={[Pagination, Navigation]}
                 pagination={{
                     clickable: true
@@ -111,15 +96,32 @@ const Music_categories = () => {
                 onReachEnd={() => {
                     setIsEnd(true);
                 }}
-                className='mySwiper w-100 swiper-container-1'
+                breakpoints={{
+                    320: {
+                        slidesPerView: 1
+                    },
+                    576: {
+                        slidesPerView: 2
+                    },
+                    768: {
+                        slidesPerView: 3
+                    },
+                    992: {
+                        slidesPerView: 4
+                    },
+                    1200: {
+                        slidesPerView: 5
+                    },
+                }}
+                className='mySwiper w-100'
             >
 
                 {
                     music_cat.map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index}>
-                            <div className="d-flex flex-column gap-2 mt-4 align-items-center justify-content-between">
+                            <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                 <Image src={item.img} className="kirtan_img" alt={item.title} width={252} height={252} />
-                                <h5>
+                                <h5 className='m-0' >
                                     <Link href='/kirtan'>{item.title}</Link>
                                 </h5>
                             </div>
