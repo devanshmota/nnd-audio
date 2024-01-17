@@ -6070,9 +6070,9 @@ h2.widget-title:after {
 		top: 0px;
 	}
 
-	.ms_nav_wrapper ul.nav_playlist {
+	/* .ms_nav_wrapper ul.nav_playlist {
 		margin-bottom: 10px;
-	}
+	} */
 
 	.ms_rcnt_box_img img {
 		width: 100%;
@@ -8256,7 +8256,7 @@ select,
 }
 
 .login_form .input_container span {
-	text-decoration: underline;
+	/* text-decoration: underline; */
 	cursor: pointer;
 }
 

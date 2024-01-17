@@ -18,19 +18,19 @@ const items = [
   },
 ];
 
-const Header = ({ show }) => {
+const Header = () => {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
   const handleLoginClick = () => {
-    setIsLoginModalVisible(true);
     setIsRegisterModalVisible(false);
+    setIsLoginModalVisible(true);
   };
 
   const handleRegisterClick = () => {
-    setIsLoginModalVisible(false);
     setIsRegisterModalVisible(true);
+    setIsLoginModalVisible(false);
   };
 
   const handleLoginSignup = (e) => {
@@ -39,14 +39,14 @@ const Header = ({ show }) => {
   };
 
   const handleForgotPasswordClick = () => {
-    setIsLoginModalVisible(false);
     setIsForgotPasswordVisible(true)
+    setIsLoginModalVisible(false);
   }
 
   return (
     <>
       <div className="ms_header">
-        <Image src={nnd_logo      } alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} />
+        <Image src={nnd_logo} alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} />
         <div className="ms_top_right">
           <div className="ms_top_btn">
             <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>

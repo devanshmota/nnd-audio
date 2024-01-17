@@ -4,10 +4,37 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import nndLogo from '../../public/images/nnd_logo.png'
 import nndWeb from '../../public/images/nnd_web.png'
 import Image from 'next/image';
+import LoginModel from './LoginModel';
+import RegisterModal from './RegisterModal';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 const Sidebar = () => {
 
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+    const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
+    const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
+
+    const handleLoginClick = () => {
+        setIsLoginModalVisible(true);
+        setMenuOpen(false)
+        setIsRegisterModalVisible(false);
+    };
+
+    const handleRegisterClick = () => {
+        setIsRegisterModalVisible(true);
+        setIsLoginModalVisible(false);
+    };
+
+    const handleLoginSignup = (e) => {
+        e.preventDefault();
+        handleLoginClick();
+    };
+
+    const handleForgotPasswordClick = () => {
+        setIsForgotPasswordVisible(true)
+        setIsLoginModalVisible(false);
+    }
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
@@ -120,10 +147,22 @@ const Sidebar = () => {
                                 </a>
                                 </li>
                             </ul>
+                            <ul className='btn_ul'>
+                                <li>
+                                    <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
+                                </li>
+                            </ul>
                         </div>
                     </div >
                 </div >
             </div >
+
+            <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick={handleForgotPasswordClick} />
+
+            <RegisterModal show={isRegisterModalVisible} onHide={() => setIsRegisterModalVisible(false)} onLoginClick={handleLoginClick} />
+
+            <ForgotPasswordModal show={isForgotPasswordVisible} onHide={() => setIsForgotPasswordVisible(false)} />
+
         </>
     )
 }
