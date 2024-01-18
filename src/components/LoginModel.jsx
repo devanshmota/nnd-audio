@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { FaRegEyeSlash } from 'react-icons/fa';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { auth } from './Firebase';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...props }) => {
 
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [formInfo, setFormInfo] = useState({
         email: '',
         password: ''
@@ -26,17 +28,21 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
         auth.signInWithEmailAndPassword(formInfo.email, formInfo.password)
             .then(auth => {
                 if (auth) {
-                    // navigate('/');
-                    alert('login successful')
+                    if (auth.user.emailVerified) {
+                        toast.success('Login successful')
+                        setFormInfo({
+                            email: '',
+                            password: ''
+                        })
+                        onHide()
+                    }
+                    else {
+                        toast.error('Email is not verified')
+                    }
                 }
                 // setIsloading(false)
             })
-            .catch((error) => alert(error.message))
-
-        setFormInfo({
-            email: '',
-            password: ''
-        })
+            .catch((error) => toast.error(error.message))
     }
 
 
@@ -47,7 +53,9 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
     const handleFrgtPassword = () => {
         onForgotPasswordClick()
     }
-
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     return (
         <>
@@ -76,8 +84,18 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                             </div>
                             <div className="input_with_icon">
                                 <RiLockPasswordLine className="all_icons" />
-                                <input value={formInfo.password} onChange={handleChange} name='password' type="password" placeholder="Password" required />
-                                <FaRegEyeSlash className="eye_icon" />
+                                <input value={formInfo.password} onChange={handleChange} name='password' type={passwordVisible ? 'text' : 'password'} placeholder="Password" required />
+                                {passwordVisible ? (
+                                    <FaRegEye
+                                        className="eye_icon"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                ) : (
+                                    <FaRegEyeSlash
+                                        className="eye_icon"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                )}
                             </div>
                             <span onClick={handleFrgtPassword} className="forgot-password">Forgot Password?</span>
                         </div>
@@ -92,7 +110,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                 </Modal.Body>
             </Modal>
 
-
+            <Toaster position="top-right" reverseOrder={false} />
         </>
 
     );

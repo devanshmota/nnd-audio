@@ -1,11 +1,12 @@
 'use client'
 // import { Dropdown, Space, Typography } from 'antd';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginModel from "./LoginModel";
 import RegisterModal from "./RegisterModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
 import Image from "next/image";
 import nnd_logo from '../../public/images/nnd_web.png'
+import { getCountriesApi } from "@/redux/actions/Campaign";
 
 const items = [
   {
@@ -42,6 +43,8 @@ const Header = () => {
     setIsForgotPasswordVisible(true)
     setIsLoginModalVisible(false);
   }
+
+  
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import * as actions from ".../actions/apiActions";
+import * as actions from "../actions/apiActions";
 import toast from "react-hot-toast";
 
 /**
@@ -40,7 +40,7 @@ const api = ({ dispatch, getState }) => next => async action => {
     try {
         // API Call
         const response = await axios.request({
-            baseURL: `${process.env.API_URL}/api/`,
+            baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/`,
             url,
             method,
             data,
@@ -49,7 +49,6 @@ const api = ({ dispatch, getState }) => next => async action => {
             onError,
             headers,
         });
-
 
         if (response.data.error !== false) {
             // Dispatch Default onError Event

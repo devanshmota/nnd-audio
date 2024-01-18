@@ -8110,7 +8110,7 @@ h2.widget-title:after {
 	width: 100%;
 }
 
-release_img {
+.release_img {
 	object-fit: cover;
 	border-radius: 10px;
 	width: 100%;
@@ -8312,6 +8312,7 @@ select,
 
 .modal-content {
 	background-color: transparent !important;
+	border: none !important;
 }
 
 .modal-body {

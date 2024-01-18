@@ -14,4 +14,4 @@ const UsersSlice = createSlice({
 })
 
 export default UsersSlice;
-export const { setData } = UsersSlice.actions;
+export const { setUsers } = UsersSlice.actions;

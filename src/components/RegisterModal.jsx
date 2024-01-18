@@ -6,17 +6,21 @@ import { FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Input } from 'antd';
-import { Select } from 'antd';
+import { getCountriesApi, getTemplesApi } from '@/redux/actions/Campaign';
+import { auth } from './Firebase'
+import { FaRegEye } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { setUsers } from '@/redux/reducer/UsersSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 
-import { getCountriesApi } from '@/redux/actions/Campaign';
-import { UserOutlined } from '@ant-design/icons';
-
-const { Option } = Select;
 
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
+
+    const dispatch = useDispatch();
+    const [allusers, setAllUsers] = useState([])
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
     const [temples, setTemples] = useState([]);
     const [countries, setCountries] = useState([])
     const [formInfo, setFormInfo] = useState({
@@ -31,18 +35,16 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
         repeatPassword: ''
     })
 
+
     useEffect(() => {
 
         getCountriesApi({
+            order: "asc",
+            sort: "name",
             onSuccess: (response) => {
-                console.log('sucess')
-                console.log(response)
-                setCountries(response.data.data)
-
+                setCountries(response.data)
             },
             onError: (error) => {
-                console.log('error')
-
                 console.log(error);
             }
         });
@@ -50,36 +52,46 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
     }, [])
 
 
-
     useEffect(() => {
-        const fetchTemples = () => {
-            const selectedCountry = countries.find((country) => country.name.toLowerCase() === formInfo.country.toLowerCase());
-            if (selectedCountry) {
-                axios.get(`https://nndaudioapp.mirzapar.com/api/get_temple?countries_id=${selectedCountry.id}`)
-                    .then((response) => {
-                        setTemples(response.data.data);
-                    })
-                    .catch((e) => {
-                        console.log((e) => {
-                            console.log(e)
-                        })
-                    })
-            }
-        };
 
         if (formInfo.country) {
-            fetchTemples();
-        } else {
-            // Reset temples when no country is selected
+            const selectedCountry = countries.find((country) => country.name.toLowerCase() === formInfo.country.toLowerCase());
+            if (selectedCountry) {
+
+                getTemplesApi({
+                    sort: "name",
+                    order: "asc",
+                    countries_id: selectedCountry.id,
+                    limit: 250,
+                    onSuccess: (response) => {
+
+                        setTemples(response.data);
+
+
+                    },
+                    onError: (error) => {
+                        console.log(error);
+                    }
+                })
+            }
+        }
+        else {
             setTemples([]);
         }
-    }, [formInfo.country, countries]);
+    }, [countries, formInfo.country]);
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
+    const toggleRepeatPasswordVisibility = () => {
+        setRepeatPasswordVisible(!repeatPasswordVisible);
+    };
 
     const handleLoginClick = () => {
         onLoginClick();
     };
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -88,17 +100,42 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
             [name]: value,
         }));
     };
-    const handleChangeSelect = (value, option) => {
-        const name = option.name; // Assuming you set a 'name' property on the Option
-        setFormInfo((prevFormInfo) => ({
-            ...prevFormInfo,
-            [name]: value,
-        }));
-    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add form submission logic here
-        console.log('Form submitted:', formInfo);
+   
+        if (formInfo.password === formInfo.repeatPassword) {
+
+            auth.createUserWithEmailAndPassword(formInfo.email, formInfo.password)
+                .then((auth) => {
+                    auth.user.sendEmailVerification()
+                        .then(() => {
+                            toast.success('Registration successful. Verification email sent.');
+                            setFormInfo({
+                                firstName: '',
+                                lastName: '',
+                                gender: '',
+                                email: '',
+                                country: '',
+                                temple: '',
+                                phoneNumber: '',
+                                password: '',
+                                repeatPassword: ''
+                            })
+                            onLoginClick()
+                        })
+                        .catch(error => {
+                            console.error('Error sending verification email:', error);
+                        });
+                    setAllUsers((prev) => [...prev, formInfo])
+                    dispatch(setUsers(allusers))
+                })
+                .catch(error => toast.error(error.message))
+
+        }
+        else {
+            toast.error('Passwords do not match');
+        }
     };
 
     return (
@@ -121,46 +158,35 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                         </div>
                         <div className="input_container">
 
-                            <div className="input_with_icon">
-                                <Input
-                                    size='large'
-                                    placeholder="First Name"
-                                    name="firstName"
-                                    value={formInfo.firstName}
-                                    onChange={handleChange}
-                                    type="text"
-                                    prefix={<FaUser />}
-                                    required
-                                />
-                            </div>
-                            {/* <div className="input_with_icon">
-                            <FaUser className="all_icons" />
-                            <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
-                        </div> */}
-                            <div className="input_with_icon">
 
-                                <Input
+                            <div className="input_with_icon">
+                                <FaUser className="all_icons" />
+                                <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
+                            </div>
+                            <div className="input_with_icon">
+                                <FaUser className="all_icons" />
+                                <input
                                     type="text"
                                     name='lastName'
                                     value={formInfo.lastName}
                                     onChange={handleChange}
                                     placeholder="Last Name"
-                                    prefix={<FaUser />}
                                     required />
                             </div>
                             <div className="input_with_icon">
-                                <Select
+                                <FaTransgenderAlt className="all_icons" />
+                                <select
                                     name="gender"
                                     id="gender"
                                     value={formInfo.gender}
-                                    onChange={handleChangeSelect}
+                                    onChange={handleChange}
                                     required
                                 >
-                                    <Option value="" disabled hidden>Select Gender</Option>
-                                    <Option value="male" name="gender">Male</Option>
-                                    <Option value="female" name="gender">Female</Option>
-                                </Select>
-                                <FaTransgenderAlt className="all_icons" />
+                                    <option value="" disabled hidden>Select Gender</option>
+                                    <option value="male" name="gender">Male</option>
+                                    <option value="female" name="gender">Female</option>
+                                </select>
+
                             </div>
                             <div className="input_with_icon">
                                 <MdOutlineEmail className="all_icons" />
@@ -173,7 +199,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                             <div className="input_with_icon">
 
                                 <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
-                                    <option value="" disabled selected hidden>Country</option>
+                                    <option value="" disabled hidden>Country</option>
 
                                     {
                                         countries.map((country) => (
@@ -186,7 +212,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                             <div className="input_with_icon">
                                 <select name="temple" id="temple" value={formInfo.temple}
                                     onChange={handleChange} disabled={!formInfo.country} required >
-                                    <option value="" disabled selected hidden>Temple</option>
+                                    <option value="" disabled hidden>Temple</option>
                                     {
                                         temples.length > 0 ? (
                                             <>
@@ -199,8 +225,6 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                             <option value="nodata">No data found</option>
                                         )
                                     }
-
-
                                 </select>
                                 <MdTempleBuddhist className="all_icons" />
                             </div>
@@ -214,17 +238,38 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
 
                             <div className="input_with_icon">
                                 <RiLockPasswordLine className="all_icons" />
-                                <input type="password" placeholder="Password" name='password'
+                                <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" name='password'
                                     value={formInfo.password}
                                     onChange={handleChange} required />
-                                <FaRegEyeSlash className="eye_icon" />
+
+                                {passwordVisible ? (
+                                    <FaRegEye
+                                        className="eye_icon"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                ) : (
+                                    <FaRegEyeSlash
+                                        className="eye_icon"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                )}
                             </div>
                             <div className="input_with_icon">
                                 <RiLockPasswordLine className="all_icons" />
-                                <input type="password" placeholder="Repeat Password" name='repeatPassword'
+                                <input type={repeatPasswordVisible ? 'text' : 'password'} placeholder="Repeat Password" name='repeatPassword'
                                     value={formInfo.repeatPassword}
                                     onChange={handleChange} required />
-                                <FaRegEyeSlash className="eye_icon" />
+                                {repeatPasswordVisible ? (
+                                    <FaRegEye
+                                        className="eye_icon"
+                                        onClick={toggleRepeatPasswordVisibility}
+                                    />
+                                ) : (
+                                    <FaRegEyeSlash
+                                        className="eye_icon"
+                                        onClick={toggleRepeatPasswordVisibility}
+                                    />
+                                )}
                             </div>
 
                         </div>
@@ -233,8 +278,10 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                             <p>Already have an account? <span onClick={handleLoginClick}>Login</span></p>
                         </div>
                     </form>
+
                 </Modal.Body>
             </Modal>
+            <Toaster position="top-right" reverseOrder={false} />
         </>
     )
 }

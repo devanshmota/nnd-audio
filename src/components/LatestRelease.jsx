@@ -90,7 +90,7 @@ const LatestRelease = () => {
                     {
                         latest_rel.map((item, index) => (
 
-                            <SwiperSlide key={item} virtualIndex={index}>
+                            <SwiperSlide key={item.id} virtualIndex={index}>
 
 
                                 <div className="d-flex gap-3 justify-content-center align-items-center">

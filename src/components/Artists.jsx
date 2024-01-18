@@ -91,7 +91,7 @@ const Artists = () => {
             >
                 {
                     artists.map((item, index) => (
-                        <SwiperSlide key={item} virtualIndex={index}>
+                        <SwiperSlide key={item.id} virtualIndex={index}>
                             <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                 <Image src={item.img} className="kirtan_img" alt={item.title} width={252} height={252} />
                                 <h5>
