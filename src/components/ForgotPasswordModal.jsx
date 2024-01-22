@@ -5,7 +5,7 @@ import { auth } from './Firebase';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 
-const ForgotPasswordModal = ({ show, onHide, ...props }) => {
+const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
 
     const [email, setEmail] = useState('')
     const handleEmailChange = (e) => {
@@ -14,24 +14,15 @@ const ForgotPasswordModal = ({ show, onHide, ...props }) => {
 
     const handleSendMyPassword = (e) => {
         e.preventDefault();
-        auth.fetchSignInMethodsForEmail(email)
-            .then((signInMethods) => {
-                console.log(signInMethods);
-                if (signInMethods.length === 0) {
-                    toast.error("Email not registered");
-                } else {
+        
                     auth.sendPasswordResetEmail(email)
                         .then(() => {
                             toast.success('Password reset email sent. Check your email.');
+                            onLoginClick()
                         })
                         .catch((error) => {
                             toast.error(error.message);
                         });
-                }
-            })
-            .catch((error) => {
-                toast.error(error.message);
-            });
     };
 
     return (
@@ -58,7 +49,7 @@ const ForgotPasswordModal = ({ show, onHide, ...props }) => {
                                 <MdOutlineEmail className="all_icons" />
                                 <input type="email" value={email} onChange={handleEmailChange} className="email_container" placeholder="Email" required />
                             </div>
-                            <button type="submit">Send My Password</button>
+                            <button type="submit">Sent</button>
                         </div>
 
                     </form>

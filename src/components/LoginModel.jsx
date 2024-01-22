@@ -6,10 +6,15 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { auth } from './Firebase';
 import toast, { Toaster } from 'react-hot-toast';
+import { checkLoginApi } from '@/redux/actions/Campaign';
+import { setUsers } from '@/redux/reducer/UsersSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...props }) => {
 
+    const disptach = useDispatch()
+    const { users } = useSelector((state) => state.users)
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [formInfo, setFormInfo] = useState({
         email: '',
@@ -24,23 +29,33 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
 
     const Submit = (e) => {
         e.preventDefault()
-        // setIsloading(true)
+
         auth.signInWithEmailAndPassword(formInfo.email, formInfo.password)
             .then(auth => {
                 if (auth) {
                     if (auth.user.emailVerified) {
-                        toast.success('Login successful')
-                        setFormInfo({
-                            email: '',
-                            password: ''
+
+                        checkLoginApi({
+                            uid: auth.user.uid,
+                            onSuccess: (res) => {
+                                toast.success(res.message)
+                                disptach(setUsers([...users ,res]))
+                                setFormInfo({
+                                    email: '',
+                                    password: ''
+                                })
+                                onHide()
+                            },
+                            onError: (error) => {
+                                toast.error(error.message)
+                            }
                         })
-                        onHide()
+
                     }
                     else {
                         toast.error('Email is not verified')
                     }
                 }
-                // setIsloading(false)
             })
             .catch((error) => toast.error(error.message))
     }

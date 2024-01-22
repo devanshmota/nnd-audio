@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import nndLogo from '../../public/images/nnd_logo.png'
 import nndWeb from '../../public/images/nnd_web.png'
@@ -7,13 +7,32 @@ import Image from 'next/image';
 import LoginModel from './LoginModel';
 import RegisterModal from './RegisterModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
+import { useSelector } from 'react-redux';
+import { auth } from './Firebase';
+import Swal from 'sweetalert2';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Sidebar = () => {
-
+    const { users } = useSelector((state) => state.users)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
     const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
     const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
+
+    useEffect(() => {
+        const updateStateChange = async () => {
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    setIsLoggedIn(true);
+                } else {
+                    setIsLoggedIn(false);
+                }
+            });
+        };
+
+        updateStateChange();
+    }, [users]);
 
     const handleLoginClick = () => {
         setIsLoginModalVisible(true);
@@ -38,6 +57,30 @@ const Sidebar = () => {
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
+    };
+
+    const handleLogout = async () => {
+        setMenuOpen(false)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                auth.signOut();
+                setIsLoggedIn(false);
+                Swal.fire({
+                    title: "Logout!",
+                    text: "Logged out successfully",
+                    icon: "success"
+                });
+            }
+        });
+
     };
 
     return (
@@ -149,7 +192,26 @@ const Sidebar = () => {
                             </ul>
                             <ul className='btn_ul'>
                                 <li>
-                                    <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
+
+                                    {
+                                        isLoggedIn ?
+                                            (
+                                                <Dropdown onSelect={handleLogout}>
+                                                    <Dropdown.Toggle variant="success" id="dropdown-basic-button" className="dropdown_toggle">
+                                                        Hello {users.firstName}
+                                                    </Dropdown.Toggle>
+
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            ) :
+                                            (
+                                                <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
+                                            )
+                                    }
+
+
                                 </li>
                             </ul>
                         </div>

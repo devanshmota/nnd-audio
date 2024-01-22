@@ -27,10 +27,10 @@ const api = ({ dispatch, getState }) => next => async action => {
     if (typeof authorizationHeader === "undefined" || authorizationHeader === true) {
         headers = {
             ...headers,
-            "Authorization": "Bearer " + getState().user.data.token,
+            "Authorization": "Bearer " + getState().users.users[0].token
         };
     }
-
+    console.log(getState().users.users[0].token)
 
     // On start is used to do actions which should happen before the API call
     // Such as set loading flag to true

@@ -6,7 +6,7 @@ import { FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { useEffect, useState } from 'react';
-import { getCountriesApi, getTemplesApi } from '@/redux/actions/Campaign';
+import { getCountriesApi, getTemplesApi, postUserApi } from '@/redux/actions/Campaign';
 import { auth } from './Firebase'
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,11 +14,9 @@ import { setUsers } from '@/redux/reducer/UsersSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
-
+    const { users } = useSelector((state) => state.users)
     const dispatch = useDispatch();
-    const [allusers, setAllUsers] = useState([])
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
     const [temples, setTemples] = useState([]);
@@ -35,9 +33,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
         repeatPassword: ''
     })
 
-
     useEffect(() => {
-
         getCountriesApi({
             order: "asc",
             sort: "name",
@@ -50,7 +46,6 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
         });
 
     }, [])
-
 
     useEffect(() => {
 
@@ -66,8 +61,6 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                     onSuccess: (response) => {
 
                         setTemples(response.data);
-
-
                     },
                     onError: (error) => {
                         console.log(error);
@@ -91,7 +84,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
     const handleLoginClick = () => {
         onLoginClick();
     };
-    
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -103,40 +96,70 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-   
         if (formInfo.password === formInfo.repeatPassword) {
-
+            let newUser;
             auth.createUserWithEmailAndPassword(formInfo.email, formInfo.password)
                 .then((auth) => {
+                    newUser = auth.user;
                     auth.user.sendEmailVerification()
                         .then(() => {
-                            toast.success('Registration successful. Verification email sent.');
-                            setFormInfo({
-                                firstName: '',
-                                lastName: '',
-                                gender: '',
-                                email: '',
-                                country: '',
-                                temple: '',
-                                phoneNumber: '',
-                                password: '',
-                                repeatPassword: ''
-                            })
-                            onLoginClick()
+                            // dispatch(setUsers([...users, formInfo]))
+                            const selectedTemple = temples.find((temple) => temple.name.toLowerCase() === formInfo.temple.toLowerCase());
+                            if (selectedTemple) {
+                                const temple_id = selectedTemple.id
+                                const countries_id = selectedTemple.country_id
+                                try {
+                                    postUserApi({
+                                        first_name: formInfo.firstName,
+                                        last_name: formInfo.lastName,
+                                        email: formInfo.email,
+                                        mobile: formInfo.phoneNumber,
+                                        gender: formInfo.gender,
+                                        country_id: countries_id,
+                                        temple_id: temple_id,
+                                        uid: auth.user.uid,
+                                        device_type: "web",
+                                        fcm_id: "",
+                                        onSuccess: (res) => {
+                                            toast.success('Registration successful. Verification email sent.');
+                                            clearFormData()
+                                            onLoginClick()
+                                        },
+                                        onError: (e) => {
+                                            toast.error(e.message)
+                                            newUser.delete().catch((error) => {
+                                                console.error('Error deleting user from Firebase:', error);
+                                            });
+                                        }
+                                    })
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }
+
                         })
-                        .catch(error => {
-                            console.error('Error sending verification email:', error);
-                        });
-                    setAllUsers((prev) => [...prev, formInfo])
-                    dispatch(setUsers(allusers))
+                        .catch(error => toast.error(error.message));
                 })
                 .catch(error => toast.error(error.message))
-
         }
         else {
             toast.error('Passwords do not match');
         }
     };
+
+    const clearFormData = () => {
+        setFormInfo({
+            firstName: '',
+            lastName: '',
+            gender: '',
+            email: '',
+            country: '',
+            temple: '',
+            phoneNumber: '',
+            password: '',
+            repeatPassword: ''
+        })
+    }
 
     return (
         <>

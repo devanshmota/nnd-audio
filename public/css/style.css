@@ -8338,3 +8338,21 @@ select,
 .entr_email {
 	text-align: center;
 }
+.header_select {
+	padding: 5px 15px;
+	background-color: var(--secondary-color);
+	color: white;
+}
+
+.dropdown_toggle{
+	background-color: var(--secondary-color) !important;
+	color: white !important;
+}
+
+.dropdown-menu.show{
+	background-color: var(--secondary-color) !important;
+}
+
+.dropdown-item:hover {
+	background-color: #e17215 !important;
+}
