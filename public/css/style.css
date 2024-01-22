@@ -8355,4 +8355,9 @@ select,
 
 .dropdown-item:hover {
 	background-color: #e17215 !important;
+	border-radius: 0.375rem !important;
+}
+
+.dropdown-menu {
+	padding: 0 !important;
 }

@@ -10,12 +10,11 @@ import { getCountriesApi, getTemplesApi, postUserApi } from '@/redux/actions/Cam
 import { auth } from './Firebase'
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers } from '@/redux/reducer/UsersSlice';
+
 import toast, { Toaster } from 'react-hot-toast';
 
 
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
-    const { users } = useSelector((state) => state.users)
     const dispatch = useDispatch();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
@@ -103,7 +102,6 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                     newUser = auth.user;
                     auth.user.sendEmailVerification()
                         .then(() => {
-                            // dispatch(setUsers([...users, formInfo]))
                             const selectedTemple = temples.find((temple) => temple.name.toLowerCase() === formInfo.temple.toLowerCase());
                             if (selectedTemple) {
                                 const temple_id = selectedTemple.id

@@ -1,18 +1,42 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link'
 import img1 from '../../public/utshav_img_1.jpeg'
+import { useEffect, useState } from 'react';
+import { getUtsavApi } from '@/redux/actions/Campaign';
 
-const utshav = [
-    { id: 1, img: '/jula_shree_ghanshyam.jpeg', title: 'Hindola Kirtan' },
-    { id: 2, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-    { id: 3, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-    { id: 4, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-    { id: 5, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-    { id: 6, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-    { id: 7, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-]
+// const utshav = [
+//     { id: 1, img: '/jula_shree_ghanshyam.jpeg', title: 'Hindola Kirtan' },
+//     { id: 2, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+//     { id: 3, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+//     { id: 4, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+//     { id: 5, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+//     { id: 6, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+//     { id: 7, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
+// ]
 
 const Utsav = () => {
+
+    const [utsav, setUtsav] = useState([])
+
+    useEffect(() => {
+
+        getUtsavApi({
+
+            limit: 6,
+            order: "asc",
+
+            onSuccess: (res) => {
+                setUtsav(res.data)
+            },
+            onError: (e) => {
+                console.log(e)
+            }
+        })
+
+
+    }, [])
+
     return (
         <div className="div_container">
             <div className="container_arrow container-fluid p-0">
@@ -23,30 +47,39 @@ const Utsav = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-3 col-3">
-                        <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                    </div>
-                    <div className="col-sm-6 col-6">
-                        <div className="row">
-                            <div className="col-sm-4 col-4">
-                                <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                            </div>
-                            <div className="col-sm-8 col-8">
-                                <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                            </div>
-                        </div>
-                        <div className="row mt-4">
-                            <div className="col-sm-8 col-8">
-                                <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                            </div>
-                            <div className="col-sm-4 col-4">
-                                <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-3 col-3">
-                        <Image src={img1} className="utshv_img" alt='utsav_img' width={0} height={0} />
-                    </div>
+
+                    {
+                        utsav && utsav.length > 0 && (
+                            <>
+                                <div className="col-sm-3 col-3">
+                                    <Image src={utsav[0].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                </div>
+                                <div className="col-sm-6 col-6">
+                                    <div className="row">
+                                        <div className="col-sm-4 col-4">
+                                            <Image src={utsav[1].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                        </div>
+                                        <div className="col-sm-8 col-8">
+                                            <Image src={utsav[2].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                        </div>
+                                    </div>
+                                    <div className="row mt-4">
+                                        <div className="col-sm-8 col-8">
+                                            <Image src={utsav[3].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                        </div>
+                                        <div className="col-sm-4 col-4">
+                                            <Image src={utsav[4].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-3 col-3">
+                                    <Image src={utsav[5].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                </div>
+                            </>
+                        )
+                    }
+
+
                 </div>
             </div>
         </div>

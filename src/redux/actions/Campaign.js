@@ -6,6 +6,10 @@ import { getTemples } from "@/utils/api";
 import { postUser } from "@/utils/api"
 import { checkLogin } from "@/utils/api";
 import { logout } from "@/utils/api";
+import { checkEmail } from "@/utils/api";
+import { getUtsav } from "@/utils/api";
+import { getLyricists } from "@/utils/api";
+import { getArtists } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -20,6 +24,57 @@ export const getCountriesApi = ({
     store.dispatch(
         apiCallBegan({
             ...getCountries(offset, sort, limit, order, search),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getUtsavApi = ({
+ 
+    limit = null,
+    order = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getUtsav(limit, order),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getLyricistsApi = ({
+ 
+    limit = null,
+    order = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getLyricists(limit, order),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getArtistsApi = ({
+ 
+    limit = null,
+    order = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getArtists(limit, order),
             displayToast: false,
             onStart,
             onSuccess,
@@ -81,6 +136,23 @@ export const postUserApi = ({
     store.dispatch(
         apiCallBegan({
             ...postUser(first_name, last_name, email, mobile, gender, country_id, temple_id, uid, device_type, fcm_id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const checkEmailApi = ({
+    email = "",
+    
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { },
+}) => {
+    store.dispatch(
+        apiCallBegan({
+            ...checkEmail(email),
             displayToast: false,
             onStart,
             onSuccess,

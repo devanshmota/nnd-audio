@@ -3,25 +3,45 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
+import { getLyricistsApi } from '@/redux/actions/Campaign';
 
-const lyricists = [
-    { id: 1, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 2, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 3, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 4, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 5, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 6, title: 'Devanand', img: '/r_music1.jpg' },
-    { id: 7, title: 'Devanand', img: '/r_music1.jpg' },
-]
+// const lyricists = [
+//     { id: 1, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 2, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 3, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 4, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 5, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 6, title: 'Devanand', img: '/r_music1.jpg' },
+//     { id: 7, title: 'Devanand', img: '/r_music1.jpg' },
+// ]
 
 const Lyricists = () => {
 
     const lyricistsRef = useRef();
-
+    const [lyricists, setLyricists] = useState([])
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+
+
+    useEffect(() => {
+
+        getLyricistsApi({
+
+            limit: 10,
+            order: "asc",
+
+            onSuccess: (res) => {
+                setLyricists(res.data)
+            },
+            onError: (e) => {
+                console.log(e)
+            }
+        })
+
+
+    }, [])
 
     const handlePrev = () => {
         if (lyricistsRef.current && !isBeginning) {
@@ -93,8 +113,8 @@ const Lyricists = () => {
                     lyricists.map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index}>
                             <div className="d-flex flex-column gap-3 align-items-center">
-                                <Image src={item.img} width={100} height={200} className="card-img-top artist_img" alt={item.title} />
-                                <h5 className="titles_homepage text-center ">{item.title}</h5>
+                                <Image src={item.image} width={100} height={200} className="card-img-top artist_img" alt={item.eng_name} />
+                                <h5 className="titles_homepage text-center ">{item.eng_name}</h5>
                             </div>
                         </SwiperSlide>
                     ))

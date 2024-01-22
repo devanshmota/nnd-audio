@@ -13,6 +13,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { logoutApi } from "@/redux/actions/Campaign";
 import toast, { Toaster } from "react-hot-toast";
+import CryptoJS from 'crypto-js';
+import { getDecryptedText } from "@/decryption/decryption";
 
 const items = [
   {
@@ -25,33 +27,28 @@ const items = [
   },
 ];
 
+
+
+
+
 const Header = () => {
   const dispatch = useDispatch()
-  const { users } = useSelector((state) => state.users)
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    const updateStateChange = async () => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setCurrentUser(user);
-          // setIsLoggedIn(true);
-        } else {
-          // setIsLoggedIn(false);
-        }
-      });
-    };
-
-    updateStateChange();
-  }, [users]);
+  const users = useSelector((state) => state.users)
 
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
+  // useEffect(() => {
+  //   const encryptedText = users.users.data.first_name;
+  //   const decryptedText = getDecryptedText(encryptedText);
+  //   // console.log('Decrypted Text:', decryptedText);
+
+  // }, []);
+
   const handleLoginClick = () => {
     setIsRegisterModalVisible(false);
-    setIsForgotPasswordVisible(false)
+    setIsForgotPasswordVisible(false);
     setIsLoginModalVisible(true);
   };
 
@@ -82,11 +79,11 @@ const Header = () => {
       confirmButtonText: "Yes!"
     }).then((result) => {
       if (result.isConfirmed) {
-        // auth.signOut();
+        auth.signOut();
         logoutApi({
-          onSuccess: (res) =>{
+          onSuccess: (res) => {
             console.log(res)
-            // dispatch(setUsers([]));
+            dispatch(setUsers({}));
 
             Swal.fire({
               title: "Logout!",
@@ -94,24 +91,18 @@ const Header = () => {
               icon: "success"
             });
           },
-          onError: (e) =>{
+          onError: (e) => {
             console.log(e)
             toast.error(e.message)
           }
         })
-        
+
       }
     });
 
   };
 
-  const getCurrentUserFirstName = () => {
-    if (currentUser) {
-      const user = users.find((user) => user.email === currentUser.email);
-      return user ? user.firstName : '';
-    }
-    return '';
-  };
+  const token = users.users?.token
 
   return (
     <>
@@ -120,13 +111,13 @@ const Header = () => {
         <div className="ms_top_right">
           <div className="ms_top_btn">
             {
-              users[0]?.token ?
+              token ?
                 (
 
 
                   <Dropdown onSelect={handleLogout}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic-button" className="dropdown_toggle">
-                      Hello {getCurrentUserFirstName()}
+                      Hello
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>

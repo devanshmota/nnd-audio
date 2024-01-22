@@ -4,6 +4,7 @@ import { MdOutlineEmail } from "react-icons/md"
 import { auth } from './Firebase';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
+import { checkEmailApi } from '@/redux/actions/Campaign';
 
 const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
 
@@ -17,8 +18,17 @@ const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
         
                     auth.sendPasswordResetEmail(email)
                         .then(() => {
-                            toast.success('Password reset email sent. Check your email.');
-                            onLoginClick()
+                            checkEmailApi({
+                                email: email,
+                                onSuccess: (res) => {
+                                    toast.success('Password reset email sent. Check your email.');
+                                    onLoginClick()
+                                },
+                                onError: (e) => {
+                                    toast.error(e.message)
+                                }
+                            })
+                            
                         })
                         .catch((error) => {
                             toast.error(error.message);

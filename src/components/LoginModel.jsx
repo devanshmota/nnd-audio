@@ -8,13 +8,12 @@ import { auth } from './Firebase';
 import toast, { Toaster } from 'react-hot-toast';
 import { checkLoginApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 
 const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...props }) => {
 
     const disptach = useDispatch()
-    const { users } = useSelector((state) => state.users)
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [formInfo, setFormInfo] = useState({
         email: '',
@@ -39,7 +38,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                             uid: auth.user.uid,
                             onSuccess: (res) => {
                                 toast.success(res.message)
-                                disptach(setUsers([...users ,res]))
+                                disptach(setUsers(res))
                                 setFormInfo({
                                     email: '',
                                     password: ''
@@ -59,7 +58,6 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
             })
             .catch((error) => toast.error(error.message))
     }
-
 
     const handleRegisterClick = () => {
         onRegisterClick();
