@@ -3,52 +3,74 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
+import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 
-const music_cat = [
-    {
-        id: 1,
-        title: 'Kirtan',
-        img: '/kirtan.jpeg'
-    },
-    {
-        id: 2,
-        title: 'Katha',
-        img: '/katha.jpeg'
-    },
-    {
-        id: 3,
-        title: 'Audiobook',
-        img: '/audiobook.jpeg'
-    },
-    {
-        id: 4,
-        title: 'Kirtan',
-        img: '/kirtan.jpeg'
-    },
-    {
-        id: 5,
-        title: 'Kirtan',
-        img: '/kirtan.jpeg'
-    },
-    {
-        id: 6,
-        title: 'Kirtan',
-        img: '/kirtan.jpeg'
-    },
-    {
-        id: 7,
-        title: 'Kirtan',
-        img: '/kirtan.jpeg'
-    },
+// const music_cat = [
+//     {
+//         id: 1,
+//         title: 'Kirtan',
+//         img: '/kirtan.jpeg'
+//     },
+//     {
+//         id: 2,
+//         title: 'Katha',
+//         img: '/katha.jpeg'
+//     },
+//     {
+//         id: 3,
+//         title: 'Audiobook',
+//         img: '/audiobook.jpeg'
+//     },
+//     {
+//         id: 4,
+//         title: 'Kirtan',
+//         img: '/kirtan.jpeg'
+//     },
+//     {
+//         id: 5,
+//         title: 'Kirtan',
+//         img: '/kirtan.jpeg'
+//     },
+//     {
+//         id: 6,
+//         title: 'Kirtan',
+//         img: '/kirtan.jpeg'
+//     },
+//     {
+//         id: 7,
+//         title: 'Kirtan',
+//         img: '/kirtan.jpeg'
+//     },
 
-]
+// ]
 
 const Music_categories = () => {
     const musicRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [musicCategory, setMusicCategory] = useState([])
+
+    useEffect(() => {
+
+        getMusicCategoryApi({
+
+            limit: 10,
+            order: "asc",
+
+            onSuccess: (res) => {
+                if (res.data) {
+                    setMusicCategory(res.data)
+
+                }
+
+            },
+            onError: (e) => {
+                console.log(e)
+            }
+        })
+    }, [])
 
     const handlePrev = () => {
         if (musicRef.current && !isBeginning) {
@@ -67,69 +89,86 @@ const Music_categories = () => {
 
     return (
 
+
+
+
+
+
+
+
         <div className="home_container d-flex flex-column">
 
-            <CategoryHeader
-                title="Music Categories"
-                onPrev={handlePrev}
-                onNext={handleNext}
-                isBeginning={isBeginning}
-                isEnd={isEnd}
-                link="/music-categories"
-            />
+            {
+                musicCategory.length > 0 && (
+                    <>
+                        <CategoryHeader
+                            title="Music Categories"
+                            onPrev={handlePrev}
+                            onNext={handleNext}
+                            isBeginning={isBeginning}
+                            isEnd={isEnd}
+                            link="/music-categories-all"
+                        />
 
-            <Swiper
-                ref={musicRef}
-                slidesPerView={5}
-                spaceBetween={30}
-                modules={[Pagination, Navigation]}
-                pagination={{
-                    clickable: true
-                }}
-                onSlideChange={(swiper) => {
-                    setIsBeginning(swiper.isBeginning);
-                    setIsEnd(swiper.isEnd);
-                }}
-                onReachBeginning={() => {
-                    setIsBeginning(true);
-                }}
-                onReachEnd={() => {
-                    setIsEnd(true);
-                }}
-                breakpoints={{
-                    320: {
-                        slidesPerView: 1
-                    },
-                    576: {
-                        slidesPerView: 2
-                    },
-                    768: {
-                        slidesPerView: 3
-                    },
-                    992: {
-                        slidesPerView: 4
-                    },
-                    1200: {
-                        slidesPerView: 5
-                    },
-                }}
-                className='mySwiper w-100'
-            >
+                        <Swiper
+                            ref={musicRef}
+                            slidesPerView={5}
+                            spaceBetween={30}
+                            modules={[Pagination, Navigation]}
+                            pagination={{
+                                clickable: true
+                            }}
+                            onSlideChange={(swiper) => {
+                                setIsBeginning(swiper.isBeginning);
+                                setIsEnd(swiper.isEnd);
+                            }}
+                            onReachBeginning={() => {
+                                setIsBeginning(true);
+                            }}
+                            onReachEnd={() => {
+                                setIsEnd(true);
+                            }}
+                            breakpoints={{
+                                320: {
+                                    slidesPerView: 1
+                                },
+                                576: {
+                                    slidesPerView: 2
+                                },
+                                768: {
+                                    slidesPerView: 3
+                                },
+                                992: {
+                                    slidesPerView: 4
+                                },
+                                1200: {
+                                    slidesPerView: 5
+                                },
+                            }}
+                            className='mySwiper w-100'
+                        >
 
-                {
-                    music_cat.map((item, index) => (
-                        <SwiperSlide key={item.id} virtualIndex={index}>
-                            <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                <Image src={item.img} className="kirtan_img" alt={item.title} width={252} height={252} />
-                                <h5 className='m-0' >
-                                    <Link href='/kirtan'>{item.title}</Link>
-                                </h5>
-                            </div>
-                        </SwiperSlide>
-                    ))
-                }
+                            {
+                                musicCategory.map((item, index) => (
+                                    <SwiperSlide key={item.id} virtualIndex={index}>
+                                        <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
+                                            <h5 className='m-0 text-center' >
+                                                <Link href='/kirtan'>{item.eng_name}</Link>
+                                            </h5>
+                                        </div>
+                                    </SwiperSlide>
+                                ))
+                            }
 
-            </Swiper>
+                        </Swiper>
+
+                    </>
+                )
+            }
+
+
+
         </div>
     )
 }

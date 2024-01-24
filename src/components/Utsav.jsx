@@ -43,37 +43,37 @@ const Utsav = () => {
                 <div className="row my-4">
                     <div className="col-sm-12 d-flex justify-content-between align-items-center">
                         <h2 className="titles_homepage m-0">Utsav</h2>
-                        <Link href="/releases" className='view_all'>View all</Link>
+                        <Link href="/utsav-all" className='view_all'>View all</Link>
                     </div>
                 </div>
                 <div className="row">
 
                     {
-                        utsav && utsav.length > 0 && (
+                        utsav.length > 0 && (
                             <>
                                 <div className="col-sm-3 col-3">
-                                    <Image src={utsav[0].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                    <img src={utsav[0].image} className="utshv_img" alt='utsav_img' />
                                 </div>
                                 <div className="col-sm-6 col-6">
                                     <div className="row">
                                         <div className="col-sm-4 col-4">
-                                            <Image src={utsav[1].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                            <img src={utsav[1].image} className="utshv_img" alt='utsav_img' />
                                         </div>
                                         <div className="col-sm-8 col-8">
-                                            <Image src={utsav[2].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                            <img src={utsav[2].image} className="utshv_img" alt='utsav_img' />
                                         </div>
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col-sm-8 col-8">
-                                            <Image src={utsav[3].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                            <img src={utsav[3].image} className="utshv_img" alt='utsav_img' />
                                         </div>
                                         <div className="col-sm-4 col-4">
-                                            <Image src={utsav[4].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                            <img src={utsav[4].image} className="utshv_img" alt='utsav_img' />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-sm-3 col-3">
-                                    <Image src={utsav[5].image} className="utshv_img" alt='utsav_img' width={0} height={0} />
+                                    <img src={utsav[5].image} className="utshv_img" alt='utsav_img' />
                                 </div>
                             </>
                         )

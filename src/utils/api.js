@@ -7,6 +7,9 @@ const CHECK_EMAIL = "check_email"
 const UTSAV = "get_utsav"
 const LYRICISTS = "get_lyricist"
 const ARTISTS = "get_artist"
+const RADIO = "get_radio"
+const HOME = "get_home"
+const MUSIC_CATEGORY = "get_category"
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -64,9 +67,31 @@ export const getUtsav = (limit, order) => {
         authorizationHeader: false,
     }
 }
+export const getMusicCategory = (limit, order) => {
+    return {
+        url: `${MUSIC_CATEGORY}`,
+        method: "GET",
+        params: {
+            order: order,
+            limit: limit,
+        },
+        authorizationHeader: false,
+    }
+}
 export const getLyricists = (limit, order) => {
     return {
         url: `${LYRICISTS}`,
+        method: "GET",
+        params: {
+            order: order,
+            limit: limit,
+        },
+        authorizationHeader: false,
+    }
+}
+export const getRadio = (limit, order) => {
+    return {
+        url: `${RADIO}`,
         method: "GET",
         params: {
             order: order,
@@ -86,6 +111,18 @@ export const getArtists = (limit, order) => {
         authorizationHeader: false,
     }
 }
+export const getHome = (is_guest) => {
+    return {
+        url: `${HOME}`,
+        method: "GET",
+        params: {
+            is_guest: is_guest
+        },
+        authorizationHeader: true,
+    }
+}
+
+
 
 export const postUser = (first_name, last_name, email, mobile, gender, country_id, temple_id, uid, device_type, fcm_id) => {
     let data = new FormData();

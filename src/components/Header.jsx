@@ -13,8 +13,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { logoutApi } from "@/redux/actions/Campaign";
 import toast, { Toaster } from "react-hot-toast";
-import CryptoJS from 'crypto-js';
 import { getDecryptedText } from "@/decryption/decryption";
+
 
 const items = [
   {
@@ -39,12 +39,12 @@ const Header = () => {
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
-  // useEffect(() => {
-  //   const encryptedText = users.users.data.first_name;
-  //   const decryptedText = getDecryptedText(encryptedText);
-  //   // console.log('Decrypted Text:', decryptedText);
+  useEffect(() => {
+    const encryptedText = users.users.data.email;
+    const decryptedText = getDecryptedText(encryptedText)
+    console.log('Decrypted Text:', decryptedText);
 
-  // }, []);
+  }, [users.users.data.email]);
 
   const handleLoginClick = () => {
     setIsRegisterModalVisible(false);

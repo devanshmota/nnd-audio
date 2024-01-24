@@ -3,6 +3,8 @@ import '../../public/css/style.css'
 import '../../public/css/responsive.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Providers from '@/redux/store/Providers';
+import Sidebar from '@/components/Sidebar';
+import Header from '@/components/Header';
 
 
 
@@ -18,6 +20,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <Sidebar />
+          <Header/>
           {children}
         </Providers>
       </body>

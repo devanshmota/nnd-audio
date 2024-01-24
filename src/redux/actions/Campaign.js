@@ -10,6 +10,9 @@ import { checkEmail } from "@/utils/api";
 import { getUtsav } from "@/utils/api";
 import { getLyricists } from "@/utils/api";
 import { getArtists } from "@/utils/api";
+import { getRadio } from "@/utils/api";
+import { getHome } from "@/utils/api";
+import { getMusicCategory } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -32,7 +35,7 @@ export const getCountriesApi = ({
     );
 };
 export const getUtsavApi = ({
- 
+
     limit = null,
     order = "",
     onSuccess = () => { },
@@ -49,7 +52,7 @@ export const getUtsavApi = ({
     );
 };
 export const getLyricistsApi = ({
- 
+
     limit = null,
     order = "",
     onSuccess = () => { },
@@ -66,7 +69,7 @@ export const getLyricistsApi = ({
     );
 };
 export const getArtistsApi = ({
- 
+
     limit = null,
     order = "",
     onSuccess = () => { },
@@ -75,6 +78,53 @@ export const getArtistsApi = ({
     store.dispatch(
         apiCallBegan({
             ...getArtists(limit, order),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getRadioApi = ({
+    limit = null,
+    order = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getRadio(limit, order),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getHomeApi = ({
+    is_guest = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getHome(is_guest),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getMusicCategoryApi = ({
+    limit = null,
+    order = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getMusicCategory(limit, order),
             displayToast: false,
             onStart,
             onSuccess,
@@ -126,7 +176,7 @@ export const postUserApi = ({
     gender = "",
     country_id = null,
     temple_id = null,
-    uid= null,
+    uid = null,
     device_type = "",
     fcm_id = "",
     onSuccess = () => { },
@@ -145,7 +195,7 @@ export const postUserApi = ({
 };
 export const checkEmailApi = ({
     email = "",
-    
+
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { },

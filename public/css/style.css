@@ -8132,7 +8132,6 @@ h2.widget-title:after {
 	border-radius: 100% !important;
 	object-fit: cover;
 	border: 4px solid #8b0000;
-	height: 50%;
 }
 
 a {
@@ -8338,18 +8337,19 @@ select,
 .entr_email {
 	text-align: center;
 }
+
 .header_select {
 	padding: 5px 15px;
 	background-color: var(--secondary-color);
 	color: white;
 }
 
-.dropdown_toggle{
+.dropdown_toggle {
 	background-color: var(--secondary-color) !important;
 	color: white !important;
 }
 
-.dropdown-menu.show{
+.dropdown-menu.show {
 	background-color: var(--secondary-color) !important;
 }
 
@@ -8360,4 +8360,44 @@ select,
 
 .dropdown-menu {
 	padding: 0 !important;
+}
+
+.card-container,.lyricits-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 7px;
+	border-radius: 5px;
+	width: min-content;
+}
+.lyricits-container img{
+	border-radius: 50%;
+	border: 4px solid #8b0000;
+ }
+
+.lat-rel-card-container {
+	width: max-content;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	border-radius: 5px;
+	width: min-content;
+}
+
+.lat-rel-card-container img {
+	border-radius: 5px;
+}
+
+.card-container img {
+	border-radius: 20px;
+}
+
+.wrapper {
+	margin-top: 80px;
+	margin-left: 80px;
+}
+
+.mus_cat_container {
+	padding-top: 60px;
 }
