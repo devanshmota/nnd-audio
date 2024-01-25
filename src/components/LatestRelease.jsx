@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getHomeApi } from '@/redux/actions/Campaign';
+import { useSelector } from 'react-redux';
 
 // const latest_rel = [
 //     { id: 1, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
@@ -18,11 +19,12 @@ import { getHomeApi } from '@/redux/actions/Campaign';
 // ]
 
 const LatestRelease = () => {
+
+    const { language } = useSelector((state) => state.language)
     const lastestReleaseRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
     const [latestRelease, setLatestReleases] = useState([])
-
 
     useEffect(() => {
 
@@ -77,15 +79,15 @@ const LatestRelease = () => {
                             ref={lastestReleaseRef}
                             slidesPerView={5}
                             spaceBetween={30}
-                            modules={[Pagination, Navigation]}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay, Pagination]}
                             pagination={{
                                 clickable: true
                             }}
                             navigation={false}
-                            autoplay={{
-                                delay: 3000, 
-                                disableOnInteraction: true  , 
-                            }}
                             onSlideChange={(swiper) => {
                                 setIsBeginning(swiper.isBeginning);
                                 setIsEnd(swiper.isEnd);
@@ -124,9 +126,15 @@ const LatestRelease = () => {
                                                 <Image src={item.album.image} className="release_img" alt={item.eng_title} width={100} height={100} />
                                                 <div className="d-flex flex-column justify-content-center">
                                                     <h6>
-                                                        <Link href='/kirtan'>{item.eng_title}</Link>
+                                                        <Link href='/kirtan'>
+
+                                                            {
+                                                                language === 'Gujarati' ? item.guj_title : item.eng_title 
+                                                            }
+                                                            
+                                                            </Link>
                                                     </h6>
-                                                    <p className="titles_homepage m-0 small text-secondary">{item.title}</p>
+                                                    {/* <p className="titles_homepage m-0 small text-secondary">{item.title}</p> */}
                                                 </div>
 
                                             </div>

@@ -1,6 +1,5 @@
 'use client'
-// import { Dropdown, Space, Typography } from 'antd';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginModel from "./LoginModel";
 import RegisterModal from "./RegisterModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
@@ -9,42 +8,34 @@ import nnd_logo from '../../public/images/nnd_web.png'
 import { auth } from './Firebase';
 import { useDispatch, useSelector } from "react-redux";
 import Swal from 'sweetalert2'
-import Dropdown from 'react-bootstrap/Dropdown';
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { logoutApi } from "@/redux/actions/Campaign";
 import toast, { Toaster } from "react-hot-toast";
-import { getDecryptedText } from "@/decryption/decryption";
+import { setLanguage } from "@/redux/reducer/LanguageSlice";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
-
-const items = [
-  {
-    key: '1',
-    label: 'English',
-  },
-  {
-    key: '2',
-    label: 'Gujarati',
-  },
-];
-
-
+// import { decryptAnswer } from "@/decryption/decryption";
 
 
 
 const Header = () => {
+
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users)
+  const { language } = useSelector((state) => state.language)
 
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
-  useEffect(() => {
-    const encryptedText = users.users.data.email;
-    const decryptedText = getDecryptedText(encryptedText)
-    console.log('Decrypted Text:', decryptedText);
 
-  }, [users.users.data.email]);
+  // useEffect(() => {
+  //   const key = 'base64:IH0mh+0AsIqQVW/zULiF+MQesoO69l8MsWZhEdOFbc0='
+  //   const encryptedText = users.users.data.email;
+  //   const decryptedText = decryptAnswer(encryptedText, key)
+  //   console.log('Decrypted Text:', decryptedText);
+
+  // }, [users.users.data.email]);
 
   const handleLoginClick = () => {
     setIsRegisterModalVisible(false);
@@ -102,18 +93,27 @@ const Header = () => {
 
   };
 
-  const token = users.users?.token
+  const token = users?.users?.token
+
+  const handleLanguageChange = (eventKey) => {
+    dispatch(setLanguage(eventKey))
+  }
 
   return (
     <>
       <div className="ms_header">
         <Image src={nnd_logo} alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} />
         <div className="ms_top_right">
+
+          <DropdownButton id="dropdown-basic-button" className="ms_top_btn" title={language} onSelect={handleLanguageChange} >
+            <Dropdown.Item eventKey="English" >English</Dropdown.Item>
+            <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
+          </DropdownButton>
+
           <div className="ms_top_btn">
             {
               token ?
                 (
-
 
                   <Dropdown onSelect={handleLogout}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic-button" className="dropdown_toggle">
@@ -124,7 +124,6 @@ const Header = () => {
                       <Dropdown.Item eventKey="logout">Logout</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-
 
                 )
                 :

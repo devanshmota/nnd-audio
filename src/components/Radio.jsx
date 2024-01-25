@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getRadioApi } from '@/redux/actions/Campaign';
+import { useSelector } from 'react-redux';
 
 
 
@@ -21,6 +22,7 @@ import { getRadioApi } from '@/redux/actions/Campaign';
 
 const Radio = () => {
 
+    const { language } = useSelector((state) => state.language)
     const radioRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
@@ -84,7 +86,11 @@ const Radio = () => {
                                 clickable: true,
                             }}
                             navigation={false}
-                            modules={[Navigation]}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay, Pagination]}
                             onSlideChange={(swiper) => {
                                 setIsBeginning(swiper.isBeginning);
                                 setIsEnd(swiper.isEnd);
@@ -121,7 +127,7 @@ const Radio = () => {
                                         <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_title} width={252} height={252} />
                                             <h5>
-                                                <Link href='/kirtan'>{item.eng_title}</Link>
+                                                <Link href='/kirtan'>{language === 'Gujarati' ? item.guj_title : item.eng_title}</Link>
                                             </h5>
                                         </div>
                                     </SwiperSlide>

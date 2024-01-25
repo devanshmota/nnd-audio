@@ -2,9 +2,12 @@
 import { getHomeApi } from "@/redux/actions/Campaign"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 
 
 const LatestReleasesAllCards = () => {
+
+    const { language } = useSelector((state) => state.language)
     const [latestRelease, setLatestReleases] = useState([])
 
     useEffect(() => {
@@ -28,11 +31,11 @@ const LatestReleasesAllCards = () => {
             {
                 latestRelease.length > 0 && latestRelease.map((item, index) => (
                     <>
-                        <div className="col-xxl-3 col-xl-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                        <div className="col-xxl-3 col-xl-4 col-sm-6 d-flex mus_cat_container">
                             <div className="lat-rel-card-container text-white">
                                 <h1 className="m-0">{`${(index + 1).toString().padStart(2, '0')}`}</h1>
                                 <Image src={item.album.image} alt={item.eng_title} width={80} height={80} />
-                                <h6 className="m-0">{item.eng_title}</h6>
+                                <h6 className="m-0">{language === 'Gujarati' ? item.guj_title : item.eng_title}</h6>
                             </div>
                         </div>
                     </>

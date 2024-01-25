@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getMusicCategoryApi } from '@/redux/actions/Campaign';
+import { useSelector } from 'react-redux';
 
 // const music_cat = [
 //     {
@@ -47,6 +48,7 @@ import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 // ]
 
 const Music_categories = () => {
+    const { language } = useSelector((state) => state.language)
     const musicRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
@@ -89,13 +91,6 @@ const Music_categories = () => {
 
     return (
 
-
-
-
-
-
-
-
         <div className="home_container d-flex flex-column">
 
             {
@@ -114,7 +109,11 @@ const Music_categories = () => {
                             ref={musicRef}
                             slidesPerView={5}
                             spaceBetween={30}
-                            modules={[Pagination, Navigation]}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay, Pagination]}
                             pagination={{
                                 clickable: true
                             }}
@@ -154,7 +153,13 @@ const Music_categories = () => {
                                         <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
                                             <h5 className='m-0 text-center' >
-                                                <Link href='/kirtan'>{item.eng_name}</Link>
+                                                <Link href='/kirtan'>
+
+                                                    {
+                                                        language === 'Gujarati' ? item.guj_name : item.eng_name
+                                                    }
+
+                                                </Link>
                                             </h5>
                                         </div>
                                     </SwiperSlide>

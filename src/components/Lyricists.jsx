@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getLyricistsApi } from '@/redux/actions/Campaign';
+import { useSelector } from 'react-redux';
 
 // const lyricists = [
 //     { id: 1, title: 'Devanand', img: '/r_music1.jpg' },
@@ -19,11 +20,11 @@ import { getLyricistsApi } from '@/redux/actions/Campaign';
 
 const Lyricists = () => {
 
+    const { language } = useSelector((state) => state.language)
     const lyricistsRef = useRef();
     const [lyricists, setLyricists] = useState([])
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-
 
     useEffect(() => {
         getLyricistsApi({
@@ -78,7 +79,11 @@ const Lyricists = () => {
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
-                            modules={[Pagination]}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay, Pagination]}
                             pagination={{
                                 clickable: true
                             }}
@@ -117,7 +122,7 @@ const Lyricists = () => {
                                     <SwiperSlide key={item.id} virtualIndex={index}>
                                         <div className="d-flex flex-column gap-3 align-items-center">
                                             <Image src={item.image} width={100} height={260} className="card-img-top artist_img" alt={item.eng_name} />
-                                            <h5 className="titles_homepage text-center ">{item.eng_name}</h5>
+                                            <h5 className="titles_homepage text-center ">{language === 'Gujarati' ? item.guj_name : item.eng_name}</h5>
                                         </div>
                                     </SwiperSlide>
                                 ))

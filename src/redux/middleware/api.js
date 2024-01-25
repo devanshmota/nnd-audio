@@ -27,7 +27,7 @@ const api = ({ dispatch, getState }) => next => async action => {
     if (typeof authorizationHeader === "undefined" || authorizationHeader === true) {
         headers = {
             ...headers,
-            "Authorization": "Bearer " + getState().users.users.token
+            "Authorization": "Bearer " + getState().users?.users?.token
         };
     }
 

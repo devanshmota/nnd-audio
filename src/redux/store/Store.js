@@ -3,13 +3,17 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist';
 import UsersSlice from '../reducer/UsersSlice';
 import apiMiddleware from '../middleware/api'; 
+import LanguageSlice from '../reducer/LanguageSlice';
 
 const persistConfig = {
     key: 'root',
     storage,
 }
 
-const rootReducer = combineReducers({ users: UsersSlice.reducer })
+const rootReducer = combineReducers({ 
+    users: UsersSlice.reducer, 
+    language: LanguageSlice.reducer
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

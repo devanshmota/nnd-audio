@@ -943,6 +943,7 @@ span.nav_text {
 	line-height: 40px;
 	display: flex;
 	place-content: flex-end;
+	gap: 10px;
 }
 
 .ms_top_right .ms_top_lang {
@@ -8362,7 +8363,8 @@ select,
 	padding: 0 !important;
 }
 
-.card-container,.lyricits-container {
+.card-container,
+.lyricits-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -8370,10 +8372,11 @@ select,
 	border-radius: 5px;
 	width: min-content;
 }
-.lyricits-container img{
+
+.lyricits-container img {
 	border-radius: 50%;
 	border: 4px solid #8b0000;
- }
+}
 
 .lat-rel-card-container {
 	width: max-content;

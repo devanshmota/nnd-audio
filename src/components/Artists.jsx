@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Autoplay ,Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getArtistsApi } from '@/redux/actions/Campaign';
+import { useSelector } from 'react-redux';
 
 // const artists = [
 //     { id: 1, title: 'Aditya', img: '/r_music1.jpg' },
@@ -18,7 +19,7 @@ import { getArtistsApi } from '@/redux/actions/Campaign';
 // ]
 
 const Artists = () => {
-
+    const { language } = useSelector((state) => state.language)
     const artistRef = useRef();
     const [artists, setArtists] = useState([])
     const [isBeginning, setIsBeginning] = useState(true);
@@ -55,7 +56,6 @@ const Artists = () => {
         if (artistRef.current && !isEnd) {
             artistRef.current.swiper.slideNext();
         }
-
     };
 
     return (
@@ -80,7 +80,11 @@ const Artists = () => {
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
-                            modules={[Pagination]}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            modules={[Autoplay ,Pagination]}
                             pagination={{
                                 clickable: true
                             }}
@@ -119,7 +123,7 @@ const Artists = () => {
                                         <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
                                             <h5 className='m-0 text-center'>
-                                                <Link href='/kirtan'>{item.eng_name}</Link>
+                                                <Link href='/kirtan'>{language === 'Gujarati' ? item.guj_name : item.eng_name}</Link>
                                             </h5>
                                         </div>
                                     </SwiperSlide>

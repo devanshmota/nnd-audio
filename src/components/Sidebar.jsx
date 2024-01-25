@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import nndLogo from '../../public/images/nnd_logo.png'
 import nndWeb from '../../public/images/nnd_web.png'
@@ -7,32 +7,23 @@ import Image from 'next/image';
 import LoginModel from './LoginModel';
 import RegisterModal from './RegisterModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from './Firebase';
 import Swal from 'sweetalert2';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { DropdownButton } from 'react-bootstrap';
+import { setLanguage } from '@/redux/reducer/LanguageSlice';
 
 const Sidebar = () => {
-    const { users } = useSelector((state) => state.users)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    const { language } = useSelector((state) => state.language)
+    const users = useSelector((state) => state.users)
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
     const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
     const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
-    useEffect(() => {
-        const updateStateChange = async () => {
-            auth.onAuthStateChanged((user) => {
-                if (user) {
-                    setIsLoggedIn(true);
-                } else {
-                    setIsLoggedIn(false);
-                }
-            });
-        };
-
-        updateStateChange();
-    }, [users]);
+    const dispatch = useDispatch()
 
     const handleLoginClick = () => {
         setIsLoginModalVisible(true);
@@ -82,6 +73,12 @@ const Sidebar = () => {
         });
 
     };
+
+    const token = users?.users?.token
+
+    const handleLanguageChange = (eventKey) => {
+        dispatch(setLanguage(eventKey))
+    }
 
     return (
         <>
@@ -192,13 +189,12 @@ const Sidebar = () => {
                             </ul>
                             <ul className='btn_ul'>
                                 <li>
-
                                     {
-                                        isLoggedIn ?
+                                        token ?
                                             (
                                                 <Dropdown onSelect={handleLogout}>
                                                     <Dropdown.Toggle variant="success" id="dropdown-basic-button" className="dropdown_toggle">
-                                                        Hello {users.firstName}
+                                                        Hello {users?.firstName}
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu>
@@ -212,6 +208,17 @@ const Sidebar = () => {
                                     }
 
 
+                                </li>
+
+
+
+                            </ul>
+                            <ul className='btn_ul'>
+                                <li>
+                                    <DropdownButton id="dropdown-basic-button" title={language} onSelect={handleLanguageChange} >
+                                        <Dropdown.Item eventKey="English" >English</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
+                                    </DropdownButton>
                                 </li>
                             </ul>
                         </div>
