@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getHomeApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
+import GetLanguage from './GetLanguage';
 
 // const latest_rel = [
 //     { id: 1, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
@@ -128,9 +129,7 @@ const LatestRelease = () => {
                                                     <h6>
                                                         <Link href='/kirtan'>
 
-                                                            {
-                                                                language === 'Gujarati' ? item.guj_title : item.eng_title 
-                                                            }
+                                                            {GetLanguage(language, item)}
                                                             
                                                             </Link>
                                                     </h6>

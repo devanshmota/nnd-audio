@@ -3,6 +3,7 @@ import { getHomeApi } from "@/redux/actions/Campaign"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import GetLanguage from "./GetLanguage"
 
 
 const LatestReleasesAllCards = () => {
@@ -35,7 +36,7 @@ const LatestReleasesAllCards = () => {
                             <div className="lat-rel-card-container text-white">
                                 <h1 className="m-0">{`${(index + 1).toString().padStart(2, '0')}`}</h1>
                                 <Image src={item.album.image} alt={item.eng_title} width={80} height={80} />
-                                <h6 className="m-0">{language === 'Gujarati' ? item.guj_title : item.eng_title}</h6>
+                                <h6 className="m-0">{GetLanguage(language, item)}</h6>
                             </div>
                         </div>
                     </>

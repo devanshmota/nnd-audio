@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getLyricistsApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
+import GetLanguage from './GetLanguage';
 
 // const lyricists = [
 //     { id: 1, title: 'Devanand', img: '/r_music1.jpg' },
@@ -122,7 +123,7 @@ const Lyricists = () => {
                                     <SwiperSlide key={item.id} virtualIndex={index}>
                                         <div className="d-flex flex-column gap-3 align-items-center">
                                             <Image src={item.image} width={100} height={260} className="card-img-top artist_img" alt={item.eng_name} />
-                                            <h5 className="titles_homepage text-center ">{language === 'Gujarati' ? item.guj_name : item.eng_name}</h5>
+                                            <h5 className="titles_homepage text-center ">{GetLanguage(language, item)}</h5>
                                         </div>
                                     </SwiperSlide>
                                 ))

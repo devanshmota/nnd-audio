@@ -4,6 +4,7 @@ import { getRadioApi } from "@/redux/actions/Campaign"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import GetLanguage from "./GetLanguage"
 
 const AllRadioCard = () => {
     const { language } = useSelector((state) => state.language)
@@ -32,7 +33,7 @@ const AllRadioCard = () => {
               <div key={item.id} className="col-xl-3 col-xxl-2 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                   <div className="card-container text-white">
                       <Image src={item.image} alt={item.eng_name} width={200} height={200} />
-                      <h6 className="m-0 align-self-baseline">{language === 'Gujarati' ? item.guj_title : item.eng_title}</h6>
+                      <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                   </div>
               </div>
           ))}

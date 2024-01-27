@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
+import GetLanguage from './GetLanguage';
 
 // const music_cat = [
 //     {
@@ -155,9 +156,7 @@ const Music_categories = () => {
                                             <h5 className='m-0 text-center' >
                                                 <Link href='/kirtan'>
 
-                                                    {
-                                                        language === 'Gujarati' ? item.guj_name : item.eng_name
-                                                    }
+                                                    {GetLanguage(language, item)}
 
                                                 </Link>
                                             </h5>

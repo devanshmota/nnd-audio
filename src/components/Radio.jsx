@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { getRadioApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
+import GetLanguage from './GetLanguage';
 
 
 
@@ -127,7 +128,7 @@ const Radio = () => {
                                         <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_title} width={252} height={252} />
                                             <h5>
-                                                <Link href='/kirtan'>{language === 'Gujarati' ? item.guj_title : item.eng_title}</Link>
+                                                <Link href='/kirtan'>{GetLanguage(language, item)}</Link>
                                             </h5>
                                         </div>
                                     </SwiperSlide>
