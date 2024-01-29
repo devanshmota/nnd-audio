@@ -92,7 +92,7 @@ const Music_categories = () => {
 
     return (
 
-        <div className="home_container d-flex flex-column">
+        <div className="container d-flex flex-column">
 
             {
                 musicCategory.length > 0 && (

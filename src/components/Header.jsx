@@ -13,12 +13,15 @@ import { logoutApi } from "@/redux/actions/Campaign";
 import toast, { Toaster } from "react-hot-toast";
 import { setLanguage } from "@/redux/reducer/LanguageSlice";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import { IconButton } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 // import { decryptAnswer } from "@/decryption/decryption";
 
 
 
-const Header = () => {
+const Header = ({ open, handleDrawerOpen }) => {
 
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users)
@@ -102,15 +105,12 @@ const Header = () => {
   return (
     <>
       <div className="ms_header">
-        <Image src={nnd_logo} alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} />
+        {/* <Image src={nnd_logo} alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} /> */}
         <div className="ms_top_right">
-
-          <DropdownButton id="dropdown-basic-button" className="ms_top_btn" title={language} onSelect={handleLanguageChange} >
-            <Dropdown.Item eventKey="English" >English</Dropdown.Item>
-            <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
-          </DropdownButton>
+          
 
           <div className="ms_top_btn">
+
             {
               token ?
                 (
@@ -131,6 +131,10 @@ const Header = () => {
                   <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
                 )
             }
+            <DropdownButton id="dropdown-basic-button" className="ms_top_btn" title={language} onSelect={handleLanguageChange} >
+              <Dropdown.Item eventKey="English" >English</Dropdown.Item>
+              <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
 

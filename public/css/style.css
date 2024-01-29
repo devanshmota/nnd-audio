@@ -457,7 +457,7 @@ body.loaded .ms_loader {
 }
 
 /*====Nav Css Start====*/
-.ms_sidemenu_wrapper {
+/* .ms_sidemenu_wrapper {
 	position: fixed;
 	width: 80px;
 	background-color: #131825;
@@ -467,7 +467,7 @@ body.loaded .ms_loader {
 	bottom: 0;
 	box-shadow: 0px 0px 24px 6px rgba(4, 4, 4, 0.2);
 	transition: all 0.3s ease-in-out;
-}
+} */
 
 .ms_logo {
 	width: 100%;
@@ -481,7 +481,7 @@ body.loaded .ms_loader {
 .ms_logo img {
 	width: 100%;
 	height: 100%;
-	max-width: 60px;
+	max-width: 40px;
 	object-fit: contain;
 }
 
@@ -497,7 +497,7 @@ body.loaded .ms_loader {
 	align-items: center;
 	justify-content: center;
 	display: flex;
-	min-height: 164px;
+	min-height: 100px;
 }
 
 .ms_nav_wrapper {
@@ -753,7 +753,7 @@ span.nav_text {
 }
 
 .ms_sidemenu_inner {
-	width: 80px;
+	width: 100%;
 	background-color: #131825;
 	height: 100%;
 	z-index: 1;
@@ -815,8 +815,7 @@ span.nav_text {
 }
 
 .ms_sidemenu_wrapper.open_menu {
-	width: 200px;
-
+	overflow: hidden;
 }
 
 .ms_logo_open {
@@ -886,7 +885,7 @@ span.nav_text {
 	margin-right: 80px;
 }
 
-.ms_header {
+/* .ms_header {
 	position: fixed;
 	background-color: #131825;
 	padding: 20px 50px;
@@ -895,6 +894,10 @@ span.nav_text {
 	top: 0;
 	z-index: 1000;
 	backface-visibility: hidden;
+} */
+
+.ms_header{
+	margin-left: auto;
 }
 
 .ms_top_search {
@@ -939,12 +942,12 @@ span.nav_text {
 	color: #fff;
 }
 
-.ms_top_right {
+/* .ms_top_right {
 	line-height: 40px;
 	display: flex;
-	place-content: flex-end;
+	align-items: center;
 	gap: 10px;
-}
+} */
 
 .ms_top_right .ms_top_lang {
 	color: #ffffff;
@@ -5758,9 +5761,9 @@ h2.widget-title:after {
 		width: 40px;
 	}
 
-	.ms_sidemenu_wrapper {
+	/* .ms_sidemenu_wrapper {
 		width: 90px;
-	}
+	} */
 
 	.ms_rcnt_box .ms_play_icon img,
 	.ms_genres_box .ms_play_icon img {
@@ -6211,10 +6214,10 @@ h2.widget-title:after {
 		padding: 12px 30px;
 	}
 
-	.ms_top_right {
+	/* .ms_top_right {
 		line-height: 1;
 		padding-right: 50px;
-	}
+	} */
 
 	.ms_album_single_wrapper .album_inner_list {
 		width: 100%;
@@ -6237,12 +6240,12 @@ h2.widget-title:after {
 	}
 
 	.ms_logo_inner {
-		min-height: 120px;
+		min-height: 100px;
 	}
 
-	.ms_nav_wrapper {
+	/* .ms_nav_wrapper {
 		top: 140px;
-	}
+	} */
 
 	.ms_upload_wrapper {
 		padding-left: 0px;
@@ -6480,8 +6483,7 @@ h2.widget-title:after {
 	}
 
 	.ms_sidemenu_wrapper {
-		width: 250px;
-		left: -250px;
+		width: 100%;
 		transition: all 0.5s ease-in-out;
 		-webkit-transition: all 0.5s ease-in-out;
 		-moz-transition: all 0.5s ease-in-out;
@@ -6505,16 +6507,16 @@ h2.widget-title:after {
 		padding: 0px 12px;
 	}
 
-	.ms_logo {
+	/* .ms_logo {
 		display: none !important;
-	}
+	} */
 
 	.ms_logo_open {
 		display: block !important;
 	}
 
 	.ms_sidemenu_inner {
-		width: 200px;
+		width: 100%;
 	}
 
 	.ms_weekly_wrapper {
@@ -7183,23 +7185,26 @@ h2.widget-title:after {
 		display: none;
 	}
 
-	.ms_free_download .album_list_wrapper {
+	.ms_free_download .album_list_wrapper {	
 		width: 262%;
 	}
 
 	.ms_logo_inner {
-		min-height: 95px;
+		min-height: 100px;
 	}
 
-	.ms_nav_wrapper {
+	/* .ms_nav_wrapper {
 		top: 120px;
-	}
+	} */
 }
 
 @media(max-width:600px) {
 	.ms_register_popup .modal-content {
 		padding: 30px 30px;
 	}
+		.css-b62sy7-MuiDrawer-docked .MuiDrawer-paper{
+			width: 53px;
+		}
 
 	.ms_register_img {
 		display: none;
@@ -7449,7 +7454,7 @@ h2.widget-title:after {
 
 	.ms_sidemenu_inner,
 	.ms_sidemenu_wrapper {
-		width: 180px !important
+		width: 100% !important
 	}
 
 	.ms_nav_wrapper ul li a {
@@ -7482,9 +7487,9 @@ h2.widget-title:after {
 		font-size: 10px;
 	}
 
-	.ms_top_right {
+	/* .ms_top_right {
 		padding-right: 40px;
-	}
+	} */
 
 	.weekly_left span.w_top_no {
 		width: 35px;
@@ -7624,9 +7629,9 @@ h2.widget-title:after {
 	/* .ms_header {
 		padding: 10px 15px 6px;
 	} */
-	.ms_top_right {
+	/* .ms_top_right {
 		padding-right: 32px;
-	}
+	} */
 
 	.ms_nav_close {
 		right: 2px;
@@ -8069,12 +8074,28 @@ h2.widget-title:after {
 	color: var(--icon-color);
 } */
 
-.home_container {
+/* .home_container {
 	margin-top: 5rem;
 	margin-left: 10rem;
 	margin-right: 5rem;
 	max-width: calc(100vw-80px);
+} */
+
+.drawerMain {
+	padding: 0 !important;
+	overflow: hidden;
+	margin-left: 0;
 }
+
+/* .container {
+	max-width: 1670px !important;
+} */
+/* .home_container {
+	width: 1732px;
+	padding-left: 5rem;
+	padding-right: 5rem;
+	overflow: hidden;
+} */
 
 .container_arrow {
 	position: relative;
@@ -8098,17 +8119,25 @@ h2.widget-title:after {
 	color: red;
 }
 
-.div_container {
+/* .div_container {
 	margin-top: 0;
 	margin-left: 10rem;
 	margin-right: 5rem;
 	max-width: calc(100vw-80px);
-}
+	width: 1400px;
+} */
+/* .div_container {
+	width: 1732px;
+	padding-left: 5rem;
+	padding-right: 5rem;
+	overflow: hidden;
+} */
 
 .kirtan_img {
 	object-fit: cover;
 	border-radius: 10px;
 	width: 100%;
+
 }
 
 .release_img {
@@ -8133,6 +8162,8 @@ h2.widget-title:after {
 	border-radius: 100% !important;
 	object-fit: cover;
 	border: 4px solid #8b0000;
+	width: 50%;
+	height: 50%;
 }
 
 a {
@@ -8396,11 +8427,37 @@ select,
 	border-radius: 20px;
 }
 
-.wrapper {
+/* .wrapper {
 	margin-top: 80px;
 	margin-left: 80px;
-}
+} */
 
 .mus_cat_container {
 	padding-top: 60px;
 }
+
+.ms_top_btn {
+	display: flex;
+	gap: 5px;
+}
+
+.css-cveggr-MuiListItemIcon-root {
+	color: white;
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+	color: white;
+}
+
+.css-9mgopn-MuiDivider-root {
+	border: 2px solid #252b4d;
+}
+
+.css-zwx2rb-MuiToolbar-root {
+	justify-content: flex-start;
+}
+
+.css-1r9jet7{
+	min-height: 64px;
+}
+

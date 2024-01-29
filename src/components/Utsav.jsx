@@ -38,7 +38,7 @@ const Utsav = () => {
     }, [])
 
     return (
-        <div className="div_container">
+        <div className="container">
             <div className="container_arrow container-fluid p-0">
                 <div className="row my-4">
                     <div className="col-sm-12 d-flex justify-content-between align-items-center">

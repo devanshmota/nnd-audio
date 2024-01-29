@@ -9,15 +9,7 @@ import { getHomeApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 
-// const latest_rel = [
-//     { id: 1, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 2, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 3, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 4, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 5, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 6, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-//     { id: 7, title: 'naval preetam ghanshyam', time: '5 mins ago', img: '/r_music1.jpg' },
-// ]
+
 
 const LatestRelease = () => {
 
@@ -43,9 +35,6 @@ const LatestRelease = () => {
     }, [])
 
 
-
-
-
     const handlePrev = () => {
         if (lastestReleaseRef.current && !isBeginning) {
             lastestReleaseRef.current.swiper.slidePrev();
@@ -62,7 +51,7 @@ const LatestRelease = () => {
 
 
     return (
-        <div className="div_container d-flex flex-column">
+        <div className="container d-flex flex-column">
 
             {
                 latestRelease.length > 0 && (
@@ -118,7 +107,7 @@ const LatestRelease = () => {
                             }}
                             className='mySwiper w-100'
                         >
-                            <div className="div_container py-3 px-5 d-flex flex-row gap-5 " >
+                            <div className="container d-flex flex-column" >
                                 {
                                     latestRelease.map((item, index) => (
 

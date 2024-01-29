@@ -28,7 +28,6 @@ const LatestReleasesAllCards = () => {
 
     return (
         <div className="row">
-
             {
                 latestRelease.length > 0 && latestRelease.map((item, index) => (
                     <>
@@ -42,8 +41,6 @@ const LatestReleasesAllCards = () => {
                     </>
                 ))
             }
-
-
         </div>
     )
 }

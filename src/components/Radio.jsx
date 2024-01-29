@@ -65,7 +65,7 @@ const Radio = () => {
 
 
     return (
-        <div className="div_container d-flex flex-column">
+        <div className="container d-flex flex-column">
 
             {
                 radio.length > 0 && (

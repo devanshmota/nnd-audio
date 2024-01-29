@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import nndLogo from '../../public/images/nnd_logo.png'
 import nndWeb from '../../public/images/nnd_web.png'
 import Image from 'next/image';
@@ -14,78 +13,78 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from 'react-bootstrap';
 import { setLanguage } from '@/redux/reducer/LanguageSlice';
 
-const Sidebar = () => {
+const Sidebar = ({ open }) => {
 
     const { language } = useSelector((state) => state.language)
     const users = useSelector((state) => state.users)
-    const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
-    const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
-    const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
+    // const [isMenuOpen, setMenuOpen] = useState(false);
+    // const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+    // const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
+    // const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
 
     const dispatch = useDispatch()
 
-    const handleLoginClick = () => {
-        setIsLoginModalVisible(true);
-        setMenuOpen(false)
-        setIsRegisterModalVisible(false);
-    };
+    // const handleLoginClick = () => {
+    //     setIsLoginModalVisible(true);
+    //     setMenuOpen(false)
+    //     setIsRegisterModalVisible(false);
+    // };
 
-    const handleRegisterClick = () => {
-        setIsRegisterModalVisible(true);
-        setIsLoginModalVisible(false);
-    };
+    // const handleRegisterClick = () => {
+    //     setIsRegisterModalVisible(true);
+    //     setIsLoginModalVisible(false);
+    // };
 
-    const handleLoginSignup = (e) => {
-        e.preventDefault();
-        handleLoginClick();
-    };
+    // const handleLoginSignup = (e) => {
+    //     e.preventDefault();
+    //     handleLoginClick();
+    // };
 
-    const handleForgotPasswordClick = () => {
-        setIsForgotPasswordVisible(true)
-        setIsLoginModalVisible(false);
-    }
+    // const handleForgotPasswordClick = () => {
+    //     setIsForgotPasswordVisible(true)
+    //     setIsLoginModalVisible(false);
+    // }
 
-    const toggleMenu = () => {
-        setMenuOpen(!isMenuOpen);
-    };
+    // const toggleMenu = () => {
+    //     setMenuOpen(!isMenuOpen);
+    // };
 
-    const handleLogout = async () => {
-        setMenuOpen(false)
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                auth.signOut();
-                setIsLoggedIn(false);
-                Swal.fire({
-                    title: "Logout!",
-                    text: "Logged out successfully",
-                    icon: "success"
-                });
-            }
-        });
+    // const handleLogout = async () => {
+    //     setMenuOpen(false)
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes!"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             auth.signOut();
+    //             setIsLoggedIn(false);
+    //             Swal.fire({
+    //                 title: "Logout!",
+    //                 text: "Logged out successfully",
+    //                 icon: "success"
+    //             });
+    //         }
+    //     });
 
-    };
+    // };
 
-    const token = users?.users?.token
+    // const token = users?.users?.token
 
-    const handleLanguageChange = (eventKey) => {
-        dispatch(setLanguage(eventKey))
-    }
+    // const handleLanguageChange = (eventKey) => {
+    //     dispatch(setLanguage(eventKey))
+    // }
 
     return (
         <>
             {/* <!---Side Menu Start---> */}
             <div className="ms_main_wrapper">
-                <div className={`ms_sidemenu_wrapper ${isMenuOpen ? 'open_menu' : ''}`}>
-                    <div className={isMenuOpen ? 'ms_nav_close02' : 'ms_nav_close'} onClick={toggleMenu}>
+                <div className={`ms_sidemenu_wrapper ${open ? 'open_menu' : ''}`}>
+                    {/* <div className={isMenuOpen ? 'ms_nav_close02' : 'ms_nav_close'} onClick={toggleMenu}>
                         <div>
                             {isMenuOpen ? (
 
@@ -95,15 +94,25 @@ const Sidebar = () => {
                                 <FaAngleRight size={20} className='custom_close_icon' />
                             )}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="ms_sidemenu_inner">
                         <div className="ms_logo_inner">
-                            <div className="ms_logo">
-                                <Image width={100} height={100} src={nndLogo} alt="" className="img-fluid" />
-                            </div>
-                            <div className="ms_logo_open">
-                                <Image width={100} height={100} src={nndWeb} alt="" className="img-fluid" />
-                            </div>
+                    {
+                        open ?
+                        (
+                                        <div className="ms_logo_open">
+                                            <Image width={100} height={100} src={nndWeb} alt="" className="img-fluid" />
+                                        </div>
+                        )
+                        :
+                        (
+                                        <div className="ms_logo">
+                                            <Image width={100} height={100} src={nndLogo} alt="" className="img-fluid" />
+                                        </div>
+                        )
+                    }
+
+                    
                         </div>
                         <div className="ms_nav_wrapper">
                             <ul>
@@ -187,7 +196,7 @@ const Sidebar = () => {
                                 </a>
                                 </li>
                             </ul>
-                            <ul className='btn_ul'>
+                            {/* <ul className='btn_ul'>
                                 <li>
                                     {
                                         token ?
@@ -212,25 +221,25 @@ const Sidebar = () => {
 
 
 
-                            </ul>
-                            <ul className='btn_ul'>
+                            </ul> */}
+                            {/* <ul className='btn_ul'>
                                 <li>
                                     <DropdownButton id="dropdown-basic-button" title={language} onSelect={handleLanguageChange} >
                                         <Dropdown.Item eventKey="English" >English</Dropdown.Item>
                                         <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
                                     </DropdownButton>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div >
                 </div >
             </div >
 
-            <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick={handleForgotPasswordClick} />
+            {/* <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick={handleForgotPasswordClick} />
 
             <RegisterModal show={isRegisterModalVisible} onHide={() => setIsRegisterModalVisible(false)} onLoginClick={handleLoginClick} />
 
-            <ForgotPasswordModal show={isForgotPasswordVisible} onHide={() => setIsForgotPasswordVisible(false)} />
+            <ForgotPasswordModal show={isForgotPasswordVisible} onHide={() => setIsForgotPasswordVisible(false)} /> */}
 
         </>
     )

@@ -1,7 +1,7 @@
 @media screen and (min-width: 576px) and (max-width: 991px) {
-    .ms_top_btn {
+    /* .ms_top_btn {
         display: none;
-    }
+    } */
 
     ul.btn_ul {
         margin-top: 40px;
@@ -14,9 +14,9 @@
 }
 
 @media (min-width: 991px) {
-    .nnd__vertical_logo {
+    /* .nnd__vertical_logo {
         display: none;
-    }
+    } */
 
     .btn_ul {
         display: none;
@@ -25,11 +25,11 @@
 
 }
 
-@media (max-width: 575px) {
+@media (max-width: 575px) { 
 
-    .ms_top_btn {
+    /* .ms_top_btn {
         display: none;
-    }
+    } */
 
     .home_container {
 
@@ -85,7 +85,7 @@
     }
 }
 
-@media screen and (min-width: 320px) and (max-width: 991px) {
+/* @media screen and (min-width: 320px) and (max-width: 991px) {
 
     .home_container {
         margin-top: 3rem;
@@ -96,7 +96,7 @@
         margin-top: 3rem;
     }
 
-}
+} */
 
 @media (max-width: 480px) {
     .ms_nav_close02 {
@@ -126,5 +126,40 @@
 
     .login_form .input_container span {
         font-size: 14px;
+    }
+}
+
+/* @media (min-width: 600px){
+    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper{
+        width: 53px;
+    }
+} */
+
+@media (min-width: 600px) {
+    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper {
+            width: 53px;
+        }
+}
+
+@media (min-width: 600px){
+    .css-b62sy7-MuiDrawer-docked {
+            width: 56px;
+        }
+}
+
+@media (max-width: 575px){
+    .menuIcon{
+        display: none;
+    }
+    .home_icon{
+        display: block;
+    }
+}
+@media (min-width: 575px){
+    .menuIcon{
+        display: block;
+    }
+    .home_icon{
+        display: none;
     }
 }

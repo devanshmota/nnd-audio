@@ -7,8 +7,9 @@ const Sidebar = dynamic(() => import('../components/Sidebar.jsx'), {
   ssr: false
 })
 import dynamic from 'next/dynamic';
+import PersistentDrawerLeft from '@/components/PersistentDrawerLeft';
 // import Header from '@/components/Header';
-const Header = dynamic(() => import('../components/Header.jsx'),{
+const Header = dynamic(() => import('../components/Header.jsx'), {
   ssr: false
 })
 const inter = Inter({ subsets: ['latin'] })
@@ -23,9 +24,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Sidebar />
-          <Header/>
-          {children}
+          <PersistentDrawerLeft>
+            {children}
+          </PersistentDrawerLeft>
         </Providers>
       </body>
     </html>

@@ -17,7 +17,6 @@ const HomePage = () => {
 
   return (
     <>
- 
       <MusicCategories />
       <LatestRelease />
       <Utsav />

@@ -5,7 +5,6 @@ import MusicCategoryallCard from "@/components/MusicCategoryallCard"
 const MusicCategoriesAll = () => {
 
 
-
   return (
     <>
       <div className="wrapper">

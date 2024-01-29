@@ -60,7 +60,7 @@ const Lyricists = () => {
 
 
     return (
-        <div className="div_container d-flex flex-column">
+        <div className="container d-flex flex-column">
 
             {
                 lyricists.length > 0 && (
@@ -122,7 +122,7 @@ const Lyricists = () => {
                                 lyricists.map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index}>
                                         <div className="d-flex flex-column gap-3 align-items-center">
-                                            <Image src={item.image} width={100} height={260} className="card-img-top artist_img" alt={item.eng_name} />
+                                            <img src={item.image} width={0} height={0} className="card-img-top artist_img" alt={item.eng_name} />
                                             <h5 className="titles_homepage text-center ">{GetLanguage(language, item)}</h5>
                                         </div>
                                     </SwiperSlide>
