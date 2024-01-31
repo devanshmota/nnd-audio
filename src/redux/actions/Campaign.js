@@ -13,6 +13,7 @@ import { getArtists } from "@/utils/api";
 import { getRadio } from "@/utils/api";
 import { getHome } from "@/utils/api";
 import { getMusicCategory } from "@/utils/api";
+import { globalSearch } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -109,6 +110,22 @@ export const getHomeApi = ({
     store.dispatch(
         apiCallBegan({
             ...getHome(is_guest),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const globalSearchApi = ({
+    search = "",
+    is_guest = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...globalSearch(search, is_guest),
             displayToast: false,
             onStart,
             onSuccess,

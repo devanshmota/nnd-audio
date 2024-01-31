@@ -31,7 +31,7 @@
     "swiper": "^11.0.5"
   },
   "devDependencies": {
-    "antd": "^5.13.1",
+    "antd": "^5.13.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4"
   }

@@ -10,6 +10,7 @@ const ARTISTS = "get_artist"
 const RADIO = "get_radio"
 const HOME = "get_home"
 const MUSIC_CATEGORY = "get_category"
+const GLOBAL_SEARCH = "global_search"
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -24,6 +25,18 @@ export const getCountries = (offset, sort, limit, order, search) => {
             search: search,
         },
         authorizationHeader: false,
+
+    }
+}
+export const globalSearch = (search, is_guest) => {
+    return {
+        url: `${GLOBAL_SEARCH}`,
+        method: "GET",
+        params: {
+            search: search,
+            is_guest: is_guest
+        },
+        authorizationHeader: true,
 
     }
 }

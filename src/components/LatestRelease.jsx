@@ -112,18 +112,12 @@ const LatestRelease = () => {
                                     latestRelease.map((item, index) => (
 
                                         <SwiperSlide key={item.id} virtualIndex={index}>
-                                            <div className="d-flex gap-2 justify-content-center align-items-center">
+                                            <div className="d-flex flex-column flex-lg-row gap-2 justify-content-center align-items-center">
                                                 <Image src={item.album.image} className="release_img" alt={item.eng_title} width={100} height={100} />
-                                                <div className="d-flex flex-column justify-content-center">
-                                                    <h6>
-                                                        <Link href='/kirtan'>
 
-                                                            {GetLanguage(language, item)}
-                                                            
-                                                            </Link>
-                                                    </h6>
-                                                    {/* <p className="titles_homepage m-0 small text-secondary">{item.title}</p> */}
-                                                </div>
+                                                <h6 className='m-0 ellipsis-container text-white'>
+                                                        {GetLanguage(language, item)}
+                                                </h6>
 
                                             </div>
                                         </SwiperSlide>
@@ -136,7 +130,7 @@ const LatestRelease = () => {
             }
 
 
-        </div>
+        </div >
     )
 }
 

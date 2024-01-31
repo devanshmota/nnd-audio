@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Image from 'next/image';
-import nndLogo from '../../public/images/nnd_web.png'
+import nndLogo from '../../public/images/nnd_logo.png'
 const Header = dynamic(() => import('./Header.jsx'), {
     ssr: false
 })
@@ -21,6 +21,9 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 })
 import dynamic from 'next/dynamic';
 import { FaHome } from 'react-icons/fa';
+import { Autocomplete, TextField } from '@mui/material';
+import { Stack } from 'react-bootstrap';
+import GlobalSearch from './Search';
 
 
 const drawerWidth = 240;
@@ -116,6 +119,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function PersistentDrawerLeft({ children }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const top100Films = [
+        {id:1, title: "Osman mir"},
+        {id:2, title: "Hemant Chauhan"},
+        {id:1, title: "Aaj Mare Orde re"},
+    ]
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -124,6 +132,7 @@ export default function PersistentDrawerLeft({ children }) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -145,7 +154,7 @@ export default function PersistentDrawerLeft({ children }) {
                 >
                     <IconButton
                         color="inherit"
-                        className="open_drawer"
+                        className="open_drawer menuIcon"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
@@ -154,12 +163,15 @@ export default function PersistentDrawerLeft({ children }) {
                             ...(open && { display: "none" }),
                         }}
                     >
+
                         <MenuIcon className='menuIcon' />
                         {/* <FaHome className='home_icon' /> */}
                     </IconButton>
-
+                    <div className="ms_logo_top">
+                        <Image width={30} height={30} src={nndLogo} alt="" className="img-fluid" />
+                    </div>
+                    <GlobalSearch />
                     <Header />
-
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>

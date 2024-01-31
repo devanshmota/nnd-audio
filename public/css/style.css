@@ -481,7 +481,7 @@ body.loaded .ms_loader {
 .ms_logo img {
 	width: 100%;
 	height: 100%;
-	max-width: 40px;
+	max-width: 30px;
 	object-fit: contain;
 }
 
@@ -497,7 +497,7 @@ body.loaded .ms_loader {
 	align-items: center;
 	justify-content: center;
 	display: flex;
-	min-height: 100px;
+	min-height: 83px;
 }
 
 .ms_nav_wrapper {
@@ -896,9 +896,9 @@ span.nav_text {
 	backface-visibility: hidden;
 } */
 
-.ms_header{
+/* .ms_header {
 	margin-left: auto;
-}
+} */
 
 .ms_top_search {
 	max-width: 395px;
@@ -5344,9 +5344,9 @@ h2.widget-title:after {
 		font-size: 13px;
 	}
 
-	.ms_header {
+	/* .ms_header {
 		padding: 20px 30px;
-	}
+	} */
 
 	.ms_top_right .ms_top_lang {
 		padding-right: 5px;
@@ -6155,9 +6155,9 @@ h2.widget-title:after {
 		line-height: 32px;
 	}
 
-	.ms_header {
+	/* .ms_header {
 		padding: 20px 30px;
-	}
+	} */
 
 	.ms_top_trend {
 		display: none;
@@ -6209,10 +6209,10 @@ h2.widget-title:after {
 		padding: 0px 10px;
 	}
 
-	.ms_header {
+	/* .ms_header {
 		left: 0px;
 		padding: 12px 30px;
-	}
+	} */
 
 	/* .ms_top_right {
 		line-height: 1;
@@ -6240,7 +6240,7 @@ h2.widget-title:after {
 	}
 
 	.ms_logo_inner {
-		min-height: 100px;
+		min-height: 83px;
 	}
 
 	/* .ms_nav_wrapper {
@@ -7185,12 +7185,12 @@ h2.widget-title:after {
 		display: none;
 	}
 
-	.ms_free_download .album_list_wrapper {	
+	.ms_free_download .album_list_wrapper {
 		width: 262%;
 	}
 
 	.ms_logo_inner {
-		min-height: 100px;
+		min-height: 83px;
 	}
 
 	/* .ms_nav_wrapper {
@@ -7202,9 +7202,10 @@ h2.widget-title:after {
 	.ms_register_popup .modal-content {
 		padding: 30px 30px;
 	}
-		.css-b62sy7-MuiDrawer-docked .MuiDrawer-paper{
-			width: 53px;
-		}
+
+	.css-b62sy7-MuiDrawer-docked .MuiDrawer-paper {
+		width: 53px;
+	}
 
 	.ms_register_img {
 		display: none;
@@ -8140,6 +8141,15 @@ h2.widget-title:after {
 
 }
 
+.ellipsis-container {
+	overflow: hidden !important;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 127px;
+	text-align: center;
+	max-width: 100%;
+}
+
 .release_img {
 	object-fit: cover;
 	border-radius: 10px;
@@ -8454,10 +8464,25 @@ select,
 }
 
 .css-zwx2rb-MuiToolbar-root {
-	justify-content: flex-start;
+	justify-content: space-between;
 }
 
-.css-1r9jet7{
+.css-1r9jet7 {
 	min-height: 64px;
 }
 
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+	left: 4px;
+}
+
+#utsav_images {
+	gap: 20px 0;
+}
+
+
+.ant-select,.ant-select-outlined,.css-dev-only-do-not-override-zl9ks2,.ant-select-single,.ant-select-show-arrow,.ant-select-show-search{
+	width: 30%;
+}
+/* .ant-select-dropdown,.ant-select-dropdown-hidden,.css-dev-only-do-not-override-1b0bdye,.ant-select-dropdown-placement-bottomLeft{
+	z-index: 1200 ;
+} */

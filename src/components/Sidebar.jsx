@@ -97,22 +97,22 @@ const Sidebar = ({ open }) => {
                     </div> */}
                     <div className="ms_sidemenu_inner">
                         <div className="ms_logo_inner">
-                    {
-                        open ?
-                        (
+                            {
+                                open ?
+                                    (
                                         <div className="ms_logo_open">
                                             <Image width={100} height={100} src={nndWeb} alt="" className="img-fluid" />
                                         </div>
-                        )
-                        :
-                        (
+                                    )
+                                    :
+                                    (
                                         <div className="ms_logo">
-                                            <Image width={100} height={100} src={nndLogo} alt="" className="img-fluid" />
+                                            <Image width={0} height={0} src={nndLogo} alt="" className="img-fluid" />
                                         </div>
-                        )
-                    }
+                                    )
+                            }
 
-                    
+
                         </div>
                         <div className="ms_nav_wrapper">
                             <ul>

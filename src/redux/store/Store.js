@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import UsersSlice from '../reducer/UsersSlice';
 import apiMiddleware from '../middleware/api'; 
 import LanguageSlice from '../reducer/LanguageSlice';
+import CachedataSlice from '../reducer/CachedataSlice';
 
 const persistConfig = {
     key: 'root',
@@ -12,7 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({ 
     users: UsersSlice.reducer, 
-    language: LanguageSlice.reducer
+    language: LanguageSlice.reducer,
+    cachedata: CachedataSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
