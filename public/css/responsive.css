@@ -188,3 +188,12 @@
         display: none;
     }
 }
+
+@media (max-width: 767px) {
+    .about-divider {
+       display: none !important;
+    }
+    .about_img_div{
+        margin: 3rem 0;
+    }
+}

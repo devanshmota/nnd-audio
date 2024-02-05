@@ -1,17 +1,20 @@
 'use client'
-
 import { globalSearchApi } from "@/redux/actions/Campaign";
-
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import GetLanguage from "./GetLanguage";
 
 
 const SearchFunctionality = () => {
 
+    const { language } = useSelector((state) => state.language)
     const [options, setOptions] = useState([]);
-    const  {searchQuery}  = useSelector((state) => state.cachedata)
+    const { searchQuery } = useSelector((state) => state.cachedata)
+    const dispatch = useDispatch()
 
     useEffect(() => {
+
         globalSearchApi({
             is_guest: 1,
             search: searchQuery,
@@ -22,7 +25,9 @@ const SearchFunctionality = () => {
                 console.error(e);
             },
         });
-    }, [])
+
+    }, [searchQuery, language])
+
 
     const generateOptions = (data) => {
         const options = [];
@@ -31,7 +36,9 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.category.map((item) => ({
                     value: `category_${item.id}`,
-                    label: `${item.eng_name} (Category)`,
+                    label: `${GetLanguage(language, item)}`,
+                    category: 'Category',
+                    img: item.image
                 }))
             );
         }
@@ -40,7 +47,9 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.music.map((item) => ({
                     value: `music_${item.id}`,
-                    label: `${item.eng_title} (Music)`,
+                    label: `${GetLanguage(language, item) }`,
+                    category: 'Music',
+                    img: item.album.image
                 }))
             );
         }
@@ -48,7 +57,9 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.radio.map((item) => ({
                     value: `radio_${item.id}`,
-                    label: `${item.eng_title} (Radio)`,
+                    label: `${GetLanguage(language, item)}`,
+                    category: 'Radio',
+                    img: item.image
                 }))
             );
         }
@@ -56,7 +67,9 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.artist.map((item) => ({
                     value: `artist_${item.id}`,
-                    label: `${item.eng_name} (Artist)`,
+                    label: `${GetLanguage(language, item)}`,
+                    category: 'Artist',
+                    img: item.image
                 }))
             );
         }
@@ -64,19 +77,40 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.utsav.map((item) => ({
                     value: `utsav_${item.id}`,
-                    label: `${item.eng_name} (Utsav)`,
+                    label: `${GetLanguage(language, item)}`,
+                    category: 'Utsav',
+                    img: item.image
                 }))
             );
         }
-
+        console.log(options)
         return options;
 
     };
 
-    console.log(options)
+
 
     return (
-        <div>SearchFunctionality</div>
+        <>
+            <div className="row">
+                {
+                    options.length > 0 && options.map((item, index) => (
+                        <>
+                            <div key={index} className="col-xxl-3 col-xl-4 col-sm-6 d-flex mus_cat_container">
+                                <div className="lat-rel-card-container text-white">
+
+                                    <Image src={item.img} alt={item.label} width={80} height={80} />
+                                    <div className="d-flex flex-column gap-1">
+                                        <h6 className="m-0">{item.label}</h6>
+                                        <p className="text-cat">{item.category}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    ))
+                }
+            </div>
+        </>
     )
 }
 

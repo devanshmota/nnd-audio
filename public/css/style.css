@@ -8426,7 +8426,6 @@ select,
 	justify-content: center;
 	gap: 10px;
 	border-radius: 5px;
-	width: min-content;
 }
 
 .lat-rel-card-container img {
@@ -8480,9 +8479,44 @@ select,
 }
 
 
-.ant-select,.ant-select-outlined,.css-dev-only-do-not-override-zl9ks2,.ant-select-single,.ant-select-show-arrow,.ant-select-show-search{
+.ant-select,
+.ant-select-outlined,
+.css-dev-only-do-not-override-zl9ks2,
+.ant-select-single,
+.ant-select-show-arrow,
+.ant-select-show-search {
 	width: 30%;
 }
-/* .ant-select-dropdown,.ant-select-dropdown-hidden,.css-dev-only-do-not-override-1b0bdye,.ant-select-dropdown-placement-bottomLeft{
-	z-index: 1200 ;
-} */
+
+.text-cat {
+	font-size: 12px;
+	color: #d5b6b6;
+}
+
+.about_us_img {
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.swaminarayan_mandir_logo {
+	width: 100%;
+}
+
+.about_us_icon {
+	font-size: 23px;
+	color: #cdcdcd;
+}
+
+.about_us_container {
+	min-height: calc(100vh - 64px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.about-divider{	
+	
+	opacity: 1 !important;
+	color: white;
+	height: 100%;
+	width: 2px !important;
+}

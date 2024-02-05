@@ -20,9 +20,6 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
     ssr: false
 })
 import dynamic from 'next/dynamic';
-import { FaHome } from 'react-icons/fa';
-import { Autocomplete, TextField } from '@mui/material';
-import { Stack } from 'react-bootstrap';
 import GlobalSearch from './Search';
 
 
@@ -120,9 +117,9 @@ export default function PersistentDrawerLeft({ children }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const top100Films = [
-        {id:1, title: "Osman mir"},
-        {id:2, title: "Hemant Chauhan"},
-        {id:1, title: "Aaj Mare Orde re"},
+        { id: 1, title: "Osman mir" },
+        { id: 2, title: "Hemant Chauhan" },
+        { id: 1, title: "Aaj Mare Orde re" },
     ]
 
     const handleDrawerOpen = () => {
@@ -154,7 +151,7 @@ export default function PersistentDrawerLeft({ children }) {
                 >
                     <IconButton
                         color="inherit"
-                        className="open_drawer menuIcon"
+                        className="open_drawer"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
@@ -165,11 +162,11 @@ export default function PersistentDrawerLeft({ children }) {
                     >
 
                         <MenuIcon className='menuIcon' />
-                        {/* <FaHome className='home_icon' /> */}
+                        <div className="ms_logo_top">
+                            <Image width={30} height={30} src={nndLogo} alt="" className="img-fluid" />
+                        </div>
                     </IconButton>
-                    <div className="ms_logo_top">
-                        <Image width={30} height={30} src={nndLogo} alt="" className="img-fluid" />
-                    </div>
+
                     <GlobalSearch />
                     <Header />
                 </Toolbar>

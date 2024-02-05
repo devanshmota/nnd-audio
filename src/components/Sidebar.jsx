@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from 'react-bootstrap';
 import { setLanguage } from '@/redux/reducer/LanguageSlice';
+import { BiCommentDetail } from "react-icons/bi";
 
 const Sidebar = ({ open }) => {
 
@@ -111,8 +112,6 @@ const Sidebar = ({ open }) => {
                                         </div>
                                     )
                             }
-
-
                         </div>
                         <div className="ms_nav_wrapper">
                             <ul>
@@ -130,9 +129,10 @@ const Sidebar = ({ open }) => {
                                     <a href="/" title="Albums">
                                         <span className="nav_icon">
                                             <span className="icon icon_albums"></span>
+                                            {/* <BiCommentDetail className='about_us_icon' /> */}
                                         </span>
                                         <span className="nav_text">
-                                            albums
+                                            about us
                                         </span>
                                     </a>
                                 </li>

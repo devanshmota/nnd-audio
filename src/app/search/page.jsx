@@ -3,10 +3,18 @@ import SearchFunctionality from "@/components/SearchFunctionality";
 
 const Search = () => {
 
-    
+
 
     return (
-        <SearchFunctionality />
+        <>
+            <div className="wrapper">
+                <div className="container">
+                    <SearchFunctionality />
+                </div>
+            </div>
+        <br />
+        <br />
+        </>
     )
 }
 
