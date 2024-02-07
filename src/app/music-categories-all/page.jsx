@@ -7,15 +7,15 @@ const MusicCategoriesAll = () => {
 
   return (
     <>
-      <div className="wrapper">
-        <div className="container">
 
-          <MusicCategoryallCard/>
+      <div className="container">
 
-        </div>
+        <MusicCategoryallCard />
+
       </div>
-    <br />
-    <br />
+
+      <br />
+      <br />
     </>
   )
 }

@@ -13,6 +13,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from 'react-bootstrap';
 import { setLanguage } from '@/redux/reducer/LanguageSlice';
 import { BiCommentDetail } from "react-icons/bi";
+import Link from 'next/link';
 
 const Sidebar = ({ open }) => {
 
@@ -116,17 +117,19 @@ const Sidebar = ({ open }) => {
                         <div className="ms_nav_wrapper">
                             <ul>
                                 <li >
-                                    <a href="/" title="Discover">
+                                    <Link href='/'>
+
                                         <span className="nav_icon">
                                             <span className="icon icon_discover"></span>
                                         </span>
                                         <span className="nav_text">
                                             discover
                                         </span>
-                                    </a>
+
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="/" title="Albums">
+                                    <Link href='albums'>
                                         <span className="nav_icon">
                                             <span className="icon icon_albums"></span>
                                             {/* <BiCommentDetail className='about_us_icon' /> */}
@@ -134,7 +137,8 @@ const Sidebar = ({ open }) => {
                                         <span className="nav_text">
                                             about us
                                         </span>
-                                    </a>
+                                    </Link>
+
                                 </li>
 
                             </ul>
@@ -177,14 +181,15 @@ const Sidebar = ({ open }) => {
                                 </li>
                             </ul>
                             <ul className="nav_playlist">
-                                <li><a href="" title="Featured Playlist">
-                                    <span className="nav_icon">
-                                        <span className="icon icon_fe_playlist"></span>
-                                    </span>
-                                    <span className="nav_text">
-                                        featured playlist
-                                    </span>
-                                </a>
+                                <li>
+                                    <Link href='/playlist'>
+                                        <span className="nav_icon">
+                                            <span className="icon icon_fe_playlist"></span>
+                                        </span>
+                                        <span className="nav_text">
+                                            featured playlist
+                                        </span>
+                                    </Link>
                                 </li>
                                 <li><a href="" title="Create Playlist">
                                     <span className="nav_icon">

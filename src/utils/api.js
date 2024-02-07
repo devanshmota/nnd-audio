@@ -11,6 +11,7 @@ const RADIO = "get_radio"
 const HOME = "get_home"
 const MUSIC_CATEGORY = "get_category"
 const GLOBAL_SEARCH = "global_search"
+const RECENTLY_PLAYED_MUSIC = "get_recently_played_music"
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -35,6 +36,16 @@ export const globalSearch = (search, is_guest) => {
         params: {
             search: search,
             is_guest: is_guest
+        },
+        authorizationHeader: true,
+
+    }
+}
+export const getRecentlyPlayedMusic = () => {
+    return {
+        url: `${RECENTLY_PLAYED_MUSIC}`,
+        method: "GET",
+        params: {
         },
         authorizationHeader: true,
 

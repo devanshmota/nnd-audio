@@ -34,7 +34,7 @@ const LatestReleasesAllCards = () => {
                         <div className="col-xxl-3 col-xl-4 col-sm-6 d-flex mus_cat_container">
                             <div className="lat-rel-card-container text-white">
                                 <h1 className="m-0">{`${(index + 1).toString().padStart(2, '0')}`}</h1>
-                                <Image src={item.album.image} alt={item.eng_title} width={80} height={80} />
+                                <Image src={item.album.image} alt={item.eng_title} className="rounded" width={80} height={80} />
                                 <h6 className="m-0">{GetLanguage(language, item)}</h6>
                             </div>
                         </div>

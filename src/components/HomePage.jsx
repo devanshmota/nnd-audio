@@ -7,6 +7,7 @@ import Utsav from './Utsav';
 import Artists from './Artists';
 import Lyricists from './Lyricists';
 import Radio from './Radio';
+import RecentlyPlayed from "./RecentlyPlayed";
 
 
 
@@ -23,6 +24,7 @@ const HomePage = () => {
       <Artists />
       <Lyricists />
       <Radio />
+      <RecentlyPlayed />
     </>
   )
 }

@@ -99,7 +99,7 @@ const SearchFunctionality = () => {
                             <div key={index} className="col-xxl-3 col-xl-4 col-sm-6 d-flex mus_cat_container">
                                 <div className="lat-rel-card-container text-white">
 
-                                    <Image src={item.img} alt={item.label} width={80} height={80} />
+                                    <Image src={item.img} alt={item.label} className="rounded" width={80} height={80} />
                                     <div className="d-flex flex-column gap-1">
                                         <h6 className="m-0">{item.label}</h6>
                                         <p className="text-cat">{item.category}</p>

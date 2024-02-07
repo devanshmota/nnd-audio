@@ -8145,7 +8145,6 @@ h2.widget-title:after {
 	overflow: hidden !important;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	max-width: 127px;
 	text-align: center;
 	max-width: 100%;
 }
@@ -8410,7 +8409,6 @@ select,
 	flex-direction: column;
 	align-items: center;
 	gap: 7px;
-	border-radius: 5px;
 	width: min-content;
 }
 
@@ -8425,21 +8423,21 @@ select,
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
+}
+
+.rec-plyd-card-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+/* .lat-rel-card-container img {
 	border-radius: 5px;
-}
-
-.lat-rel-card-container img {
-	border-radius: 5px;
-}
-
-.card-container img {
-	border-radius: 20px;
-}
-
-/* .wrapper {
-	margin-top: 80px;
-	margin-left: 80px;
 } */
+
+
+
 
 .mus_cat_container {
 	padding-top: 60px;
@@ -8493,6 +8491,11 @@ select,
 	color: #d5b6b6;
 }
 
+.text-rec-pld {
+	font-size: 16px;
+	color: #d5b6b6;
+}
+
 .about_us_img {
 	border-radius: 50%;
 	object-fit: cover;
@@ -8507,16 +8510,55 @@ select,
 	color: #cdcdcd;
 }
 
+
 .about_us_container {
 	min-height: calc(100vh - 64px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.about-divider{	
-	
+
+.about-divider {
+
 	opacity: 1 !important;
 	color: white;
 	height: 100%;
 	width: 2px !important;
+}
+
+.icon_recent_plyd {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.playlist_container {
+	width: 200px;
+	height: auto;
+	background-color: #1a212bd1;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.playlist_container:hover {
+	background-color: #1a212b;
+}
+
+.ant-btn .css-dev-only-do-not-override-1b0bdye .ant-btn-default .ant-btn-compact-item .ant-btn-compact-first-item {
+	display: none;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-btn-default {
+	background: transparent;
+	border-color: transparent;
+	color: white;
+}
+
+:where(.css-dev-only-do-not-override-1b0bdye).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+	background: transparent;
+	border-color: transparent;
+	color: white;
 }

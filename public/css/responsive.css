@@ -191,9 +191,25 @@
 
 @media (max-width: 767px) {
     .about-divider {
-       display: none !important;
+        display: none !important;
     }
-    .about_img_div{
+
+    .about_img_div {
         margin: 3rem 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .container_icon_rcnt_plyd {
+        display: none !important;
+    }
+}
+
+@media (max-width: 476px) {
+    .title_rcnt_plyd{
+        font-size: 18px;
+    }
+    .desc_rcnt_plyd{
+        font-size: 16px;
     }
 }

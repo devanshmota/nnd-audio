@@ -14,6 +14,7 @@ import { getRadio } from "@/utils/api";
 import { getHome } from "@/utils/api";
 import { getMusicCategory } from "@/utils/api";
 import { globalSearch } from "@/utils/api";
+import { getRecentlyPlayedMusic } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -177,6 +178,20 @@ export const logoutApi = ({
     store.dispatch(
         apiCallBegan({
             ...logout(),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getRecentlyPlayedMusicApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getRecentlyPlayedMusic(),
             displayToast: false,
             onStart,
             onSuccess,

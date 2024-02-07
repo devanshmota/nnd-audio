@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 
 
-
 const LatestRelease = () => {
 
     const { language } = useSelector((state) => state.language)
