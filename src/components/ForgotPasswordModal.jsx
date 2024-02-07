@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import { IoMdCloseCircle } from "react-icons/io"
 import { MdOutlineEmail } from "react-icons/md"
 import { auth } from './Firebase';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { checkEmailApi } from '@/redux/actions/Campaign';
 
@@ -65,7 +65,7 @@ const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
                     </form>
                 </Modal.Body>
             </Modal>
-            <Toaster position="top-right" reverseOrder={false} />
+    
         </>
     )
 }

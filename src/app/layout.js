@@ -3,15 +3,8 @@ import '../../public/css/style.css'
 import '../../public/css/responsive.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Providers from '@/redux/store/Providers';
-const Sidebar = dynamic(() => import('../components/Sidebar.jsx'), {
-  ssr: false
-})
-import dynamic from 'next/dynamic';
 import PersistentDrawerLeft from '@/components/PersistentDrawerLeft';
-// import Header from '@/components/Header';
-const Header = dynamic(() => import('../components/Header.jsx'), {
-  ssr: false
-})
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

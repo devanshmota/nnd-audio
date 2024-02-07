@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from 'sweetalert2'
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { logoutApi } from "@/redux/actions/Campaign";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { setLanguage } from "@/redux/reducer/LanguageSlice";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { IconButton } from "@mui/material";
@@ -146,7 +146,7 @@ const Header = ({ open, handleDrawerOpen }) => {
         <ForgotPasswordModal show={isForgotPasswordVisible} onLoginClick={handleLoginClick} onHide={() => setIsForgotPasswordVisible(false)} />
 
       </div>
-      <Toaster position="top-right" reverseOrder={false} />
+      
     </>
   )
 }

@@ -21,6 +21,7 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 })
 import dynamic from 'next/dynamic';
 import GlobalSearch from './Search';
+import { Toaster } from 'react-hot-toast';
 
 
 const drawerWidth = 240;
@@ -187,6 +188,7 @@ export default function PersistentDrawerLeft({ children }) {
                 <DrawerHeader />
                 {children}
             </Main>
+            <Toaster position="top-center" reverseOrder={false} />
         </Box>
     );
 }

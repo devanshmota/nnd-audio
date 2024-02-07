@@ -8233,6 +8233,22 @@ button.header_login_btn {
 	border-radius: 10px;
 }
 
+.create_playlist_modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	padding: 40px;
+	width: 25rem;
+	color: white;
+	background-color: var(--primary-color);
+	border-radius: 10px;
+}
+
+
+
 .login_form h2,
 p {
 	margin-bottom: 0 !important;
@@ -8240,7 +8256,7 @@ p {
 
 .login_form input,
 select,
-.frgt_container input {
+.frgt_container input,.create_playlist_modal input {
 	border: none;
 	outline: none;
 	border-radius: 10px;
@@ -8255,7 +8271,7 @@ select,
 }
 
 
-.login_form button {
+.login_form button, .create_playlist_modal button{
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;
@@ -8310,20 +8326,20 @@ select,
 	font-size: 14px;
 }
 
-.login_form .input_with_icon {
+.login_form .input_with_icon,.create_playlist_modal .input_with_icon {
 	position: relative;
 	display: flex;
 	align-items: center;
 }
 
 
-.login_form .all_icons {
+.login_form .all_icons,.create_playlist_modal .all_icons {
 	position: absolute;
 	left: 15px;
 }
 
 .login_form .all_icons,
-.eye_icon {
+.eye_icon,.create_playlist_modal .all_icons{
 	color: var(--icon-color);
 }
 
@@ -8333,7 +8349,7 @@ select,
 	cursor: pointer;
 }
 
-.login_form .close_icon {
+.login_form .close_icon,.create_playlist_modal .close_icon{
 	position: absolute;
 	top: 15px;
 	right: 15px;
@@ -8492,7 +8508,7 @@ select,
 }
 
 .text-rec-pld {
-	font-size: 16px;
+	font-size: 12px;
 	color: #d5b6b6;
 }
 
@@ -8541,24 +8557,25 @@ select,
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+	border-radius: 5px;
 }
 
 .playlist_container:hover {
 	background-color: #1a212b;
 }
 
-.ant-btn .css-dev-only-do-not-override-1b0bdye .ant-btn-default .ant-btn-compact-item .ant-btn-compact-first-item {
-	display: none;
-}
-
-:where(.css-dev-only-do-not-override-1b0bdye).ant-btn-default {
-	background: transparent;
-	border-color: transparent;
+.plylist_drp_btn {
+	background-color: transparent;
+	padding: 0;
+	border: none;
 	color: white;
 }
 
-:where(.css-dev-only-do-not-override-1b0bdye).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-	background: transparent;
-	border-color: transparent;
-	color: white;
+.plylist_drp_btn:active,
+.plylist_drp_btn:hover {
+	border-color: transparent !important;
+	color: white !important;
+}
+.create_playlist_modal .input_with_icon{
+	width: 100%;
 }

@@ -5,7 +5,7 @@ import { IoMdCloseCircle } from 'react-icons/io';
 import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { auth } from './Firebase';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { checkLoginApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
 import { useDispatch} from 'react-redux';
@@ -123,7 +123,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                 </Modal.Body>
             </Modal>
 
-            <Toaster position="top-right" reverseOrder={false} />
+        
         </>
 
     );

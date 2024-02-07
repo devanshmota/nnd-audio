@@ -15,6 +15,10 @@ import { getHome } from "@/utils/api";
 import { getMusicCategory } from "@/utils/api";
 import { globalSearch } from "@/utils/api";
 import { getRecentlyPlayedMusic } from "@/utils/api";
+import { getPlaylist } from "@/utils/api";
+import { createPlaylist } from "@/utils/api";
+import { deletePlaylist } from "@/utils/api";
+import { updatePlaylist } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -134,6 +138,68 @@ export const globalSearchApi = ({
         })
     );
 };
+
+export const getPlaylistApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getPlaylist(),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const createPlaylistApi = ({
+    title = '',
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...createPlaylist(title),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const deletePlaylistApi = ({
+    id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...deletePlaylist(id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const updatePlaylistApi = ({
+    title = '',
+    id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...updatePlaylist(title, id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+
 export const getMusicCategoryApi = ({
     limit = null,
     order = "",

@@ -11,8 +11,7 @@ import { auth } from './Firebase'
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast from 'react-hot-toast';
 
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
     const dispatch = useDispatch();
@@ -302,7 +301,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
 
                 </Modal.Body>
             </Modal>
-            <Toaster position="top-right" reverseOrder={false} />
+        
         </>
     )
 }

@@ -12,6 +12,10 @@ const HOME = "get_home"
 const MUSIC_CATEGORY = "get_category"
 const GLOBAL_SEARCH = "global_search"
 const RECENTLY_PLAYED_MUSIC = "get_recently_played_music"
+const GET_PLAYLIST = "playlist/get_playlist"
+const CREATE_PLAYLIST = 'playlist/create'
+const DELETE_PLAYLIST = 'playlist/delete'
+const UPDATE_PLAYLIST = 'playlist/update'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -39,6 +43,49 @@ export const globalSearch = (search, is_guest) => {
         },
         authorizationHeader: true,
 
+    }
+}
+export const getPlaylist = () => {
+    return {
+        url: `${GET_PLAYLIST}`,
+        method: "GET",
+        params: {
+        
+        },
+        authorizationHeader: true,
+
+    }
+}
+export const createPlaylist = (title) => {
+    return {
+        url: `${CREATE_PLAYLIST}`,
+        method: "POST",
+        params: {
+            title: title
+        },
+        authorizationHeader: true,
+
+    }
+}
+export const deletePlaylist = (id) => {
+    return {
+        url: `${DELETE_PLAYLIST}`,
+        method: "DELETE",
+        params: {
+            id: id
+        },
+        authorizationHeader: true,
+    }
+}
+export const updatePlaylist = (title, id) => {
+    return {
+        url: `${UPDATE_PLAYLIST}`,
+        method: "POST",
+        params: {
+            title : title,
+            id: id
+        },
+        authorizationHeader: true,
     }
 }
 export const getRecentlyPlayedMusic = () => {
