@@ -19,6 +19,7 @@ import { getPlaylist } from "@/utils/api";
 import { createPlaylist } from "@/utils/api";
 import { deletePlaylist } from "@/utils/api";
 import { updatePlaylist } from "@/utils/api";
+import { saveMusicToPlaylist } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -192,6 +193,22 @@ export const updatePlaylistApi = ({
     store.dispatch(
         apiCallBegan({
             ...updatePlaylist(title, id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const saveMusicToPlaylistApi = ({
+    id = null,
+    music_id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...saveMusicToPlaylist(id, music_id),
             displayToast: false,
             onStart,
             onSuccess,

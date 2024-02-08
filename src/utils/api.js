@@ -88,6 +88,17 @@ export const updatePlaylist = (title, id) => {
         authorizationHeader: true,
     }
 }
+export const saveMusicToPlaylist = (id, music_id) => {
+    return {
+        url: `${UPDATE_PLAYLIST}`,
+        method: "POST",
+        params: {
+            id: id,
+            music_id: music_id
+        },
+        authorizationHeader: true,
+    }
+}
 export const getRecentlyPlayedMusic = () => {
     return {
         url: `${RECENTLY_PLAYED_MUSIC}`,

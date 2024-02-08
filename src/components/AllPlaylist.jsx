@@ -17,15 +17,13 @@ const AllPlaylist = () => {
     const [initialRenameValue, setInitialRenameValue] = useState('');
     const [initialPlaylistid, setInitialPlaylistid] = useState(null)
     const [isGetPlaylist, setIsGetPlaylist] = useState(false)
-    // console.log(playlist)
+
 
     useEffect(() => {
-        
         getPlaylistApi({
             onSuccess: (res) => {
                 if (res.data) {
                     setPlaylist(res.data)
-                    
                 }
             },
             onError: (e) => {
@@ -78,8 +76,6 @@ const AllPlaylist = () => {
         onClick: (item) => handleMenuClick(item.key, playlistId),
     });
 
-
-
     const createPlaylist = () => {
         setIsPlaylistModalVisible(true)
     }
@@ -97,7 +93,6 @@ const AllPlaylist = () => {
         toast.success('Playlist renamed successfully');
     };
 
-
     return (
         <>
             <div className="container text-white">
@@ -114,8 +109,17 @@ const AllPlaylist = () => {
                             <div key={index} className="col-12 col-xl-3 col-xxl-2 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                                 <div className="card-container text-white">
 
-
-                                    <Image src='/Audio_hedphone.svg' alt='utshav_img_1' className="rounded" width={200} height={200} />
+                                    {
+                                        item.music.length > 0 ? (
+                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="rounded" width={200} height={200} />
+                                        )
+                                        :
+                                        (
+                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="rounded" width={200} height={200} />
+                                        )
+                                    }
+                                    
+                                    
                                     <div className="d-flex align-items-center justify-content-between w-100">
 
                                         <div className="d-flex flex-column">

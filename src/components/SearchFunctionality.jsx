@@ -28,7 +28,6 @@ const SearchFunctionality = () => {
 
     }, [searchQuery, language])
 
-
     const generateOptions = (data) => {
         const options = [];
 
@@ -47,7 +46,7 @@ const SearchFunctionality = () => {
             options.push(
                 ...data.music.map((item) => ({
                     value: `music_${item.id}`,
-                    label: `${GetLanguage(language, item) }`,
+                    label: `${GetLanguage(language, item)}`,
                     category: 'Music',
                     img: item.album.image
                 }))
@@ -88,13 +87,15 @@ const SearchFunctionality = () => {
 
     };
 
-
+    // if (options.length > 0) {
+    //     return 
+    // }
 
     return (
         <>
             <div className="row">
                 {
-                    options.length > 0 && options.map((item, index) => (
+                    options.length > 0 ? options.map((item, index) => (
                         <>
                             <div key={index} className="col-xxl-3 col-xl-4 col-sm-6 d-flex mus_cat_container">
                                 <div className="lat-rel-card-container text-white">
@@ -108,6 +109,8 @@ const SearchFunctionality = () => {
                             </div>
                         </>
                     ))
+                        :
+                        <h4 className="text-white text-center mt-4">No data found</h4>
                 }
             </div>
         </>

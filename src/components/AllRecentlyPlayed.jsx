@@ -46,8 +46,6 @@ const AllRecentlyPlayed = () => {
           </div>
         ))
         }
-
-
       </div>
     </div>
   )

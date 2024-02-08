@@ -9,11 +9,14 @@ import { FaRegHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
+import OffCanvas from "./OffCanvas";
 
 const RecentlyPlayed = () => {
 
   const { language } = useSelector((state) => state.language)
   const [recentlyPlayed, setRecentlyPlayed] = useState([])
+  const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
+  const [selectedMusicId, setSelectedMusicId] = useState(null);
 
   useEffect(() => {
 
@@ -27,6 +30,11 @@ const RecentlyPlayed = () => {
     })
   }, [])
 
+  const handleSave = (musicId) => {
+    setSelectedMusicId(musicId);
+    setIsOffCanvasOpen(true)
+  }
+
 
   return (
     <>
@@ -39,27 +47,28 @@ const RecentlyPlayed = () => {
 
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
-             
-                <div key={index} className="col-lg-12">
-                  <div className="d-flex align-items-center justify-content-between text-white">
-                    <div className="d-flex align-items-center gap-3">
-                      <Image src={item.album.image} alt={item.eng_title} className="rounded" width={120} height={120} />
-                      <div className="d-flex flex-column gap-2">
-                        <h5 className="m-0 text-break title_rcnt_plyd">{GetLanguage(language, item)}</h5>
-                        <p className="text-rec-pld desc_rcnt_plyd">{GetCatLanguage(language, item)}</p>
-                      </div>
-                    </div>
-                    <div className="d-flex align-items-center gap-2 gap-md-3">
-                      <FaShareAlt className="icon_recent_plyd" />
-                      <FaDownload className="icon_recent_plyd" />
-                      <FaRegHeart className="icon_recent_plyd" />
+
+              <div key={index} className="col-lg-12">
+                <div className="d-flex align-items-center justify-content-between text-white">
+                  <div className="d-flex align-items-center gap-3">
+                    <Image src={item.album.image} alt={item.eng_title} className="rounded" width={120} height={120} />
+                    <div className="d-flex flex-column gap-2">
+                      <h5 className="m-0 text-break title_rcnt_plyd">{GetLanguage(language, item)}</h5>
+                      <p className="text-rec-pld desc_rcnt_plyd">{GetCatLanguage(language, item)}</p>
                     </div>
                   </div>
+                  <div className="d-flex align-items-center gap-2 gap-md-3">
+                    <FaShareAlt className="icon_recent_plyd" />
+                    <FaDownload className="icon_recent_plyd" />
+                    <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                  </div>
                 </div>
-            
+              </div>
+
             ))
           }
         </div>
+        <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} />
       </div>
       <br />
       <br />

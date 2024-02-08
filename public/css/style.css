@@ -8256,7 +8256,8 @@ p {
 
 .login_form input,
 select,
-.frgt_container input,.create_playlist_modal input {
+.frgt_container input,
+.create_playlist_modal input {
 	border: none;
 	outline: none;
 	border-radius: 10px;
@@ -8271,7 +8272,9 @@ select,
 }
 
 
-.login_form button, .create_playlist_modal button{
+.login_form button,
+.create_playlist_modal button,
+.canvas_form button {
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;
@@ -8326,20 +8329,24 @@ select,
 	font-size: 14px;
 }
 
-.login_form .input_with_icon,.create_playlist_modal .input_with_icon {
+.login_form .input_with_icon,
+.create_playlist_modal .input_with_icon {
 	position: relative;
 	display: flex;
 	align-items: center;
 }
 
 
-.login_form .all_icons,.create_playlist_modal .all_icons {
+.login_form .all_icons,
+.create_playlist_modal .all_icons {
 	position: absolute;
 	left: 15px;
 }
 
 .login_form .all_icons,
-.eye_icon,.create_playlist_modal .all_icons{
+.eye_icon,
+.create_playlist_modal .all_icons,
+.canvas_form .all_icons {
 	color: var(--icon-color);
 }
 
@@ -8349,7 +8356,8 @@ select,
 	cursor: pointer;
 }
 
-.login_form .close_icon,.create_playlist_modal .close_icon{
+.login_form .close_icon,
+.create_playlist_modal .close_icon {
 	position: absolute;
 	top: 15px;
 	right: 15px;
@@ -8426,6 +8434,7 @@ select,
 	align-items: center;
 	gap: 7px;
 	width: min-content;
+	height: 244px;
 }
 
 .lyricits-container img {
@@ -8549,7 +8558,7 @@ select,
 
 .playlist_container {
 	width: 200px;
-	height: auto;
+	height: 244px;
 	background-color: #1a212bd1;
 	display: flex;
 	flex-direction: column;
@@ -8560,8 +8569,20 @@ select,
 	border-radius: 5px;
 }
 
-.playlist_container:hover {
+.playlist_container:hover,
+.playlist_container_canvas:hover {
 	background-color: #1a212b;
+}
+
+
+.playlist_container_canvas {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	cursor: pointer;
+	border-radius: 5px;
+	padding: 10px 15px;
+	border: 2px solid #313841;
 }
 
 .plylist_drp_btn {
@@ -8576,6 +8597,67 @@ select,
 	border-color: transparent !important;
 	color: white !important;
 }
-.create_playlist_modal .input_with_icon{
+
+.create_playlist_modal .input_with_icon {
 	width: 100%;
 }
+
+.offcanvas {
+	z-index: 1201 !important;
+	background-color: #212635 !important;
+	color: white !important;
+}
+
+
+
+.canvas_form input {
+	border: none;
+	outline: none;
+	border-radius: 10px;
+	width: 100%;
+	padding-left: 40px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border: 2px solid black;
+}
+
+.canvas_form .input_with_icon {
+	display: flex;
+	align-items: center;
+}
+
+.canvas_form .all_icons {
+	position: absolute;
+	left: 15px;
+}
+
+.text-small {
+	font-size: 14px;
+}
+
+.save_button {
+	border: none;
+	background-color: var(--secondary-color);
+	color: white;
+	width: 100%;
+	padding: 7px;
+	border-radius: 10px;
+
+}
+
+.chckbox_setter {
+	top: 0;
+	right: 5px;
+}
+
+.chckbox_setter input {
+	cursor: pointer;
+}
+
+.btn-close {
+	background-color: white !important;
+	opacity: 1 !important;
+	border-radius: 50% !important;
+}
+
+/* #313841 */
