@@ -20,6 +20,9 @@ import { createPlaylist } from "@/utils/api";
 import { deletePlaylist } from "@/utils/api";
 import { updatePlaylist } from "@/utils/api";
 import { saveMusicToPlaylist } from "@/utils/api";
+import { getYoutubePlaylist } from "@/utils/api";
+import { getYoutubeLiveVideos } from "@/utils/api";
+import { updateProfile } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -154,6 +157,34 @@ export const getPlaylistApi = ({
         })
     );
 };
+export const getYoutubePlaylistApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getYoutubePlaylist(),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getYoutubeLiveVideosApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getYoutubeLiveVideos(),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
 export const createPlaylistApi = ({
     title = '',
     onSuccess = () => { },
@@ -193,6 +224,27 @@ export const updatePlaylistApi = ({
     store.dispatch(
         apiCallBegan({
             ...updatePlaylist(title, id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const updateProfileApi = ({
+    first_name = '',
+    last_name = '',
+    mobile = null,
+    gender = '',
+    country_id = null,
+    temple_id = null,
+    uid = '',
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...updateProfile(first_name, last_name, mobile, gender, country_id, temple_id, uid),
             displayToast: false,
             onStart,
             onSuccess,

@@ -30,7 +30,7 @@ const AllLyricistsCard = () => {
     return (
         <div className="row">
             {lyricists.length > 0 && lyricists.map((item) => (
-                <div key={item.id} className="col-xl-3 col-xxl-2 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                <div key={item.id} className="col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                     <div className="lyricits-container text-white">
                         <Image src={item.image} alt={item.eng_name}  width={200} height={200} />
                         <h6 className="m-0">{GetLanguage(language, item)}</h6>

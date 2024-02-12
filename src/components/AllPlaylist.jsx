@@ -98,7 +98,7 @@ const AllPlaylist = () => {
             <div className="container text-white">
 
                 <div className="row">
-                    <div className="col-12 col-xl-3 col-xxl-2 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                    <div className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                         <div className="playlist_container text-white" onClick={createPlaylist}>
                             <Image src='/playlist_icon.svg' alt='playlist-icon' width={51} height={37} />
                             <h5 className="m-0">Create Playlist</h5>
@@ -106,7 +106,7 @@ const AllPlaylist = () => {
                     </div>
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
-                            <div key={index} className="col-12 col-xl-3 col-xxl-2 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                            <div key={index} className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                                 <div className="card-container text-white">
 
                                     {

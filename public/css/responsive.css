@@ -8,9 +8,9 @@
         padding: 9px 15px;
     }
 
-    button.header_login_btn {
+    /* button.header_login_btn {
         padding: 9px 25px;
-    }
+    } */
 }
 
 @media (min-width: 991px) {
@@ -79,9 +79,9 @@
         padding: 9px 15px;
     }
 
-    button.header_login_btn {
+    /* button.header_login_btn {
         padding: 9px 25px;
-    }
+    } */
 }
 
 @media screen and (min-width: 576px) and (max-width: 991px) {
@@ -120,10 +120,10 @@
         right: -25px !important;
     }
 
-    button.header_login_btn {
+    /* button.header_login_btn {
         font-size: 12px;
         padding: 9px 25px;
-    }
+    } */
 
     .login_form {
         width: 22rem;
@@ -206,15 +206,48 @@
 }
 
 @media (max-width: 476px) {
-    .title_rcnt_plyd{
+    .title_rcnt_plyd {
         font-size: 18px;
     }
-    .desc_rcnt_plyd{
+
+    .desc_rcnt_plyd {
         font-size: 16px;
     }
 }
-@media (max-width: 576px){
-    .playlist_container{
+
+@media (max-width: 576px) {
+    .playlist_container {
         height: 244px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .drp_large {
+        display: none;
+    }
+
+    .drp_small {
+        display: block;
+    }
+
+    .three_dot_btn {
+        padding: 0;
+        background-color: transparent !important;
+    }
+
+    #dropdown-basic-button {
+        padding: 0;
+    }
+}
+
+@media (min-width: 993px) {
+    .drp_large {
+        display: flex;
+        gap: 10px;
+    }
+
+    .drp_small {
+        display: none;
     }
 }

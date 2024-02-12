@@ -16,6 +16,10 @@ const GET_PLAYLIST = "playlist/get_playlist"
 const CREATE_PLAYLIST = 'playlist/create'
 const DELETE_PLAYLIST = 'playlist/delete'
 const UPDATE_PLAYLIST = 'playlist/update'
+const GET_YOUTUBE_PLAYLIST = 'get_youtube_playlist'
+const GET_YOUTUBE_LIVE = 'get_youtube_live'
+const UPDATE_PROFILE = 'user/update'
+const GET_USER_DETAILS = 'user/get_details'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -31,6 +35,16 @@ export const getCountries = (offset, sort, limit, order, search) => {
         },
         authorizationHeader: false,
 
+    }
+}
+export const getUserDetails = () => {
+    return {
+        url: `${GET_USER_DETAILS}`,
+        method: "GET",
+        params: {
+            
+        },
+        authorizationHeader: true,
     }
 }
 export const globalSearch = (search, is_guest) => {
@@ -50,10 +64,30 @@ export const getPlaylist = () => {
         url: `${GET_PLAYLIST}`,
         method: "GET",
         params: {
-        
+
         },
         authorizationHeader: true,
 
+    }
+}
+export const getYoutubePlaylist = () => {
+    return {
+        url: `${GET_YOUTUBE_PLAYLIST}`,
+        method: "GET",
+        params: {
+
+        },
+        authorizationHeader: false,
+
+    }
+}
+export const getYoutubeLiveVideos = () => {
+    return {
+        url: `${GET_YOUTUBE_LIVE}`,
+        method: "GET",
+        params: {
+        },
+        authorizationHeader: false,
     }
 }
 export const createPlaylist = (title) => {
@@ -82,7 +116,7 @@ export const updatePlaylist = (title, id) => {
         url: `${UPDATE_PLAYLIST}`,
         method: "POST",
         params: {
-            title : title,
+            title: title,
             id: id
         },
         authorizationHeader: true,
@@ -144,7 +178,7 @@ export const getUtsav = (limit, order) => {
         params: {
             order: order,
             limit: limit,
-           
+
         },
         authorizationHeader: false,
     }
@@ -199,6 +233,22 @@ export const getHome = (is_guest) => {
         method: "GET",
         params: {
             is_guest: is_guest
+        },
+        authorizationHeader: true,
+    }
+}
+export const updateProfile = (first_name, last_name, mobile, gender, country_id, temple_id, uid) => {
+    return {
+        url: `${UPDATE_PROFILE}`,
+        method: "POST",
+        params: {
+            first_name: first_name,
+            last_name: last_name,
+            mobile: mobile,
+            gender: gender,
+            country_id: country_id,
+            temple_id: temple_id,
+            uid: uid
         },
         authorizationHeader: true,
     }

@@ -15,7 +15,7 @@ import { setLanguage } from '@/redux/reducer/LanguageSlice';
 import { BiCommentDetail } from "react-icons/bi";
 import Link from 'next/link';
 
-const Sidebar = ({ open }) => {
+const Sidebar = ({open}) => {
 
     const { language } = useSelector((state) => state.language)
     const users = useSelector((state) => state.users)
@@ -170,38 +170,43 @@ const Sidebar = ({ open }) => {
                                     </span>
                                 </a>
                                 </li>
-                                <li><a href="" title="History">
-                                    <span className="nav_icon">
-                                        <span className="icon icon_history"></span>
-                                    </span>
-                                    <span className="nav_text">
-                                        history
-                                    </span>
-                                </a>
-                                </li>
-                            </ul>
-                            <ul className="nav_playlist">
                                 <li>
-                                    <Link href='/playlist'>
+                                    <Link href='/youtube-live-videos'>
+
                                         <span className="nav_icon">
-                                            <span className="icon icon_fe_playlist"></span>
+                                            <span className="icon icon_history"></span>
                                         </span>
                                         <span className="nav_text">
-                                            featured playlist
+                                            {/* history */}
+                                            youtube live videos
                                         </span>
                                     </Link>
-                                </li>
-                                <li><a href="" title="Create Playlist">
+                            </li>
+                        </ul>
+                        <ul className="nav_playlist">
+                            <li>
+                                <Link href='/playlist'>
+                                    <span className="nav_icon">
+                                        <span className="icon icon_fe_playlist"></span>
+                                    </span>
+                                    <span className="nav_text">
+                                        featured playlist
+                                    </span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='/youtube-playlist'>
                                     <span className="nav_icon">
                                         <span className="icon icon_c_playlist"></span>
                                     </span>
                                     <span className="nav_text">
-                                        create playlist
+                                        {/* create playlist */}
+                                        youtube playlist
                                     </span>
-                                </a>
-                                </li>
-                            </ul>
-                            {/* <ul className='btn_ul'>
+                                </Link>
+                            </li>
+                        </ul>
+                        {/* <ul className='btn_ul'>
                                 <li>
                                     {
                                         token ?
@@ -227,7 +232,7 @@ const Sidebar = ({ open }) => {
 
 
                             </ul> */}
-                            {/* <ul className='btn_ul'>
+                        {/* <ul className='btn_ul'>
                                 <li>
                                     <DropdownButton id="dropdown-basic-button" title={language} onSelect={handleLanguageChange} >
                                         <Dropdown.Item eventKey="English" >English</Dropdown.Item>
@@ -235,12 +240,12 @@ const Sidebar = ({ open }) => {
                                     </DropdownButton>
                                 </li>
                             </ul> */}
-                        </div>
-                    </div >
+                    </div>
                 </div >
             </div >
+        </div >
 
-            {/* <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick={handleForgotPasswordClick} />
+        {/* <LoginModel show={isLoginModalVisible} onHide={() => setIsLoginModalVisible(false)} onRegisterClick={handleRegisterClick} onForgotPasswordClick={handleForgotPasswordClick} />
 
             <RegisterModal show={isRegisterModalVisible} onHide={() => setIsRegisterModalVisible(false)} onLoginClick={handleLoginClick} />
 
