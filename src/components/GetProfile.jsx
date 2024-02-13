@@ -34,8 +34,6 @@ const GetProfile = () => {
 
 
     useEffect(() => {
-        // console.log(formInfo.country)
-        // console.log(formInfo.temple)
         getCountriesApi({
             order: "asc",
             sort: "name",
@@ -49,19 +47,21 @@ const GetProfile = () => {
 
     }, [])
 
-    useEffect(() => {
 
+    useEffect(() => {
         if (formInfo.country) {
             const selectedCountry = countries.find((country) => country.name.toLowerCase() === formInfo.country.toLowerCase());
             if (selectedCountry) {
-
                 getTemplesApi({
                     sort: "name",
                     order: "asc",
                     countries_id: selectedCountry.id,
                     limit: 250,
                     onSuccess: (response) => {
-
+                        if (response?.data?.length === 0) {
+                            setFormInfo((prevFormInfo) => ({ ...prevFormInfo, temple: 'nodata' }))
+                        }
+                        else { }
                         setTemples(response.data);
                     },
                     onError: (error) => {
@@ -78,9 +78,9 @@ const GetProfile = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormInfo((prevFormInfo) => ({
+        setFormInfo(prevFormInfo => ({
             ...prevFormInfo,
-            [name]: value,
+            [name]: value
         }));
     };
 
@@ -122,12 +122,12 @@ const GetProfile = () => {
 
     const handleSave = (e) => {
         e.preventDefault()
+        console.log(formInfo)
         const selectedTemple = temples.find((temple) => temple.name.toLowerCase() === formInfo.temple.toLowerCase());
-        if (selectedTemple) {
-            const temple_id = selectedTemple.id
-            const countries_id = selectedTemple.country_id
 
-            console.log(users)
+        if (selectedTemple) {
+            const temple_id = selectedTemple?.id
+            const countries_id = selectedTemple?.country_id
 
             updateProfileApi({
                 first_name: formInfo.firstName,
@@ -140,11 +140,12 @@ const GetProfile = () => {
                 onSuccess: (res) => {
                     if (res.error === false) {
                         toast.success(res.message);
+                        console.log(res)
                         dispatch(setUsers({
                             ...users, data: {
                                 ...res.data,
-                                temple: { ...users.data.temple, ...res.data.temple },
-                                country: { ...users.data.country, ...res.data.country },
+                                temple: { ...res.data.temple },
+                                country: { ...res.data.country },
                             }
                         }));
                     }
@@ -154,6 +155,43 @@ const GetProfile = () => {
                 }
             })
         }
+        else {
+            const selectedCountry = countries.find((country) => country.name.toLowerCase() === formInfo.country.toLowerCase());
+
+            if (selectedCountry) {
+                const countries_id = selectedCountry.id
+                updateProfileApi({
+                    first_name: formInfo.firstName,
+                    last_name: formInfo.lastName,
+                    mobile: formInfo.phoneNumber,
+                    gender: formInfo.gender,
+                    country_id: countries_id,
+                    uid: users.data.uid,
+                    onSuccess: (res) => {
+                        if (res.error === false) {
+                            toast.success(res.message);
+                            console.log(res)
+                            dispatch(setUsers({
+                                ...users, data: {
+                                    ...res.data,
+                                    temple: { ...res.data.temple },
+                                    country: { ...res.data.country },
+                                }
+                            }));
+                        }
+                    },
+                    onError: (e) => {
+                        toast.error('Save Failed')
+                    }
+                })
+            }
+        }
+
+
+
+
+
+
     }
 
     return (
@@ -206,7 +244,7 @@ const GetProfile = () => {
 
                                 {
                                     countries.map((country) => (
-                                        <option key={country.id} value={country.name.toLowerCase()} >{country.name}</option>
+                                        <option key={country.id} value={country.name} >{country.name}</option>
                                     ))
                                 }
                             </select>
@@ -215,16 +253,18 @@ const GetProfile = () => {
                         <div className="input_with_icon">
                             <select name="temple" id="temple" value={formInfo.temple}
                                 onChange={handleChange} disabled={!formInfo.country} required >
-                                <option value="" disabled hidden>Temple</option>
+                                <option value="" hidden>Temple</option>
+
                                 {
                                     temples.length > 0 ? (
                                         <>
 
                                             {temples.map((temple) => (
-                                                <option key={temple.id} value={temple.name.toLowerCase()}>{temple.name}</option>
+                                                <option key={temple.id} value={temple.name}>{temple.name}</option>
                                             ))}
                                         </>
                                     ) : (
+
                                         <option value="nodata">No data found</option>
                                     )
                                 }
