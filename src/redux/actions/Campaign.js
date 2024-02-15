@@ -23,6 +23,7 @@ import { saveMusicToPlaylist } from "@/utils/api";
 import { getYoutubePlaylist } from "@/utils/api";
 import { getYoutubeLiveVideos } from "@/utils/api";
 import { updateProfile } from "@/utils/api";
+import { deleteAccount } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -245,6 +246,20 @@ export const updateProfileApi = ({
     store.dispatch(
         apiCallBegan({
             ...updateProfile(first_name, last_name, mobile, gender, country_id, temple_id, uid),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const deleteAccountApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...deleteAccount(),
             displayToast: false,
             onStart,
             onSuccess,

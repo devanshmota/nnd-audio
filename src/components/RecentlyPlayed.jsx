@@ -23,6 +23,7 @@ const RecentlyPlayed = () => {
     getRecentlyPlayedMusicApi({
       onSuccess: (res) => {
         setRecentlyPlayed(res.music.slice(0, 3))
+        
       },
       onError: (e) => {
         console.log(e)

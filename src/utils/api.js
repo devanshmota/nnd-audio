@@ -20,6 +20,7 @@ const GET_YOUTUBE_PLAYLIST = 'get_youtube_playlist'
 const GET_YOUTUBE_LIVE = 'get_youtube_live'
 const UPDATE_PROFILE = 'user/update'
 const GET_USER_DETAILS = 'user/get_details'
+const DELETE_ACCOUNT = 'user/delete'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -41,6 +42,16 @@ export const getUserDetails = () => {
     return {
         url: `${GET_USER_DETAILS}`,
         method: "GET",
+        params: {
+            
+        },
+        authorizationHeader: true,
+    }
+}
+export const deleteAccount = () => {
+    return {
+        url: `${DELETE_ACCOUNT}`,
+        method: "DELETE",
         params: {
             
         },

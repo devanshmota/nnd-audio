@@ -1,19 +1,15 @@
 'use client'
-// import CryptoJS from "crypto-js";
-import { MdOutlineEmail, MdPhone, MdTempleBuddhist } from "react-icons/md";
+import { MdPhone, MdTempleBuddhist } from "react-icons/md";
 import { FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { getCountriesApi, getTemplesApi, getUserDetailsApi, logoutApi, updateProfileApi } from "@/redux/actions/Campaign";
 import { useRouter } from "next/navigation";
-import { auth } from "./Firebase";
 import toast from "react-hot-toast";
-import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { getDecryptedText } from "@/decryption/decryption";
-
 
 const GetProfile = () => {
 
@@ -84,41 +80,7 @@ const GetProfile = () => {
         }));
     };
 
-    const handleLogout = () => {
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                auth.signOut();
-                logoutApi({
-                    onSuccess: (res) => {
-                        if (res.error === false) {
-                            dispatch(setUsers({}));
-                            Swal.fire({
-                                title: "Logout!",
-                                text: "Logged out successfully",
-                                icon: "success"
-                            });
-                            router.push('/')
-                        }
-                    },
-                    onError: (e) => {
-                        console.log(e)
-                        toast.error(e)
-                    }
-                })
-
-            }
-        });
-
-    };
+    
 
     const handleSave = (e) => {
         e.preventDefault()
@@ -157,7 +119,6 @@ const GetProfile = () => {
         }
         else {
             const selectedCountry = countries.find((country) => country.name.toLowerCase() === formInfo.country.toLowerCase());
-
             if (selectedCountry) {
                 const countries_id = selectedCountry.id
                 updateProfileApi({
@@ -186,106 +147,142 @@ const GetProfile = () => {
                 })
             }
         }
+    }
 
-
-
-
-
-
+    const handleCancel = () => {
+        router.push('/')
     }
 
     return (
         <div className="container">
             <div className="d-flex align-items-center justify-content-center form_wrapper">
-                <form className="login_form" onSubmit={handleSave} >
+                <form className="login_form w-75" onSubmit={handleSave} >
                     <h2 className="text-center">Profile</h2>
-                    <div className="input_container">
-                        <div className="input_with_icon">
-                            <FaUser className="all_icons" />
-                            <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
+                    <div className="row gap_field">
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="firstName">First Name</label>
+                                <div className="input_with_icon">
+
+                                    <FaUser className="all_icons" />
+                                    <input name='firstName' id="firstName" value={formInfo.firstName} onChange={handleChange} type="text" placeholder="Enter your first name" required />
+                                </div>
+                            </div>
                         </div>
-                        <div className="input_with_icon">
-                            <FaUser className="all_icons" />
-                            <input
-                                type="text"
-                                name='lastName'
-                                value={formInfo.lastName}
-                                onChange={handleChange}
-                                placeholder="Last Name"
-                                required />
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="lastName">Last Name</label>
+                                <div className="input_with_icon">
+                                    <FaUser className="all_icons" />
+                                    <input
+                                        type="text"
+                                        name='lastName'
+                                        id="lastName"
+                                        value={formInfo.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Last Name"
+                                        required />
+                                </div>
+                            </div>
                         </div>
-                        <div className="input_with_icon">
-                            <FaTransgenderAlt className="all_icons" />
-                            <select
-                                name="gender"
-                                id="gender"
-                                value={formInfo.gender}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="" disabled hidden>Select Gender</option>
-                                <option value="male" name="gender">Male</option>
-                                <option value="female" name="gender">Female</option>
-                            </select>
-
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="gender">Gender</label>
+                                <div className="input_with_icon">
+                                    <FaTransgenderAlt className="all_icons" />
+                                    <select
+                                        name="gender"
+                                        id="gender"
+                                        value={formInfo.gender}
+                                        onChange={handleChange}
+                                        required
+                                    >
+                                        <option value="" disabled hidden>Select Gender</option>
+                                        <option value="male" name="gender">Male</option>
+                                        <option value="female" name="gender">Female</option>
+                                    </select>
+                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                </div>
+                            </div>
                         </div>
-                        <div className="input_with_icon">
-                            <MdEmail className="all_icons" />
-                            <input type="email" name='email'
-                                value={formInfo.email}
-                                onChange={handleChange} placeholder="Email" readOnly={true} />
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="email">Email</label>
+                                <div className="input_with_icon">
+                                    <MdEmail className="all_icons" />
+                                    <input
+                                        type="email"
+                                        name='email'
+                                        id="email"
+                                        value={formInfo.email}
+                                        onChange={handleChange} placeholder="Email" readOnly={true} />
+                                </div>
+                            </div>
                         </div>
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="country">Country</label>
+                                <div className="input_with_icon">
 
+                                    <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
+                                        <option value="" disabled hidden>Country</option>
 
-                        <div className="input_with_icon">
-
-                            <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
-                                <option value="" disabled hidden>Country</option>
-
-                                {
-                                    countries.map((country) => (
-                                        <option key={country.id} value={country.name} >{country.name}</option>
-                                    ))
-                                }
-                            </select>
-                            <FaFlag className="all_icons" />
+                                        {
+                                            countries.map((country) => (
+                                                <option key={country.id} value={country.name} >{country.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <FaFlag className="all_icons" />
+                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                </div>
+                            </div>
                         </div>
-                        <div className="input_with_icon">
-                            <select name="temple" id="temple" value={formInfo.temple}
-                                onChange={handleChange} disabled={!formInfo.country} required >
-                                <option value="" hidden>Temple</option>
-
-                                {
-                                    temples.length > 0 ? (
-                                        <>
-
-                                            {temples.map((temple) => (
-                                                <option key={temple.id} value={temple.name}>{temple.name}</option>
-                                            ))}
-                                        </>
-                                    ) : (
-
-                                        <option value="nodata">No data found</option>
-                                    )
-                                }
-                            </select>
-                            <MdTempleBuddhist className="all_icons" />
+                        <div className="col-sm-12 col-md-6">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="phoneNumber">Phone number</label>
+                                <div className="input_with_icon">
+                                    <MdPhone className="all_icons" />
+                                    <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber' id="phoneNumber"
+                                        value={formInfo.phoneNumber}
+                                        onChange={handleChange} required />
+                                </div>
+                            </div>
                         </div>
+                        <div className="col-sm-12">
+                            <div className="d-flex flex-column gap-1 w-100">
+                                <label htmlFor="temple">Temple</label>
+                                <div className="input_with_icon">
+                                    <select name="temple" id="temple" value={formInfo.temple}
+                                        onChange={handleChange} disabled={!formInfo.country} required >
+                                        <option value="" hidden>Temple</option>
 
-                        <div className="input_with_icon">
-                            <MdPhone className="all_icons" />
-                            <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber'
-                                value={formInfo.phoneNumber}
-                                onChange={handleChange} required />
+                                        {
+                                            temples.length > 0 ? (
+                                                <>
+
+                                                    {temples.map((temple) => (
+                                                        <option key={temple.id} value={temple.name}>{temple.name}</option>
+                                                    ))}
+                                                </>
+                                            ) : (
+
+                                                <option value="nodata">No data found</option>
+                                            )
+                                        }
+                                    </select>
+                                    <MdTempleBuddhist className="all_icons" />
+                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                </div>
+                            </div>
                         </div>
-
+                        <div className="col-sm-12">
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+                                <button type="submit" className="save_cancel_btn">Save</button>
+                                <button type="button" className="save_cancel_btn" onClick={handleCancel}>Cancel</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="d-flex align-items-center gap-2">
-                        <button type="submit">Save</button>
-                        <button type="button" onClick={handleLogout}>Logout</button>
-                    </div>
-
                 </form>
             </div>
         </div>

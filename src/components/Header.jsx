@@ -10,15 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import PersonIcon from '@mui/icons-material/Person';
-import Link from "next/link";
 import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-
-
-// import { decryptAnswer } from "@/decryption/decryption";
-
+import BasicMenu from "./BasicMenu";
 
 
 const Header = ({ open, handleDrawerOpen }) => {
@@ -41,15 +35,6 @@ const Header = ({ open, handleDrawerOpen }) => {
 
 
 
-
-  // useEffect(() => {
-  //   const key = 'base64:IH0mh+0AsIqQVW/zULiF+MQesoO69l8MsWZhEdOFbc0='
-  //   const encryptedText = users.users.data.email;
-  //   const decryptedText = decryptAnswer(encryptedText, key)
-  //   console.log('Decrypted Text:', decryptedText);
-
-  // }, [users.users.data.email]);
-
   const handleLoginClick = () => {
     setIsRegisterModalVisible(false);
     setIsForgotPasswordVisible(false);
@@ -70,8 +55,6 @@ const Header = ({ open, handleDrawerOpen }) => {
     setIsForgotPasswordVisible(true)
     setIsLoginModalVisible(false);
   }
-
-  
 
   const token = users?.users?.token
 
@@ -108,10 +91,7 @@ const Header = ({ open, handleDrawerOpen }) => {
                 token ?
                   (
                     <>
-                      <Link href='profile' className="d-flex align-items-center gap-1 profile_cont">
-                        <PersonIcon />
-                        <span>Devansh</span>
-                      </Link>
+                      <BasicMenu />
 
                     </>
                   )
@@ -142,23 +122,25 @@ const Header = ({ open, handleDrawerOpen }) => {
               >
                 {token ? (
                   <MenuItem>
-                    <Link href='/profile' className="d-flex gap-2">
-                      <PersonIcon />
-                      Devansh
-                    </Link>
+
+                    <BasicMenu />
+
                   </MenuItem>
                 ) : (
                   <MenuItem onClick={handleLoginSignup}>Login/Sign Up</MenuItem>
                 )}
-                <MenuItem>  
+                <MenuItem>
                   <DropdownButton
                     id="dropdown-basic-button"
                     className="ms_top_btn"
                     title={
                       <>
-                        <div className="d-flex align-items-center gap-1">
-                          <LanguageIcon className="text-white" />
-                          {language}
+                        <div className="d-flex align-items-center">
+                          <div className="d-flex align-items-center gap-2">
+
+                            <span>{language}</span>
+                          </div>
+
                           <ArrowDropDownIcon />
                         </div>
 
