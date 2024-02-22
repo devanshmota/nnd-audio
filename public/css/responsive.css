@@ -245,7 +245,8 @@
 @media (min-width: 993px) {
     .drp_large {
         display: flex;
-        gap: 10px;
+        align-items: center;
+        gap: 20px;
     }
 
     .drp_small {

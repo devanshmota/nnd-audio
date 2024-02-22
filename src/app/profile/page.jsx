@@ -1,3 +1,4 @@
+'use client'
 import GetProfile from "@/components/GetProfile"
 
 const Profile = () => {

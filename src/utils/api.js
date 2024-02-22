@@ -147,7 +147,7 @@ export const updatePlaylist = (title, id) => {
         authorizationHeader: true,
     }
 }
-export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, is_guest) => {
+export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, is_guest) => {
     return {
         url: `${GET_SINGLE_ARTIST}`,
         method: "GET",
@@ -155,6 +155,7 @@ export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, is_guest)
             artist_id: artist_id,
             lyricist_id: lyricist_id,
             utsav_id: utsav_id,
+            album_id: album_id,
             is_guest: is_guest
         },
         authorizationHeader: true,

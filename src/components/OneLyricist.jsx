@@ -9,19 +9,19 @@ import { useSelector } from "react-redux";
 import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
+import Nodataviewall from "./Nodataviewall";
 
 const OneLyricist = ({ lyricistid }) => {
 
     const { language } = useSelector((state) => state.language)
     const [singleLyricistData, setSingleLyricistData] = useState([])
     const [lyricistDetails, setLyricistDetails] = useState(null)
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
     useEffect(() => {
-        setIsLoading(true)
         fetchSigleArtistDataApi({
             lyricist_id: lyricistid.slug,
             is_guest: 0,
@@ -45,17 +45,17 @@ const OneLyricist = ({ lyricistid }) => {
 
     return (
         <div className="container text-white mt-4">
-
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
             {
-                singleLyricistData.length > 0 ?
+                singleLyricistData.length > 0 &&
                     (
                         <>
                             <div className="row">
-                                {isLoading &&
-                                    <div className='d-flex align-items-center justify-content-center py-2'>
-                                        <ClipLoader color="#ffffff" />
-                                    </div>
-                                }
+
                                 <div className="col-lg-12">
                                     <div className="d-flex flex-column flex-lg-row align-items-center gap-5">
                                         <Image src={lyricistDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
@@ -73,7 +73,7 @@ const OneLyricist = ({ lyricistid }) => {
                             </div>
                             <div className="row ">
                                 {
-                                    singleLyricistData.length > 0 && singleLyricistData.map((item, index) => (
+                                    singleLyricistData.map((item, index) => (
 
                                         <div key={index} className="col-lg-6 mt-4">
                                             <div className="d-flex align-items-center justify-content-between text-white music_card">
@@ -110,10 +110,9 @@ const OneLyricist = ({ lyricistid }) => {
                             </div>
                         </>
                     )
-                    :
-                    (
-                        <Nodatafound />
-                    )
+            }
+            {
+                !isLoading && singleLyricistData.length === 0 && <Nodataviewall />
             }
 
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />

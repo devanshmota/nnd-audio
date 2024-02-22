@@ -6,7 +6,6 @@ import { useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
-import GetCatLanguage from "./GetCatLanguage"
 import Link from "next/link"
 
 const AlbumMusic = ({ categoryid }) => {

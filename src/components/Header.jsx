@@ -13,6 +13,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BasicMenu from "./BasicMenu";
+import { Badge } from "@mui/material";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
 const Header = ({ open, handleDrawerOpen }) => {
@@ -71,6 +73,12 @@ const Header = ({ open, handleDrawerOpen }) => {
 
           <div className="ms_top_btn">
             <div className="drp_large">
+
+              <Badge badgeContent={4} color="primary">
+                <NotificationsIcon/> 
+              </Badge>
+
+
               <DropdownButton id="dropdown-basic-button" className="ms_top_btn"
                 title={
                   <>
@@ -92,7 +100,6 @@ const Header = ({ open, handleDrawerOpen }) => {
                   (
                     <>
                       <BasicMenu />
-
                     </>
                   )
                   :

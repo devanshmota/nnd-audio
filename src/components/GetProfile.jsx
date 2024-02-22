@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { getDecryptedText } from "@/decryption/decryption";
-import { ClipLoader } from "react-spinners";
+
 
 const GetProfile = () => {
 
@@ -20,13 +20,13 @@ const GetProfile = () => {
     const [countries, setCountries] = useState([])
     const [temples, setTemples] = useState([]);
     const [formInfo, setFormInfo] = useState({
-        firstName: getDecryptedText(users.data.first_name),
-        lastName: getDecryptedText(users.data.last_name),
-        gender: getDecryptedText(users.data.gender),
-        email: getDecryptedText(users.data.email),
-        country: users.data.country.name,
-        temple: users.data.temple.name,
-        phoneNumber: getDecryptedText(users.data.mobile),
+        firstName: getDecryptedText(users?.data?.first_name),
+        lastName: getDecryptedText(users?.data?.last_name),
+        gender: getDecryptedText(users?.data?.gender),
+        email: getDecryptedText(users?.data?.email),
+        country: users?.data?.country?.name,
+        temple: users?.data?.temple?.name,
+        phoneNumber: getDecryptedText(users?.data?.mobile),
     });
     const [isLoading, setIsLoading] = useState(false);
 

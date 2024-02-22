@@ -83,17 +83,17 @@ export const getLyricistsApi = ({
     );
 };
 export const fetchSigleArtistDataApi = ({
-
     artist_id = null,
     lyricist_id = null,
     utsav_id = null,
+    album_id = null,
     is_guest = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, is_guest, ),
+            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id, is_guest),
             displayToast: false,
             onStart,
             onSuccess,
