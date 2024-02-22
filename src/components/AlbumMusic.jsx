@@ -7,6 +7,7 @@ import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
 import GetCatLanguage from "./GetCatLanguage"
+import Link from "next/link"
 
 const AlbumMusic = ({ categoryid }) => {
 
@@ -44,10 +45,10 @@ const AlbumMusic = ({ categoryid }) => {
                 {
                     albums.length > 0 && albums.map((item) => (
                         <div key={item.id} className="col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-4">
-                            <div className="card-container text-white">
+                            <Link href={`/music-categories-all/${categoryid.slug}/${item.id}`} className="card-container text-white">
                                 <Image src={item.image} alt={item.eng_name} className="rounded" width={200} height={200} />
                                 <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
-                            </div>
+                            </Link> 
                         </div>
                     ))
                 }

@@ -1,10 +1,10 @@
 import GetAlbumMusic from "@/components/GetAlbumMusic"
 
 
-const AlbumMusic = () => {
+const AlbumMusic = ({params}) => {
     return (
         <>
-            <GetAlbumMusic/>
+            <GetAlbumMusic albumid={params} />
             <br />
             <br />
         </>
