@@ -9,16 +9,8 @@ import { getArtistsApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
-
-// const artists = [
-//     { id: 1, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 2, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 3, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 4, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 5, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 6, title: 'Aditya', img: '/r_music1.jpg' },
-//     { id: 7, title: 'Aditya', img: '/r_music1.jpg' },
-// ]
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
 const Artists = () => {
     const { language } = useSelector((state) => state.language)
@@ -26,22 +18,21 @@ const Artists = () => {
     const [artists, setArtists] = useState([])
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
         getArtistsApi({
-
             limit: 10,
             order: "asc",
-
             onSuccess: (res) => {
                 if (res.data) {
                     setArtists(res.data)
                 }
-
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
     }, [])
@@ -62,20 +53,22 @@ const Artists = () => {
 
     return (
         <div className="container d-flex flex-column">
-
+            <CategoryHeader
+                title="Artists"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/artists-all"
+            />
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
             {
                 artists.length > 0 && (
                     <>
-                        <CategoryHeader
-                            title="Artists"
-                            onPrev={handlePrev}
-                            onNext={handleNext}
-                            isBeginning={isBeginning}
-                            isEnd={isEnd}
-                            link="/artists-all"
-                        />
-
-
                         <Swiper
                             ref={artistRef}
                             slidesPerView={5}
@@ -122,12 +115,12 @@ const Artists = () => {
                             {
                                 artists.map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+                                        <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
                                             <h5 className='m-0 text-center'>
-                                                <Link href='/kirtan'>{GetFirstWord(GetLanguage(language, item))}</Link>
+                                                {GetFirstWord(GetLanguage(language, item))}
                                             </h5>
-                                        </div>
+                                        </Link>
                                     </SwiperSlide>
                                 ))
                             }
@@ -136,8 +129,9 @@ const Artists = () => {
                     </>
                 )
             }
-
-
+            {
+                !isLoading && artists.length === 0 && <Nodatafound />
+            }
         </div>
     )
 }

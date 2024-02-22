@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -9,16 +8,8 @@ import { getLyricistsApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
-
-// const lyricists = [
-//     { id: 1, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 2, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 3, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 4, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 5, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 6, title: 'Devanand', img: '/r_music1.jpg' },
-//     { id: 7, title: 'Devanand', img: '/r_music1.jpg' },
-// ]
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
 const Lyricists = () => {
 
@@ -27,6 +18,7 @@ const Lyricists = () => {
     const [lyricists, setLyricists] = useState([])
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getLyricistsApi({
@@ -36,13 +28,13 @@ const Lyricists = () => {
                 if (res.data) {
                     setLyricists(res.data)
                 }
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
-
-
     }, [])
 
     const handlePrev = () => {
@@ -59,22 +51,24 @@ const Lyricists = () => {
 
     };
 
-
     return (
         <div className="container d-flex flex-column">
-
+            <CategoryHeader
+                title="Lyricists"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/lyricists-all"
+            />
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
             {
                 lyricists.length > 0 && (
                     <>
-                        <CategoryHeader
-                            title="Lyricists"
-                            onPrev={handlePrev}
-                            onNext={handleNext}
-                            isBeginning={isBeginning}
-                            isEnd={isEnd}
-                            link="/lyricists-all"
-                        />
-
                         <Swiper
                             ref={lyricistsRef}
                             slidesPerView={5}
@@ -122,16 +116,20 @@ const Lyricists = () => {
                             {
                                 lyricists.map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <div className="d-flex flex-column gap-3 align-items-center">
+                                        <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center">
                                             <img src={item.image} width={0} height={0} className="card-img-top artist_img" alt={item.eng_name} />
                                             <h5 className="titles_homepage text-center m-0">{GetFirstWord(GetLanguage(language, item))}</h5>
-                                        </div>
+                                        </Link>
                                     </SwiperSlide>
                                 ))
                             }
                         </Swiper>
                     </>
                 )
+            }
+
+            {
+                !isLoading && lyricists.length === 0 && <Nodatafound />
             }
         </div>
     )

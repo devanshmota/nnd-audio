@@ -8386,6 +8386,10 @@ select,
 	font-size: xx-large;
 }
 
+.close_icon_modal {
+	font-size: xx-large;
+	cursor: pointer;
+}
 
 .modal-dialog {
 	margin-left: 0 !important;
@@ -8456,6 +8460,28 @@ select,
 	gap: 7px;
 	width: min-content;
 	height: 244px;
+}
+
+.card-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.image-container {
+	position: relative;
+}
+
+.overlay {
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.play-button {
+	color: #fff;
+	font-size: 36px;
 }
 
 .card-container_youtube {
@@ -8739,6 +8765,92 @@ select,
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
 	justify-content: center;
 }
+
+.ply-item-title {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+
+.title_rcnt_plyd {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+
+
+.modal_body {
+	background-color: white;
+	display: block;
+}
+
+.video_container {
+	width: 100%;
+	padding: 10px;
+}
+
+.modal {
+	z-index: 1200 !important;
+}
+
+.md-delete {
+	font-size: 32px;
+}
+
+.video_modal_title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 92%;
+}
+
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+	overflow: visible !important;
+}
+
+.prfl_img {
+	border-radius: 50%;
+}
+
+.dwnl_ply_btn {
+	border: none;
+	background-color: var(--secondary-color);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 18px;
+}
+
+.music_card {
+	padding: 15px 15px;
+	border: 2px solid #404451;
+	border-radius: 5px;
+}
+
+.nodata-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 87vh;
+}
+
+/* .item-title {
+	font-size: 15px;
+	font-weight: 500;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	white-space: normal;
+} */
+
 
 /* .login_form select {
 	appearance: none;

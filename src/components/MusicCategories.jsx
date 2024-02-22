@@ -8,45 +8,9 @@ import CategoryHeader from './CategoryHeader';
 import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
-// const music_cat = [
-//     {
-//         id: 1,
-//         title: 'Kirtan',
-//         img: '/kirtan.jpeg'
-//     },
-//     {
-//         id: 2,
-//         title: 'Katha',
-//         img: '/katha.jpeg'
-//     },
-//     {
-//         id: 3,
-//         title: 'Audiobook',
-//         img: '/audiobook.jpeg'
-//     },
-//     {
-//         id: 4,
-//         title: 'Kirtan',
-//         img: '/kirtan.jpeg'
-//     },
-//     {
-//         id: 5,
-//         title: 'Kirtan',
-//         img: '/kirtan.jpeg'
-//     },
-//     {
-//         id: 6,
-//         title: 'Kirtan',
-//         img: '/kirtan.jpeg'
-//     },
-//     {
-//         id: 7,
-//         title: 'Kirtan',
-//         img: '/kirtan.jpeg'
-//     },
-
-// ]
 
 const Music_categories = () => {
     const { language } = useSelector((state) => state.language)
@@ -54,23 +18,21 @@ const Music_categories = () => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
     const [musicCategory, setMusicCategory] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
         getMusicCategoryApi({
-
             limit: 10,
             order: "asc",
-
             onSuccess: (res) => {
                 if (res.data) {
                     setMusicCategory(res.data)
-
                 }
-
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
     }, [])
@@ -86,25 +48,27 @@ const Music_categories = () => {
         if (musicRef.current && !isEnd) {
             musicRef.current.swiper.slideNext();
         }
-
     };
 
-
     return (
-
         <div className="container d-flex flex-column">
-
+            <CategoryHeader
+                title="Music Categories"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/music-categories-all"
+            />
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
             {
                 musicCategory.length > 0 && (
                     <>
-                        <CategoryHeader
-                            title="Music Categories"
-                            onPrev={handlePrev}
-                            onNext={handleNext}
-                            isBeginning={isBeginning}
-                            isEnd={isEnd}
-                            link="/music-categories-all"
-                        />
+
 
                         <Swiper
                             ref={musicRef}
@@ -151,28 +115,25 @@ const Music_categories = () => {
                             {
                                 musicCategory.map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+                                        <Link href={`/music-categories-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
-                                            <h5 className='m-0 text-center' >
-                                                <Link href='/kirtan'>
+                                            <h5 className='m-0 text-center text-white' >
+                                                {GetLanguage(language, item)}
 
-                                                    {GetLanguage(language, item)}
-
-                                                </Link>
                                             </h5>
-                                        </div>
+                                        </Link>
                                     </SwiperSlide>
                                 ))
                             }
-
                         </Swiper>
 
                     </>
                 )
             }
 
-
-
+            {
+                !isLoading && musicCategory.length === 0 && <Nodatafound />
+            }
         </div>
     )
 }

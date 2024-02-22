@@ -39,7 +39,7 @@ export default function BasicMenu() {
         return <ClipLoader color="#36d7b7" />
     }
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         handleClose()
         Swal.fire({
             title: "Are you sure?",
@@ -49,10 +49,10 @@ export default function BasicMenu() {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes!"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 auth.signOut();
-                logoutApi({
+               await logoutApi({
                     onSuccess: (res) => {
                         if (res.error === false) {
                             dispatch(setUsers({}));

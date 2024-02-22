@@ -21,6 +21,9 @@ const GET_YOUTUBE_LIVE = 'get_youtube_live'
 const UPDATE_PROFILE = 'user/update'
 const GET_USER_DETAILS = 'user/get_details'
 const DELETE_ACCOUNT = 'user/delete'
+const DELETE_MUSIC_PLAYLIST = 'playlist/delete'
+const GET_SINGLE_ARTIST = 'get_music'
+const GET_ALBUM = 'get_album'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -43,7 +46,7 @@ export const getUserDetails = () => {
         url: `${GET_USER_DETAILS}`,
         method: "GET",
         params: {
-            
+
         },
         authorizationHeader: true,
     }
@@ -53,7 +56,7 @@ export const deleteAccount = () => {
         url: `${DELETE_ACCOUNT}`,
         method: "DELETE",
         params: {
-            
+
         },
         authorizationHeader: true,
     }
@@ -122,6 +125,17 @@ export const deletePlaylist = (id) => {
         authorizationHeader: true,
     }
 }
+export const deleteMusicPlaylist = (id, music_id) => {
+    return {
+        url: `${DELETE_MUSIC_PLAYLIST}`,
+        method: "DELETE",
+        params: {
+            id: id,
+            music_id
+        },
+        authorizationHeader: true,
+    }
+}
 export const updatePlaylist = (title, id) => {
     return {
         url: `${UPDATE_PLAYLIST}`,
@@ -131,6 +145,29 @@ export const updatePlaylist = (title, id) => {
             id: id
         },
         authorizationHeader: true,
+    }
+}
+export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, is_guest) => {
+    return {
+        url: `${GET_SINGLE_ARTIST}`,
+        method: "GET",
+        params: {
+            artist_id: artist_id,
+            lyricist_id: lyricist_id,
+            utsav_id: utsav_id,
+            is_guest: is_guest
+        },
+        authorizationHeader: true,
+    }
+}
+export const getAlbum = (category_id) => {
+    return {
+        url: `${GET_ALBUM}`,
+        method: "GET",
+        params: {
+            category_id: category_id
+        },
+        authorizationHeader: false,
     }
 }
 export const saveMusicToPlaylist = (id, music_id) => {

@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { getDecryptedText } from "@/decryption/decryption";
+import { ClipLoader } from "react-spinners";
 
 const GetProfile = () => {
 
@@ -27,6 +28,7 @@ const GetProfile = () => {
         temple: users.data.temple.name,
         phoneNumber: getDecryptedText(users.data.mobile),
     });
+    const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
@@ -35,6 +37,7 @@ const GetProfile = () => {
             sort: "name",
             onSuccess: (response) => {
                 setCountries(response.data)
+
             },
             onError: (error) => {
                 console.log(error);
@@ -80,11 +83,9 @@ const GetProfile = () => {
         }));
     };
 
-    
-
     const handleSave = (e) => {
+        setIsLoading(true)
         e.preventDefault()
-        console.log(formInfo)
         const selectedTemple = temples.find((temple) => temple.name.toLowerCase() === formInfo.temple.toLowerCase());
 
         if (selectedTemple) {
@@ -111,9 +112,11 @@ const GetProfile = () => {
                             }
                         }));
                     }
+                    setIsLoading(false)
                 },
                 onError: (e) => {
                     toast.error('Save Failed')
+                    setIsLoading(false)
                 }
             })
         }
@@ -225,7 +228,9 @@ const GetProfile = () => {
                                 <div className="input_with_icon">
 
                                     <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
-                                        <option value="" disabled hidden>Country</option>
+                                        <option value="" disabled hidden>
+                                            Country
+                                        </option>
 
                                         {
                                             countries.map((country) => (
@@ -278,7 +283,10 @@ const GetProfile = () => {
                         </div>
                         <div className="col-sm-12">
                             <div className="d-flex justify-content-center align-items-center gap-2">
-                                <button type="submit" className="save_cancel_btn">Save</button>
+
+                                <button type="submit" className="save_cancel_btn" disabled={isLoading} >
+                                    Save
+                                </button>
                                 <button type="button" className="save_cancel_btn" onClick={handleCancel}>Cancel</button>
                             </div>
                         </div>

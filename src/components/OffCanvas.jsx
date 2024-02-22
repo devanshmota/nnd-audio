@@ -1,19 +1,22 @@
 'use client'
-import { createPlaylistApi, getPlaylistApi, saveMusicToPlaylistApi } from '@/redux/actions/Campaign';
+import { createPlaylistApi, deleteMusicPlaylistApi, getPlaylistApi, saveMusicToPlaylistApi } from '@/redux/actions/Campaign';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import toast from 'react-hot-toast';
 import { MdPlaylistAdd } from 'react-icons/md';
 
-const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, ...props }) => {
+const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLiked, ...props }) => {
 
     const [playlist, setPlaylist] = useState([])
     const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState(false)
     const [playlistName, setPlaylistName] = useState('')
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
+    const [prevSelectedPlaylists, setPrevSelectedPlaylists] = useState([]);
+
 
     useEffect(() => {
+
         getPlaylistApi({
             onSuccess: (res) => {
                 if (res.data) {
@@ -24,19 +27,29 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, ...props }) => {
                 console.log(e)
             }
         })
-    }, [])
+    }, [isLiked])
+
+    useEffect(() => {
+        const initialSelectedPlaylists = playlist.filter((item) => item.music.some((music) => music.id === selectedMusicId)).map((item) => item.id);
+        setSelectedPlaylists(initialSelectedPlaylists);
+        setPrevSelectedPlaylists(initialSelectedPlaylists)
+    }, [playlist, selectedMusicId]);
+
     const handleChange = (e) => {
         setPlaylistName(e.target.value)
     }
 
-    const handleCheckboxChange = (playlistId) => {
+    const handleCheckboxChange = (e, item) => {
+        const { checked } = e.target;
+
         setSelectedPlaylists((prevSelectedPlaylists) => {
-            if (prevSelectedPlaylists.includes(playlistId)) {
-                return prevSelectedPlaylists.filter((id) => id !== playlistId);
+            if (checked) {
+                return [...prevSelectedPlaylists, item.id];
             } else {
-                return [...prevSelectedPlaylists, playlistId];
+                return prevSelectedPlaylists.filter((id) => id !== item.id);
             }
         });
+        // setIsChecked(item.music.some((music) => music.id === selectedMusicId))
     };
 
     const handleCreateClick = () => {
@@ -63,20 +76,48 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, ...props }) => {
 
     const saved = () => {
 
-        const playlistIdsAsNumbers = selectedPlaylists.map(Number);
-        saveMusicToPlaylistApi({
-            id: playlistIdsAsNumbers.join(','),
-            music_id: selectedMusicId,
-            onSuccess: (res) => {
-                if (res.error === false) {
-                    toast.success('Saved Successfully');
-                    onHide()
+        const playlistsToDelete = prevSelectedPlaylists.filter(
+            (prevId) => !selectedPlaylists.includes(prevId)
+        );
+
+        if (playlistsToDelete.length > 0) {
+            deleteMusicPlaylistApi({
+                id: playlistsToDelete.join(','),
+                music_id: selectedMusicId,
+                onSuccess: (res) => {
+                    if (res.error === false) {
+                        toast.success('Deleted Successfully');
+                        onHide()
+                        setIsLiked(!isLiked)
+                    }
+                },
+                onError: (e) => {
+                    toast.error(e.message);
                 }
-            },
-            onError: (e) => {
-                toast.error(e.message);
-            }
-        })
+            })
+        }
+
+        const playlistsToAdd = selectedPlaylists.filter(
+            (currentId) => !prevSelectedPlaylists.includes(currentId)
+        );
+
+        if (playlistsToAdd.length > 0) {
+            saveMusicToPlaylistApi({
+                id: playlistsToAdd.join(','),
+                music_id: selectedMusicId,
+                onSuccess: (res) => {
+                    if (res.error === false) {
+                        toast.success('Saved Successfully');
+                        setIsLiked(!isLiked)
+                        onHide()
+                    }
+                },
+                onError: (e) => {
+                    toast.error(e.message);
+                }
+            })
+        }
+
     }
 
     return (
@@ -106,7 +147,6 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, ...props }) => {
                         <div className="container">
                             <div className="row">
 
-
                                 {
                                     playlist.length > 0 && playlist.map((item, index) => (
                                         <div key={index} className="col-lg-6">
@@ -124,26 +164,23 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, ...props }) => {
                                                     }
 
                                                     <div className="position-absolute chckbox_setter">
-                                                        <input type="checkbox" onChange={() => handleCheckboxChange(item.id)}
-                                                            checked={selectedPlaylists.includes(item.id)} />
+                                                        <input
+                                                            type="checkbox"
+                                                            onChange={(e) => handleCheckboxChange(e, item)}
+                                                            checked={selectedPlaylists.includes(item.id)}
+
+                                                        />
                                                     </div>
                                                     <h6 className="m-0 text-center">{item.title}</h6>
                                                 </div>
-                                                
                                             </div>
                                         </div>
                                     ))
                                 }
-
-
                             </div>
                         </div>
-
                         <button className='mt-auto save_button' onClick={saved} >Save</button>
                     </div>
-
-
-
                 </Offcanvas.Body>
             </Offcanvas>
         </>

@@ -8,11 +8,11 @@ const MusicCategoriesAll = () => {
   return (
     <>
 
-      <div className="container">
+      
 
         <MusicCategoryallCard />
 
-      </div>
+      
 
       <br />
       <br />

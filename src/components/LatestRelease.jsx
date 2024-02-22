@@ -8,6 +8,8 @@ import CategoryHeader from './CategoryHeader';
 import { getHomeApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
 
 const LatestRelease = () => {
@@ -17,18 +19,20 @@ const LatestRelease = () => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
     const [latestRelease, setLatestReleases] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
         getHomeApi({
             is_guest: 1,
             onSuccess: (res) => {
                 if (res.latest_releases) {
                     setLatestReleases(res.latest_releases)
                 }
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
     }, [])
@@ -51,18 +55,24 @@ const LatestRelease = () => {
 
     return (
         <div className="container d-flex flex-column">
+            <CategoryHeader
+                title="Latest Releases"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/latest-releases-all"
+            />
+
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
 
             {
                 latestRelease.length > 0 && (
                     <>
-                        <CategoryHeader
-                            title="Latest Releases"
-                            onPrev={handlePrev}
-                            onNext={handleNext}
-                            isBeginning={isBeginning}
-                            isEnd={isEnd}
-                            link="/latest-releases-all"
-                        />
 
                         <Swiper
                             ref={lastestReleaseRef}
@@ -115,7 +125,7 @@ const LatestRelease = () => {
                                                 <Image src={item.album.image} className="release_img" alt={item.eng_title} width={100} height={100} />
 
                                                 <h6 className='m-0 ellipsis-container text-white'>
-                                                        {GetLanguage(language, item)}
+                                                    {GetLanguage(language, item)}
                                                 </h6>
 
                                             </div>
@@ -126,8 +136,12 @@ const LatestRelease = () => {
                         </Swiper>
                     </>
                 )
+
             }
 
+            {
+                !isLoading && latestRelease.length === 0 && <Nodatafound />
+            }
 
         </div >
     )

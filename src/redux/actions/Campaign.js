@@ -24,6 +24,9 @@ import { getYoutubePlaylist } from "@/utils/api";
 import { getYoutubeLiveVideos } from "@/utils/api";
 import { updateProfile } from "@/utils/api";
 import { deleteAccount } from "@/utils/api";
+import { deleteMusicPlaylist } from "@/utils/api";
+import { fetchSigleArtistData } from "@/utils/api";
+import { getAlbum } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -72,6 +75,40 @@ export const getLyricistsApi = ({
     store.dispatch(
         apiCallBegan({
             ...getLyricists(limit, order),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const fetchSigleArtistDataApi = ({
+
+    artist_id = null,
+    lyricist_id = null,
+    utsav_id = null,
+    is_guest = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, is_guest, ),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getAlbumApi = ({
+    category_id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getAlbum(category_id),
             displayToast: false,
             onStart,
             onSuccess,
@@ -267,6 +304,22 @@ export const deleteAccountApi = ({
         })
     );
 };
+export const deleteMusicPlaylistApi = ({
+    id = null,
+    music_id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...deleteMusicPlaylist(id, music_id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
 export const saveMusicToPlaylistApi = ({
     id = null,
     music_id = null,
@@ -301,7 +354,7 @@ export const getMusicCategoryApi = ({
     );
 };
 // // GET TEMPLES
-export const getTemplesApi = ({
+export const getTemplesApi = async ({
     offset = "",
     sort = "",
     limit = "",
@@ -321,7 +374,7 @@ export const getTemplesApi = ({
         })
     );
 };
-export const logoutApi = ({
+export const logoutApi = async ({
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {

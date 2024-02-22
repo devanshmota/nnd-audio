@@ -1,26 +1,18 @@
 'use client'
-import Image from 'next/image';
 import Link from 'next/link'
-import img1 from '../../public/utshav_img_1.jpeg'
 import { useEffect, useState } from 'react';
 import { getUtsavApi } from '@/redux/actions/Campaign';
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
-// const utshav = [
-//     { id: 1, img: '/jula_shree_ghanshyam.jpeg', title: 'Hindola Kirtan' },
-//     { id: 2, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-//     { id: 3, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-//     { id: 4, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-//     { id: 5, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-//     { id: 6, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-//     { id: 7, img: '/r_music1.jpg', title: 'Hindola Kirtan' },
-// ]
 
 const Utsav = () => {
 
     const [utsav, setUtsav] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
+        setIsLoading(true)
         getUtsavApi({
 
             limit: 6,
@@ -28,17 +20,18 @@ const Utsav = () => {
 
             onSuccess: (res) => {
                 setUtsav(res.data)
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
-
-
     }, [])
 
     return (
         <div className="container">
+
             <div className="container_arrow container-fluid p-0">
                 <div className="row my-4">
                     <div className="col-sm-12 d-flex justify-content-between align-items-center">
@@ -48,38 +41,24 @@ const Utsav = () => {
                 </div>
                 <div className="row" id='utsav_images' >
 
-                    {
-                        utsav.length > 0 && (
-                            <>
-                                <div className="col-12 col-12 col-lg-3">
-                                    <img src={utsav[0].image} className="utshv_img" alt='utsav_img' />
-                                </div>
-                                <div className="col-12 col-lg-6">
-                                    <div className="row mb-3" id='utsav_images'>
-                                        <div className="col-lg-4 col-md-6">
-                                            <img src={utsav[1].image} className="utshv_img" alt='utsav_img' />
-                                        </div>
-                                        <div className="col-lg-8 col-md-6">
-                                            <img src={utsav[2].image} className="utshv_img" alt='utsav_img' />
-                                        </div>
-                                    </div>
-                                    <div className="row" id='utsav_images'>
-                                        <div className="col-lg-8 col-md-6">
-                                            <img src={utsav[3].image} className="utshv_img" alt='utsav_img' />
-                                        </div>
-                                        <div className="col-lg-4 col-md-6">
-                                            <img src={utsav[4].image} className="utshv_img" alt='utsav_img' />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-lg-3">
-                                    <img src={utsav[5].image} className="utshv_img" alt='utsav_img' />
-                                </div>
-                            </>
-                        )
+                    {isLoading &&
+                        <div className='d-flex align-items-center justify-content-center py-2'>
+                            <ClipLoader color="#ffffff" />
+                        </div>
                     }
 
-
+                    {
+                        utsav.length > 0 && (
+                            utsav.map((item, index) => (
+                                <Link href={`/utsav-all/${item.id}`} key={index} className="col-12 col-md-4">
+                                    <img src={item.image} className="utshv_img" alt={`utsav_img_${index}`} />
+                                </Link>
+                            ))
+                        )
+                    }
+                    {
+                        !isLoading && utsav.length === 0 && <Nodatafound />
+                    }
                 </div>
             </div>
         </div>

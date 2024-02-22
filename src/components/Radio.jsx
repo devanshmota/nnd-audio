@@ -8,18 +8,9 @@ import CategoryHeader from './CategoryHeader';
 import { getRadioApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
+import { ClipLoader } from 'react-spinners';
+import Nodatafound from './Nodatafound';
 
-
-
-// const radio24x7 = [
-//     { id: 1, title: 'test', img: '/r_music1.jpg' },
-//     { id: 2, title: 'test', img: '/r_music1.jpg' },
-//     { id: 3, title: 'test', img: '/r_music1.jpg' },
-//     { id: 4, title: 'test', img: '/r_music1.jpg' },
-//     { id: 5, title: 'test', img: '/r_music1.jpg' },
-//     { id: 6, title: 'test', img: '/r_music1.jpg' },
-//     { id: 7, title: 'test', img: '/r_music1.jpg' }
-// ]
 
 const Radio = () => {
 
@@ -28,9 +19,9 @@ const Radio = () => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
     const [radio, setRadio] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
         getRadioApi({
 
             limit: 10,
@@ -40,10 +31,11 @@ const Radio = () => {
                 if (res.data) {
                     setRadio(res.data)
                 }
-
+                setIsLoading(false)
             },
             onError: (e) => {
                 console.log(e)
+                setIsLoading(false)
             }
         })
     }, [])
@@ -61,24 +53,24 @@ const Radio = () => {
         }
 
     };
-
-
-
     return (
         <div className="container d-flex flex-column">
-
+            <CategoryHeader
+                title="Radio 24x7"
+                onPrev={handlePrev}
+                onNext={handleNext}
+                isBeginning={isBeginning}
+                isEnd={isEnd}
+                link="/radio-all"
+            />
+            {isLoading &&
+                <div className='d-flex align-items-center justify-content-center py-2'>
+                    <ClipLoader color="#ffffff" />
+                </div>
+            }
             {
                 radio.length > 0 && (
                     <>
-                        <CategoryHeader
-                            title="Radio 24x7"
-                            onPrev={handlePrev}
-                            onNext={handleNext}
-                            isBeginning={isBeginning}
-                            isEnd={isEnd}
-                            link="/radio-all"
-                        />
-
                         <Swiper
                             ref={radioRef}
                             slidesPerView={5}
@@ -138,6 +130,10 @@ const Radio = () => {
                         </Swiper>
                     </>
                 )
+            }
+
+            {
+                !isLoading && radio.length === 0 && <Nodatafound />
             }
 
         </div>

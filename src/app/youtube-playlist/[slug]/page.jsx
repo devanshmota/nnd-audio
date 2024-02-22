@@ -1,12 +1,14 @@
+import OneYoutubePlaylist from "@/components/OneYoutubePlaylist"
+
 
 
 const SingleYoutubePlaylist = ({ params }) => {
     return (
-        <div className="container text-white">
-            <div className="row">
-                SingleYoutubePlaylist : {params.slug}
-            </div>
-        </div>
+        <>
+            <OneYoutubePlaylist playlistid={params} />
+            <br />
+            <br />
+        </>
     )
 }
 

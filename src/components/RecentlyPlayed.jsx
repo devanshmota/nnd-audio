@@ -10,26 +10,35 @@ import { useSelector } from "react-redux";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
 import OffCanvas from "./OffCanvas";
+import { FaHeart } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
+import Nodatafound from "./Nodatafound";
 
 const RecentlyPlayed = () => {
 
   const { language } = useSelector((state) => state.language)
   const [recentlyPlayed, setRecentlyPlayed] = useState([])
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
   const [selectedMusicId, setSelectedMusicId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-
+    setIsLoading(true)
     getRecentlyPlayedMusicApi({
       onSuccess: (res) => {
-        setRecentlyPlayed(res.music.slice(0, 3))
-        
+
+        if (res.music) {
+          setRecentlyPlayed(res.music.slice(0, 3))
+        }
+        setIsLoading(false)
       },
       onError: (e) => {
         console.log(e)
+        setIsLoading(false);
       }
     })
-  }, [])
+  }, [isLiked, selectedMusicId])
 
   const handleSave = (musicId) => {
     setSelectedMusicId(musicId);
@@ -45,12 +54,16 @@ const RecentlyPlayed = () => {
       </div>
       <div className="container">
         <div className="row gap-4">
-
+          {isLoading &&
+            <div className='d-flex align-items-center justify-content-center py-2'>
+              <ClipLoader color="#ffffff" />
+            </div>
+          }
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
 
               <div key={index} className="col-lg-12">
-                <div className="d-flex align-items-center justify-content-between text-white">
+                <div className="d-flex align-items-center justify-content-between text-white music_card">
                   <div className="d-flex align-items-center gap-3">
                     <Image src={item.album.image} alt={item.eng_title} className="rounded" width={120} height={120} />
                     <div className="d-flex flex-column gap-2">
@@ -61,15 +74,26 @@ const RecentlyPlayed = () => {
                   <div className="d-flex align-items-center gap-2 gap-md-3">
                     <FaShareAlt className="icon_recent_plyd" />
                     <FaDownload className="icon_recent_plyd" />
-                    <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                    {
+                      item.playlist.length > 0 ? (
+                        <FaHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                      )
+                        :
+                        (
+                          <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                        )
+                    }
                   </div>
                 </div>
               </div>
 
             ))
           }
+          {
+            !isLoading && recentlyPlayed.length === 0 && <Nodatafound />
+          }
         </div>
-        <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} />
+        <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
       </div>
       <br />
       <br />
