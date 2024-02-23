@@ -9,7 +9,7 @@ const NotificationBell = () => {
 
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [notifications, setNotifications] = useState([])
-
+ 
     useEffect(() => {
         
         getNotificationApi({
