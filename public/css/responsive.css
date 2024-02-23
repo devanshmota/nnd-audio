@@ -159,8 +159,8 @@
 }
 
 @media (min-width: 600px) {
-    .css-b62sy7-MuiDrawer-docked {
-        width: 56px;
+    .css-b62sy7-MuiDrawer-docked, .css-qw6dy7 {
+        width: 53px !important;
     }
 }
 
