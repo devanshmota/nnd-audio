@@ -24,6 +24,7 @@ const DELETE_ACCOUNT = 'user/delete'
 const DELETE_MUSIC_PLAYLIST = 'playlist/delete'
 const GET_SINGLE_ARTIST = 'get_music'
 const GET_ALBUM = 'get_album'
+const GET_NOTIFICATION = 'get_notification'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -59,6 +60,16 @@ export const deleteAccount = () => {
 
         },
         authorizationHeader: true,
+    }
+}
+export const getNotification = () => {
+    return {
+        url: `${GET_NOTIFICATION}`,
+        method: "GET",
+        params: {
+
+        },
+        authorizationHeader: false,
     }
 }
 export const globalSearch = (search, is_guest) => {

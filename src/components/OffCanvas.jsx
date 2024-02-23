@@ -49,7 +49,6 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 return prevSelectedPlaylists.filter((id) => id !== item.id);
             }
         });
-        // setIsChecked(item.music.some((music) => music.id === selectedMusicId))
     };
 
     const handleCreateClick = () => {

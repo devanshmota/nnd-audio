@@ -27,7 +27,6 @@ const RecentlyPlayed = () => {
     setIsLoading(true)
     getRecentlyPlayedMusicApi({
       onSuccess: (res) => {
-
         if (res.music) {
           setRecentlyPlayed(res.music.slice(0, 3))
         }

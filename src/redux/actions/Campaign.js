@@ -27,6 +27,7 @@ import { deleteAccount } from "@/utils/api";
 import { deleteMusicPlaylist } from "@/utils/api";
 import { fetchSigleArtistData } from "@/utils/api";
 import { getAlbum } from "@/utils/api";
+import { getNotification } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -109,6 +110,20 @@ export const getAlbumApi = ({
     store.dispatch(
         apiCallBegan({
             ...getAlbum(category_id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getNotificationApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getNotification(),
             displayToast: false,
             onStart,
             onSuccess,

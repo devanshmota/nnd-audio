@@ -13,8 +13,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BasicMenu from "./BasicMenu";
-import { Badge } from "@mui/material";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationBell from "./NotificationBell";
+
 
 
 const Header = ({ open, handleDrawerOpen }) => {
@@ -34,8 +34,6 @@ const Header = ({ open, handleDrawerOpen }) => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
-
 
   const handleLoginClick = () => {
     setIsRegisterModalVisible(false);
@@ -74,10 +72,8 @@ const Header = ({ open, handleDrawerOpen }) => {
           <div className="ms_top_btn">
             <div className="drp_large">
 
-              <Badge badgeContent={4} color="primary">
-                <NotificationsIcon/> 
-              </Badge>
 
+              <NotificationBell />
 
               <DropdownButton id="dropdown-basic-button" className="ms_top_btn"
                 title={
@@ -107,20 +103,22 @@ const Header = ({ open, handleDrawerOpen }) => {
                     <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
                   )
               }
-
-
             </div>
 
             <div className="drp_small">
-              <IconButton
-                aria-controls="menu"
-                aria-haspopup="true"
-                onClick={handleMenuClick}
-                variant="contained"
-                className="three_dot_btn"
-              >
-                <MoreVertIcon />
-              </IconButton>
+
+              <div className="d-flex align-items-center gap-2">
+                <NotificationBell />
+                <IconButton
+                  aria-controls="menu"
+                  aria-haspopup="true"
+                  onClick={handleMenuClick}
+                  variant="contained"
+                  className="three_dot_btn"
+                >
+                  <MoreVertIcon />
+                </IconButton>
+              </div>
               <Menu
                 id="menu"
                 anchorEl={anchorEl}

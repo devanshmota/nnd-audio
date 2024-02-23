@@ -8840,6 +8840,25 @@ select,
 	height: 87vh;
 }
 
+.css-zza0ns-MuiBadge-badge{
+	background-color: var(--secondary-color) !important;
+}
+
+.ntfc_badge{
+	cursor: pointer;
+}
+
+.ntfc_desc{
+	font-size: 12px;
+	color: grey;
+}
+.ntfc_card {
+    border: 2px solid #404451;
+    padding: 10px;
+    border-radius: 5px;
+	cursor: pointer;
+}
+
 /* .item-title {
 	font-size: 15px;
 	font-weight: 500;

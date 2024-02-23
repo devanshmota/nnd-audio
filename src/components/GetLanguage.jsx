@@ -1,6 +1,4 @@
 const GetLanguage = (language, item) => {
-
-    console.log(item)
     // if (language === 'Gujarati') {
     //     if ('guj_title' in item) {
     //         return item.guj_title;
