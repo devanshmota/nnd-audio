@@ -8763,7 +8763,7 @@ select,
 }
 
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root,.css-1km1ehz {
-	justify-content: center;
+	justify-content: center !important;
 }
 
 .ply-item-title {
