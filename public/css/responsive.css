@@ -152,11 +152,18 @@
     }
 }
 
-@media (max-width: 599px) {
+/* @media (max-width: 600px) {
     .css-b62sy7-MuiDrawer-docked, .css-qw6dy7 .MuiDrawer-paper {
         width: 53px !important;
     }
+} */
+
+@media (min-width: 600px){
+    .css-qw6dy7,.css-b62sy7-MuiDrawer-docked{
+        width: 53px !important;
+    }
 }
+
 
 @media (max-width: 575px) {
     .menuIcon {
