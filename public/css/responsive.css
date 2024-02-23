@@ -27,18 +27,18 @@
 
 @media(min-width: 575px) {
     .ms_logo_top {
-        display: none !important;
+        display: none ;
     }
 }
 
 @media (max-width: 575px) {
 
     .ms_logo_inner {
-        display: none;
+        display: none !important;
     }
 
     .ms_nav_wrapper {
-        top: 85px;
+        top: 85px !important;
     }
 
 
@@ -153,8 +153,8 @@
 } */
 
 @media (min-width: 600px) {
-    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper {
-        width: 53px;
+    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper,.css-qw6dy7 {
+        width: 53px !important;
     }
 }
 
@@ -166,7 +166,7 @@
 
 @media (max-width: 575px) {
     .menuIcon {
-        display: none;
+        display: none !important;
     }
 
     .home_icon {
