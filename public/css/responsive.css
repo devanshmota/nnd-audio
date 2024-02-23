@@ -152,7 +152,7 @@
     }
 } */
 
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
     .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper,.css-qw6dy7 {
         width: 53px !important;
     }
@@ -162,7 +162,7 @@
     .css-b62sy7-MuiDrawer-docked, .css-qw6dy7 {
         width: 53px !important;
     }
-}
+} */
 
 @media (max-width: 575px) {
     .menuIcon {

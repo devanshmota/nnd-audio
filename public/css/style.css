@@ -8859,6 +8859,10 @@ select,
 	cursor: pointer;
 }
 
+.css-b62sy7-MuiDrawer-docked .MuiDrawer-paper,.css-qw6dy7 {
+	width: 53px !important;
+}
+
 /* .item-title {
 	font-size: 15px;
 	font-weight: 500;
