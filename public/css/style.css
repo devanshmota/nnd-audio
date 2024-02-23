@@ -8288,7 +8288,7 @@ select,
 }
 
 .basic_menu_item {
-	color: white;
+	color: white !important;
 }
 
 .basic_menu {
@@ -8840,7 +8840,7 @@ select,
 	height: 87vh;
 }
 
-.css-zza0ns-MuiBadge-badge{
+.css-zza0ns-MuiBadge-badge,.css-1871dw3{
 	background-color: var(--secondary-color) !important;
 }
 
