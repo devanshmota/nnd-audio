@@ -8728,7 +8728,7 @@ select,
 	border: none !important;
 }
 
-.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper,.css-pwxzbm {
 	background-color: var(--secondary-color) !important;
 }
 
@@ -8762,7 +8762,7 @@ select,
 	color: white;
 }
 
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root,.css-1km1ehz {
 	justify-content: center;
 }
 
