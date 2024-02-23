@@ -27,7 +27,7 @@
 
 @media(min-width: 575px) {
     .ms_logo_top {
-        display: none;
+        display: none !important;
     }
 }
 
