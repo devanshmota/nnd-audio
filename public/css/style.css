@@ -8085,7 +8085,7 @@ h2.widget-title:after {
 .drawerMain {
 	padding: 0 !important;
 	overflow: hidden;
-	margin-left: 0;
+	margin-left: 0 !important;
 }
 
 /* .container {
@@ -8171,7 +8171,7 @@ h2.widget-title:after {
 	border-radius: 100% !important;
 	object-fit: cover;
 	border: 4px solid #8b0000;
-	width: 50%;
+	width: 100%;
 	height: 50%;
 }
 
@@ -8758,7 +8758,7 @@ select,
 	gap: 20px 0;
 }
 
-.css-i4bv87-MuiSvgIcon-root {
+.MuiSvgIcon-root {
 	color: white;
 }
 

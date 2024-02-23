@@ -1,4 +1,5 @@
 'use client'
+import addNotification from 'react-push-notification';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Badge } from '@mui/material';
 import NotificationCanvas from './NotificationCanvas';
@@ -28,9 +29,19 @@ const NotificationBell = () => {
         setIsOffCanvasOpen(true)
     }
 
+    // const addNotifications = () => {
+    //     addNotification({
+    //         title: 'dddddddddd',
+    //         message: 'aaa',
+    //         duration: 4000,
+    //         icon: '/images/nnd_logo.png',
+    //         native: true
+    //     })
+    // }
+
     return (
         <>
-        
+            {/* <button onClick={addNotifications}>click</button> */}
             <Badge badgeContent={notifications.length} color="primary" className='ntfc_badge' onClick={handleOpen} >
                 <NotificationsIcon />
             </Badge>
@@ -39,4 +50,4 @@ const NotificationBell = () => {
     )
 }
 
-export default NotificationBell
+export default NotificationBell 
