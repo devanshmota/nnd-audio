@@ -16,7 +16,6 @@ import BasicMenu from "./BasicMenu";
 import NotificationBell from "./NotificationBell";
 
 
-
 const Header = ({ open, handleDrawerOpen }) => {
 
   const dispatch = useDispatch()
@@ -72,8 +71,10 @@ const Header = ({ open, handleDrawerOpen }) => {
           <div className="ms_top_btn">
             <div className="drp_large">
 
-
-              <NotificationBell />
+              {
+                token &&  <NotificationBell />
+              }
+              
 
               <DropdownButton id="dropdown-basic-button" className="ms_top_btn"
                 title={
