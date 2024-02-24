@@ -28,6 +28,8 @@ import { deleteMusicPlaylist } from "@/utils/api";
 import { fetchSigleArtistData } from "@/utils/api";
 import { getAlbum } from "@/utils/api";
 import { getNotification } from "@/utils/api";
+// import { postFcmId } from "@/utils/api";
+import { updateFcmId } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -253,6 +255,22 @@ export const createPlaylistApi = ({
         })
     );
 };
+// export const postFcmIdApi = ({
+//     fcm_id = '',
+//     device_type = '',
+//     onSuccess = () => { },
+//     onError = () => { },
+//     onStart = () => { } }) => {
+//     store.dispatch(
+//         apiCallBegan({
+//             ...postFcmId(fcm_id, device_type),
+//             displayToast: false,
+//             onStart,
+//             onSuccess,
+//             onError,
+//         })
+//     );
+// };
 export const deletePlaylistApi = ({
     id = null,
     onSuccess = () => { },
@@ -292,12 +310,28 @@ export const updateProfileApi = ({
     country_id = null,
     temple_id = null,
     uid = '',
+    fcm_id= '',
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...updateProfile(first_name, last_name, mobile, gender, country_id, temple_id, uid),
+            ...updateProfile(first_name, last_name, mobile, gender, country_id, temple_id, uid, fcm_id),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const updateFcmIdApi = ({
+    fcm_id= null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...updateFcmId(fcm_id),
             displayToast: false,
             onStart,
             onSuccess,

@@ -6,19 +6,22 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { auth } from './Firebase';
 import toast from 'react-hot-toast';
-import { checkLoginApi } from '@/redux/actions/Campaign';
+import { checkLoginApi, updateFcmIdApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...props }) => {
 
     const disptach = useDispatch()
+    const { fcmToken } = useSelector((state) => state.cachedata)
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [formInfo, setFormInfo] = useState({
         email: '',
         password: ''
     })
+
+    console.log(fcmToken)
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -33,17 +36,33 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
             .then(auth => {
                 if (auth) {
                     if (auth.user.emailVerified) {
-
                         checkLoginApi({
                             uid: auth.user.uid,
                             onSuccess: (res) => {
-                                toast.success(res.message)
-                                disptach(setUsers(res))
-                                setFormInfo({
-                                    email: '',
-                                    password: ''
-                                })
-                                onHide()
+                                if (res.error === false) {
+
+                                    toast.success(res.message)
+                                    disptach(setUsers(res))
+
+                                    updateFcmIdApi({
+                                        fcm_id: fcmToken,
+                                        onSuccess: (res) => {
+                                            console.log(res)
+                                           
+                                        },
+                                        onError: (error) => {
+                                            toast.error(error.message)
+                                        }
+                                    })
+                                    setFormInfo({
+                                        email: '',
+                                        password: ''
+                                    })
+                                    onHide()
+
+                                }
+
+
                             },
                             onError: (error) => {
                                 toast.error(error.message)
@@ -122,8 +141,6 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                     </form>
                 </Modal.Body>
             </Modal>
-
-        
         </>
 
     );

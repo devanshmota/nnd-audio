@@ -13,10 +13,8 @@ const GlobalSearch = () => {
     const router = useRouter()
 
     const onChange = (value) => {
-        // console.log('Selected:', value);
-        // console.log(value)
+        
         dispatch(setSearchQuery(value))
-        // router.push('/search')
     };
     const onSearch = () => {
         router.push('/search')

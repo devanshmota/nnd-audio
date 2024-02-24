@@ -4,24 +4,17 @@ import { Badge } from '@mui/material';
 import NotificationCanvas from './NotificationCanvas';
 import { useEffect, useState } from 'react';
 import { getNotificationApi } from '@/redux/actions/Campaign';
-import { generateToken, messaging } from './Firebase';
-import { onMessage } from 'firebase/messaging';
+
 
 const NotificationBell = () => {
 
+
+    
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [notifications, setNotifications] = useState([])
 
 
-    useEffect(() => {
-        generateToken()
-        onMessage(messaging, (payload) => {
-            console.log('Message received:', payload);
-            // Handle the received message as needed
-        });
     
-        
-    }, [])
  
     useEffect(() => {
         

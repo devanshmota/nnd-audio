@@ -116,7 +116,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function PersistentDrawerLeft({ children }) {
     const theme = useTheme();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const top100Films = [
         { id: 1, title: "Osman mir" },
         { id: 2, title: "Hemant Chauhan" },

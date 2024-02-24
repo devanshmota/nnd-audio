@@ -25,6 +25,7 @@ const DELETE_MUSIC_PLAYLIST = 'playlist/delete'
 const GET_SINGLE_ARTIST = 'get_music'
 const GET_ALBUM = 'get_album'
 const GET_NOTIFICATION = 'get_notification'
+// const POST_FCM_ID = 'add_guest_fcm_id'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -116,16 +117,27 @@ export const getYoutubeLiveVideos = () => {
     }
 }
 export const createPlaylist = (title) => {
+    let data = new FormData();
+    data.append('title', title);
     return {
         url: `${CREATE_PLAYLIST}`,
         method: "POST",
-        params: {
-            title: title
-        },
+        data,
         authorizationHeader: true,
 
     }
 }
+// export const postFcmId = (fcm_id, device_type) => {
+//     return {
+//         url: `${POST_FCM_ID}`,
+//         method: "POST",
+//         params: {
+//             fcm_id: fcm_id,
+//             device_type: device_type
+//         },
+//         authorizationHeader: false,
+//     }
+// }
 export const deletePlaylist = (id) => {
     return {
         url: `${DELETE_PLAYLIST}`,
@@ -148,13 +160,13 @@ export const deleteMusicPlaylist = (id, music_id) => {
     }
 }
 export const updatePlaylist = (title, id) => {
+    let data = new FormData();
+    data.append('title', title);
+    data.append('id', id);
     return {
         url: `${UPDATE_PLAYLIST}`,
         method: "POST",
-        params: {
-            title: title,
-            id: id
-        },
+        data,
         authorizationHeader: true,
     }
 }
@@ -183,13 +195,13 @@ export const getAlbum = (category_id) => {
     }
 }
 export const saveMusicToPlaylist = (id, music_id) => {
+    let data = new FormData();
+    data.append('id', id);
+    data.append('music_id', music_id);
     return {
         url: `${UPDATE_PLAYLIST}`,
         method: "POST",
-        params: {
-            id: id,
-            music_id: music_id
-        },
+        data,
         authorizationHeader: true,
     }
 }
@@ -297,19 +309,30 @@ export const getHome = (is_guest) => {
         authorizationHeader: true,
     }
 }
-export const updateProfile = (first_name, last_name, mobile, gender, country_id, temple_id, uid) => {
+export const updateProfile = (first_name, last_name, mobile, gender, country_id, temple_id, uid, fcm_id) => {
+    let data = new FormData();
+    data.append('first_name', first_name);
+    data.append('last_name', last_name);
+    data.append('mobile', mobile);
+    data.append('gender', gender);
+    data.append('country_id', country_id);
+    data.append('temple_id', temple_id);
+    data.append('uid', uid);
+    data.append('fcm_id', fcm_id);
     return {
         url: `${UPDATE_PROFILE}`,
         method: "POST",
-        params: {
-            first_name: first_name,
-            last_name: last_name,
-            mobile: mobile,
-            gender: gender,
-            country_id: country_id,
-            temple_id: temple_id,
-            uid: uid
-        },
+        data,
+        authorizationHeader: true,
+    }
+}
+export const updateFcmId = (fcm_id) => {
+    let data = new FormData();
+    data.append('fcm_id', fcm_id);
+    return {
+        url: `${UPDATE_PROFILE}`,
+        method: "POST",
+        data,
         authorizationHeader: true,
     }
 }
@@ -346,7 +369,6 @@ export const checkEmail = (email) => {
         authorizationHeader: false,
     }
 }
-
 
 export const checkLogin = (uid) => {
     let data = new FormData();
