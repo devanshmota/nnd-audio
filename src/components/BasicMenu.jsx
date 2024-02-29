@@ -13,6 +13,7 @@ import { setUsers } from '@/redux/reducer/UsersSlice';
 import { ClipLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function BasicMenu() {
 
@@ -138,7 +139,7 @@ export default function BasicMenu() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                startIcon={<PersonIcon />}
+                endIcon={<ExpandMoreIcon/>}
             >
                 {getDecryptedText(users.data.first_name)}
             </Button>

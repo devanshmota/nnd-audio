@@ -51,6 +51,10 @@ const Artists = () => {
         }
     };
 
+    if(artists.length === 0){
+        return null
+    }
+
     return (
         <div className="container d-flex flex-column">
             <CategoryHeader
@@ -71,7 +75,7 @@ const Artists = () => {
                     <>
                         <Swiper
                             ref={artistRef}
-                            slidesPerView={5}
+                            slidesPerView={7}
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
@@ -98,25 +102,25 @@ const Artists = () => {
                                     slidesPerView: 1,
                                 },
                                 576: {
-                                    slidesPerView: 2,
-                                },
-                                768: {
                                     slidesPerView: 3,
                                 },
-                                992: {
+                                768: {
                                     slidesPerView: 4,
                                 },
+                                992: {
+                                    slidesPerView: 6,
+                                },
                                 1200: {
-                                    slidesPerView: 5,
+                                    slidesPerView: 7,
                                 },
                             }}
                             className='mySwiper w-100'
                         >
                             {
                                 artists.map((item, index) => (
-                                    <SwiperSlide key={item.id} virtualIndex={index}>
+                                    <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                         <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
+                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={150} height={150} />
                                             <h5 className='m-0 text-center'>
                                                 {GetFirstWord(GetLanguage(language, item))}
                                             </h5>
@@ -129,9 +133,7 @@ const Artists = () => {
                     </>
                 )
             }
-            {
-                !isLoading && artists.length === 0 && <Nodatafound />
-            }
+
         </div>
     )
 }

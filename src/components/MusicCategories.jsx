@@ -9,7 +9,6 @@ import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import { ClipLoader } from 'react-spinners';
-import Nodatafound from './Nodatafound';
 
 
 const Music_categories = () => {
@@ -50,6 +49,10 @@ const Music_categories = () => {
         }
     };
 
+    if(musicCategory.length === 0){
+        return null
+    }
+
     return (
         <div className="container d-flex flex-column">
             <CategoryHeader
@@ -69,10 +72,9 @@ const Music_categories = () => {
                 musicCategory.length > 0 && (
                     <>
 
-
                         <Swiper
                             ref={musicRef}
-                            slidesPerView={5}
+                            slidesPerView={7}
                             spaceBetween={30}
                             autoplay={{
                                 delay: 2500,
@@ -97,16 +99,16 @@ const Music_categories = () => {
                                     slidesPerView: 1
                                 },
                                 576: {
-                                    slidesPerView: 2
-                                },
-                                768: {
                                     slidesPerView: 3
                                 },
-                                992: {
+                                768: {
                                     slidesPerView: 4
                                 },
+                                992: {
+                                    slidesPerView: 6
+                                },
                                 1200: {
-                                    slidesPerView: 5
+                                    slidesPerView: 7
                                 },
                             }}
                             className='mySwiper w-100'
@@ -114,12 +116,11 @@ const Music_categories = () => {
 
                             {
                                 musicCategory.map((item, index) => (
-                                    <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <Link href={`/music-categories-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={252} height={252} />
-                                            <h5 className='m-0 text-center text-white' >
+                                    <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
+                                        <Link href={`/music-categories-all/${item.id}`} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
+                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={150} height={150} />
+                                            <h5 className='m-0 text-center text-white'>
                                                 {GetLanguage(language, item)}
-
                                             </h5>
                                         </Link>
                                     </SwiperSlide>
@@ -131,9 +132,6 @@ const Music_categories = () => {
                 )
             }
 
-            {
-                !isLoading && musicCategory.length === 0 && <Nodatafound />
-            }
         </div>
     )
 }

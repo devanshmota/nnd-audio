@@ -10,10 +10,13 @@ import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import { ClipLoader } from 'react-spinners';
 import Nodatafound from './Nodatafound';
+import GetFirstWord from './GetFirstWord';
 
 
 const Radio = () => {
 
+
+    const users = useSelector((state) => state.users)
     const { language } = useSelector((state) => state.language)
     const radioRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
@@ -53,6 +56,11 @@ const Radio = () => {
         }
 
     };
+    const token = users?.users?.token
+
+    if(radio.length === 0 || !token){
+        return null
+    }
     return (
         <div className="container d-flex flex-column">
             <CategoryHeader
@@ -73,7 +81,7 @@ const Radio = () => {
                     <>
                         <Swiper
                             ref={radioRef}
-                            slidesPerView={5}
+                            slidesPerView={7}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -99,16 +107,16 @@ const Radio = () => {
                                     slidesPerView: 1,
                                 },
                                 576: {
-                                    slidesPerView: 2,
-                                },
-                                768: {
                                     slidesPerView: 3,
                                 },
-                                992: {
+                                768: {
                                     slidesPerView: 4,
                                 },
+                                992: {
+                                    slidesPerView: 6,
+                                },
                                 1200: {
-                                    slidesPerView: 5,
+                                    slidesPerView: 7,
                                 },
                             }}
                             className="mySwiper w-100"
@@ -116,11 +124,11 @@ const Radio = () => {
 
                             {
                                 radio.map((item, index) => (
-                                    <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className="kirtan_img" alt={item.eng_title} width={252} height={252} />
-                                            <h5>
-                                                <Link href='/kirtan'>{GetLanguage(language, item)}</Link>
+                                    <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
+                                        <div className="d-flex flex-column gap-3 align-items-center mw-100">
+                                            <Image src={item.image} className="card-img-top artist_img" alt={item.eng_title} width={150} height={150} />
+                                            <h5 className="text-white text-center m-0">
+                                                {GetFirstWord(GetLanguage(language, item))}
                                             </h5>
                                         </div>
                                     </SwiperSlide>
@@ -130,10 +138,6 @@ const Radio = () => {
                         </Swiper>
                     </>
                 )
-            }
-
-            {
-                !isLoading && radio.length === 0 && <Nodatafound />
             }
 
         </div>

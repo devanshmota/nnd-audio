@@ -28,8 +28,8 @@ import { deleteMusicPlaylist } from "@/utils/api";
 import { fetchSigleArtistData } from "@/utils/api";
 import { getAlbum } from "@/utils/api";
 import { getNotification } from "@/utils/api";
-// import { postFcmId } from "@/utils/api";
 import { updateFcmId } from "@/utils/api";
+import { getAlbumWithMusic } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -44,6 +44,21 @@ export const getCountriesApi = ({
     store.dispatch(
         apiCallBegan({
             ...getCountries(offset, sort, limit, order, search),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getAlbumWithMusicApi = ({
+    category_id = null,
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getAlbumWithMusic(category_id),
             displayToast: false,
             onStart,
             onSuccess,
@@ -90,13 +105,14 @@ export const fetchSigleArtistDataApi = ({
     lyricist_id = null,
     utsav_id = null,
     album_id = null,
+    category_id = null,
     is_guest = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id, is_guest),
+            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest),
             displayToast: false,
             onStart,
             onSuccess,
@@ -106,12 +122,14 @@ export const fetchSigleArtistDataApi = ({
 };
 export const getAlbumApi = ({
     category_id = null,
+    offset = null,
+    limit = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getAlbum(category_id),
+            ...getAlbum(category_id, offset, limit),
             displayToast: false,
             onStart,
             onSuccess,

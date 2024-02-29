@@ -13,8 +13,6 @@ import { ClipLoader } from "react-spinners"
 
 const GetAlbumMusic = ({ albumid }) => {
 
-    
-    
     const { language } = useSelector((state) => state.language)
     const [singleAlbumData, setSingleAlbumData] = useState([])
     const [albumDetails, setAlbumDetails] = useState(null)
@@ -22,15 +20,18 @@ const GetAlbumMusic = ({ albumid }) => {
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
+
+
     
+
     useEffect(() => {
         fetchSigleArtistDataApi({
             album_id: albumid.id,
             is_guest: 0,
             onSuccess: (res) => {
-                console.log(res)
                 setSingleAlbumData(res.data)
                 setAlbumDetails(res.data[0].album)
+                
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -45,6 +46,7 @@ const GetAlbumMusic = ({ albumid }) => {
         setIsOffCanvasOpen(true)
     }
 
+    
 
     return (
         <div className="container text-white mt-4">
@@ -111,6 +113,9 @@ const GetAlbumMusic = ({ albumid }) => {
                     </>
                 )
             }
+
+            
+
             {
                 !isLoading && singleAlbumData.length === 0 && <Nodataviewall />
             }

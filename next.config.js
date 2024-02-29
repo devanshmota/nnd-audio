@@ -5,9 +5,16 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "nndaudioapp.mirzapar.com"
+            },
+            {
+                protocol: "https",
+                hostname: "img.youtube.com"
+            },
+            {
+                protocol: "https",
+                hostname: "i.ytimg.com"
             }
-        ],
-        domains: ['i.ytimg.com'],
+        ]
     }
 }
 

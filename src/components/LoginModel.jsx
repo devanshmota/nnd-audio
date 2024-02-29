@@ -105,7 +105,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                     <form className="login_form" onSubmit={Submit}>
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
                         <div className="header">
-                            <h2>Login</h2>
+                            <h3>Login</h3>
                             <p>Please enter your email and password</p>
                         </div>
                         <div className="input_container">
@@ -132,7 +132,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                             <span onClick={handleFrgtPassword} className="forgot-password">Forgot Password?</span>
                         </div>
                         <div className="btn_container">
-                            <button type='submit'>Login</button>
+                            <button type='submit' className='login_button'>Login</button>
                             <p>
                                 Don’t have any account?
                                 <span onClick={handleRegisterClick}> Register</span>

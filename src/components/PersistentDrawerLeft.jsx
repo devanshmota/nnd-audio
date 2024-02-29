@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Image from 'next/image';
-import nndLogo from '../../public/images/nnd_logo.png'
 const Header = dynamic(() => import('./Header.jsx'), {
     ssr: false
 })
@@ -22,6 +20,7 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 import dynamic from 'next/dynamic';
 import GlobalSearch from './Search';
 import { Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 
 
 const drawerWidth = 240;
@@ -117,14 +116,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function PersistentDrawerLeft({ children }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const top100Films = [
-        { id: 1, title: "Osman mir" },
-        { id: 2, title: "Hemant Chauhan" },
-        { id: 1, title: "Aaj Mare Orde re" },
-    ]
+   
 
     const handleDrawerOpen = () => {
-        setOpen(true);
+        setOpen(!open);
     };
 
     const handleDrawerClose = () => {
@@ -150,23 +145,27 @@ export default function PersistentDrawerLeft({ children }) {
                         height: "64px",
                     }}
                 >
-                    <IconButton
-                        color="inherit"
-                        className="open_drawer"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(open && { display: "none" }),
-                        }}
-                    >
 
-                        <MenuIcon className='menuIcon' />
-                        <div className="ms_logo_top">
-                            <Image width={30} height={30} src={nndLogo} alt="" className="img-fluid" />
-                        </div>
-                    </IconButton>
+                    <div className='d-flex align-items-center gap-2'>
+                        <IconButton
+                            color="inherit"
+                            className="open_drawer"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{
+                                marginRight: 5,
+                                ...(open && { display: "none" }),
+                            }}
+                            
+                        >
+
+                            <MenuIcon className='menuIcon' />
+
+                        </IconButton>
+                        <img src='/images/nnd_web.png' alt='nnd_logo' className='nnd_web' />
+                        <img src='/images/nnd_logo.png' alt='nnd_logo' className='nnd_logo' />
+                    </div>
 
                     <GlobalSearch />
                     <Header />
@@ -182,7 +181,6 @@ export default function PersistentDrawerLeft({ children }) {
                 <Divider />
 
                 <Sidebar open={open} />
-
             </Drawer>
             <Main open={open} className='drawerMain' >
                 <DrawerHeader />

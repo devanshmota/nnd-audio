@@ -52,11 +52,14 @@ const LatestRelease = () => {
         console.log(isBeginning)
     };
 
+    if (latestRelease.length === 0) {
+        return null
+    }
 
     return (
         <div className="container d-flex flex-column">
             <CategoryHeader
-                title="Latest Releases"
+                title="Latest Albums"
                 onPrev={handlePrev}
                 onNext={handleNext}
                 isBeginning={isBeginning}
@@ -76,7 +79,7 @@ const LatestRelease = () => {
 
                         <Swiper
                             ref={lastestReleaseRef}
-                            slidesPerView={5}
+                            slidesPerView={4}
                             spaceBetween={30}
                             autoplay={{
                                 delay: 2500,
@@ -108,10 +111,10 @@ const LatestRelease = () => {
                                     slidesPerView: 3,
                                 },
                                 992: {
-                                    slidesPerView: 4,
+                                    slidesPerView: 3,
                                 },
                                 1200: {
-                                    slidesPerView: 5,
+                                    slidesPerView: 4,
                                 },
                             }}
                             className='mySwiper w-100'
@@ -121,12 +124,12 @@ const LatestRelease = () => {
                                     latestRelease.map((item, index) => (
 
                                         <SwiperSlide key={item.id} virtualIndex={index}>
-                                            <div className="d-flex flex-column flex-lg-row gap-2 justify-content-center align-items-center">
-                                                <Image src={item.album.image} className="release_img" alt={item.eng_title} width={100} height={100} />
+                                            <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
+                                                <Image src={item.album.image} className="release_img" alt={item.eng_title} width={300} height={200} />
 
-                                                <h6 className='m-0 ellipsis-container text-white'>
+                                                <h5 className='m-0 ellipsis-container text-white'>
                                                     {GetLanguage(language, item)}
-                                                </h6>
+                                                </h5>
 
                                             </div>
                                         </SwiperSlide>
@@ -138,11 +141,6 @@ const LatestRelease = () => {
                 )
 
             }
-
-            {
-                !isLoading && latestRelease.length === 0 && <Nodatafound />
-            }
-
         </div >
     )
 }

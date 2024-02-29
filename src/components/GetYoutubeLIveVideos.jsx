@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { FaPlay } from "react-icons/fa"
 import PlayLiveVideoModal from "./PlayLiveVideoModal"
+import { getDecryptedText } from "@/decryption/decryption"
 
 const GetYoutubeLiveVideos = () => {
 
@@ -44,7 +45,7 @@ const GetYoutubeLiveVideos = () => {
                                 <div className="card-container_youtube text-white">
 
                                     <div className="image-container">
-                                        <Image src='/nnd_cd.png' alt='playlist' className="rounded opacity-50" width={200} height={200} />
+                                        <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} alt='playlist' className="rounded opacity-50" width={200} height={200} />
                                         <div className="overlay" onClick={() => handlePlay(item)} >
                                             <FaPlay className="play-button" />
                                         </div>

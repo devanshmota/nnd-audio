@@ -3,11 +3,18 @@ import React, { useState } from 'react'
 import nndLogo from '../../public/images/nnd_logo.png'
 import nndWeb from '../../public/images/nnd_web.png'
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import { MdHome, MdPrivacyTip } from "react-icons/md";
+import { PiDownloadSimpleBold } from "react-icons/pi";
+import { FaHeart } from 'react-icons/fa';
+
 
 const Sidebar = ({ open }) => {
-    const dispatch = useDispatch()
+
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
+
     return (
         <>
             {/* <!---Side Menu Start---> */}
@@ -25,41 +32,40 @@ const Sidebar = ({ open }) => {
                         </div>
                     </div> */}
                     <div className="ms_sidemenu_inner">
-                        <div className="ms_logo_inner">
-                            {
-                                open ?
-                                    (
-                                        <div className="ms_logo_open">
-                                            <Image width={100} height={100} src={nndWeb} alt="" className="img-fluid" />
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        <div className="ms_logo">
-                                            <Image width={0} height={0} src={nndLogo} alt="" className="img-fluid" />
-                                        </div>
-                                    )
-                            }
-                        </div>
+
                         <div className="ms_nav_wrapper">
                             <ul>
                                 <li >
                                     <Link href='/'>
 
                                         <span className="nav_icon">
-                                            <span className="icon icon_discover"></span>
+                                            <MdHome className='home_icon_sidebar' />
                                         </span>
                                         <span className="nav_text">
-                                            discover
+                                            Home
                                         </span>
-
                                     </Link>
                                 </li>
+
+                                {
+                                    token && <li >
+                                        <Link href='/recently-played-all'>
+
+                                            <span className="nav_icon">
+                                                <Image src='/Recent_Played.svg' alt='' width={25} height={25} />
+                                            </span>
+                                            <span className="nav_text">
+                                                Recently Played
+                                            </span>
+                                        </Link>
+                                    </li>
+                                }
+
+
                                 <li>
                                     <Link href='/about-us'>
                                         <span className="nav_icon">
-                                            <span className="icon icon_albums"></span>
-                                            {/* <BiCommentDetail className='about_us_icon' /> */}
+                                            <Image src='/About_us.svg' alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             about us
@@ -68,41 +74,46 @@ const Sidebar = ({ open }) => {
 
                                 </li>
 
-                            </ul>
-                            <ul className="nav_downloads">
-                                <li>
-                                    <Link href='/downloads'>
-                                        <span className="nav_icon">
-                                            <span className="icon icon_download"></span>
-                                        </span>
-                                        <span className="nav_text">
-                                            downloads
-                                        </span>
-                                    </Link>
-                                </li>
+                                {
+                                    token && <li>
+                                        <Link href='/downloads'>
+                                            <span className="nav_icon">
+                                                <PiDownloadSimpleBold className='icon_sidebar' />
+                                            </span>
+                                            <span className="nav_text">
+                                                downloads
+                                            </span>
+                                        </Link>
+                                    </li>
+                                }
+
+
                                 <li><a href="" title="Purchased">
                                     <span className="nav_icon">
-                                        <span className="icon icon_purchased"></span>
+                                        <MdPrivacyTip className='icon_sidebar' />
                                     </span>
                                     <span className="nav_text">
-                                        purchased
+                                        privacy policy
                                     </span>
                                 </a>
                                 </li>
-                                <li><a href="" title="Favourites">
-                                    <span className="nav_icon">
-                                        <span className="icon icon_favourite"></span>
-                                    </span>
-                                    <span className="nav_text">
-                                        favourites
-                                    </span>
-                                </a>
-                                </li>
+
+                                {
+                                    token && <li><a href="" title="Favourites">
+                                        <span className="nav_icon">
+                                            <FaHeart className='icon_sidebar' />
+                                        </span>
+                                        <span className="nav_text">
+                                            favourites
+                                        </span>
+                                    </a>
+                                    </li>
+                                }
                                 <li>
                                     <Link href='/youtube-live-videos'>
 
                                         <span className="nav_icon">
-                                            <span className="icon icon_history"></span>
+                                            <Image src='/Youtube_live_videos.svg' alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             {/* history */}
@@ -110,12 +121,10 @@ const Sidebar = ({ open }) => {
                                         </span>
                                     </Link>
                                 </li>
-                            </ul>
-                            <ul className="nav_playlist">
                                 <li>
                                     <Link href='/playlist'>
                                         <span className="nav_icon">
-                                            <span className="icon icon_fe_playlist"></span>
+                                            <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             featured playlist
@@ -125,7 +134,7 @@ const Sidebar = ({ open }) => {
                                 <li>
                                     <Link href='/youtube-playlist'>
                                         <span className="nav_icon">
-                                            <span className="icon icon_c_playlist"></span>
+                                            <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             {/* create playlist */}

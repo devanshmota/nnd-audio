@@ -1,8 +1,10 @@
 'use client'
 import Modal from 'react-bootstrap/Modal';
 import { IoMdCloseCircle } from 'react-icons/io';
+import { getDecryptedText } from '@/decryption/decryption';
 
 const PlayLiveVideoModal = ({ show, onHide, videoDetails, ...props }) => {
+    
   return (
       <Modal
           className='form_container'
@@ -26,7 +28,7 @@ const PlayLiveVideoModal = ({ show, onHide, videoDetails, ...props }) => {
                   <iframe
                       width="100%"
                       height="400px"
-                      src={`https://www.youtube.com/embed/${videoDetails?.videoid}`}
+                      src={`https://www.youtube.com/embed/${getDecryptedText(videoDetails?.videoid)}?`}
                       title={videoDetails?.title}
                       allowFullScreen
                   ></iframe>

@@ -10,6 +10,7 @@ import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
 import { ClipLoader } from 'react-spinners';
 import Nodatafound from './Nodatafound';
+import Image from 'next/image';
 
 const Lyricists = () => {
 
@@ -48,8 +49,10 @@ const Lyricists = () => {
         if (lyricistsRef.current && !isEnd) {
             lyricistsRef.current.swiper.slideNext();
         }
-
     };
+    if(lyricists.length === 0){
+        return null
+    }
 
     return (
         <div className="container d-flex flex-column">
@@ -71,7 +74,7 @@ const Lyricists = () => {
                     <>
                         <Swiper
                             ref={lyricistsRef}
-                            slidesPerView={5}
+                            slidesPerView={7}
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
@@ -98,16 +101,16 @@ const Lyricists = () => {
                                     slidesPerView: 1,
                                 },
                                 576: {
-                                    slidesPerView: 2,
-                                },
-                                768: {
                                     slidesPerView: 3,
                                 },
-                                992: {
+                                768: {
                                     slidesPerView: 4,
                                 },
+                                992: {
+                                    slidesPerView: 6,
+                                },
                                 1200: {
-                                    slidesPerView: 5,
+                                    slidesPerView: 7,
                                 },
                             }}
                             className='mySwiper w-100'
@@ -115,10 +118,10 @@ const Lyricists = () => {
 
                             {
                                 lyricists.map((item, index) => (
-                                    <SwiperSlide key={item.id} virtualIndex={index}>
-                                        <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center">
-                                            <img src={item.image} width={0} height={0} className="card-img-top artist_img" alt={item.eng_name} />
-                                            <h5 className="titles_homepage text-center m-0">{GetFirstWord(GetLanguage(language, item))}</h5>
+                                    <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
+                                        <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center mw-100">
+                                            <Image src={item.image} width={150} height={150} className="card-img-top artist_img" alt={item.eng_name} />
+                                            <h5 className="text-white text-center m-0">{GetFirstWord(GetLanguage(language, item))}</h5>
                                         </Link>
                                     </SwiperSlide>
                                 ))
@@ -126,10 +129,6 @@ const Lyricists = () => {
                         </Swiper>
                     </>
                 )
-            }
-
-            {
-                !isLoading && lyricists.length === 0 && <Nodatafound />
             }
         </div>
     )

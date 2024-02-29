@@ -53,7 +53,6 @@ const OneArtist = ({ artistid }) => {
                 (
                     <>
                         <div className="row">
-
                             <div className="col-lg-12">
                                 <div className="d-flex flex-column flex-lg-row align-items-center gap-5">
                                     <Image src={artistDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
@@ -91,15 +90,15 @@ const OneArtist = ({ artistid }) => {
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" />
                                                 <FaDownload className="icon_recent_plyd" />
-                                                {
-                                                    item.playlist.length > 0 ? (
-                                                        <FaHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                                                    )
-                                                        :
-                                                        (
-                                                            <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                                                    {
+                                                        item.playlist.length > 0 ? (
+                                                            <FaHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
                                                         )
-                                                }
+                                                            :
+                                                            (
+                                                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                                                            )
+                                                    }
                                             </div>
                                         </div>
                                     </div>

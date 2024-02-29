@@ -4,10 +4,14 @@ import { useEffect, useState } from 'react';
 import { getUtsavApi } from '@/redux/actions/Campaign';
 import { ClipLoader } from 'react-spinners';
 import Nodatafound from './Nodatafound';
+import GetFirstWord from './GetFirstWord';
+import GetLanguage from './GetLanguage';
+import { useSelector } from 'react-redux';
 
 
 const Utsav = () => {
 
+    const { language } = useSelector((state) => state.language)
     const [utsav, setUtsav] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
@@ -28,6 +32,10 @@ const Utsav = () => {
             }
         })
     }, [])
+
+    if (utsav.length === 0) {
+        return null
+    }
 
     return (
         <div className="container">
@@ -51,14 +59,17 @@ const Utsav = () => {
                         utsav.length > 0 && (
                             utsav.map((item, index) => (
                                 <Link href={`/utsav-all/${item.id}`} key={index} className="col-12 col-md-4">
-                                    <img src={item.image} className="utshv_img" alt={`utsav_img_${index}`} />
+                                    <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+                                        <img src={item.image} className="utshv_img" alt={`utsav_img_${index}`} />
+                                        <h5 className='m-0 text-center'>
+                                            {GetFirstWord(GetLanguage(language, item))}
+                                        </h5>
+                                    </div>
                                 </Link>
                             ))
                         )
                     }
-                    {
-                        !isLoading && utsav.length === 0 && <Nodatafound />
-                    }
+
                 </div>
             </div>
         </div>

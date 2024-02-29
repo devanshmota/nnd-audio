@@ -25,7 +25,7 @@ const DELETE_MUSIC_PLAYLIST = 'playlist/delete'
 const GET_SINGLE_ARTIST = 'get_music'
 const GET_ALBUM = 'get_album'
 const GET_NOTIFICATION = 'get_notification'
-// const POST_FCM_ID = 'add_guest_fcm_id'
+const GET_ALBUM_WITH_MUSIC = 'get_album_with_music'
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -38,6 +38,17 @@ export const getCountries = (offset, sort, limit, order, search) => {
             limit: limit,
             order: order,
             search: search,
+        },
+        authorizationHeader: false,
+
+    }
+}
+export const getAlbumWithMusic = (category_id) => {
+    return {
+        url: `${GET_ALBUM_WITH_MUSIC}`,
+        method: "GET",
+        params: {
+            category_id: category_id,
         },
         authorizationHeader: false,
 
@@ -170,7 +181,7 @@ export const updatePlaylist = (title, id) => {
         authorizationHeader: true,
     }
 }
-export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, is_guest) => {
+export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest) => {
     return {
         url: `${GET_SINGLE_ARTIST}`,
         method: "GET",
@@ -179,17 +190,21 @@ export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id,
             lyricist_id: lyricist_id,
             utsav_id: utsav_id,
             album_id: album_id,
-            is_guest: is_guest
+            category_id: category_id,
+            is_guest: is_guest,
+
         },
         authorizationHeader: true,
     }
 }
-export const getAlbum = (category_id) => {
+export const getAlbum = (category_id, offset, limit) => {
     return {
         url: `${GET_ALBUM}`,
         method: "GET",
         params: {
-            category_id: category_id
+            category_id: category_id,
+            offset: offset,
+            limit: limit
         },
         authorizationHeader: false,
     }

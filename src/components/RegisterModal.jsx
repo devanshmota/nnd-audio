@@ -170,138 +170,155 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                 centered
             >
                 <Modal.Body >
-                    <form className="login_form" onSubmit={handleSubmit}>
+                    <form className="login_form register_form" onSubmit={handleSubmit}>
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
                         <div className="header">
                             <h2>Register</h2>
                             <p>Please enter your details to register</p>
                         </div>
+
                         <div className="input_container">
+                            <div className="row gy-4">
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <FaUser className="all_icons" />
+                                        <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <FaUser className="all_icons" />
+                                        <input
+                                            type="text"
+                                            name='lastName'
+                                            value={formInfo.lastName}
+                                            onChange={handleChange}
+                                            placeholder="Last Name"
+                                            required />
+                                    </div>
+                                </div>
 
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <FaTransgenderAlt className="all_icons" />
+                                        <select
+                                            name="gender"
+                                            id="gender"
+                                            value={formInfo.gender}
+                                            onChange={handleChange}
+                                            required
+                                        >
+                                            <option value="" disabled hidden>Select Gender</option>
+                                            <option value="male" name="gender">Male</option>
+                                            <option value="female" name="gender">Female</option>
+                                        </select>
 
-                            <div className="input_with_icon">
-                                <FaUser className="all_icons" />
-                                <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
-                            </div>
-                            <div className="input_with_icon">
-                                <FaUser className="all_icons" />
-                                <input
-                                    type="text"
-                                    name='lastName'
-                                    value={formInfo.lastName}
-                                    onChange={handleChange}
-                                    placeholder="Last Name"
-                                    required />
-                            </div>
-                            <div className="input_with_icon">
-                                <FaTransgenderAlt className="all_icons" />
-                                <select
-                                    name="gender"
-                                    id="gender"
-                                    value={formInfo.gender}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="" disabled hidden>Select Gender</option>
-                                    <option value="male" name="gender">Male</option>
-                                    <option value="female" name="gender">Female</option>
-                                </select>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <MdOutlineEmail className="all_icons" />
+                                        <input type="email" name='email'
+                                            value={formInfo.email}
+                                            onChange={handleChange} placeholder="Email" required />
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
 
-                            </div>
-                            <div className="input_with_icon">
-                                <MdOutlineEmail className="all_icons" />
-                                <input type="email" name='email'
-                                    value={formInfo.email}
-                                    onChange={handleChange} placeholder="Email" required />
-                            </div>
+                                        <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
+                                            <option value="" disabled hidden>Country</option>
 
+                                            {
+                                                countries.map((country) => (
+                                                    <option key={country.id} value={country.name.toLowerCase()} >{country.name}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        <FaFlag className="all_icons" />
+                                    </div>
+                                </div>
 
-                            <div className="input_with_icon">
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <select name="temple" id="temple" value={formInfo.temple}
+                                            onChange={handleChange} disabled={!formInfo.country} required >
+                                            <option value="" disabled hidden>Temple</option>
+                                            {
+                                                temples.length > 0 ? (
+                                                    <>
 
-                                <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
-                                    <option value="" disabled hidden>Country</option>
+                                                        {temples.map((temple) => (
+                                                            <option key={temple.id} value={temple.name.toLowerCase()}>{temple.name}</option>
+                                                        ))}
+                                                    </>
+                                                ) : (
+                                                    <option value="nodata">No data found</option>
+                                                )
+                                            }
+                                        </select>
+                                        <MdTempleBuddhist className="all_icons" />
+                                    </div>
+                                </div>
 
-                                    {
-                                        countries.map((country) => (
-                                            <option key={country.id} value={country.name.toLowerCase()} >{country.name}</option>
-                                        ))
-                                    }
-                                </select>
-                                <FaFlag className="all_icons" />
-                            </div>
-                            <div className="input_with_icon">
-                                <select name="temple" id="temple" value={formInfo.temple}
-                                    onChange={handleChange} disabled={!formInfo.country} required >
-                                    <option value="" disabled hidden>Temple</option>
-                                    {
-                                        temples.length > 0 ? (
-                                            <>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <MdPhone className="all_icons" />
+                                        <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber'
+                                            value={formInfo.phoneNumber}
+                                            onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <RiLockPasswordLine className="all_icons" />
+                                        <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" name='password'
+                                            value={formInfo.password}
+                                            onChange={handleChange} required />
 
-                                                {temples.map((temple) => (
-                                                    <option key={temple.id} value={temple.name.toLowerCase()}>{temple.name}</option>
-                                                ))}
-                                            </>
+                                        {passwordVisible ? (
+                                            <FaRegEye
+                                                className="eye_icon"
+                                                onClick={togglePasswordVisibility}
+                                            />
                                         ) : (
-                                            <option value="nodata">No data found</option>
-                                        )
-                                    }
-                                </select>
-                                <MdTempleBuddhist className="all_icons" />
+                                            <FaRegEyeSlash
+                                                className="eye_icon"
+                                                onClick={togglePasswordVisibility}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="input_with_icon">
+                                        <RiLockPasswordLine className="all_icons" />
+                                        <input type={repeatPasswordVisible ? 'text' : 'password'} placeholder="Repeat Password" name='repeatPassword'
+                                            value={formInfo.repeatPassword}
+                                            onChange={handleChange} required />
+                                        {repeatPasswordVisible ? (
+                                            <FaRegEye
+                                                className="eye_icon"
+                                                onClick={toggleRepeatPasswordVisibility}
+                                            />
+                                        ) : (
+                                            <FaRegEyeSlash
+                                                className="eye_icon"
+                                                onClick={toggleRepeatPasswordVisibility}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-
-                            <div className="input_with_icon">
-                                <MdPhone className="all_icons" />
-                                <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber'
-                                    value={formInfo.phoneNumber}
-                                    onChange={handleChange} required />
-                            </div>
-
-                            <div className="input_with_icon">
-                                <RiLockPasswordLine className="all_icons" />
-                                <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" name='password'
-                                    value={formInfo.password}
-                                    onChange={handleChange} required />
-
-                                {passwordVisible ? (
-                                    <FaRegEye
-                                        className="eye_icon"
-                                        onClick={togglePasswordVisibility}
-                                    />
-                                ) : (
-                                    <FaRegEyeSlash
-                                        className="eye_icon"
-                                        onClick={togglePasswordVisibility}
-                                    />
-                                )}
-                            </div>
-                            <div className="input_with_icon">
-                                <RiLockPasswordLine className="all_icons" />
-                                <input type={repeatPasswordVisible ? 'text' : 'password'} placeholder="Repeat Password" name='repeatPassword'
-                                    value={formInfo.repeatPassword}
-                                    onChange={handleChange} required />
-                                {repeatPasswordVisible ? (
-                                    <FaRegEye
-                                        className="eye_icon"
-                                        onClick={toggleRepeatPasswordVisibility}
-                                    />
-                                ) : (
-                                    <FaRegEyeSlash
-                                        className="eye_icon"
-                                        onClick={toggleRepeatPasswordVisibility}
-                                    />
-                                )}
-                            </div>
-
                         </div>
                         <div className="btn_container">
-                            <button type='submit'>Register</button>
+                            <button className='rgstr_btn' type='submit'>Register</button>
                             <p>Already have an account? <span onClick={handleLoginClick}>Login</span></p>
                         </div>
                     </form>
 
                 </Modal.Body>
             </Modal>
-        
+
         </>
     )
 }

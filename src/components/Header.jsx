@@ -66,8 +66,6 @@ const Header = ({ open, handleDrawerOpen }) => {
       <div className="ms_header">
         {/* <Image src={nnd_logo} alt="nnd_logo" className="nnd__vertical_logo" width={80} height={20} /> */}
         <div className="ms_top_right">
-
-
           <div className="ms_top_btn">
             <div className="drp_large">
 
@@ -79,8 +77,7 @@ const Header = ({ open, handleDrawerOpen }) => {
               <DropdownButton id="dropdown-basic-button" className="ms_top_btn"
                 title={
                   <>
-                    <div className="d-flex align-items-center gap-1">
-                      <LanguageIcon className="text-white" />
+                    <div className="d-flex align-items-center gap-1"> 
                       {language}
                       <ArrowDropDownIcon />
                     </div>
@@ -109,7 +106,10 @@ const Header = ({ open, handleDrawerOpen }) => {
             <div className="drp_small">
 
               <div className="d-flex align-items-center gap-2">
-                <NotificationBell />
+              {
+                token && <NotificationBell />
+              }
+                
                 <IconButton
                   aria-controls="menu"
                   aria-haspopup="true"

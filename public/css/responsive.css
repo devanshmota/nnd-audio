@@ -166,9 +166,9 @@
 
 
 @media (max-width: 575px) {
-    .menuIcon {
+    /* .menuIcon {
         display: none !important;
-    }
+    } */
 
     .home_icon {
         display: block;
@@ -181,9 +181,9 @@
 }
 
 @media (min-width: 575px) {
-    .menuIcon {
+    /* .menuIcon {
         display: block;
-    }
+    } */
 
     .home_icon {
         display: none;
@@ -247,10 +247,27 @@
     .drp_large {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }
 
     .drp_small {
         display: none;
+    }
+}
+
+@media (min-width: 600px){
+    .nnd_web{
+        display: block;
+    }
+    .nnd_logo{
+        display: none;
+    }
+}
+@media (max-width: 600px){
+    .nnd_web{
+        display: none;
+    }
+    .nnd_logo{
+        display: block;
     }
 }

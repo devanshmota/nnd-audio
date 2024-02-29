@@ -4,6 +4,7 @@ import { Badge } from '@mui/material';
 import NotificationCanvas from './NotificationCanvas';
 import { useEffect, useState } from 'react';
 import { getNotificationApi } from '@/redux/actions/Campaign';
+import Image from 'next/image';
 
 
 const NotificationBell = () => {
@@ -37,9 +38,7 @@ const NotificationBell = () => {
 
     return (
         <>
-            <Badge badgeContent={notifications.length} color="primary" className='ntfc_badge' onClick={handleOpen} >
-                <NotificationsIcon />
-            </Badge>
+            <Image src='/Notification.svg' alt='notifications' width={40} height={40} onClick={handleOpen} className='ntfc_icon' />
             <NotificationCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} notifications={notifications} />
         </>
     )
