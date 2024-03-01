@@ -21,6 +21,7 @@ import dynamic from 'next/dynamic';
 import GlobalSearch from './Search';
 import { Toaster } from 'react-hot-toast';
 import Image from 'next/image';
+import MusicPlayer from './Player';
 
 
 const drawerWidth = 240;
@@ -167,7 +168,7 @@ export default function PersistentDrawerLeft({ children }) {
                         <img src='/images/nnd_logo.png' alt='nnd_logo' className='nnd_logo' />
                     </div>
 
-                    <GlobalSearch />
+                    
                     <Header />
                 </Toolbar>
             </AppBar>

@@ -2175,12 +2175,12 @@ h1.footer_title:after {
 
 /*====Player Css Start====*/
 .ms_player_wrapper {
-	background-image: url(../images/player_bg.jpg);
-	background-size: cover;
+	background-color: var(--primary-color);
+	padding: 10px 20px;
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
-	z-index: 10000;
+	z-index: 1200;
 	box-shadow: 0px 0px 24px 6px rgba(4, 4, 4, 0.2);
 	transition: all 0.4s ease-in-out;
 	-webkit-transition: all 0.4s ease-in-out;
@@ -2235,7 +2235,7 @@ h1.footer_title:after {
 	border-radius: 25px 25px 0px 0px;
 }
 
-.ms_player_wrapper:after {
+/* .ms_player_wrapper:after {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -2245,7 +2245,7 @@ h1.footer_title:after {
 	width: 100%;
 	height: 100%;
 	z-index: -1;
-}
+} */
 
 .player_left {
 	width: auto;
@@ -8835,6 +8835,7 @@ select,
 	padding: 15px 15px;
 	border: 2px solid #404451;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .nodata-container{
@@ -9002,3 +9003,21 @@ input.ant-input.css-dev-only-do-not-override-1b0bdye.ant-input-outlined {
   .pagination__link--disabled a {
 	cursor: not-allowed;
   }
+
+  .margin-bottom{
+	margin-bottom: 50px;
+  }
+  .music_player_icon{
+	font-size: 25px;
+	cursor: pointer;
+  }
+  .liked_rcnt{
+	color: var(--secondary-color);
+  }
+  input[type="range"] {
+    accent-color: var(--secondary-color);
+}
+
+
+
+  

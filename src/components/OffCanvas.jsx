@@ -87,7 +87,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                     if (res.error === false) {
                         toast.success('Deleted Successfully');
                         onHide()
-                        setIsLiked(!isLiked)
+                        setIsLiked(false)
                     }
                 },
                 onError: (e) => {
@@ -107,7 +107,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 onSuccess: (res) => {
                     if (res.error === false) {
                         toast.success('Saved Successfully');
-                        setIsLiked(!isLiked)
+                        setIsLiked(true)
                         onHide()
                     }
                 },

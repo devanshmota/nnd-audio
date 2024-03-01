@@ -97,7 +97,7 @@ const GetAlbumMusic = ({ albumid }) => {
                                                 <FaDownload className="icon_recent_plyd" />
                                                 {
                                                     item.playlist.length > 0 ? (
-                                                        <FaHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                                                        <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
                                                     )
                                                         :
                                                         (

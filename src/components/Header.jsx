@@ -14,6 +14,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BasicMenu from "./BasicMenu";
 import NotificationBell from "./NotificationBell";
+import GlobalSearch from "./Search";
 
 
 const Header = ({ open, handleDrawerOpen }) => {
@@ -69,15 +70,18 @@ const Header = ({ open, handleDrawerOpen }) => {
           <div className="ms_top_btn">
             <div className="drp_large">
 
+            <GlobalSearch />
+
+
               {
-                token &&  <NotificationBell />
+                token && <NotificationBell />
               }
-              
+
 
               <DropdownButton id="dropdown-basic-button" className="ms_top_btn"
                 title={
                   <>
-                    <div className="d-flex align-items-center gap-1"> 
+                    <div className="d-flex align-items-center gap-1">
                       {language}
                       <ArrowDropDownIcon />
                     </div>
@@ -106,10 +110,10 @@ const Header = ({ open, handleDrawerOpen }) => {
             <div className="drp_small">
 
               <div className="d-flex align-items-center gap-2">
-              {
-                token && <NotificationBell />
-              }
-                
+                {
+                  token && <NotificationBell />
+                }
+
                 <IconButton
                   aria-controls="menu"
                   aria-haspopup="true"
