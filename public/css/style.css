@@ -8750,7 +8750,7 @@ select,
 
 .css-p55zm9-MuiButtonBase-root-MuiIconButton-root,
 .css-q6oun {
-	margin-right: 0;
+	margin-right: 0 !important;
 }
 
 .form_wrapper {
@@ -8914,8 +8914,8 @@ input.ant-input.css-dev-only-do-not-override-1b0bdye.ant-input-outlined {
 
 .css-189zzm0-MuiButtonBase-root-MuiIconButton-root,
 .css-11mpixb {
-	display: block;
-	margin-right: 0;
+	display: block !important;
+	margin-right: 0 !important;
 }
 
 .css-zja613-MuiPaper-root-MuiAppBar-root,
