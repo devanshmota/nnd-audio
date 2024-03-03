@@ -8918,7 +8918,7 @@ input.ant-input.css-dev-only-do-not-override-1b0bdye.ant-input-outlined {
 
 .css-zja613-MuiPaper-root-MuiAppBar-root,
 .css-1u9gjrx {
-	width: 100%;
+	width: 100% !important;
 }
 
 .icon_sidebar {

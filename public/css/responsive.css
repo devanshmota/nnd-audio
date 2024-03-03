@@ -1,23 +1,14 @@
 @media screen and (min-width: 576px) and (max-width: 991px) {
-    /* .ms_top_btn {
-        display: none;
-    } */
-
+  
     ul.btn_ul {
         margin-top: 40px;
         padding: 9px 15px;
     }
 
-    /* button.header_login_btn {
-        padding: 9px 25px;
-    } */
 }
 
 @media (min-width: 991px) {
-    /* .nnd__vertical_logo {
-        display: none;
-    } */
-
+   
     .btn_ul {
         display: none;
     }
@@ -78,10 +69,6 @@
         margin-top: 40px;
         padding: 9px 15px;
     }
-
-    /* button.header_login_btn {
-        padding: 9px 25px;
-    } */
 }
 
 @media screen and (min-width: 576px) and (max-width: 991px) {
@@ -96,18 +83,6 @@
     }
 }
 
-/* @media screen and (min-width: 320px) and (max-width: 991px) {
-
-    .home_container {
-        margin-top: 3rem;
-    }
-
-    .wrapper {
-        margin-left: 0;
-        margin-top: 3rem;
-    }
-
-} */
 
 @media (max-width: 992px) {
     .utshv_img {
@@ -119,11 +94,6 @@
     .ms_nav_close02 {
         right: -25px !important;
     }
-
-    /* button.header_login_btn {
-        font-size: 12px;
-        padding: 9px 25px;
-    } */
 
     .login_form {
         width: 22rem;
@@ -152,11 +122,6 @@
     }
 }
 
-/* @media (max-width: 600px) {
-    .css-b62sy7-MuiDrawer-docked, .css-qw6dy7 .MuiDrawer-paper {
-        width: 53px !important;
-    }
-} */
 
 @media (min-width: 600px){
     .css-qw6dy7,.css-b62sy7-MuiDrawer-docked{
@@ -166,10 +131,7 @@
 
 
 @media (max-width: 575px) {
-    /* .menuIcon {
-        display: none !important;
-    } */
-
+   
     .home_icon {
         display: block;
     }
@@ -181,10 +143,7 @@
 }
 
 @media (min-width: 575px) {
-    /* .menuIcon {
-        display: block;
-    } */
-
+  
     .home_icon {
         display: none;
     }
