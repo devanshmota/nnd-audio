@@ -8893,7 +8893,8 @@ select,
 	color: grey;
 }
 
-input.ant-input.css-dev-only-do-not-override-1b0bdye.ant-input-outlined {
+input.ant-input.css-dev-only-do-not-override-1b0bdye.ant-input-outlined,
+input.ant-input.css-1b0bdye.ant-input-outlined {
 	padding-left: 40px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
