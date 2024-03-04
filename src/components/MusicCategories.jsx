@@ -49,7 +49,7 @@ const Music_categories = () => {
         }
     };
 
-    if(musicCategory.length === 0){
+    if (musicCategory.length === 0) {
         return null
     }
 
@@ -118,7 +118,7 @@ const Music_categories = () => {
                                 musicCategory.map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                         <Link href={`/music-categories-all/${item.id}`} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className="kirtan_img" alt={item.eng_name} width={150} height={150} />
+                                            <Image src={item.image} className='rounded mw-100 object-fit-cover' alt={item.eng_name} width={159.429} height={159.429} />
                                             <h5 className='m-0 text-center text-white'>
                                                 {GetLanguage(language, item)}
                                             </h5>

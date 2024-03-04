@@ -67,7 +67,7 @@ const RecentlyPlayed = () => {
         <Link href='recently-played-all' className='view_all'>View all</Link>
       </div>
       <div className="container">
-        <div className="row margin-bottom">
+        <div className="row gy-4 utsav_gap margin-bottom">
           {isLoading &&
             <div className='d-flex align-items-center justify-content-center py-2'>
               <ClipLoader color="#ffffff" />

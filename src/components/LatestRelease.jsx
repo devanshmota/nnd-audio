@@ -125,7 +125,7 @@ const LatestRelease = () => {
 
                                         <SwiperSlide key={item.id} virtualIndex={index}>
                                             <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                                <Image src={item.album.image} className="release_img" alt={item.eng_title} width={300} height={200} />
+                                                <Image src={item.album.image} className="rounded mw-100 object-fit-cover" alt={item.eng_title} width={301.5} height={200} />
 
                                                 <h5 className='m-0 ellipsis-container text-white'>
                                                     {GetLanguage(language, item)}

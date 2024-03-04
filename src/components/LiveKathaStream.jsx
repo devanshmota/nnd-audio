@@ -7,6 +7,7 @@ import { getDecryptedText } from "@/decryption/decryption";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import CategoryHeader from "./CategoryHeader";
+import Image from "next/image";
 
 
 const LiveKathaStream = () => {
@@ -121,7 +122,9 @@ const LiveKathaStream = () => {
                         {liveKathaStream.length > 0 && liveKathaStream.map((item, index) => (
                             <SwiperSlide key={item.id} virtualIndex={index}>
                                 <div className="image-container">
-                                    <img src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} className="utshv_img opacity-50" alt={`utsav_img`} />
+
+                                    <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} alt={`utsav_img`} className="rounded opacity-50 mw-100 object-fit-cover" width={412} height={206} />
+
                                     <div className="overlay" onClick={() => handlePlay(item)}>
                                         <FaPlay className="play-button" />
                                     </div>

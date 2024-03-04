@@ -37,6 +37,9 @@ Author: Kamleshyadav
 30.Blog Single Page Css / .ms_blog_single_wrapper
 31.Sidebar Css / .ms_sidebar
 -------------------------------------------------------------------*/
+
+
+
 body {
 	margin: 0;
 	font-family: 'Josefin Sans', sans-serif;
@@ -8087,6 +8090,8 @@ h2.widget-title:after {
 	padding: 0 !important;
 	overflow: hidden;
 	margin-left: 0 !important;
+	background-image: url('/public/kirtan.jpeg');
+
 }
 
 /* .container {
@@ -8135,11 +8140,6 @@ h2.widget-title:after {
 	overflow: hidden;
 } */
 
-.kirtan_img {
-	object-fit: cover;
-	border-radius: 10px;
-	max-width: 100%;
-}
 
 .ellipsis-container {
 	overflow: hidden !important;
@@ -8168,7 +8168,7 @@ h2.widget-title:after {
 }
 
 .artist_img {
-	border-radius: 100% !important;
+	border-radius: 50% !important;
 	object-fit: cover;
 	border: 4px solid #8b0000;
 	width: 100%;
@@ -8552,9 +8552,9 @@ select,
 	min-height: 64px;
 }
 
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+/* .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
 	left: 4px;
-}
+} */
 
 #utsav_images {
 	gap: 20px 0;
@@ -8705,12 +8705,15 @@ select,
 }
 
 .chckbox_setter {
-	top: 0;
-	right: 5px;
+	top: 7px;
+	right: 7px;
 }
 
 .chckbox_setter input {
 	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	accent-color: #d8690b;
 }
 
 .btn-close {
@@ -9035,5 +9038,15 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 input[type="range"] {
-	accent-color: var(--secondary-color);
+	accent-color: #d8690b;
+}
+
+.img_cont {
+	position: relative;
+	height: 200px;
+	width: 100%;
+}
+
+.utsav_gap {
+	--bs-gutter-x: 1.875rem !important;
 }

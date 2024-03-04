@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { getUtsavApi } from '@/redux/actions/Campaign';
 import { ClipLoader } from 'react-spinners';
-import Nodatafound from './Nodatafound';
 import GetFirstWord from './GetFirstWord';
 import GetLanguage from './GetLanguage';
 import { useSelector } from 'react-redux';
@@ -47,7 +46,7 @@ const Utsav = () => {
                         <Link href="/utsav-all" className='view_all'>View all</Link>
                     </div>
                 </div>
-                <div className="row" id='utsav_images' >
+                <div className="row utsav_gap" id='utsav_images' >
 
                     {isLoading &&
                         <div className='d-flex align-items-center justify-content-center py-2'>

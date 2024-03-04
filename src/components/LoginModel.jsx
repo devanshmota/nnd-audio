@@ -21,8 +21,6 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
         password: ''
     })
 
-    console.log(fcmToken)
-
     const handleChange = (e) => {
         e.preventDefault()
         let { name, value } = e.target
@@ -48,7 +46,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                                         fcm_id: fcmToken,
                                         onSuccess: (res) => {
                                             console.log(res)
-                                           
+
                                         },
                                         onError: (error) => {
                                             toast.error(error.message)

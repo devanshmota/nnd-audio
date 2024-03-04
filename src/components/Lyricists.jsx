@@ -50,7 +50,7 @@ const Lyricists = () => {
             lyricistsRef.current.swiper.slideNext();
         }
     };
-    if(lyricists.length === 0){
+    if (lyricists.length === 0) {
         return null
     }
 
@@ -78,10 +78,10 @@ const Lyricists = () => {
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
-                            autoplay={{
-                                delay: 2500,
-                                disableOnInteraction: false,
-                            }}
+                            // autoplay={{
+                            //     delay: 2500,
+                            //     disableOnInteraction: false,
+                            // }}
                             modules={[Autoplay, Pagination]}
                             pagination={{
                                 clickable: true
