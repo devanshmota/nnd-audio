@@ -78,10 +78,10 @@ const Lyricists = () => {
                             loop={false}
                             spaceBetween={30}
                             freeMode={true}
-                            // autoplay={{
-                            //     delay: 2500,
-                            //     disableOnInteraction: false,
-                            // }}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
                             modules={[Autoplay, Pagination]}
                             pagination={{
                                 clickable: true

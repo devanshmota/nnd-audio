@@ -1,8 +1,7 @@
 'use client'
-
 import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Nodataviewall from "./Nodataviewall"
 import OffCanvas from "./OffCanvas"
 import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
@@ -10,9 +9,12 @@ import GetCatLanguage from "./GetCatLanguage"
 import GetLanguage from "./GetLanguage"
 import Image from "next/image"
 import { ClipLoader } from "react-spinners"
+import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
+import toast from "react-hot-toast"
 
 const GetAlbumMusic = ({ albumid }) => {
 
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const [singleAlbumData, setSingleAlbumData] = useState([])
     const [albumDetails, setAlbumDetails] = useState(null)
@@ -22,8 +24,6 @@ const GetAlbumMusic = ({ albumid }) => {
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
 
-    
-
     useEffect(() => {
         fetchSigleArtistDataApi({
             album_id: albumid.id,
@@ -31,7 +31,7 @@ const GetAlbumMusic = ({ albumid }) => {
             onSuccess: (res) => {
                 setSingleAlbumData(res.data)
                 setAlbumDetails(res.data[0].album)
-                
+
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -46,7 +46,18 @@ const GetAlbumMusic = ({ albumid }) => {
         setIsOffCanvasOpen(true)
     }
 
-    
+    const handlePlayMusic = (musicId) => {
+        const index = singleAlbumData.findIndex((item) => item.id === musicId);
+        dispatch(setMusicPlaylist(singleAlbumData))
+        dispatch(setCurrentTrack(index))
+        dispatch(setIsPlaying(true))
+    };
+
+    const handlePlayAll = () => {
+        dispatch(setCurrentTrack(0))
+        dispatch(setIsPlaying(true))
+        toast.success('Playing All')
+    }
 
     return (
         <div className="container text-white mt-4">
@@ -70,7 +81,7 @@ const GetAlbumMusic = ({ albumid }) => {
                                         </h2>
                                         <div className="d-flex align-items-center gap-3">
                                             <button className="dwnl_ply_btn">Download all</button>
-                                            <button className="dwnl_ply_btn">Play all</button>
+                                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>Play all</button>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +92,7 @@ const GetAlbumMusic = ({ albumid }) => {
                                 singleAlbumData.map((item, index) => (
                                     <div key={index} className="col-lg-6 mt-4">
                                         <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                            <div className="d-flex align-items-center gap-3">
+                                            <div className="d-flex align-items-center gap-3 cursor-pointer" onClick={() => handlePlayMusic(item.id)}>
                                                 <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
                                                 <div className="d-flex flex-column gap-2">
                                                     <h5 className="m-0 text-break title_rcnt_plyd">
@@ -114,7 +125,7 @@ const GetAlbumMusic = ({ albumid }) => {
                 )
             }
 
-            
+
 
             {
                 !isLoading && singleAlbumData.length === 0 && <Nodataviewall />

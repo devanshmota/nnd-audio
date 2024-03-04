@@ -2,16 +2,19 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import GetCatLanguage from "./GetCatLanguage"
 import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign"
 import { ClipLoader } from "react-spinners"
 import OffCanvas from "./OffCanvas"
 import Nodataviewall from "./Nodataviewall"
+import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
+import toast from "react-hot-toast"
 
 const OneArtist = ({ artistid }) => {
 
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const [singleArtistData, setSingleArtistData] = useState([])
     const [artistDetails, setArtistDetails] = useState(null)
@@ -41,6 +44,19 @@ const OneArtist = ({ artistid }) => {
         setIsOffCanvasOpen(true)
     }
 
+    const handlePlayMusic = (musicId) => {
+        const index = singleArtistData.findIndex((item) => item.id === musicId);
+        dispatch(setMusicPlaylist(singleArtistData))
+        dispatch(setCurrentTrack(index))
+        dispatch(setIsPlaying(true))
+    };
+
+    const handlePlayAll = () => {
+        dispatch(setCurrentTrack(0))
+        dispatch(setIsPlaying(true))
+        toast.success('Playing All')
+    }
+
     return (
         <div className="container text-white mt-4">
             {isLoading &&
@@ -62,7 +78,7 @@ const OneArtist = ({ artistid }) => {
                                         </h2>
                                         <div className="d-flex align-items-center gap-3">
                                             <button className="dwnl_ply_btn">Download all</button>
-                                            <button className="dwnl_ply_btn">Play all</button>
+                                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>Play all</button>
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +90,7 @@ const OneArtist = ({ artistid }) => {
 
                                     <div key={index} className="col-lg-6 mt-4">
                                         <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                            <div className="d-flex align-items-center gap-3">
+                                            <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                                                 <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
                                                 <div className="d-flex flex-column gap-2">
                                                     <h5 className="m-0 text-break title_rcnt_plyd">
@@ -90,15 +106,15 @@ const OneArtist = ({ artistid }) => {
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" />
                                                 <FaDownload className="icon_recent_plyd" />
-                                                    {
-                                                        item.playlist.length > 0 ? (
-                                                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                                {
+                                                    item.playlist.length > 0 ? (
+                                                        <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                                    )
+                                                        :
+                                                        (
+                                                            <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
                                                         )
-                                                            :
-                                                            (
-                                                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                                                            )
-                                                    }
+                                                }
                                             </div>
                                         </div>
                                     </div>

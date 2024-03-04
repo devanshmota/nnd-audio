@@ -5,14 +5,17 @@ import OffCanvas from "./OffCanvas";
 import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa";
 import Image from "next/image";
 import { ClipLoader } from "react-spinners";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
 import Nodataviewall from "./Nodataviewall";
+import { setCurrentTrack, setIsPlaying, setMusicPlaylist} from "@/redux/reducer/MusicPlaylistSlice";
+import toast from "react-hot-toast";
 
 const OneLyricist = ({ lyricistid }) => {
 
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const [singleLyricistData, setSingleLyricistData] = useState([])
     const [lyricistDetails, setLyricistDetails] = useState(null)
@@ -41,7 +44,18 @@ const OneLyricist = ({ lyricistid }) => {
         setSelectedMusicId(musicId);
         setIsOffCanvasOpen(true)
     }
+    const handlePlayMusic = (musicId) => {
+        const index = singleLyricistData.findIndex((item) => item.id === musicId);
+        dispatch(setMusicPlaylist(singleLyricistData))
+        dispatch(setCurrentTrack(index))
+        dispatch(setIsPlaying(true))
+      };
 
+      const handlePlayAll = () => {
+        dispatch(setCurrentTrack(0))
+        dispatch(setIsPlaying(true))
+        toast.success('Playing All')
+      }
 
     return (
         <div className="container text-white mt-4">
@@ -65,7 +79,7 @@ const OneLyricist = ({ lyricistid }) => {
                                             </h2>
                                             <div className="d-flex align-items-center gap-3">
                                                 <button className="dwnl_ply_btn">Download all</button>
-                                                <button className="dwnl_ply_btn">Play all</button>
+                                                <button className="dwnl_ply_btn" onClick={handlePlayAll} >Play all</button>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +91,7 @@ const OneLyricist = ({ lyricistid }) => {
 
                                         <div key={index} className="col-lg-6 mt-4">
                                             <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                                <div className="d-flex align-items-center gap-3">
+                                                <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                                                     <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
                                                     <div className="d-flex flex-column gap-2">
                                                         <h5 className="m-0 text-break title_rcnt_plyd">

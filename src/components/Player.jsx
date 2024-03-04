@@ -7,36 +7,54 @@ import { MdSkipPrevious } from "react-icons/md";
 import { MdSkipNext } from "react-icons/md";
 import { IoIosPause, IoIosPlay } from "react-icons/io";
 import { BiSolidVolumeFull, BiSolidVolumeMute } from "react-icons/bi";
-import { MdPlaylistAdd } from "react-icons/md";
 import { PiDownloadSimpleBold } from "react-icons/pi";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import OffCanvas from "./OffCanvas";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentTrack, setIsPlaying, setIsLiked, resetState } from "@/redux/reducer/MusicPlaylistSlice";
 
-const Player = ({ playlist, isPlaying, currentTrack, setCurrentTrack, setIsPlaying }) => {
+const Player = () => {
+
+    const dispatch = useDispatch()
+    const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist);
     const [volume, setVolume] = useState(0.5);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const playerRef = useRef(null);
     const animationRef = useRef();
     const [isMuted, setIsMuted] = useState(false);
-
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
-    const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
 
+
+    const handleSeekUpdate = () => {
+        setCurrentTime(playerRef?.current?.seek());
+        animationRef.current = requestAnimationFrame(handleSeekUpdate);
+    };
+
+    useEffect(() => {
+        animationRef.current = requestAnimationFrame(handleSeekUpdate);
+        return () => cancelAnimationFrame(animationRef.current);
+    }, []);
+
+
     const playPauseToggle = () => {
-        setIsPlaying(!isPlaying);
+        dispatch(setIsPlaying(!isPlaying))
     };
 
     const playNext = () => {
-        setCurrentTrack((prevTrack) => (prevTrack + 1) % playlist?.length);
-        setIsPlaying(true);
+        if (MusicPlaylist && MusicPlaylist.length > 0) {
+            dispatch(setCurrentTrack((currentTrack + 1) % MusicPlaylist.length));
+            dispatch(setIsPlaying(true));
+        }
     };
 
     const playPrev = () => {
-        setCurrentTrack((prevTrack) => (prevTrack - 1 + playlist?.length) % playlist?.length);
-        setIsPlaying(true);
+        if (MusicPlaylist && MusicPlaylist.length > 0) {
+            dispatch(setCurrentTrack((currentTrack - 1 + MusicPlaylist.length) % MusicPlaylist.length));
+            dispatch(setIsPlaying(true));
+        }
     };
 
     const handleVolumeChange = (value) => {
@@ -64,16 +82,6 @@ const Player = ({ playlist, isPlaying, currentTrack, setCurrentTrack, setIsPlayi
         setDuration(playerRef.current.duration());
     };
 
-    const handleSeekUpdate = () => {
-        setCurrentTime(playerRef.current.seek());
-        animationRef.current = requestAnimationFrame(handleSeekUpdate);
-    };
-
-    useEffect(() => {
-        animationRef.current = requestAnimationFrame(handleSeekUpdate);
-        return () => cancelAnimationFrame(animationRef.current);
-    }, []);
-
     const toggleMute = () => {
         setIsMuted(!isMuted);
         const newVolume = isMuted ? 0.5 : 0; // Adjust the volume accordingly
@@ -82,20 +90,22 @@ const Player = ({ playlist, isPlaying, currentTrack, setCurrentTrack, setIsPlayi
     };
 
     const handleSave = (musicId) => {
-
         setSelectedMusicId(musicId);
         setIsOffCanvasOpen(true)
+    }
 
+    if (MusicPlaylist.length === 0) {
+        return
     }
 
     return (
         <>
             <div className="d-flex align-items-center justify-content-between w-100 text-white ms_player_wrapper">
                 <div className="d-flex gap-2">
-                    <Image src={playlist[currentTrack]?.album.image} alt="song" className="rounded" width={50} height={50} />
+                    <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album.image} alt="song" className="rounded" width={50} height={50} />
                     <div className="d-flex flex-column gap-1">
-                        <h5 className="text-white m-0">{playlist[currentTrack]?.eng_title}</h5>
-                        <p className="text-rec-pld">{playlist[currentTrack]?.category?.eng_name}</p>
+                        <h5 className="text-white m-0">{MusicPlaylist && MusicPlaylist[currentTrack]?.eng_title}</h5>
+                        <p className="text-rec-pld">{MusicPlaylist && MusicPlaylist[currentTrack]?.category?.eng_name}</p>
                     </div>
                 </div>
 
@@ -125,12 +135,12 @@ const Player = ({ playlist, isPlaying, currentTrack, setCurrentTrack, setIsPlayi
 
 
                     {
-                        playlist[currentTrack]?.playlist.length > 0 ? (
-                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(playlist[currentTrack]?.id)} />
+                        MusicPlaylist && MusicPlaylist[currentTrack]?.playlist.length > 0 ? (
+                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                         )
                             :
                             (
-                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(playlist[currentTrack]?.id)} />
+                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                             )
                     }
 
@@ -147,15 +157,19 @@ const Player = ({ playlist, isPlaying, currentTrack, setCurrentTrack, setIsPlayi
                         onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                     />
                 </div>
+                {
+                    MusicPlaylist.length > 0 && currentTrack !== undefined &&
+                    <ReactHowler
+                        src={getDecryptedText(MusicPlaylist && MusicPlaylist[currentTrack]?.audio_url)}
+                        playing={isPlaying}
+                        volume={volume}
+                        ref={playerRef}
+                        onEnd={handleEnd}
+                        onLoad={handleLoad}
+                        html5={true}
+                    />
+                }
 
-                <ReactHowler
-                    src={getDecryptedText(playlist[currentTrack]?.audio_url)}
-                    playing={isPlaying}
-                    volume={volume}
-                    ref={playerRef}
-                    onEnd={handleEnd}
-                    onLoad={handleLoad}
-                />
             </div>
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
         </>

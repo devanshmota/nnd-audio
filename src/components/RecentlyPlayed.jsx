@@ -6,26 +6,26 @@ import { useEffect, useState } from "react";
 import { FaShareAlt } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
 import OffCanvas from "./OffCanvas";
 import { FaHeart } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
-import Player from "./Player";
+import { setCurrentTrack, setIsPlaying, setMusicPlaylist} from "@/redux/reducer/MusicPlaylistSlice";
 
 
 const RecentlyPlayed = () => {
 
+  const dispatch = useDispatch()
   const users = useSelector((state) => state.users)
   const { language } = useSelector((state) => state.language)
-  const [recentlyPlayed, setRecentlyPlayed] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
+  const [recentlyPlayed, setRecentlyPlayed] = useState([])
   const [isLiked, setIsLiked] = useState(false)
   const [selectedMusicId, setSelectedMusicId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState(0);
+
 
   useEffect(() => {
     setIsLoading(true)
@@ -56,8 +56,9 @@ const RecentlyPlayed = () => {
 
   const handlePlayMusic = (musicId) => {
     const index = recentlyPlayed.findIndex((item) => item.id === musicId);
-    setCurrentTrack(index);
-    setIsPlaying(true);
+    dispatch(setMusicPlaylist(recentlyPlayed))
+    dispatch(setCurrentTrack(index))
+    dispatch(setIsPlaying(true))
   };
 
   return (
@@ -76,10 +77,10 @@ const RecentlyPlayed = () => {
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
 
-              <>
-                <div className="col-lg-6">
-                  <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center justify-content-between text-white music_card">
-                    <div className="d-flex align-items-center gap-3">
+            
+                <div key={item.id} className="col-lg-6">
+                  <div className="d-flex align-items-center justify-content-between text-white music_card">
+                    <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                       <Image src={item.album.image} alt={item.eng_title} className="rounded" width={80} height={80} />
                       <div className="d-flex flex-column gap-2">
                         <h5 className="m-0 text-break title_rcnt_plyd">{GetLanguage(language, item)}</h5>
@@ -101,14 +102,11 @@ const RecentlyPlayed = () => {
                     </div>
                   </div>
                 </div>
-              </>
-            ))
+            ))  
           }
-
         </div>
         <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
       </div>
-      <Player playlist={recentlyPlayed} isPlaying={isPlaying} currentTrack={currentTrack} setCurrentTrack={setCurrentTrack} setIsPlaying={setIsPlaying} />
       <br />
       <br />
     </>
