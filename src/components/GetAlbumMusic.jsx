@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Nodataviewall from "./Nodataviewall"
 import OffCanvas from "./OffCanvas"
-import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
+import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
 import GetCatLanguage from "./GetCatLanguage"
 import GetLanguage from "./GetLanguage"
 import Image from "next/image"
@@ -59,6 +59,11 @@ const GetAlbumMusic = ({ albumid }) => {
         toast.success('Playing All')
     }
 
+    const copyToClip = async () => {
+        await navigator.clipboard.writeText(location.href)
+        toast.success('Link copied to clipboard')
+    } 
+
     return (
         <div className="container text-white mt-4">
             {isLoading &&
@@ -104,8 +109,8 @@ const GetAlbumMusic = ({ albumid }) => {
                                                 </div>
                                             </div>
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
-                                                <FaShareAlt className="icon_recent_plyd" />
-                                                <FaDownload className="icon_recent_plyd" />
+                                                <FaShareAlt className="icon_recent_plyd" onClick={copyToClip} />
+                                        
                                                 {
                                                     item.playlist.length > 0 ? (
                                                         <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
@@ -124,9 +129,6 @@ const GetAlbumMusic = ({ albumid }) => {
                     </>
                 )
             }
-
-
-
             {
                 !isLoading && singleAlbumData.length === 0 && <Nodataviewall />
             }

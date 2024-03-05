@@ -507,7 +507,7 @@ body.loaded .ms_loader {
 	padding: 0px 0px;
 	position: absolute !important;
 	left: 0;
-	top: 164px;
+	top: 100px;
 	right: 0;
 	bottom: 70px;
 }
@@ -9051,4 +9051,10 @@ input[type="range"] {
 
 .utsav_gap {
 	--bs-gutter-x: 1.875rem !important;
+}
+.wrapper{
+	margin-bottom: 5rem;
+}
+.css-i4bv87-MuiSvgIcon-root{
+	color: white;
 }

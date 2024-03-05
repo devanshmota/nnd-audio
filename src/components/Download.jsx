@@ -3,6 +3,9 @@ import Image from "next/image"
 import { MdDelete } from "react-icons/md";
 
 const Download = () => {
+
+    const Downloads = useSelector((state) => state.downloads)
+
     return (
         <div className="container text-white">
             <div className="row">

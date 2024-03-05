@@ -62,6 +62,7 @@ const Music_categories = () => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/music-categories-all"
+                isShow={false}
             />
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>

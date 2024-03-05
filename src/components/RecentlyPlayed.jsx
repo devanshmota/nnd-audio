@@ -4,7 +4,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react";
 import { FaShareAlt } from "react-icons/fa";
-import { FaDownload } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import GetLanguage from "./GetLanguage";
@@ -76,8 +75,6 @@ const RecentlyPlayed = () => {
           }
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
-
-            
                 <div key={item.id} className="col-lg-6">
                   <div className="d-flex align-items-center justify-content-between text-white music_card">
                     <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
@@ -89,7 +86,6 @@ const RecentlyPlayed = () => {
                     </div>
                     <div className="d-flex align-items-center gap-2 gap-md-3">
                       <FaShareAlt className="icon_recent_plyd" />
-                      <FaDownload className="icon_recent_plyd" />
                       {
                         item.playlist.length > 0 ? (
                           <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />

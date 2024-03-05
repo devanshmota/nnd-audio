@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     users: UsersSlice.reducer,
     language: LanguageSlice.reducer,
     cachedata: CachedataSlice.reducer,
-    MusicPlaylist: MusicPlaylistSlice.reducer
+    MusicPlaylist: MusicPlaylistSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -37,7 +37,7 @@ export const store = configureStore({
                 serializableCheck: false
             }
         ),
-        apiMiddleware, // Add your custom middleware here
+        apiMiddleware,
     ],
 });
 

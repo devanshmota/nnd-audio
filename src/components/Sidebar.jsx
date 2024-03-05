@@ -74,18 +74,7 @@ const Sidebar = ({ open }) => {
 
                                 </li>
 
-                                {
-                                    token && <li>
-                                        <Link href='/downloads'>
-                                            <span className="nav_icon">
-                                                <PiDownloadSimpleBold className='icon_sidebar' />
-                                            </span>
-                                            <span className="nav_text">
-                                                downloads
-                                            </span>
-                                        </Link>
-                                    </li>
-                                }
+                                
 
 
                                 <li><a href="" title="Purchased">

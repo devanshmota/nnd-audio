@@ -7,7 +7,6 @@ import { MdSkipPrevious } from "react-icons/md";
 import { MdSkipNext } from "react-icons/md";
 import { IoIosPause, IoIosPlay } from "react-icons/io";
 import { BiSolidVolumeFull, BiSolidVolumeMute } from "react-icons/bi";
-import { PiDownloadSimpleBold } from "react-icons/pi";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import OffCanvas from "./OffCanvas";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,8 +24,6 @@ const Player = () => {
     const [isMuted, setIsMuted] = useState(false);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
-
-
 
     const handleSeekUpdate = () => {
         setCurrentTime(playerRef?.current?.seek());
@@ -143,8 +140,6 @@ const Player = () => {
                                 <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                             )
                     }
-
-                    <PiDownloadSimpleBold className="music_player_icon" />
                     {
                         isMuted ? <BiSolidVolumeMute className="music_player_icon" onClick={toggleMute} /> : <BiSolidVolumeFull className="music_player_icon" onClick={toggleMute} />
                     }

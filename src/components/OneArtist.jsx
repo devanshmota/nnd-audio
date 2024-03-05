@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
+import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import GetCatLanguage from "./GetCatLanguage"
@@ -105,7 +105,7 @@ const OneArtist = ({ artistid }) => {
                                             </div>
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" />
-                                                <FaDownload className="icon_recent_plyd" />
+                
                                                 {
                                                     item.playlist.length > 0 ? (
                                                         <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />

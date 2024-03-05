@@ -19,6 +19,7 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 })
 import dynamic from 'next/dynamic';
 import { Toaster } from 'react-hot-toast';
+import FirebaseNotification from './FirebaseNotification.jsx';
 const Player = dynamic(() => import('./Player.jsx'), {
     ssr: false
 })
@@ -184,6 +185,7 @@ export default function PersistentDrawerLeft({ children }) {
             </Drawer>
             <Main open={open} className='drawerMain' >
                 <DrawerHeader />
+                <FirebaseNotification/>
                 {children}
                 <Player/>         
             </Main>

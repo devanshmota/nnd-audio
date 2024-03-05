@@ -1,4 +1,3 @@
-
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js');
 
@@ -23,7 +22,6 @@ self.addEventListener('push', (event) => {
     body: payload.notification.body,
     icon: payload.notification.icon
   };
-
   event.waitUntil(
     self.registration.showNotification(notificationTitle, notificationOptions)
   );

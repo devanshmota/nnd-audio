@@ -4,7 +4,7 @@ import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import OffCanvas from "./OffCanvas"
-import { FaDownload, FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
+import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
 import Image from "next/image"
 import { ClipLoader } from "react-spinners"
 import GetLanguage from "./GetLanguage"
@@ -107,7 +107,6 @@ const OneUtsav = ({ utsavid }) => {
                                             </div>
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" />
-                                                <FaDownload className="icon_recent_plyd" />
                                                 {
                                                     item.playlist.length > 0 ? (
                                                         <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />

@@ -63,6 +63,7 @@ const Lyricists = () => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/lyricists-all"
+                isShow={true}
             />
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>

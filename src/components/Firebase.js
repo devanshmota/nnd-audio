@@ -21,15 +21,22 @@ const auth = firebase.auth();
 
 export const messaging = getMessaging(firebaseApp)
 
-export const generateToken = async() => {
+export const generateToken = async () => {
+  try {
     const permission = await Notification.requestPermission();
-    if(permission === 'granted'){
-        const token = await getToken(messaging, {
-            vapidKey: "BAx3KxWNJuYL6F-GvraQQVZyHtofeTidX0soV3b4hre4Hsu6PedgWop64--740WUu3psNMKB-2v8UAs_K3aqoqM"
-        })
-        return token
+    if (permission === 'granted') {
+      const token = await getToken(messaging, {
+        vapidKey: 'BAx3KxWNJuYL6F-GvraQQVZyHtofeTidX0soV3b4hre4Hsu6PedgWop64--740WUu3psNMKB-2v8UAs_K3aqoqM',
+      });
+      console.log(token)
+
+      return token;
     }
-}
+  } catch (error) {
+    console.error('Error generating token:', error);
+    throw error;
+  }
+};
 
 
 export { db, auth };

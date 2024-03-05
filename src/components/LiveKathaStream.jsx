@@ -74,6 +74,7 @@ const LiveKathaStream = () => {
                     isBeginning={isBeginning}
                     isEnd={isEnd}
                     link="/"
+                    isShow={false}
                 />
 
                 <Swiper

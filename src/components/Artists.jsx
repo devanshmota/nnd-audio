@@ -64,6 +64,7 @@ const Artists = () => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/artists-all"
+                isShow={true}
             />
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>

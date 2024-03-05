@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image';
-import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { useEffect, useRef, useState } from 'react';
@@ -9,24 +8,23 @@ import { getHomeApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import { ClipLoader } from 'react-spinners';
-import Nodatafound from './Nodatafound';
 
 
-const LatestRelease = () => {
+const LatestAlbums = () => {
 
     const { language } = useSelector((state) => state.language)
-    const lastestReleaseRef = useRef();
+    const lastestAlbumsRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    const [latestRelease, setLatestReleases] = useState([])
+    const [LatestAlbums, setLatestAlbums] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getHomeApi({
             is_guest: 1,
             onSuccess: (res) => {
-                if (res.latest_releases) {
-                    setLatestReleases(res.latest_releases)
+                if (res.recent_album) {
+                    setLatestAlbums(res.recent_album)
                 }
                 setIsLoading(false)
             },
@@ -39,20 +37,20 @@ const LatestRelease = () => {
 
 
     const handlePrev = () => {
-        if (lastestReleaseRef.current && !isBeginning) {
-            lastestReleaseRef.current.swiper.slidePrev();
+        if (lastestAlbumsRef.current && !isBeginning) {
+            lastestAlbumsRef.current.swiper.slidePrev();
         }
         console.log(isBeginning)
     };
 
     const handleNext = () => {
-        if (lastestReleaseRef.current && !isEnd) {
-            lastestReleaseRef.current.swiper.slideNext();
+        if (lastestAlbumsRef.current && !isEnd) {
+            lastestAlbumsRef.current.swiper.slideNext();
         }
         console.log(isBeginning)
     };
 
-    if (latestRelease.length === 0) {
+    if (LatestAlbums.length === 0) {
         return null
     }
 
@@ -65,6 +63,7 @@ const LatestRelease = () => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/latest-releases-all"
+                isShow={false}
             />
 
             {isLoading &&
@@ -74,11 +73,11 @@ const LatestRelease = () => {
             }
 
             {
-                latestRelease.length > 0 && (
+                LatestAlbums.length > 0 && (
                     <>
 
                         <Swiper
-                            ref={lastestReleaseRef}
+                            ref={lastestAlbumsRef}
                             slidesPerView={4}
                             spaceBetween={30}
                             autoplay={{
@@ -121,11 +120,11 @@ const LatestRelease = () => {
                         >
                             <div className="container d-flex flex-column" >
                                 {
-                                    latestRelease.map((item, index) => (
+                                    LatestAlbums.map((item, index) => (
 
                                         <SwiperSlide key={item.id} virtualIndex={index}>
                                             <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                                <Image src={item.album.image} className="rounded mw-100 object-fit-cover" alt={item.eng_title} width={301.5} height={200} />
+                                                <Image src={item.image} className="rounded mw-100 object-fit-cover" alt={item.eng_title} width={301.5} height={200} />
 
                                                 <h5 className='m-0 ellipsis-container text-white'>
                                                     {GetLanguage(language, item)}
@@ -145,4 +144,4 @@ const LatestRelease = () => {
     )
 }
 
-export default LatestRelease
+export default LatestAlbums
