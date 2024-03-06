@@ -84,6 +84,9 @@
     .utshv_img {
         border-radius: 20px;
     }
+    .youtube_video{
+        height: 400px;
+    }
 }
 
 @media (max-width: 480px) {

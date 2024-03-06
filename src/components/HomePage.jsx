@@ -18,7 +18,6 @@ const HomePage = () => {
 
   return (
     <>
-      <div className='wrapper'>
         <LiveKathaStream />
         <MusicCategories />
         <LatestAlbums />
@@ -27,7 +26,6 @@ const HomePage = () => {
         <Lyricists />
         <Radio />
         <RecentlyPlayed />
-      </div>
     </>
   )
 }

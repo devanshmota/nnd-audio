@@ -10,26 +10,29 @@ import Image from 'next/image';
 const NotificationBell = () => {
 
 
-    
+
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [notifications, setNotifications] = useState([])
 
 
-    
- 
+
+
     useEffect(() => {
-        
-        getNotificationApi({
-            onSuccess: (res) => {
-                if (res.data) {
-                    setNotifications(res.data)
+
+        if (isOffCanvasOpen) {
+            getNotificationApi({
+                onSuccess: (res) => {
+                    if (res.data) {
+                        setNotifications(res.data)
+                    }
+                },
+                onError: (e) => {
+                    console.log(e)
                 }
-            },
-            onError: (e) => {
-                console.log(e)
-            }
-        })
-    }, [])
+            })
+        }
+
+    }, [isOffCanvasOpen])
 
     const handleOpen = () => {
         setIsOffCanvasOpen(true)

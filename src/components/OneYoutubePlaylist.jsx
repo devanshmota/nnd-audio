@@ -3,13 +3,13 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react"
 import { FaPlay } from "react-icons/fa";
-import PlayVideoModal from "./PlayVideoModal";
+// import PlayVideoModal from "./PlayVideoModal";
 
 const OneYoutubePlaylist = ({ playlistid }) => {
 
     const [playlistData, setPlaylistData] = useState([])
-    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-    const [videoDetails, setVideoDetails] = useState(null)
+    const [InitialTrack, setInitialTrack] = useState(null)
+
 
     useEffect(() => {
 
@@ -19,45 +19,49 @@ const OneYoutubePlaylist = ({ playlistid }) => {
                     `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistid.slug}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
                 );
 
-                setPlaylistData(response.data.items)
+                setPlaylistData(response?.data?.items)
+                setInitialTrack(response?.data?.items[0])
 
             } catch (error) {
                 console.error('Error fetching playlist data:', error);
             }
         };
-
         fetchPlaylistData();
-
     }, [])
 
-    const handlePlay = (videodetails) => {
-        setVideoDetails(videodetails)
-        setIsVideoModalOpen(true)
+    const handlePlay = (item) => {
+        setInitialTrack(item)
     }
 
     return (
         <>
-            <div className="container text-white">
-                <div className="row">
-                    {
-                        playlistData.map((item, index) => (
-                            <div key={index} className="col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
-                                <div className="card-container text-white">
-
-                                    <div className="image-container">
-                                        <Image src={item?.snippet?.thumbnails?.medium?.url} alt={item.snippet.title} className="rounded opacity-50" width={200} height={200} />
-                                        <div className="overlay" onClick={() => handlePlay(item)}>
-                                            <FaPlay className="play-button" />
-                                        </div>
+            <div className="container text-white mt-5">
+                <div className="row gy-3 yt-heigth">
+                    <div className="col-lg-8 d-flex flex-column gap-3">
+                        <iframe
+                            className="youtube_video"
+                            src={`https://www.youtube.com/embed/${InitialTrack?.snippet?.resourceId?.videoId}`}
+                            title={InitialTrack?.snippet?.title}
+                            allowFullScreen
+                        ></iframe>
+                        <h5 className="m-0">{InitialTrack?.snippet?.title}</h5>
+                    </div>
+                    <div className="col-lg-4 h-100 overflow-y-scroll">
+                        <div className="d-flex flex-column justify-content-center gap-2">
+                            {
+                                playlistData.map((item, index) => (
+                                    <div key={index} className={`d-flex align-items-center gap-3 p-3 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
+                                        <Image src={item?.snippet?.thumbnails?.medium?.url} className="rounded mw-100 object-fit-cover" alt={item.snippet.title} width={100} height={60} onError={(e) => {
+            e.target.src = '/Audio_hedphone.svg'
+        }}/>
+                                        <p className="ply-item-title">{item.snippet.title}</p>
                                     </div>
-                                    <h6 className="m-0 align-self-baseline ply-item-title">{item.snippet.title}</h6>
-                                </div>
-                            </div>
-                        ))
-                    }
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-            <PlayVideoModal show={isVideoModalOpen} onHide={() => setIsVideoModalOpen(false)} videoDetails={videoDetails} />
         </>
     )
 }

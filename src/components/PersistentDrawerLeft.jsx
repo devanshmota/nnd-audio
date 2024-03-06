@@ -185,9 +185,11 @@ export default function PersistentDrawerLeft({ children }) {
             </Drawer>
             <Main open={open} className='drawerMain' >
                 <DrawerHeader />
-                <FirebaseNotification/>
-                {children}
-                <Player/>         
+                <FirebaseNotification />
+                <div className='main nnd_scrollbar'>
+                    {children}
+                </div>
+                <Player />
             </Main>
             <Toaster position="top-center" reverseOrder={false} />
         </Box>

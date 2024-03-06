@@ -28,8 +28,6 @@ export const generateToken = async () => {
       const token = await getToken(messaging, {
         vapidKey: 'BAx3KxWNJuYL6F-GvraQQVZyHtofeTidX0soV3b4hre4Hsu6PedgWop64--740WUu3psNMKB-2v8UAs_K3aqoqM',
       });
-      console.log(token)
-
       return token;
     }
   } catch (error) {

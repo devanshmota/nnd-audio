@@ -16,11 +16,12 @@ const messaging = firebase.messaging();
 
 
 self.addEventListener('push', (event) => {
-  const payload = event.data.json();
+  const payload = event.data.json() 
+  console.log(typeof(payload.notification.image))
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: payload.notification.icon
+    icon: payload.notification.image
   };
   event.waitUntil(
     self.registration.showNotification(notificationTitle, notificationOptions)

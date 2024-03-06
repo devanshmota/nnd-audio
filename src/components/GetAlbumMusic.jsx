@@ -23,7 +23,6 @@ const GetAlbumMusic = ({ albumid }) => {
     const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
-
     useEffect(() => {
         fetchSigleArtistDataApi({
             album_id: albumid.id,
