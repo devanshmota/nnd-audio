@@ -133,11 +133,11 @@ const Player = () => {
 
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist.length > 0 ? (
-                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
+                            <FaHeart className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                         )
                             :
                             (
-                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
+                                <FaRegHeart className="icon_recent_plyd music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                             )
                     }
                     {

@@ -19,7 +19,9 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 })
 import dynamic from 'next/dynamic';
 import { Toaster } from 'react-hot-toast';
-import FirebaseNotification from './FirebaseNotification.jsx';
+const FirebaseNotification = dynamic(()=> import('./FirebaseNotification.jsx'),{
+    ssr: false
+})
 const Player = dynamic(() => import('./Player.jsx'), {
     ssr: false
 })
