@@ -5,6 +5,8 @@ import { auth } from './Firebase';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { checkEmailApi } from '@/redux/actions/Campaign';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
 
@@ -21,7 +23,7 @@ const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
                             checkEmailApi({
                                 email: email,
                                 onSuccess: (res) => {
-                                    toast.success('Password reset email sent. Check your email.');
+                                    toast.success(t('Password reset email sent. Check your email'));
                                     onLoginClick()
                                 },
                                 onError: (e) => {
@@ -54,12 +56,12 @@ const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
                     <form className="login_form" onSubmit={handleSendMyPassword}>
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
                         <div className="input_container">
-                            <p className="entr_email">Enter your email address</p>
+                            <p className="entr_email">{t('Enter your email address')}</p>
                             <div className="input_with_icon">
                                 <MdOutlineEmail className="all_icons" />
-                                <input type="email" value={email} onChange={handleEmailChange} className="email_container" placeholder="Email" required />
+                                <input type="email" value={email} onChange={handleEmailChange} className="email_container" placeholder={t("Email")} required />
                             </div>
-                            <button type="submit">Sent</button>
+                            <button type="submit">{t('Sent')}</button>
                         </div>
 
                     </form>
@@ -70,4 +72,4 @@ const ForgotPasswordModal = ({ show, onHide, onLoginClick, ...props }) => {
     )
 }
 
-export default ForgotPasswordModal
+export default withTranslation()(ForgotPasswordModal)

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GetLanguage from "./GetLanguage";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const SearchFunctionality = () => {
@@ -103,7 +105,7 @@ const SearchFunctionality = () => {
                                     <Image src={item.img} alt={item.label} className="rounded" width={80} height={80} />
                                     <div className="d-flex flex-column gap-1">
                                         <h6 className="m-0">{item.label}</h6>
-                                        <p className="text-cat">{item.category}</p>
+                                        <p className="text-cat">{t(item.category)}</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,4 +119,4 @@ const SearchFunctionality = () => {
     )
 }
 
-export default SearchFunctionality
+export default withTranslation()(SearchFunctionality)

@@ -11,10 +11,15 @@ import Image from "next/image"
 import { ClipLoader } from "react-spinners"
 import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
 import toast from "react-hot-toast"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+
 
 const GetAlbumMusic = ({ albumid }) => {
 
     const dispatch = useDispatch()
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
     const { language } = useSelector((state) => state.language)
     const [singleAlbumData, setSingleAlbumData] = useState([])
     const [albumDetails, setAlbumDetails] = useState(null)
@@ -26,7 +31,7 @@ const GetAlbumMusic = ({ albumid }) => {
     useEffect(() => {
         fetchSigleArtistDataApi({
             album_id: albumid.id,
-            is_guest: 0,
+            is_guest: 1,
             onSuccess: (res) => {
                 setSingleAlbumData(res.data)
                 setAlbumDetails(res.data[0].album)
@@ -55,13 +60,13 @@ const GetAlbumMusic = ({ albumid }) => {
     const handlePlayAll = () => {
         dispatch(setCurrentTrack(0))
         dispatch(setIsPlaying(true))
-        toast.success('Playing All')
+        toast.success(t('Playing All'))
     }
 
     const copyToClip = async () => {
         await navigator.clipboard.writeText(location.href)
-        toast.success('Link copied to clipboard')
-    } 
+        toast.success(t('Link copied to clipboard'))
+    }
 
     return (
         <div className="container text-white mt-4">
@@ -81,12 +86,12 @@ const GetAlbumMusic = ({ albumid }) => {
                                     <Image src={albumDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
                                     <div className="d-flex flex-column gap-4">
                                         <h2 className="m-0">
-                                            {albumDetails?.eng_name}
+                                            {GetLanguage(language, albumDetails)}
                                         </h2>
-                                        <div className="d-flex align-items-center gap-3">
-                                            <button className="dwnl_ply_btn">Download all</button>
-                                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>Play all</button>
-                                        </div>
+
+
+                                        <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -109,16 +114,16 @@ const GetAlbumMusic = ({ albumid }) => {
                                             </div>
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" onClick={copyToClip} />
-                                        
-                                                {
-                                                    item.playlist.length > 0 ? (
-                                                        <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
-                                                    )
-                                                        :
-                                                        (
+
+                                                {token && (
+                                                    <>
+                                                        {item.playlist.length > 0 ? (
+                                                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                                        ) : (
                                                             <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                                                        )
-                                                }
+                                                        )}
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -136,4 +141,4 @@ const GetAlbumMusic = ({ albumid }) => {
     )
 }
 
-export default GetAlbumMusic
+export default withTranslation()(GetAlbumMusic)

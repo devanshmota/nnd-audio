@@ -11,10 +11,12 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import OffCanvas from "./OffCanvas";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTrack, setIsPlaying, setIsLiked, resetState } from "@/redux/reducer/MusicPlaylistSlice";
+import GetLanguage from "./GetLanguage";
 
 const Player = () => {
 
     const dispatch = useDispatch()
+    const { language } = useSelector((state) => state.language)
     const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist);
     const [volume, setVolume] = useState(0.5);
     const [currentTime, setCurrentTime] = useState(0);
@@ -101,8 +103,8 @@ const Player = () => {
                 <div className="d-flex gap-2">
                     <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album.image} alt="song" className="rounded" width={50} height={50} />
                     <div className="d-flex flex-column gap-1">
-                        <h5 className="text-white m-0">{MusicPlaylist && MusicPlaylist[currentTrack]?.eng_title}</h5>
-                        <p className="text-rec-pld">{MusicPlaylist && MusicPlaylist[currentTrack]?.category?.eng_name}</p>
+                        <h5 className="text-white m-0">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
+                        <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
                     </div>
                 </div>
 
@@ -129,7 +131,6 @@ const Player = () => {
                 </div>
 
                 <div className="d-flex align-items-center gap-2">
-
 
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist.length > 0 ? (

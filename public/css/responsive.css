@@ -1,5 +1,5 @@
 @media screen and (min-width: 576px) and (max-width: 991px) {
-  
+
     ul.btn_ul {
         margin-top: 40px;
         padding: 9px 15px;
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 991px) {
-   
+
     .btn_ul {
         display: none;
     }
@@ -18,7 +18,7 @@
 
 @media(min-width: 575px) {
     .ms_logo_top {
-        display: none ;
+        display: none;
     }
 }
 
@@ -84,7 +84,8 @@
     .utshv_img {
         border-radius: 20px;
     }
-    .youtube_video{
+
+    .youtube_video {
         height: 400px;
     }
 }
@@ -116,21 +117,25 @@
 }
 
 @media (min-width: 600px) {
-    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper,.css-qw6dy7 .MuiDrawer-paper {
+
+    .css-b62sy7-MuiDrawer-docked .MuiDrawer-paper,
+    .css-qw6dy7 .MuiDrawer-paper {
         width: 53px !important;
     }
 }
 
 
-@media (min-width: 600px){
-    .css-qw6dy7,.css-b62sy7-MuiDrawer-docked{
+@media (min-width: 600px) {
+
+    .css-qw6dy7,
+    .css-b62sy7-MuiDrawer-docked {
         width: 53px !important;
     }
 }
 
 
 @media (max-width: 575px) {
-   
+
     .home_icon {
         display: block;
     }
@@ -142,7 +147,7 @@
 }
 
 @media (min-width: 575px) {
-  
+
     .home_icon {
         display: none;
     }
@@ -179,6 +184,9 @@
     .playlist_container {
         height: 244px;
     }
+    .register_form{
+        width: 22rem;
+    }
 }
 
 @media (max-width: 992px) {
@@ -213,19 +221,27 @@
     }
 }
 
-@media (min-width: 600px){
-    .nnd_web{
+@media (min-width: 767px) {
+    .nnd_web {
         display: block;
     }
-    .nnd_logo{
+
+    .nnd_logo {
         display: none;
     }
 }
-@media (max-width: 600px){
-    .nnd_web{
+
+@media (max-width: 767px) {
+    .nnd_web {
         display: none;
     }
-    .nnd_logo{
+
+    .nnd_logo {
         display: block;
     }
+
+    .logo_icon_container {
+        display: none !important;
+    }
 }
+

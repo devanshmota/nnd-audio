@@ -1,13 +1,12 @@
 'use client'
 import React, { useState } from 'react'
-import nndLogo from '../../public/images/nnd_logo.png'
-import nndWeb from '../../public/images/nnd_web.png'
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { MdHome, MdPrivacyTip } from "react-icons/md";
-import { PiDownloadSimpleBold } from "react-icons/pi";
 import { FaHeart } from 'react-icons/fa';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const Sidebar = ({ open }) => {
@@ -42,7 +41,7 @@ const Sidebar = ({ open }) => {
                                             <MdHome className='home_icon_sidebar' />
                                         </span>
                                         <span className="nav_text">
-                                            Home
+                                            {t('Home')}
                                         </span>
                                     </Link>
                                 </li>
@@ -55,7 +54,7 @@ const Sidebar = ({ open }) => {
                                                 <Image src='/Recent_Played.svg' alt='' width={25} height={25} />
                                             </span>
                                             <span className="nav_text">
-                                                Recently Played
+                                                {t('Recently Played')}
                                             </span>
                                         </Link>
                                     </li>
@@ -68,13 +67,13 @@ const Sidebar = ({ open }) => {
                                             <Image src='/About_us.svg' alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
-                                            about us
+                                            {t('About Us')}
                                         </span>
                                     </Link>
 
                                 </li>
 
-                                
+
 
 
                                 <li><a href="" title="Purchased">
@@ -82,7 +81,7 @@ const Sidebar = ({ open }) => {
                                         <MdPrivacyTip className='icon_sidebar' />
                                     </span>
                                     <span className="nav_text">
-                                        privacy policy
+                                        {t('Privacy Policy')}
                                     </span>
                                 </a>
                                 </li>
@@ -93,7 +92,7 @@ const Sidebar = ({ open }) => {
                                             <FaHeart className='icon_sidebar' />
                                         </span>
                                         <span className="nav_text">
-                                            favourites
+                                            {t('Favourites')}
                                         </span>
                                     </a>
                                     </li>
@@ -106,20 +105,23 @@ const Sidebar = ({ open }) => {
                                         </span>
                                         <span className="nav_text">
                                             {/* history */}
-                                            youtube live videos
+                                            {t('Youtube Live Videos')}
                                         </span>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href='/playlist'>
-                                        <span className="nav_icon">
-                                            <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
-                                        </span>
-                                        <span className="nav_text">
-                                            featured playlist
-                                        </span>
-                                    </Link>
-                                </li>
+                                {
+                                    token && <li>
+                                        <Link href='/playlist'>
+                                            <span className="nav_icon">
+                                                <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
+                                            </span>
+                                            <span className="nav_text">
+                                                {t('Featured Playlist')}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                }
+
                                 <li>
                                     <Link href='/youtube-playlist'>
                                         <span className="nav_icon">
@@ -127,7 +129,7 @@ const Sidebar = ({ open }) => {
                                         </span>
                                         <span className="nav_text">
                                             {/* create playlist */}
-                                            youtube playlist
+                                            {t('Youtube Playlist')}
                                         </span>
                                     </Link>
                                 </li>
@@ -140,4 +142,4 @@ const Sidebar = ({ open }) => {
     )
 }
 
-export default Sidebar
+export default withTranslation()(Sidebar)

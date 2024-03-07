@@ -11,7 +11,6 @@ const FirebaseNotification = ({ children }) => {
 
     const fetchToken = async () => {
       try {
-        if (typeof window !== 'undefined') {
           const permission = await Notification.requestPermission();
           if (permission === 'granted') {
             const token = await getToken(messaging, {
@@ -19,8 +18,7 @@ const FirebaseNotification = ({ children }) => {
             });
             dispatch(setFcmToken(token))
           }
-        }
-
+  
       } catch (error) {
         console.error('Error fetching token:', error);
       }

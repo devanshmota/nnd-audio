@@ -19,12 +19,20 @@ const Sidebar = dynamic(() => import('./Sidebar.jsx'), {
 })
 import dynamic from 'next/dynamic';
 import { Toaster } from 'react-hot-toast';
-const FirebaseNotification = dynamic(()=> import('./FirebaseNotification.jsx'),{
+import { I18nextProvider } from 'react-i18next';
+const FirebaseNotification = dynamic(() => import('./FirebaseNotification.jsx'), {
     ssr: false
 })
 const Player = dynamic(() => import('./Player.jsx'), {
     ssr: false
 })
+import language from '../utils/language.jsx'
+import { useEffect } from 'react';
+import { getSystemSettingsApi } from '@/redux/actions/Campaign.js';
+import { useDispatch } from 'react-redux';
+import { setSystemSettings } from '@/redux/reducer/SystemSettingsSlice.js';
+import Loader from './Loader.jsx';
+import { useState } from 'react';
 
 const drawerWidth = 240;
 
@@ -117,9 +125,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function PersistentDrawerLeft({ children }) {
+    const dispatch = useDispatch()
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleDrawerOpen = () => {
         setOpen(!open);
@@ -128,6 +137,26 @@ export default function PersistentDrawerLeft({ children }) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        getSystemSettingsApi({
+            type: 'all',
+            onSuccess: (res) => {
+                if (res.data) {
+                    dispatch(setSystemSettings(res.data))
+                }
+                setIsLoading(false)
+            },
+            onError: (e) => {
+                console.log(e)
+                setIsLoading(false)
+            }
+        })
+    }, [])
+
+    if (isLoading) {
+        return <Loader />
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -152,7 +181,7 @@ export default function PersistentDrawerLeft({ children }) {
                     <div className='d-flex align-items-center gap-2'>
                         <IconButton
                             color="inherit"
-                            className="open_drawer"
+                            className="open_drawer logo_icon_container"
                             aria-label="open drawer"
                             onClick={handleDrawerOpen}
                             edge="start"
@@ -160,17 +189,12 @@ export default function PersistentDrawerLeft({ children }) {
                                 marginRight: 5,
                                 ...(open && { display: "none" }),
                             }}
-
                         >
-
                             <MenuIcon className='menuIcon' />
-
                         </IconButton>
                         <img src='/images/nnd_web.png' alt='nnd_logo' className='nnd_web' />
                         <img src='/images/nnd_logo.png' alt='nnd_logo' className='nnd_logo' />
                     </div>
-
-
                     <Header />
                 </Toolbar>
             </AppBar>
@@ -178,7 +202,6 @@ export default function PersistentDrawerLeft({ children }) {
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
@@ -186,12 +209,14 @@ export default function PersistentDrawerLeft({ children }) {
                 <Sidebar open={open} />
             </Drawer>
             <Main open={open} className='drawerMain' >
-                <DrawerHeader />
-                <FirebaseNotification />
-                <div className='main nnd_scrollbar'>
-                    {children}
-                </div>
-                <Player />
+                <I18nextProvider i18n={language}>
+                    <DrawerHeader />
+                    <FirebaseNotification />
+                    <div className='main nnd_scrollbar'>
+                        {children}
+                    </div>
+                    <Player />
+                </I18nextProvider>
             </Main>
             <Toaster position="top-center" reverseOrder={false} />
         </Box>

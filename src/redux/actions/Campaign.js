@@ -30,6 +30,7 @@ import { getAlbum } from "@/utils/api";
 import { getNotification } from "@/utils/api";
 import { updateFcmId } from "@/utils/api";
 import { getAlbumWithMusic } from "@/utils/api";
+import { getSystemSettings } from "@/utils/api";
 
 // // GET COUNTRIES
 export const getCountriesApi = ({
@@ -44,6 +45,21 @@ export const getCountriesApi = ({
     store.dispatch(
         apiCallBegan({
             ...getCountries(offset, sort, limit, order, search),
+            displayToast: false,
+            onStart,
+            onSuccess,
+            onError,
+        })
+    );
+};
+export const getSystemSettingsApi = ({
+    type = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getSystemSettings(type),
             displayToast: false,
             onStart,
             onSuccess,

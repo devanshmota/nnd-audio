@@ -12,10 +12,15 @@ import GetCatLanguage from "./GetCatLanguage"
 import Nodataviewall from "./Nodataviewall"
 import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
 import toast from "react-hot-toast"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+
 
 const OneUtsav = ({ utsavid }) => {
 
     const dispatch = useDispatch()
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
     const { language } = useSelector((state) => state.language)
     const [singleUtsavData, setSingleUtsavData] = useState([])
     const [utsavDetails, setUtsavDetails] = useState(null)
@@ -27,7 +32,7 @@ const OneUtsav = ({ utsavid }) => {
     useEffect(() => {
         fetchSigleArtistDataApi({
             utsav_id: utsavid.slug,
-            is_guest: 0,
+            is_guest: 1,
             onSuccess: (res) => {
                 setSingleUtsavData(res.data)
                 setUtsavDetails(res.data[0].utsav)
@@ -76,12 +81,9 @@ const OneUtsav = ({ utsavid }) => {
                                     <Image src={utsavDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
                                     <div className="d-flex flex-column gap-4">
                                         <h2 className="m-0">
-                                            {utsavDetails?.eng_name}
+                                            {GetLanguage(language, utsavDetails)}
                                         </h2>
-                                        <div className="d-flex align-items-center gap-3">
-                                            <button className="dwnl_ply_btn">Download all</button>
-                                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>Play all</button>
-                                        </div>
+                                        <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -107,15 +109,15 @@ const OneUtsav = ({ utsavid }) => {
                                             </div>
                                             <div className="d-flex align-items-center gap-2 gap-md-3">
                                                 <FaShareAlt className="icon_recent_plyd" />
-                                                {
-                                                    item.playlist.length > 0 ? (
-                                                        <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
-                                                    )
-                                                        :
-                                                        (
+                                                {token && (
+                                                    <>
+                                                        {item.playlist.length > 0 ? (
+                                                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                                        ) : (
                                                             <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                                                        )
-                                                }
+                                                        )}
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -135,4 +137,4 @@ const OneUtsav = ({ utsavid }) => {
     )
 }
 
-export default OneUtsav
+export default withTranslation()(OneUtsav)

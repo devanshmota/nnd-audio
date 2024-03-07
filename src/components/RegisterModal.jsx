@@ -10,7 +10,9 @@ import { getCountriesApi, getTemplesApi, postUserApi } from '@/redux/actions/Cam
 import { auth } from './Firebase'
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+import { FaAngleDown } from "react-icons/fa";
 import toast from 'react-hot-toast';
 
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
@@ -118,7 +120,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                         device_type: "web",
                                         fcm_id: "",
                                         onSuccess: (res) => {
-                                            toast.success('Registration successful. Verification email sent.');
+                                            toast.success('Registration successful. Verification email sent');
                                             clearFormData()
                                             onLoginClick()
                                         },
@@ -173,8 +175,8 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                     <form className="login_form register_form" onSubmit={handleSubmit}>
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
                         <div className="header">
-                            <h2>Register</h2>
-                            <p>Please enter your details to register</p>
+                            <h2>{t('Register')}</h2>
+                            <p>{t('Please enter your details to register')}</p>
                         </div>
 
                         <div className="input_container">
@@ -182,7 +184,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
                                         <FaUser className="all_icons" />
-                                        <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder="First Name" required />
+                                        <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder={t('First Name')} required />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
@@ -193,7 +195,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                             name='lastName'
                                             value={formInfo.lastName}
                                             onChange={handleChange}
-                                            placeholder="Last Name"
+                                            placeholder={t("Last Name")}
                                             required />
                                     </div>
                                 </div>
@@ -208,11 +210,11 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                             onChange={handleChange}
                                             required
                                         >
-                                            <option value="" disabled hidden>Select Gender</option>
+                                            <option value="" disabled hidden>{t('Select Gender')}</option>
                                             <option value="male" name="gender">Male</option>
                                             <option value="female" name="gender">Female</option>
                                         </select>
-
+                                        <FaAngleDown className='down_Arrow'/>
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
@@ -220,14 +222,14 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                         <MdOutlineEmail className="all_icons" />
                                         <input type="email" name='email'
                                             value={formInfo.email}
-                                            onChange={handleChange} placeholder="Email" required />
+                                            onChange={handleChange} placeholder={t("Email")} required />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
 
                                         <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
-                                            <option value="" disabled hidden>Country</option>
+                                            <option value="" disabled hidden>{t('Country')}</option>
 
                                             {
                                                 countries.map((country) => (
@@ -236,6 +238,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                             }
                                         </select>
                                         <FaFlag className="all_icons" />
+                                        <FaAngleDown className='down_Arrow'/>
                                     </div>
                                 </div>
 
@@ -243,7 +246,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                     <div className="input_with_icon">
                                         <select name="temple" id="temple" value={formInfo.temple}
                                             onChange={handleChange} disabled={!formInfo.country} required >
-                                            <option value="" disabled hidden>Temple</option>
+                                            <option value="" disabled hidden>{t('Temple')}</option>
                                             {
                                                 temples.length > 0 ? (
                                                     <>
@@ -257,6 +260,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                                 )
                                             }
                                         </select>
+                                        <FaAngleDown className='down_Arrow'/>
                                         <MdTempleBuddhist className="all_icons" />
                                     </div>
                                 </div>
@@ -264,7 +268,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
                                         <MdPhone className="all_icons" />
-                                        <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber'
+                                        <input type="tel" pattern='[0-9]{10}' placeholder={t("Phone Number")} name='phoneNumber'
                                             value={formInfo.phoneNumber}
                                             onChange={handleChange} required />
                                     </div>
@@ -272,7 +276,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
                                         <RiLockPasswordLine className="all_icons" />
-                                        <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" name='password'
+                                        <input type={passwordVisible ? 'text' : 'password'} placeholder={t("Password")} name='password'
                                             value={formInfo.password}
                                             onChange={handleChange} required />
 
@@ -292,7 +296,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
                                         <RiLockPasswordLine className="all_icons" />
-                                        <input type={repeatPasswordVisible ? 'text' : 'password'} placeholder="Repeat Password" name='repeatPassword'
+                                        <input type={repeatPasswordVisible ? 'text' : 'password'} placeholder={t("Repeat Password")} name='repeatPassword'
                                             value={formInfo.repeatPassword}
                                             onChange={handleChange} required />
                                         {repeatPasswordVisible ? (
@@ -311,8 +315,8 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                             </div>
                         </div>
                         <div className="btn_container">
-                            <button className='rgstr_btn' type='submit'>Register</button>
-                            <p>Already have an account? <span onClick={handleLoginClick}>Login</span></p>
+                            <button className='rgstr_btn' type='submit'>{t('Register')}</button>
+                            <p>{t('Already have an account?')} <span onClick={handleLoginClick}>{t('Login')}</span></p>
                         </div>
                     </form>
 
@@ -323,4 +327,4 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
     )
 }
 
-export default RegisterModal
+export default withTranslation()(RegisterModal)

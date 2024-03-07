@@ -6,6 +6,7 @@ import apiMiddleware from '../middleware/api';
 import LanguageSlice from '../reducer/LanguageSlice';
 import CachedataSlice from '../reducer/CachedataSlice';
 import MusicPlaylistSlice from '../reducer/MusicPlaylistSlice';
+import SystemSettingsSlice from '../reducer/SystemSettingsSlice';
 
 const persistConfig = {
     key: 'root',
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     language: LanguageSlice.reducer,
     cachedata: CachedataSlice.reducer,
     MusicPlaylist: MusicPlaylistSlice.reducer,
+    SystemSettings: SystemSettingsSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

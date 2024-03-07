@@ -12,10 +12,12 @@ import { deleteAccountApi, logoutApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
 import { ClipLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
-import { useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
-export default function BasicMenu() {
+
+export function BasicMenu() {
 
     const dispatch = useDispatch()
     const router = useRouter()
@@ -43,8 +45,8 @@ export default function BasicMenu() {
     const handleLogout = async () => {
         handleClose()
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: t("Are you sure?"),
+            text: t("You won't be able to revert this!"),
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -58,8 +60,8 @@ export default function BasicMenu() {
                         if (res.error === false) {
                             dispatch(setUsers({}));
                             Swal.fire({
-                                title: "Logout!",
-                                text: "Logged out successfully",
+                                title: t("Logout!"),
+                                text: t("Logged out successfully"),
                                 icon: "success"
                             });
                             router.push('/')
@@ -73,15 +75,14 @@ export default function BasicMenu() {
 
             }
         });
-
     };
 
     const handleDeleteAccount = () => {
         handleClose()
 
         Swal.fire({
-            title: "Delete Account?",
-            text: "You will permanently lose your Notification, Profile, & Favorite",
+            title: t("Delete Account?"),
+            text: t("You will permanently lose your Notification, Profile, & Favorite"),
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -100,7 +101,7 @@ export default function BasicMenu() {
                                     console.log('Account deleted successfully');
                                 });
                             } else {
-                                toast.error('No user found');
+                                toast.error(t('No user found'));
                             }
                         } catch (error) {
                             toast.error(error.message);
@@ -110,8 +111,8 @@ export default function BasicMenu() {
                             onSuccess: (res) => {
                                 if (res.error === false) {
                                     Swal.fire({
-                                        title: "Deleted!",
-                                        text: res.message,
+                                        title: t("Deleted!"),
+                                        text: t(res.message),
                                         icon: "success"
                                     });
                                     dispatch(setUsers({}));
@@ -153,10 +154,11 @@ export default function BasicMenu() {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleProfile} className='basic_menu_item'>Profile</MenuItem>
-                <MenuItem onClick={handleLogout} className='basic_menu_item' >Logout</MenuItem>
-                <MenuItem onClick={handleDeleteAccount} className='basic_menu_item'>Delete account</MenuItem>
+                <MenuItem onClick={handleProfile} className='basic_menu_item'>{t('Profile')}</MenuItem>
+                <MenuItem onClick={handleLogout} className='basic_menu_item' >{t('Logout')}</MenuItem>
+                <MenuItem onClick={handleDeleteAccount} className='basic_menu_item'>{t('Delete account')}</MenuItem>
             </Menu>
         </div>
     );
 }
+export default withTranslation()(BasicMenu)

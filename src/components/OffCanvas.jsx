@@ -5,9 +5,14 @@ import { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import toast from 'react-hot-toast';
 import { MdPlaylistAdd } from 'react-icons/md';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+import { useSelector } from 'react-redux';
 
 const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLiked, ...props }) => {
 
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
     const [playlist, setPlaylist] = useState([])
     const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState(false)
     const [playlistName, setPlaylistName] = useState('')
@@ -16,18 +21,19 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
 
 
     useEffect(() => {
-
-        getPlaylistApi({
-            onSuccess: (res) => {
-                if (res.data) {
-                    setPlaylist(res.data)
+        if (token) {
+            getPlaylistApi({
+                onSuccess: (res) => {
+                    if (res.data) {
+                        setPlaylist(res.data)
+                    }
+                },
+                onError: (e) => {
+                    console.log(e)
                 }
-            },
-            onError: (e) => {
-                console.log(e)
-            }
-        })
-    }, [isLiked])
+            })
+        }
+    }, [isLiked, token])
 
     useEffect(() => {
         const initialSelectedPlaylists = playlist.filter((item) => item.music.some((music) => music.id === selectedMusicId)).map((item) => item.id);
@@ -64,11 +70,11 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                     setPlaylist([...playlist, res.data])
                     setPlaylistName('')
                     setIsCreatePlaylistOpen(false)
-                    toast.success('Playlist Created');
+                    toast.success(t('Playlist Created'));
                 }
             },
             onError: (e) => {
-                toast.error('Failed to create playlist');
+                toast.error(t('Failed to create playlist'));
             }
         })
     }
@@ -85,7 +91,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 music_id: selectedMusicId,
                 onSuccess: (res) => {
                     if (res.error === false) {
-                        toast.success('Deleted Successfully');
+                        toast.success(t('Deleted Successfully'));
                         onHide()
                         setIsLiked(false)
                     }
@@ -106,7 +112,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 music_id: selectedMusicId,
                 onSuccess: (res) => {
                     if (res.error === false) {
-                        toast.success('Saved Successfully');
+                        toast.success(t('Saved Successfully'));
                         setIsLiked(true)
                         onHide()
                     }
@@ -123,13 +129,13 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
         <>
             <Offcanvas placement="end" show={show} onHide={onHide} {...props}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Add to playlist</Offcanvas.Title>
+                    <Offcanvas.Title>{t('Add to playlist')}</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <div className='d-flex flex-column gap-3 h-100'>
                         <div className="playlist_container_canvas text-white" onClick={handleCreateClick} >
                             <Image src='/playlist_icon.svg' alt='playlist-icon' width={28} height={14} />
-                            <p className="m-0 text-small">Create Playlist</p>
+                            <p className="m-0 text-small">{t('Create Playlist')}</p>
                         </div>
 
                         {
@@ -137,9 +143,9 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                             <form className='canvas_form d-flex flex-column gap-3 position-relative' onSubmit={submitCreate}>
                                 <div className="input_with_icon">
                                     <MdPlaylistAdd className="all_icons" />
-                                    <input name='playlistname' type="text" onChange={handleChange} value={playlistName} placeholder="Enter playlist name" required />
+                                    <input name='playlistname' type="text" onChange={handleChange} value={playlistName} placeholder={t("Enter playlist name")} required />
                                 </div>
-                                <button type='submit'>Create</button>
+                                <button type='submit'>{t('Create')}</button>
                             </form>
                         }
 
@@ -178,7 +184,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                                 }
                             </div>
                         </div>
-                        <button className='mt-auto save_button' onClick={saved} >Save</button>
+                        <button className='mt-auto save_button' onClick={saved} >{t('Save')}</button>
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
@@ -186,4 +192,4 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
     )
 }
 
-export default OffCanvas
+export default withTranslation()(OffCanvas)

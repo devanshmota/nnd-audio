@@ -7,12 +7,16 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import toast from "react-hot-toast";
 import RenamePlaylistModal from "./RenamePlaylistModal";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const AllPlaylist = () => {
 
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
     const [playlist, setPlaylist] = useState([])
     const [isPlaylistModalVisible, setIsPlaylistModalVisible] = useState(false)
-
     const [isRenameModalVisible, setIsRenameModalVisible] = useState(false);
     const [initialRenameValue, setInitialRenameValue] = useState('');
     const [initialPlaylistid, setInitialPlaylistid] = useState(null)
@@ -20,27 +24,29 @@ const AllPlaylist = () => {
 
 
     useEffect(() => {
-        getPlaylistApi({
-            onSuccess: (res) => {
-                if (res.data) {
-                    setPlaylist(res.data)
+        if (token) {
+            getPlaylistApi({
+                onSuccess: (res) => {
+                    if (res.data) {
+                        setPlaylist(res.data)
+                    }
+                },
+                onError: (e) => {
+                    console.log(e)
                 }
-            },
-            onError: (e) => {
-                console.log(e)
-            }
-        })
-        setIsGetPlaylist(false)
+            })
+            setIsGetPlaylist(false)
+        }
     }, [isGetPlaylist])
 
 
     const items = [
         {
-            label: 'Delete',
+            label: t('Delete'),
             key: '1',
         },
         {
-            label: 'Rename',
+            label: t('Rename'),
             key: '2',
         },
     ];
@@ -52,16 +58,16 @@ const AllPlaylist = () => {
                     if (res.error === false) {
                         const updatedPlaylist = playlist.filter((item) => item.id !== playlistId)
                         setPlaylist(updatedPlaylist)
-                        toast.success('Deleted successfully')
+                        toast.success(t('Deleted successfully'))
                     }
 
                 },
                 onError: (e) => {
-                    toast.error('Failed to delete')
+                    toast.error(t('Failed to delete'))
                     console.log(e)
                 }
             })
-    
+
         } else if (key === '2') {
             setInitialPlaylistid(playlistId)
             const playlistToRename = playlist.find((item) => item.id === playlistId);
@@ -90,7 +96,7 @@ const AllPlaylist = () => {
             )
         );
         setIsRenameModalVisible(false);
-        toast.success('Playlist renamed successfully');
+        toast.success(t('Playlist renamed successfully'));
     };
 
     return (
@@ -101,7 +107,7 @@ const AllPlaylist = () => {
                     <div className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                         <div className="playlist_container text-white" onClick={createPlaylist}>
                             <Image src='/playlist_icon.svg' alt='playlist-icon' width={51} height={37} />
-                            <h5 className="m-0">Create Playlist</h5>
+                            <h5 className="m-0">{t('Create Playlist')}</h5>
                         </div>
                     </div>
                     {
@@ -113,18 +119,18 @@ const AllPlaylist = () => {
                                         item.music.length > 0 ? (
                                             <Image src={item?.music[0]?.album?.image} alt='playlist' className="rounded" width={200} height={200} />
                                         )
-                                        :
-                                        (
+                                            :
+                                            (
                                                 <Image src='/Audio_hedphone.svg' alt='playlist' className="rounded" width={200} height={200} />
-                                        )
+                                            )
                                     }
-                                    
-                                    
+
+
                                     <div className="d-flex align-items-center justify-content-between w-100">
 
                                         <div className="d-flex flex-column">
                                             <h6 className="m-0">{item.title}</h6>
-                                            <p className="text-rec-pld">{item?.music?.length} Songs</p>
+                                            <p className="text-rec-pld">{item?.music?.length} {t('Songs')}</p>
                                         </div>
                                         <div>
                                             <Dropdown menu={menuProps(item.id)} placement="bottomRight" arrow={{ pointAtCenter: true }}>
@@ -145,4 +151,4 @@ const AllPlaylist = () => {
     )
 }
 
-export default AllPlaylist
+export default withTranslation()(AllPlaylist)

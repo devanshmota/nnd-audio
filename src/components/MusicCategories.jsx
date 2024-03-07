@@ -2,39 +2,21 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { useEffect, useRef, useState } from 'react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
-import { getMusicCategoryApi } from '@/redux/actions/Campaign';
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
-import { ClipLoader } from 'react-spinners';
 
 
-const Music_categories = () => {
+
+
+const Music_categories = ({musicCategory}) => {
     const { language } = useSelector((state) => state.language)
     const musicRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    const [musicCategory, setMusicCategory] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        getMusicCategoryApi({
-            limit: 10,
-            order: "asc",
-            onSuccess: (res) => {
-                if (res.data) {
-                    setMusicCategory(res.data)
-                }
-                setIsLoading(false)
-            },
-            onError: (e) => {
-                console.log(e)
-                setIsLoading(false)
-            }
-        })
-    }, [])
+   
 
     const handlePrev = () => {
         if (musicRef.current && !isBeginning) {
@@ -49,9 +31,6 @@ const Music_categories = () => {
         }
     };
 
-    if (musicCategory.length === 0) {
-        return null
-    }
 
     return (
         <div className="container d-flex flex-column">
@@ -64,11 +43,7 @@ const Music_categories = () => {
                 link="/music-categories-all"
                 isShow={false}
             />
-            {isLoading &&
-                <div className='d-flex align-items-center justify-content-center py-2'>
-                    <ClipLoader color="#ffffff" />
-                </div>
-            }
+
             {
                 musicCategory.length > 0 && (
                     <>
@@ -116,7 +91,7 @@ const Music_categories = () => {
                         >
 
                             {
-                                musicCategory.map((item, index) => (
+                                musicCategory.slice(0, 10).map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                         <Link href={`/music-categories-all/${item.id}`} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
                                             <Image src={item.image} className='rounded mw-100 object-fit-cover' alt={item.eng_name} width={159.429} height={159.429} />

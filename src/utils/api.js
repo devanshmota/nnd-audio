@@ -26,6 +26,7 @@ const GET_SINGLE_ARTIST = 'get_music'
 const GET_ALBUM = 'get_album'
 const GET_NOTIFICATION = 'get_notification'
 const GET_ALBUM_WITH_MUSIC = 'get_album_with_music'
+const GET_SYSTEM_SETTINGS = "get_system_settings"
 
 // GET COUNTRIES
 export const getCountries = (offset, sort, limit, order, search) => {
@@ -38,6 +39,17 @@ export const getCountries = (offset, sort, limit, order, search) => {
             limit: limit,
             order: order,
             search: search,
+        },
+        authorizationHeader: false,
+
+    }
+}
+export const getSystemSettings = (type) => {
+    return {
+        url: `${GET_SYSTEM_SETTINGS}`,
+        method: "GET",
+        params: {
+            type: type,
         },
         authorizationHeader: false,
 
@@ -192,7 +204,6 @@ export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id,
             album_id: album_id,
             category_id: category_id,
             is_guest: is_guest,
-
         },
         authorizationHeader: true,
     }

@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 import { checkLoginApi, updateFcmIdApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...props }) => {
@@ -69,7 +71,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
 
                     }
                     else {
-                        toast.error('Email is not verified')
+                        toast.error(t('Email is not verified'))
                     }
                 }
             })
@@ -103,18 +105,18 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                     <form className="login_form" onSubmit={Submit}>
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
                         <div className="header">
-                            <h3>Login</h3>
-                            <p>Please enter your email and password</p>
+                            <h3>{t('Login')}</h3>
+                            <p>{t('Please enter your email and password')}</p>
                         </div>
                         <div className="input_container">
 
                             <div className="input_with_icon">
                                 <MdOutlineEmail className="all_icons" />
-                                <input name='email' value={formInfo.email} onChange={handleChange} type="email" className="email_container" placeholder="Your Email" required />
+                                <input name='email' value={formInfo.email} onChange={handleChange} type="email" className="email_container" placeholder={t("Your Email")} required />
                             </div>
                             <div className="input_with_icon">
                                 <RiLockPasswordLine className="all_icons" />
-                                <input value={formInfo.password} onChange={handleChange} name='password' type={passwordVisible ? 'text' : 'password'} placeholder="Password" required />
+                                <input value={formInfo.password} onChange={handleChange} name='password' type={passwordVisible ? 'text' : 'password'} placeholder={t("Password")} required />
                                 {passwordVisible ? (
                                     <FaRegEye
                                         className="eye_icon"
@@ -127,13 +129,13 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                                     />
                                 )}
                             </div>
-                            <span onClick={handleFrgtPassword} className="forgot-password">Forgot Password?</span>
+                            <span onClick={handleFrgtPassword} className="forgot-password">{t('Forgot Password?')}</span>
                         </div>
                         <div className="btn_container">
-                            <button type='submit' className='login_button'>Login</button>
+                            <button type='submit' className='login_button'>{t("Login")}</button>
                             <p>
-                                Don’t have any account?
-                                <span onClick={handleRegisterClick}> Register</span>
+                                {t("Don’t have any account?")}
+                                <span onClick={handleRegisterClick}>{t('Register')}</span>
                             </p>
                         </div>
                     </form>
@@ -144,4 +146,4 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
     );
 };
 
-export default LoginModel
+export default withTranslation()(LoginModel)

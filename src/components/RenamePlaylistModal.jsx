@@ -5,6 +5,8 @@ import { Modal } from "react-bootstrap"
 import toast from "react-hot-toast";
 import { IoMdCloseCircle } from "react-icons/io";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const RenamePlaylistModal = ({ show, onHide, initialRenameValue, initialPlaylistid, handleRenameSuccess, setIsGetPlaylist, ...props }) => {
@@ -52,12 +54,12 @@ const RenamePlaylistModal = ({ show, onHide, initialRenameValue, initialPlaylist
             <Modal.Body >
                 <form className="create_playlist_modal" onSubmit={handleRenamePlaylist} >
                     <IoMdCloseCircle className="close_icon" onClick={onHide} />
-                    <h4 className="m-0">Rename Playlist</h4>
+                    <h4 className="m-0">{t('Rename Playlist')}</h4>
                     <div className="input_with_icon">
                         <MdDriveFileRenameOutline className="all_icons" />
-                        <input name='renamedplaylist' value={renamed} onChange={handleRenamed} type="text" placeholder="Enter playlist name" required />
+                        <input name='renamedplaylist' value={renamed} onChange={handleRenamed} type="text" placeholder={t("Enter playlist name")} required />
                     </div>
-                    <button type="submit">Update</button>
+                    <button type="submit">{t('Update')}</button>
                 </form>
 
             </Modal.Body>
@@ -65,4 +67,4 @@ const RenamePlaylistModal = ({ show, onHide, initialRenameValue, initialPlaylist
     )
 }
 
-export default RenamePlaylistModal
+export default withTranslation()(RenamePlaylistModal)

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const AllRadioCard = () => {
     const { language } = useSelector((state) => state.language)
@@ -55,4 +57,4 @@ const AllRadioCard = () => {
     )
 }
 
-export default AllRadioCard
+export default withTranslation()(AllRadioCard)

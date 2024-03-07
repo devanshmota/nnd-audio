@@ -3,9 +3,10 @@ import { setSearchQuery } from '@/redux/reducer/CachedataSlice';
 import Search from 'antd/es/input/Search';
 import { useRouter } from 'next/navigation';
 import SearchIcon from '@mui/icons-material/Search';
-
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const GlobalSearch = () => {
 
@@ -26,7 +27,7 @@ const GlobalSearch = () => {
             <div className='position-relative'>
                 <SearchIcon className='search-icon' />
                 <Search
-                    placeholder="Search"
+                    placeholder={t('Search')}
                     onSearch={onSearch}
                     onChange={(e) => (onChange(e.target.value))}
                     style={{
@@ -40,4 +41,4 @@ const GlobalSearch = () => {
     );
 };
 
-export default GlobalSearch;
+export default withTranslation()(GlobalSearch);

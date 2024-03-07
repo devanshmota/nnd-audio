@@ -1,17 +1,15 @@
 'use client'
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { FaPlay } from "react-icons/fa";
-import { getHomeApi } from "@/redux/actions/Campaign";
 import PlayLiveVideoModal from "./PlayLiveVideoModal";
 import { getDecryptedText } from "@/decryption/decryption";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay,Pagination } from 'swiper/modules';
 import CategoryHeader from "./CategoryHeader";
 import Image from "next/image";
 
 
-const LiveKathaStream = () => {
-
+const LiveKathaStream = ({liveKathaStream}) => {
 
     const liveKathaStreamRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
@@ -21,22 +19,6 @@ const LiveKathaStream = () => {
         title: ''
     });
     const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-    const [liveKathaStream, setLiveKathaStream] = useState([]);
-
-    useEffect(() => {
-
-        getHomeApi({
-            is_guest: 1,
-            onSuccess: (res) => {
-                if (res.youtube_live) {
-                    setLiveKathaStream(res.youtube_live);
-                }
-            },
-            onError: (e) => {
-                console.log(e);
-            }
-        });
-    }, []);
 
     const handlePlay = (item) => {
         setVideoDetails({
@@ -60,9 +42,6 @@ const LiveKathaStream = () => {
         console.log(isBeginning)
     };
 
-    if (liveKathaStream.length === 0) {
-        return null
-    }
 
     return (
         <>
@@ -120,7 +99,7 @@ const LiveKathaStream = () => {
                     className='mySwiper w-100'
                 >
                     <div className="container d-flex flex-column">
-                        {liveKathaStream.length > 0 && liveKathaStream.map((item, index) => (
+                        {liveKathaStream.slice(0, 10).map((item, index) => (
                             <SwiperSlide key={item.id} virtualIndex={index}>
                                 <div className="image-container">
 

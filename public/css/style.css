@@ -8961,16 +8961,17 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 } */
 
 
-/* .login_form select {
+.register_form select,.login_form select{
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-} */
+	padding-right: 40px;
+}
 
-/* .down_Arrow{
+.down_Arrow{
 	position: absolute;
-	right: 10px;
-} */
+	right: 15px;
+}
 
 /* #313841 */
 
@@ -9086,8 +9087,14 @@ input[type="range"] {
 }
 
 .main{
-	margin-bottom: 20px;
+	margin-bottom: 70px;
 	overflow: auto;
+}
+.loader{
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 

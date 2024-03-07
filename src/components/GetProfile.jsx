@@ -1,6 +1,6 @@
 'use client'
 import { MdPhone, MdTempleBuddhist } from "react-icons/md";
-import { FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
+import { FaAngleDown, FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "@/redux/reducer/UsersSlice";
 import { getDecryptedText } from "@/decryption/decryption";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const GetProfile = () => {
@@ -115,7 +117,7 @@ const GetProfile = () => {
                     setIsLoading(false)
                 },
                 onError: (e) => {
-                    toast.error('Save Failed')
+                    toast.error(t('Save Failed'))
                     setIsLoading(false)
                 }
             })
@@ -145,7 +147,7 @@ const GetProfile = () => {
                         }
                     },
                     onError: (e) => {
-                        toast.error('Save Failed')
+                        toast.error(t('Save Failed'))
                     }
                 })
             }
@@ -160,21 +162,21 @@ const GetProfile = () => {
         <div className="container">
             <div className="d-flex align-items-center justify-content-center form_wrapper">
                 <form className="login_form w-75" onSubmit={handleSave} >
-                    <h2 className="text-center">Profile</h2>
+                    <h2 className="text-center">{t('Profile')}</h2>
                     <div className="row gap_field">
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="firstName">First Name</label>
+                                <label htmlFor="firstName">{t('First Name')}</label>
                                 <div className="input_with_icon">
 
                                     <FaUser className="all_icons" />
-                                    <input name='firstName' id="firstName" value={formInfo.firstName} onChange={handleChange} type="text" placeholder="Enter your first name" required />
+                                    <input name='firstName' id="firstName" value={formInfo.firstName} onChange={handleChange} type="text" placeholder={t("Enter your first name")} required />
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="lastName">Last Name</label>
+                                <label htmlFor="lastName">{t('Last Name')}</label>
                                 <div className="input_with_icon">
                                     <FaUser className="all_icons" />
                                     <input
@@ -183,14 +185,14 @@ const GetProfile = () => {
                                         id="lastName"
                                         value={formInfo.lastName}
                                         onChange={handleChange}
-                                        placeholder="Last Name"
+                                        placeholder={t("Last Name")}
                                         required />
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="gender">Gender</label>
+                                <label htmlFor="gender">{t('Select Gender')}</label>
                                 <div className="input_with_icon">
                                     <FaTransgenderAlt className="all_icons" />
                                     <select
@@ -204,13 +206,13 @@ const GetProfile = () => {
                                         <option value="male" name="gender">Male</option>
                                         <option value="female" name="gender">Female</option>
                                     </select>
-                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                    <FaAngleDown className='down_Arrow'/>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">{t('Email')}</label>
                                 <div className="input_with_icon">
                                     <MdEmail className="all_icons" />
                                     <input
@@ -218,13 +220,13 @@ const GetProfile = () => {
                                         name='email'
                                         id="email"
                                         value={formInfo.email}
-                                        onChange={handleChange} placeholder="Email" readOnly={true} />
+                                        onChange={handleChange} placeholder={t("Email")} readOnly={true} />
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="country">Country</label>
+                                <label htmlFor="country">{t('Country')}</label>
                                 <div className="input_with_icon">
 
                                     <select name="country" id="country" value={formInfo.country} onChange={handleChange} required>
@@ -239,16 +241,16 @@ const GetProfile = () => {
                                         }
                                     </select>
                                     <FaFlag className="all_icons" />
-                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                    <FaAngleDown className='down_Arrow'/>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="phoneNumber">Phone number</label>
+                                <label htmlFor="phoneNumber">{t('Phone Number')}</label>
                                 <div className="input_with_icon">
                                     <MdPhone className="all_icons" />
-                                    <input type="tel" pattern='[0-9]{10}' placeholder="Phone Number" name='phoneNumber' id="phoneNumber"
+                                    <input type="tel" pattern='[0-9]{10}' placeholder={t("Phone Number")} name='phoneNumber' id="phoneNumber"
                                         value={formInfo.phoneNumber}
                                         onChange={handleChange} required />
                                 </div>
@@ -256,7 +258,7 @@ const GetProfile = () => {
                         </div>
                         <div className="col-sm-12">
                             <div className="d-flex flex-column gap-1 w-100">
-                                <label htmlFor="temple">Temple</label>
+                                <label htmlFor="temple">{t('Temple')}</label>
                                 <div className="input_with_icon">
                                     <select name="temple" id="temple" value={formInfo.temple}
                                         onChange={handleChange} disabled={!formInfo.country} required >
@@ -277,17 +279,16 @@ const GetProfile = () => {
                                         }
                                     </select>
                                     <MdTempleBuddhist className="all_icons" />
-                                    {/* <IoIosArrowDown className="down_Arrow" /> */}
+                                    <FaAngleDown className='down_Arrow'/>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12">
                             <div className="d-flex justify-content-center align-items-center gap-2">
-
                                 <button type="submit" className="save_cancel_btn" disabled={isLoading} >
-                                    Save
+                                    {t('Save')}
                                 </button>
-                                <button type="button" className="save_cancel_btn" onClick={handleCancel}>Cancel</button>
+                                <button type="button" className="save_cancel_btn" onClick={handleCancel}>{t('Cancel')}</button>
                             </div>
                         </div>
                     </div>
@@ -297,4 +298,4 @@ const GetProfile = () => {
     )
 }
 
-export default GetProfile
+export default withTranslation()(GetProfile)

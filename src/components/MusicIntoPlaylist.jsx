@@ -21,7 +21,6 @@ const MusicIntoPlaylist = () => {
         })
 
     }, [])
-    console.log(playlist)
     return (
         <div className="container text-white">
             <div className="row">

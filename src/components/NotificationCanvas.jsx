@@ -2,6 +2,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+
 
 const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
 
@@ -9,7 +12,7 @@ const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
     return (
         <Offcanvas placement="end" show={show} onHide={onHide} {...props}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Notifications</Offcanvas.Title>
+                <Offcanvas.Title>{t('Notifications')}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 {notifications?.length > 0 &&
@@ -51,4 +54,4 @@ const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
     )
 }
 
-export default NotificationCanvas
+export default withTranslation()(NotificationCanvas)

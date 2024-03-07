@@ -4,6 +4,9 @@ import { Modal } from "react-bootstrap"
 import { IoMdCloseCircle } from "react-icons/io";
 import { MdPlaylistAdd } from "react-icons/md";
 import toast from 'react-hot-toast';
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+
 
 
 const CreatePlaylistModal = ({ show, onHide, handleCreatePlaylistSuccess, ...props }) => {
@@ -23,11 +26,11 @@ const CreatePlaylistModal = ({ show, onHide, handleCreatePlaylistSuccess, ...pro
                 if (res.error === false) {
                     handleCreatePlaylistSuccess(res.data)
                     setPlayListName('')
-                    toast.success('Playlist Created');
+                    toast.success(t('Playlist Created'));
                 }
             },
             onError: (e) => {
-                toast.error('Failed to create playlist');
+                toast.error(t('Failed to create playlist'));
             }
         })
         onHide()
@@ -47,12 +50,12 @@ const CreatePlaylistModal = ({ show, onHide, handleCreatePlaylistSuccess, ...pro
                 <Modal.Body >
                     <form className="create_playlist_modal" onSubmit={handleCreatePlaylist} >
                         <IoMdCloseCircle className="close_icon" onClick={onHide} />
-                        <h4 className="m-0">Create Playlist</h4>
+                        <h4 className="m-0">{t('Create Playlist')}</h4>
                         <div className="input_with_icon">
                             <MdPlaylistAdd className="all_icons" />
-                            <input name='playlistname' value={playListName} onChange={handlePlaylistName} type="text" placeholder="Enter playlist name" required />
+                            <input name='playlistname' value={playListName} onChange={handlePlaylistName} type="text" placeholder={t("Enter playlist name")} required />
                         </div>
-                        <button type="submit">Create</button>
+                        <button type="submit">{t('Create')}</button>
                     </form>
 
                 </Modal.Body>
@@ -62,4 +65,4 @@ const CreatePlaylistModal = ({ show, onHide, handleCreatePlaylistSuccess, ...pro
     )
 }
 
-export default CreatePlaylistModal
+export default withTranslation()(CreatePlaylistModal)
