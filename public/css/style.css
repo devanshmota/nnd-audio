@@ -74,10 +74,10 @@ h6,
 	font-family: inherit;
 	font-weight: 600;
 	line-height: 1.2;
-	/* color: #3bc8e7; */
-}
+	color: #3bc8e7;
+} */
 
-*/ a {
+a {
 	color: #3bc8e7;
 	transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
