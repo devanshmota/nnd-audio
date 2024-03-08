@@ -10,13 +10,13 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import BasicMenu from "./BasicMenu";
 import NotificationBell from "./NotificationBell";
 import GlobalSearch from "./Search";
 import i18n from "@/utils/language";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import { IoIosArrowDown } from "react-icons/io";
 
 
 const Header = ({ open, handleDrawerOpen }) => {
@@ -85,12 +85,11 @@ const Header = ({ open, handleDrawerOpen }) => {
               }
               <DropdownButton
                 id="dropdown-basic-button"
-                className="ms_top_btn"
                 title={
                   <>
                     <div className="d-flex align-items-center gap-1">
                       {language}
-                      <ArrowDropDownIcon />
+                      <IoIosArrowDown />
                     </div>
                   </>
                 }
@@ -137,6 +136,7 @@ const Header = ({ open, handleDrawerOpen }) => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
+                className="sm_menu"
               >
                 {token ? (
                   <MenuItem>
@@ -150,15 +150,16 @@ const Header = ({ open, handleDrawerOpen }) => {
                 <MenuItem>
                   <DropdownButton
                     id="dropdown-basic-button"
-                    className="ms_top_btn"
+                    className="basic_menu"
                     title={
                       <>
                         <div className="d-flex align-items-center">
                           <div className="d-flex align-items-center gap-2">
                             <span>{language}</span>
+                            <IoIosArrowDown />
                           </div>
 
-                          <ArrowDropDownIcon />
+
                         </div>
 
                       </>

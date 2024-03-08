@@ -8295,8 +8295,7 @@ select,
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;
-	width: 100%;
-	padding: 0 0.75rem;
+	padding: 0.375rem 0.75rem;
 	border-radius: 5px;
 }
 
@@ -9103,7 +9102,29 @@ input[type="range"] {
 	justify-content: center;
 }
 
+.globalSearch {
+	display: block !important;
+	width: 100% !important;
+}
+
+.usersName {
+	padding: 0 !important;
+}
+
+.usersName:hover {
+	background-color: transparent !important;
+}
 
 .three_dot_btn {
 	color: white !important;
+}
+
+.child_menu ul {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+.sm_menu ul {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
 }

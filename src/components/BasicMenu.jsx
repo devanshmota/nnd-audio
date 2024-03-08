@@ -128,6 +128,7 @@ export function BasicMenu() {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
                 endIcon={<ExpandMoreIcon />}
+                className='usersName'
             >
                 {getDecryptedText(users.data.first_name)}
             </Button>
@@ -140,6 +141,7 @@ export function BasicMenu() {
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}
+                className='child_menu'
             >
                 <MenuItem onClick={handleProfile} className='basic_menu_item'>{t('Profile')}</MenuItem>
                 <MenuItem onClick={handleLogout} className='basic_menu_item' >{t('Logout')}</MenuItem>
