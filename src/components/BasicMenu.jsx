@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 import { auth } from './Firebase';
 import { deleteAccountApi, logoutApi } from '@/redux/actions/Campaign';
 import { setUsers } from '@/redux/reducer/UsersSlice';
-import { ClipLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { t } from 'i18next';
@@ -24,7 +23,6 @@ export function BasicMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const { users } = useSelector((state) => state.users)
-    const [isLoading, setIsLoading] = React.useState(false)
 
 
     const handleClick = (event) => {
@@ -38,9 +36,6 @@ export function BasicMenu() {
         router.push('/profile')
     }
 
-    if (isLoading) {
-        return <ClipLoader color="#36d7b7" />
-    }
 
     const handleLogout = async () => {
         handleClose()
@@ -55,7 +50,7 @@ export function BasicMenu() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 auth.signOut();
-               await logoutApi({
+                await logoutApi({
                     onSuccess: (res) => {
                         if (res.error === false) {
                             dispatch(setUsers({}));
@@ -72,14 +67,12 @@ export function BasicMenu() {
                         toast.error(e)
                     }
                 })
-
             }
         });
     };
 
     const handleDeleteAccount = () => {
         handleClose()
-
         Swal.fire({
             title: t("Delete Account?"),
             text: t("You will permanently lose your Notification, Profile, & Favorite"),
@@ -91,43 +84,37 @@ export function BasicMenu() {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    setIsLoading(true)
 
-                    setTimeout(() => {
-                        try {
-                            const user = auth.currentUser;
-                            if (user) {
-                                user.delete().then(() => {
-                                    console.log('Account deleted successfully');
-                                });
-                            } else {
-                                toast.error(t('No user found'));
-                            }
-                        } catch (error) {
-                            toast.error(error.message);
+
+                    try {
+                        const user = auth.currentUser;
+                        if (user) {
+                            user.delete().then(() => {
+                                console.log('Account deleted successfully');
+                            });
+                        } else {
+                            toast.error(t('No user found'));
                         }
-
-                        deleteAccountApi({
-                            onSuccess: (res) => {
-                                if (res.error === false) {
-                                    Swal.fire({
-                                        title: t("Deleted!"),
-                                        text: t(res.message),
-                                        icon: "success"
-                                    });
-                                    dispatch(setUsers({}));
-                                    setIsLoading(false);
-                                    router.push('/');
-                                }
-                            },
-                            onError: (e) => {
-                                console.log(e);
-                                toast.error(res.error);
+                    } catch (error) {
+                        toast.error(error.message);
+                    }
+                    deleteAccountApi({
+                        onSuccess: (res) => {
+                            if (res.error === false) {
+                                Swal.fire({
+                                    title: t("Deleted!"),
+                                    text: t(res.message),
+                                    icon: "success"
+                                });
+                                dispatch(setUsers({}));
+                                router.push('/');
                             }
-                        });
-                    }, 5000);
-
-
+                        },
+                        onError: (e) => {
+                            console.log(e);
+                            toast.error(res.error);
+                        }
+                    });
                 }
             })
     }
@@ -140,7 +127,7 @@ export function BasicMenu() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                endIcon={<ExpandMoreIcon/>}
+                endIcon={<ExpandMoreIcon />}
             >
                 {getDecryptedText(users.data.first_name)}
             </Button>

@@ -70,10 +70,7 @@ const Header = ({ open, handleDrawerOpen }) => {
   const setDefaultLanguage = async () => {
     await i18n.changeLanguage(languageCode);
   }
-  useEffect(() => {
 
-    setDefaultLanguage()
-  }, [languageCode])
 
   return (
     <>
@@ -82,15 +79,10 @@ const Header = ({ open, handleDrawerOpen }) => {
         <div className="ms_top_right">
           <div className="ms_top_btn">
             <div className="drp_large">
-
               <GlobalSearch />
-
-
               {
                 token && <NotificationBell />
               }
-
-
               <DropdownButton
                 id="dropdown-basic-button"
                 className="ms_top_btn"
@@ -119,11 +111,10 @@ const Header = ({ open, handleDrawerOpen }) => {
                   )
                   :
                   (
-                    <button className="header_login_btn" onClick={handleLoginSignup}>Login/Sign Up</button>
+                    <button className="header_login_btn" onClick={handleLoginSignup}>{t('Login/Sign Up')}</button>
                   )
               }
             </div>
-
             <div className="drp_small">
 
               <div className="d-flex align-items-center gap-2">
@@ -131,7 +122,6 @@ const Header = ({ open, handleDrawerOpen }) => {
                 {
                   token && <NotificationBell />
                 }
-
                 <IconButton
                   aria-controls="menu"
                   aria-haspopup="true"
