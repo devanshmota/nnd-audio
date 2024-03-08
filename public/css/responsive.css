@@ -184,7 +184,8 @@
     .playlist_container {
         height: 244px;
     }
-    .register_form{
+
+    .register_form {
         width: 22rem;
     }
 }
@@ -206,6 +207,10 @@
 
     #dropdown-basic-button {
         padding: 0;
+    }
+
+    .btn {
+        background-color: transparent !important;
     }
 }
 
@@ -244,4 +249,3 @@
         display: none !important;
     }
 }
-

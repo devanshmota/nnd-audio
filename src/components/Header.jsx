@@ -145,7 +145,7 @@ const Header = ({ open, handleDrawerOpen }) => {
 
                   </MenuItem>
                 ) : (
-                  <MenuItem onClick={handleLoginSignup}>{t('Login/Sign Up')}</MenuItem>
+                  <MenuItem onClick={handleLoginSignup} className="text-white">{t('Login/Sign Up')}</MenuItem>
                 )}
                 <MenuItem>
                   <DropdownButton
