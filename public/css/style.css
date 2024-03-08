@@ -8295,7 +8295,6 @@ select,
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;
-	padding: 0.375rem 0.75rem;
 	border-radius: 5px;
 }
 
@@ -8767,15 +8766,6 @@ select,
 	gap: 20px 0;
 }
 
-
-/* .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root,.css-1km1ehz {
-	justify-content: center !important;
-} */
-
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
-	justify-content: center !important;
-}
-
 .ply-item-title {
 	overflow: hidden;
 	display: -webkit-box;
@@ -9127,4 +9117,8 @@ input[type="range"] {
 .sm_menu ul {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
+}
+
+.MuiButton-endIcon {
+	margin-left: 0 !important;
 }

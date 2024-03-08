@@ -228,6 +228,10 @@
     .drp_small {
         display: none;
     }
+
+    .basic_menu {
+        padding: 0.375rem 0.75rem;
+    }
 }
 
 @media (min-width: 767px) {
