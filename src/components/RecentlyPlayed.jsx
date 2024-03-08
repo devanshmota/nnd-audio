@@ -15,6 +15,7 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
+import CategoryHeader from "./CategoryHeader";
 
 
 const RecentlyPlayed = () => {
@@ -73,11 +74,19 @@ const RecentlyPlayed = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-between align-items-center my-4">
+      {/* <div className="container d-flex justify-content-between align-items-center mb-3">
         <h2 className="text-white m-0">{t('Recently Played')}</h2>
         <Link href='recently-played-all' className='view_all'>{t('View all')}</Link>
-      </div>
+      </div> */}
+
+
+
       <div className="container">
+        <CategoryHeader
+          title="Recently Played"
+          link="/recently-played-all"
+          isShow={true}
+        />
         <div className="row gy-4 utsav_gap margin-bottom">
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
@@ -109,8 +118,6 @@ const RecentlyPlayed = () => {
         </div>
         <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
       </div>
-      <br />
-      <br />
     </>
   )
 }

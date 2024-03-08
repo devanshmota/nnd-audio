@@ -34,50 +34,52 @@ const HomePage = () => {
     })
   }, [])
 
-  if(isLoading){
-    return <Loader/>
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
     <>
-      {Home?.youtube_live?.length > 0 && (
-        <LiveKathaStream liveKathaStream={Home.youtube_live} />
-      )}
+      <div className='d-flex flex-column gap-5 mt-3'>
+        {Home?.youtube_live?.length > 0 && (
+          <LiveKathaStream liveKathaStream={Home.youtube_live} />
+        )}
 
-      {
-        Home?.category?.length > 0 && (
-          <MusicCategories musicCategory={Home.category} />
-        )
-      }
-      {
-        Home?.recent_album?.length > 0 && (
-          <LatestAlbums LatestAlbums={Home.recent_album} />
-        )
-      }
-      {
-        Home?.utsav?.length > 0 && (
-          <Utsav utsav={Home.utsav} />
-        )
-      }
+        {
+          Home?.category?.length > 0 && (
+            <MusicCategories musicCategory={Home.category} />
+          )
+        }
+        {
+          Home?.recent_album?.length > 0 && (
+            <LatestAlbums LatestAlbums={Home.recent_album} />
+          )
+        }
+        {
+          Home?.utsav?.length > 0 && (
+            <Utsav utsav={Home.utsav} />
+          )
+        }
 
-      {
-        Home?.artist?.length > 0 && (
-          <Artists artists={Home.artist} />
-        )
-      }
+        {
+          Home?.artist?.length > 0 && (
+            <Artists artists={Home.artist} />
+          )
+        }
 
-      {
-        Home?.lyricist?.length > 0 && (
-          <Lyricists lyricists={Home.lyricist} />
-        )
-      }
+        {
+          Home?.lyricist?.length > 0 && (
+            <Lyricists lyricists={Home.lyricist} />
+          )
+        }
 
-      {
-        Home?.radio?.length > 0 && (
-          <Radio radio={Home.radio} />
-        )
-      }
-      <RecentlyPlayed />
+        {
+          Home?.radio?.length > 0 && (
+            <Radio radio={Home.radio} />
+          )
+        }
+        <RecentlyPlayed />
+      </div>
     </>
   )
 }

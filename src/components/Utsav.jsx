@@ -3,22 +3,18 @@ import Link from 'next/link'
 import GetFirstWord from './GetFirstWord';
 import GetLanguage from './GetLanguage';
 import { useSelector } from 'react-redux';
-import { t } from 'i18next';
-import { withTranslation } from "react-i18next";
+import CategoryHeader from './CategoryHeader';
 
 const Utsav = ({ utsav }) => {
-
     const { language } = useSelector((state) => state.language)
-
     return (
         <div className="container">
             <div className="container_arrow container-fluid p-0">
-                <div className="row my-4">
-                    <div className="col-sm-12 d-flex justify-content-between align-items-center">
-                        <h2 className="titles_homepage m-0">{t('Utsav')}</h2>
-                        <Link href="/utsav-all" className='view_all'>{t('View all')}</Link>
-                    </div>
-                </div>
+                <CategoryHeader
+                    title="Utsav"
+                    link="/utsav-all"
+                    isShow={true}
+                />
                 <div className="row utsav_gap" id='utsav_images' >
                     {
                         utsav.slice(0, 6).map((item, index) => (
@@ -38,4 +34,4 @@ const Utsav = ({ utsav }) => {
     )
 }
 
-export default withTranslation()(Utsav)
+export default Utsav
