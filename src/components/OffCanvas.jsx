@@ -19,7 +19,6 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
     const [prevSelectedPlaylists, setPrevSelectedPlaylists] = useState([]);
 
-
     useEffect(() => {
         if (token) {
             getPlaylistApi({
@@ -47,7 +46,6 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
 
     const handleCheckboxChange = (e, item) => {
         const { checked } = e.target;
-
         setSelectedPlaylists((prevSelectedPlaylists) => {
             if (checked) {
                 return [...prevSelectedPlaylists, item.id];
@@ -93,7 +91,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                     if (res.error === false) {
                         toast.success(t('Deleted Successfully'));
                         onHide()
-                        setIsLiked(false)
+                        setIsLiked(!isLiked)
                     }
                 },
                 onError: (e) => {
@@ -113,7 +111,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 onSuccess: (res) => {
                     if (res.error === false) {
                         toast.success(t('Saved Successfully'));
-                        setIsLiked(true)
+                        setIsLiked(!isLiked)
                         onHide()
                     }
                 },

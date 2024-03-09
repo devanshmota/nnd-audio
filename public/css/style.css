@@ -8123,7 +8123,7 @@ h2.widget-title:after {
 
 .view_all {
 	font-size: 14px;
-	color: red;
+	color: var(--secondary-color) !important;
 }
 
 /* .div_container {
@@ -8258,7 +8258,8 @@ p {
 .login_form input,
 select,
 .frgt_container input,
-.create_playlist_modal input {
+.create_playlist_modal input,
+.canvas_form input {
 	border: none;
 	outline: none;
 	border-radius: 10px;
@@ -8661,22 +8662,13 @@ select,
 
 .offcanvas {
 	z-index: 1201 !important;
-	background-color: #212635 !important;
+	background-color: var(--primary-color) !important;
 	color: white !important;
 }
 
 
 
-.canvas_form input {
-	border: none;
-	outline: none;
-	border-radius: 10px;
-	width: 100%;
-	padding-left: 40px;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	border: 2px solid black;
-}
+
 
 .canvas_form .input_with_icon {
 	display: flex;
@@ -8820,6 +8812,7 @@ select,
 }
 
 .dwnl_ply_btn {
+	width: max-content;
 	border: none;
 	background-color: var(--secondary-color);
 	color: white;

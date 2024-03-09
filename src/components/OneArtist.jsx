@@ -59,7 +59,7 @@ const OneArtist = ({ artistid }) => {
     const handlePlayAll = () => {
         dispatch(setCurrentTrack(0))
         dispatch(setIsPlaying(true))
-        toast.success('Playing All')
+        toast.success(t('Playing All'))
     }
 
     return (
@@ -75,9 +75,9 @@ const OneArtist = ({ artistid }) => {
                     <>
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="d-flex flex-column flex-lg-row align-items-center gap-5">
+                                <div className="d-flex flex-column flex-lg-row align-items-center gap-4">
                                     <Image src={artistDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
-                                    <div className="d-flex flex-column gap-4">
+                                    <div className="d-flex flex-column align-items-center align-items-lg-start gap-4">
                                         <h2 className="m-0">
                                             {GetLanguage(language, artistDetails)}
                                         </h2>
