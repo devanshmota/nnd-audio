@@ -41,7 +41,7 @@ const Music_categories = ({musicCategory}) => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/music-categories-all"
-                isShow={false}
+                isShow={musicCategory.length > 6}
             />
 
             {
@@ -72,7 +72,7 @@ const Music_categories = ({musicCategory}) => {
                             }}
                             breakpoints={{
                                 320: {
-                                    slidesPerView: 1
+                                    slidesPerView: 2
                                 },
                                 576: {
                                     slidesPerView: 3
@@ -94,8 +94,8 @@ const Music_categories = ({musicCategory}) => {
                                 musicCategory.slice(0, 10).map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                         <Link href={`/music-categories-all/${item.id}`} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className='rounded mw-100 object-fit-cover' alt={item.eng_name} width={159.429} height={159.429} />
-                                            <h5 className='m-0 text-center text-white'>
+                                            <Image src={item.image} className='rounded-4 w-100 object-fit-cover' alt={item.eng_name} width={159.429} height={159.429} />
+                                            <h5 className='m-0 text-center text-white title_rcnt_plyd'>
                                                 {GetLanguage(language, item)}
                                             </h5>
                                         </Link>

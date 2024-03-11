@@ -13,7 +13,7 @@ const Utsav = ({ utsav }) => {
                 <CategoryHeader
                     title="Utsav"
                     link="/utsav-all"
-                    isShow={true}
+                    isShow={utsav.length > 5}
                 />
                 <div className="row utsav_gap" id='utsav_images' >
                     {

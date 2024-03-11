@@ -1,42 +1,40 @@
 'use client'
-import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign"
+import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import OffCanvas from "./OffCanvas"
-import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa"
-import GetCatLanguage from "./GetCatLanguage"
-import GetLanguage from "./GetLanguage"
-import Image from "next/image"
-import { ClipLoader } from "react-spinners"
-import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
-import toast from "react-hot-toast"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
-import NoMusicsFound from "./NoMusicsFound"
+import OffCanvas from "./OffCanvas";
+import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa";
+import GetCatLanguage from "./GetCatLanguage";
+import GetLanguage from "./GetLanguage";
+import { ClipLoader } from "react-spinners";
+import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign";
+import Image from "next/image";
+import toast from "react-hot-toast";
+import NoMusicsFound from "./NoMusicsFound";
 
+const OneLatestAlbum = ({ latestalbumid }) => {
 
-const GetAlbumMusic = ({ albumid }) => {
-
-    const dispatch = useDispatch()
     const { CurrentAlbum } = useSelector((state) => state.cachedata)
+    const dispatch = useDispatch()
     const users = useSelector((state) => state.users)
     const token = users?.users?.token
     const { language } = useSelector((state) => state.language)
-    const [singleAlbumData, setSingleAlbumData] = useState([])
+    const [singleLatestAlbumData, setSingleLatestAlbumData] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
+
     useEffect(() => {
-
-
         fetchSigleArtistDataApi({
-            album_id: albumid.id,
-            is_guest: 0,
+            album_id: latestalbumid.slug,
+            is_guest: token ? 0 : 1,
             onSuccess: (res) => {
-                setSingleAlbumData(res.data)
-                setAlbumDetails(res.data[0].album)
+                setSingleLatestAlbumData(res.data)
+                setLatestAlbumDetails(res.data[0].artist)
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -44,7 +42,6 @@ const GetAlbumMusic = ({ albumid }) => {
                 setIsLoading(false)
             }
         })
-
     }, [isLiked, selectedMusicId])
 
     const handleSave = (musicId) => {
@@ -53,34 +50,27 @@ const GetAlbumMusic = ({ albumid }) => {
     }
 
     const handlePlayMusic = (musicId) => {
-        const index = singleAlbumData.findIndex((item) => item.id === musicId);
-        dispatch(setMusicPlaylist(singleAlbumData))
+        const index = singleLatestAlbumData.findIndex((item) => item.id === musicId);
+        dispatch(setMusicPlaylist(singleLatestAlbumData))
         dispatch(setCurrentTrack(index))
         dispatch(setIsPlaying(true))
     };
 
     const handlePlayAll = () => {
-        dispatch(setMusicPlaylist(singleAlbumData))
+        dispatch(setMusicPlaylist(singleLatestAlbumData))
         dispatch(setCurrentTrack(0))
         dispatch(setIsPlaying(true))
         toast.success(t('Playing All'))
     }
 
-    const copyToClip = async () => {
-        await navigator.clipboard.writeText(location.href)
-        toast.success(t('Link copied to clipboard'))
-    }
-
     return (
         <div className="container text-white mt-4">
             {isLoading &&
-                <div className='d-flex align-items-center justify-content-center py-2'>
+                <div className='w-100 h-100 d-flex align-items-center justify-content-center py-2'>
                     <ClipLoader color="#ffffff" />
                 </div>
             }
-
             <div className="row">
-
                 <div className="col-lg-12">
                     <div className="d-flex flex-column flex-lg-row align-items-center gap-4 py-4 brdr_btm">
                         <Image src={CurrentAlbum?.image} alt="profile" width={220} height={220} className="prfl_img" />
@@ -88,9 +78,9 @@ const GetAlbumMusic = ({ albumid }) => {
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
                             </h2>
-
-
-                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                            {
+                                singleLatestAlbumData.length !== 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                            }
 
                         </div>
                     </div>
@@ -98,22 +88,24 @@ const GetAlbumMusic = ({ albumid }) => {
             </div>
             <div className="row ">
                 {
-                    singleAlbumData.map((item, index) => (
+                    singleLatestAlbumData.length > 0 && singleLatestAlbumData.map((item, index) => (
                         <div key={index} className="col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                <div className="d-flex align-items-center gap-3 cursor-pointer" onClick={() => handlePlayMusic(item.id)}>
-                                    <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded-4" width={80} height={80} />
+                                <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
+                                    <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
                                     <div className="d-flex flex-column gap-2">
                                         <h5 className="m-0 text-break title_rcnt_plyd">
                                             {GetLanguage(language, item)}
+                                            {/* Hore Jule Naval Hindol */}
                                         </h5>
                                         <p className="text-rec-pld desc_rcnt_plyd">
                                             {GetCatLanguage(language, item)}
+                                            {/* Kirtan */}
                                         </p>
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center gap-2 gap-md-3">
-                                    <FaShareAlt className="icon_recent_plyd" onClick={copyToClip} />
+                                    <FaShareAlt className="icon_recent_plyd" />
 
                                     {token && (
                                         <>
@@ -130,13 +122,12 @@ const GetAlbumMusic = ({ albumid }) => {
                     ))
                 }
             </div>
-
             {
-                !isLoading && singleAlbumData.length === 0 && <NoMusicsFound />
+                !isLoading && singleLatestAlbumData.length === 0 && <NoMusicsFound/>
             }
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
         </div>
     )
 }
 
-export default withTranslation()(GetAlbumMusic)
+export default withTranslation()(OneLatestAlbum)

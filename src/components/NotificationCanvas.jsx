@@ -8,7 +8,6 @@ import { withTranslation } from "react-i18next";
 
 const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
 
-
     return (
         <Offcanvas placement="end" show={show} onHide={onHide} {...props}>
             <Offcanvas.Header closeButton>

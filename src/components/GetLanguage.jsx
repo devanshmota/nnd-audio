@@ -16,9 +16,9 @@ const GetLanguage = (language, item) => {
 
 
     if (language === 'Gujarati') {
-        return item.guj_title || item.guj_name;
+        return item?.guj_title || item?.guj_name;
     } else {
-        return item.eng_title || item.eng_name;
+        return item?.eng_title || item?.eng_name;
     }
 
 }

@@ -269,14 +269,14 @@ export const logout = () => {
         authorizationHeader: true,
     }
 }
-export const getUtsav = (limit, order) => {
+export const getUtsav = (limit, order, offset) => {
     return {
         url: `${UTSAV}`,
         method: "GET",
         params: {
             order: order,
             limit: limit,
-
+            offset: offset
         },
         authorizationHeader: false,
     }
@@ -292,35 +292,38 @@ export const getMusicCategory = (limit, order) => {
         authorizationHeader: false,
     }
 }
-export const getLyricists = (limit, order) => {
+export const getLyricists = (limit, order, offset) => {
     return {
         url: `${LYRICISTS}`,
         method: "GET",
         params: {
             order: order,
             limit: limit,
+            offset: offset
         },
         authorizationHeader: false,
     }
 }
-export const getRadio = (limit, order) => {
+export const getRadio = (limit, order, offset) => {
     return {
         url: `${RADIO}`,
         method: "GET",
         params: {
             order: order,
             limit: limit,
+            offset: offset
         },
         authorizationHeader: false,
     }
 }
-export const getArtists = (limit, order) => {
+export const getArtists = (limit, order, offset) => {
     return {
         url: `${ARTISTS}`,
         method: "GET",
         params: {
             order: order,
             limit: limit,
+            offset: offset,
         },
         authorizationHeader: false,
     }

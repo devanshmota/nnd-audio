@@ -40,10 +40,8 @@ const Lyricists = ({ lyricists }) => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/lyricists-all"
-                isShow={true}
+                isShow={lyricists.length > 6}
             />
-
-
             <Swiper
                 ref={lyricistsRef}
                 slidesPerView={7}
@@ -70,7 +68,7 @@ const Lyricists = ({ lyricists }) => {
                 }}
                 breakpoints={{
                     320: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                     },
                     576: {
                         slidesPerView: 3,
@@ -90,9 +88,9 @@ const Lyricists = ({ lyricists }) => {
                 {
                     lyricists.slice(0,10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center mw-100">
-                                <Image src={item.image} width={150} height={150} className="card-img-top artist_img" alt={item.eng_name} />
-                                <h5 className="text-white text-center m-0">{GetFirstWord(GetLanguage(language, item))}</h5>
+                            <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center w-100">
+                                <Image src={item.image} width={150} height={150} className="artist_img" alt={item.eng_name} />
+                                <h5 className="text-white text-center m-0 lyricist_heading">{GetFirstWord(GetLanguage(language, item))}</h5>
                             </Link>
                         </SwiperSlide>
                     ))

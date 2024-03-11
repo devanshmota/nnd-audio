@@ -519,6 +519,10 @@ body.loaded .ms_loader {
 }
 
 .ms_nav_wrapper ul li {
+	padding: 5px 0;
+}
+
+.ms_nav_wrapper ul li {
 	width: 100%;
 	display: block;
 }
@@ -2179,7 +2183,7 @@ h1.footer_title:after {
 /*====Player Css Start====*/
 .ms_player_wrapper {
 	background-color: var(--primary-color);
-	padding: 10px 20px;
+	padding: 15px 30px;
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
@@ -8776,6 +8780,15 @@ select,
 	white-space: normal;
 }
 
+.lyricist_heading {
+	overflow: hidden;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	white-space: normal;
+	max-width: 100%;
+}
+
 
 .modal_body {
 	background-color: white;
@@ -8964,7 +8977,9 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin-top: 30px;
+	/* margin-top: 30px; */
+	padding: 0;
+	margin: 0;
 }
 
 .pagination li.pagination__link--active a {
@@ -8975,7 +8990,6 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 .pagination li.pagination__link--active a:hover {
 	color: #ffffff !important;
 }
-
 
 
 .pagination li.pagination__link01--active a {
@@ -9011,9 +9025,9 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 	cursor: not-allowed;
 }
 
-.margin-bottom {
+/* .margin-bottom {
 	margin-bottom: 50px;
-}
+} */
 
 .music_player_icon {
 	font-size: 25px;
@@ -9074,8 +9088,9 @@ input[type="range"] {
 }
 
 .main {
-	margin-bottom: 70px;
-	overflow: auto;
+    margin-bottom: 105px;
+    overflow: auto;
+    min-height: calc(100vh - 64px - 80px);
 }
 
 .loader {
@@ -9115,4 +9130,11 @@ input[type="range"] {
 
 .MuiButton-endIcon {
 	margin-left: 0 !important;
+}
+
+.brdr_btm {
+	border-bottom: 2px dotted #404451;
+}
+.nomusic_height{
+	height: 527px;
 }

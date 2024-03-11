@@ -1,12 +1,15 @@
+'use client'
 import React from "react";
 import ReactPaginate from "react-paginate";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const ReactPagination = ({ pageCount, onPageChange }) => {
     return (
         <div>
             <ReactPaginate
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
+                previousLabel={t("Previous")}
+                nextLabel={t("Next")}
                 breakLabel="..."
                 breakClassName="break-me"
                 pageCount={pageCount}
@@ -23,4 +26,4 @@ const ReactPagination = ({ pageCount, onPageChange }) => {
     );
 };
 
-export default ReactPagination;
+export default withTranslation()(ReactPagination)

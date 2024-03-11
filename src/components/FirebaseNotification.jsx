@@ -3,6 +3,7 @@ import { setFcmToken } from "@/redux/reducer/CachedataSlice";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { messaging } from "./Firebase";
+import { getToken } from "firebase/messaging";
 
 const FirebaseNotification = ({ children }) => {
 

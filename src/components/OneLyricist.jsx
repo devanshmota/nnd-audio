@@ -55,6 +55,7 @@ const OneLyricist = ({ lyricistid }) => {
     };
 
     const handlePlayAll = () => {
+        dispatch(setMusicPlaylist(singleLyricistData))
         dispatch(setCurrentTrack(0))
         dispatch(setIsPlaying(true))
         toast.success('Playing All')

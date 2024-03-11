@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
-
 import { useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
@@ -40,7 +39,7 @@ const Artists = ({ artists }) => {
                 isBeginning={isBeginning}
                 isEnd={isEnd}
                 link="/artists-all"
-                isShow={true}
+                isShow={artists.length > 6}
             />
             <Swiper
                 ref={artistRef}
@@ -68,7 +67,7 @@ const Artists = ({ artists }) => {
                 }}
                 breakpoints={{
                     320: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                     },
                     576: {
                         slidesPerView: 3,
@@ -89,7 +88,7 @@ const Artists = ({ artists }) => {
                     artists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                             <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                <Image src={item.image} objectFit='cover' className='rounded mw-100' alt={item.eng_name} width={159.429} height={159.429} />
+                                <Image src={item.image} objectFit='cover' className='rounded-4 mw-100' alt={item.eng_name} width={159.429} height={159.429} />
                                 <h5 className='m-0 text-center'>
                                     {GetFirstWord(GetLanguage(language, item))}
                                 </h5>

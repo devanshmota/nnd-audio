@@ -86,12 +86,13 @@ export const getUtsavApi = ({
 
     limit = null,
     order = "",
+    offset = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getUtsav(limit, order),
+            ...getUtsav(limit, order, offset),
             displayToast: false,
             onStart,
             onSuccess,
@@ -103,12 +104,13 @@ export const getLyricistsApi = ({
 
     limit = null,
     order = "",
+    offset = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getLyricists(limit, order),
+            ...getLyricists(limit, order, offset),
             displayToast: false,
             onStart,
             onSuccess,
@@ -168,15 +170,15 @@ export const getNotificationApi = ({
     );
 };
 export const getArtistsApi = ({
-
     limit = null,
     order = "",
+    offset = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getArtists(limit, order),
+            ...getArtists(limit, order, offset),
             displayToast: false,
             onStart,
             onSuccess,
@@ -187,12 +189,13 @@ export const getArtistsApi = ({
 export const getRadioApi = ({
     limit = null,
     order = "",
+    offset= null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getRadio(limit, order),
+            ...getRadio(limit, order, offsetis),
             displayToast: false,
             onStart,
             onSuccess,

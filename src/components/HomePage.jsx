@@ -73,12 +73,12 @@ const HomePage = () => {
           )
         }
 
+        <RecentlyPlayed />
         {
           Home?.radio?.length > 0 && (
             <Radio radio={Home.radio} />
           )
         }
-        <RecentlyPlayed />
       </div>
     </>
   )

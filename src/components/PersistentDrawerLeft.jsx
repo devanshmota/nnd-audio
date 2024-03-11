@@ -127,7 +127,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function PersistentDrawerLeft({ children }) {
     const dispatch = useDispatch()
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
     const handleDrawerOpen = () => {
@@ -215,9 +215,9 @@ export default function PersistentDrawerLeft({ children }) {
                     <div className='main nnd_scrollbar'>
                         {children}
                     </div>
-                    <Player />
                 </I18nextProvider>
             </Main>
+            <Player />
             <Toaster position="top-center" reverseOrder={false} />
         </Box>
     );

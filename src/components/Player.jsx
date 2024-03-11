@@ -17,15 +17,24 @@ const Player = () => {
 
     const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
-    const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist);
-    const [volume, setVolume] = useState(0.5);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const playerRef = useRef(null);
-    const animationRef = useRef();
+    const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist)
+    const [volume, setVolume] = useState(0.5)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const playerRef = useRef(null)
+    const animationRef = useRef()
     const [isMuted, setIsMuted] = useState(false);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
-    const [selectedMusicId, setSelectedMusicId] = useState(null);
+    const [selectedMusicId, setSelectedMusicId] = useState(null)
+
+
+    // useEffect(() => {
+    //     dispatch(resetState())
+    // }, [])
+    
+    useEffect(() => {
+        dispatch(setIsPlaying(false))
+    }, [])
 
     const handleSeekUpdate = () => {
         setCurrentTime(playerRef?.current?.seek());
@@ -43,15 +52,15 @@ const Player = () => {
     };
 
     const playNext = () => {
-        if (MusicPlaylist && MusicPlaylist.length > 0) {
-            dispatch(setCurrentTrack((currentTrack + 1) % MusicPlaylist.length));
+        if (MusicPlaylist && MusicPlaylist?.length > 0) {
+            dispatch(setCurrentTrack((currentTrack + 1) % MusicPlaylist?.length));
             dispatch(setIsPlaying(true));
         }
     };
 
     const playPrev = () => {
-        if (MusicPlaylist && MusicPlaylist.length > 0) {
-            dispatch(setCurrentTrack((currentTrack - 1 + MusicPlaylist.length) % MusicPlaylist.length));
+        if (MusicPlaylist && MusicPlaylist?.length > 0) {
+            dispatch(setCurrentTrack((currentTrack - 1 + MusicPlaylist?.length) % MusicPlaylist?.length));
             dispatch(setIsPlaying(true));
         }
     };
@@ -93,17 +102,18 @@ const Player = () => {
         setIsOffCanvasOpen(true)
     }
 
-    if (MusicPlaylist.length === 0) {
-        return
+    if (MusicPlaylist?.length === 0) {
+        return null
     }
+
 
     return (
         <>
             <div className="d-flex align-items-center justify-content-between w-100 text-white ms_player_wrapper">
                 <div className="d-flex gap-2">
-                    <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album.image} alt="song" className="rounded" width={50} height={50} />
+                    <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image} alt="song" className="rounded" width={50} height={50} />
                     <div className="d-flex flex-column gap-1">
-                        <h5 className="text-white m-0">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
+                        <h5 className="text-white m-0 title_rcnt_plyd">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
                         <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
                     </div>
                 </div>
@@ -133,7 +143,7 @@ const Player = () => {
                 <div className="d-flex align-items-center gap-2">
 
                     {
-                        MusicPlaylist && MusicPlaylist[currentTrack]?.playlist.length > 0 ? (
+                        MusicPlaylist && MusicPlaylist[currentTrack]?.playlist?.length > 0 ? (
                             <FaHeart className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                         )
                             :
@@ -153,20 +163,20 @@ const Player = () => {
                         onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                     />
                 </div>
-                {
-                    MusicPlaylist.length > 0 && currentTrack !== undefined &&
-                    <ReactHowler
-                        src={getDecryptedText(MusicPlaylist && MusicPlaylist[currentTrack]?.audio_url)}
-                        playing={isPlaying}
-                        volume={volume}
-                        ref={playerRef}
-                        onEnd={handleEnd}
-                        onLoad={handleLoad}
-                        html5={true}
-                    />
-                }
-
+                
             </div>
+            {
+                MusicPlaylist?.length > 0 && currentTrack !== undefined &&
+                <ReactHowler
+                    src={getDecryptedText(MusicPlaylist && MusicPlaylist[currentTrack]?.audio_url) || getDecryptedText(MusicPlaylist && MusicPlaylist[currentTrack]?.url)}
+                    playing={isPlaying}
+                    volume={volume}
+                    ref={playerRef}
+                    onEnd={handleEnd}
+                    onLoad={handleLoad}
+                    html5={true}
+                />
+            }
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
         </>
     );

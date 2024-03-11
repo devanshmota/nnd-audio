@@ -1,7 +1,6 @@
 'use client'
 import { getRecentlyPlayedMusicApi } from "@/redux/actions/Campaign";
 import Image from "next/image"
-import Link from "next/link"
 import { useEffect, useState } from "react";
 import { FaShareAlt } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -28,8 +27,9 @@ const RecentlyPlayed = () => {
   const [isLiked, setIsLiked] = useState(false)
   const [selectedMusicId, setSelectedMusicId] = useState(null);
   const token = users?.users?.token
-  useEffect(() => {
 
+
+  useEffect(() => {
     if (token) {
       getRecentlyPlayedMusicApi({
         onSuccess: (res) => {
@@ -45,7 +45,8 @@ const RecentlyPlayed = () => {
       })
     }
     setIsLoading(false)
-  }, [token, isLiked, selectedMusicId])
+  }, [token, isLiked])
+
 
   const handleSave = (musicId) => {
     setSelectedMusicId(musicId);
@@ -74,20 +75,13 @@ const RecentlyPlayed = () => {
 
   return (
     <>
-      {/* <div className="container d-flex justify-content-between align-items-center mb-3">
-        <h2 className="text-white m-0">{t('Recently Played')}</h2>
-        <Link href='recently-played-all' className='view_all'>{t('View all')}</Link>
-      </div> */}
-
-
-
       <div className="container">
         <CategoryHeader
           title="Recently Played"
           link="/recently-played-all"
           isShow={true}
         />
-        <div className="row gy-4 utsav_gap margin-bottom">
+        <div className="row gy-4 utsav_gap">
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
               <div key={item.id} className="col-lg-6">

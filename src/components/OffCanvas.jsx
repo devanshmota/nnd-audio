@@ -7,7 +7,9 @@ import toast from 'react-hot-toast';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMusicPlaylist } from '@/redux/reducer/MusicPlaylistSlice';
+
 
 const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLiked, ...props }) => {
 
@@ -25,6 +27,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 onSuccess: (res) => {
                     if (res.data) {
                         setPlaylist(res.data)
+                        
                     }
                 },
                 onError: (e) => {
@@ -32,7 +35,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 }
             })
         }
-    }, [isLiked, token])
+    }, [show])
 
     useEffect(() => {
         const initialSelectedPlaylists = playlist.filter((item) => item.music.some((music) => music.id === selectedMusicId)).map((item) => item.id);
@@ -78,7 +81,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
     }
 
     const saved = () => {
-
+        
         const playlistsToDelete = prevSelectedPlaylists.filter(
             (prevId) => !selectedPlaylists.includes(prevId)
         );

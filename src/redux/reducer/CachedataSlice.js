@@ -6,7 +6,8 @@ const CachedataSlice = createSlice({
     name: 'cachedata',
     initialState: {
         searchQuery: '',
-        fcmToken: ''
+        fcmToken: '',
+        CurrentAlbum: {}
     },
 
     reducers: {
@@ -15,9 +16,12 @@ const CachedataSlice = createSlice({
         },
         setFcmToken: (state, action) => {
             state.fcmToken = action.payload;
-        }
+        },
+        setCurrentAlbum: (state, action) => {
+            state.CurrentAlbum = action.payload;
+        },
     }
 })
 
 export default CachedataSlice;
-export const { setSearchQuery, setFcmToken } = CachedataSlice.actions;
+export const { setSearchQuery, setFcmToken, setCurrentAlbum } = CachedataSlice.actions;

@@ -19,17 +19,7 @@ const Sidebar = ({ open }) => {
             {/* <!---Side Menu Start---> */}
             <div className="ms_main_wrapper">
                 <div className={`ms_sidemenu_wrapper ${open ? 'open_menu' : ''}`}>
-                    {/* <div className={isMenuOpen ? 'ms_nav_close02' : 'ms_nav_close'} onClick={toggleMenu}>
-                        <div>
-                            {isMenuOpen ? (
-
-                                <FaAngleLeft size={20} className='custom_close_icon' />
-                            ) : (
-
-                                <FaAngleRight size={20} className='custom_close_icon' />
-                            )}
-                        </div>
-                    </div> */}
+                   
                     <div className="ms_sidemenu_inner">
 
                         <div className="ms_nav_wrapper">

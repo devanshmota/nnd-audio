@@ -31,7 +31,7 @@ const OneArtist = ({ artistid }) => {
     useEffect(() => {
         fetchSigleArtistDataApi({
             artist_id: artistid.slug,
-            is_guest: 1,
+            is_guest: 0,
             onSuccess: (res) => {
                 setSingleArtistData(res.data)
                 setArtistDetails(res.data[0].artist)
@@ -57,6 +57,7 @@ const OneArtist = ({ artistid }) => {
     };
 
     const handlePlayAll = () => {
+        dispatch(setMusicPlaylist(singleArtistData))
         dispatch(setCurrentTrack(0))
         dispatch(setIsPlaying(true))
         toast.success(t('Playing All'))
@@ -81,10 +82,7 @@ const OneArtist = ({ artistid }) => {
                                         <h2 className="m-0">
                                             {GetLanguage(language, artistDetails)}
                                         </h2>
-
-
                                         <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
-
                                     </div>
                                 </div>
                             </div>
