@@ -8553,7 +8553,7 @@ select,
 }
 
 .css-1r9jet7 {
-	min-height: 84px;
+	min-height: 84px !important;
 }
 
 /* .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
