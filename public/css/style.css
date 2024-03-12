@@ -8912,7 +8912,7 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 .nnd_web {
-	height: 40px;
+	height: 55px;
 }
 
 .css-189zzm0-MuiButtonBase-root-MuiIconButton-root,
@@ -9159,6 +9159,6 @@ input[type="range"] {
 	margin-bottom: 0 !important;
 }
 
-.css-gbv9pa-MuiPaper-root-MuiAppBar-root{
+.css-gbv9pa-MuiPaper-root-MuiAppBar-root,.css-1dt959v{
 	width: 100% !important;
 }
