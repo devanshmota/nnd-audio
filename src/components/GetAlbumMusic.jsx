@@ -13,11 +13,13 @@ import toast from "react-hot-toast"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import NoMusicsFound from "./NoMusicsFound"
+import BreadCrumb from "./BreadCrumb"
 
 
 const GetAlbumMusic = ({ albumid }) => {
 
     const dispatch = useDispatch()
+    const { BreadcrumbCategory } = useSelector((state) => state.cachedata)
     const { CurrentAlbum } = useSelector((state) => state.cachedata)
     const users = useSelector((state) => state.users)
     const token = users?.users?.token
@@ -29,7 +31,6 @@ const GetAlbumMusic = ({ albumid }) => {
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
     useEffect(() => {
-
 
         fetchSigleArtistDataApi({
             album_id: albumid.id,
@@ -78,7 +79,7 @@ const GetAlbumMusic = ({ albumid }) => {
                     <ClipLoader color="#ffffff" />
                 </div>
             }
-
+            <BreadCrumb title={t('Music Categories')} category={GetLanguage(language, BreadcrumbCategory)} subcategory={GetLanguage(language, CurrentAlbum)} />
             <div className="row">
 
                 <div className="col-lg-12">
@@ -88,10 +89,9 @@ const GetAlbumMusic = ({ albumid }) => {
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
                             </h2>
-
-
-                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
-
+                            {
+                                singleAlbumData.length > 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                            }
                         </div>
                     </div>
                 </div>

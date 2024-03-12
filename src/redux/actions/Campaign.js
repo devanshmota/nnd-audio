@@ -195,7 +195,7 @@ export const getRadioApi = ({
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getRadio(limit, order, offsetis),
+            ...getRadio(limit, order, offset),
             displayToast: false,
             onStart,
             onSuccess,

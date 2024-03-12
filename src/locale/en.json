@@ -91,5 +91,7 @@
     "Saved Successfully": "Saved Successfully",
     "Registration successful. Verification email sent": "Registration successful. Verification email sent",
     "Passwords do not match": "Passwords do not match",
-    "Failed to rename": "Failed to rename"
+    "Failed to rename": "Failed to rename",
+    "Playlist": "Playlist",
+    "Videos": "Videos"
 }

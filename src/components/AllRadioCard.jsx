@@ -10,6 +10,7 @@ import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import Pagination from "./ReactPagination"
+import BreadCrumb from "./BreadCrumb"
 
 const AllRadioCard = () => {
     const dispatch = useDispatch()
@@ -54,17 +55,17 @@ const AllRadioCard = () => {
     };
     return (
         <div className="container">
-            <div className="row mt-5">
+            <div className="row mt-4">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <h1 className="text-white text-center m-0">{t('Radio 24x7')}</h1>
+                <BreadCrumb title={t('Radio 24x7')}/>
                 {radio.length > 0 && radio.map((item) => (
-                    <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-5">
+                    <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-4">
                         <div onClick={() => handlePlayMusic(item.id)} className="lyricits-container text-white cursor-pointer">
-                            <Image src={item.image} alt={item.eng_name} width={200} height={200} />
+                            <Image src={item.image} alt={item.eng_name} width={200} height={200} className="w-100 object-fit-cover" />
                             <h6 className="m-0">{GetLanguage(language, item)}</h6>
                         </div>
                     </div>
@@ -74,7 +75,7 @@ const AllRadioCard = () => {
             </div>
             {
                 radio.length > 0 && (
-                    <div className="row mt-5">
+                    <div className="row mt-4">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>

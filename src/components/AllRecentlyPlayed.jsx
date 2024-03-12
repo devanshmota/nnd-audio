@@ -10,6 +10,9 @@ import { FaHeart } from "react-icons/fa";
 import OffCanvas from "./OffCanvas"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
+import BreadCrumb from "./BreadCrumb"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const AllRecentlyPlayed = () => {
 
@@ -42,12 +45,13 @@ const AllRecentlyPlayed = () => {
 
   return (
     <div className="container text-white">
-      <div className="row">
+      <div className="row mt-4">
         {isLoading &&
           <div className='d-flex align-items-center justify-content-center py-2'>
             <ClipLoader color="#ffffff" />
           </div>
         }
+        <BreadCrumb title={t('Recently Played')}/>
         {recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
           <div key={index} className="col-lg-6 mt-4">
             <div className="d-flex align-items-center justify-content-between text-white music_card">
@@ -87,4 +91,4 @@ const AllRecentlyPlayed = () => {
   )
 }
 
-export default AllRecentlyPlayed
+export default withTranslation()(AllRecentlyPlayed)

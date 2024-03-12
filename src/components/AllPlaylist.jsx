@@ -22,7 +22,6 @@ const AllPlaylist = () => {
     const [initialPlaylistid, setInitialPlaylistid] = useState(null)
     const [isGetPlaylist, setIsGetPlaylist] = useState(false)
 
-
     useEffect(() => {
         if (token) {
             getPlaylistApi({
@@ -105,23 +104,25 @@ const AllPlaylist = () => {
 
                 <div className="row">
                     <div className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
-                        <div className="playlist_container text-white" onClick={createPlaylist}>
-                            <Image src='/playlist_icon.svg' alt='playlist-icon' width={51} height={37} />
-                            <h5 className="m-0">{t('Create Playlist')}</h5>
+                        <div className="card-container text-white">
+                            <div className="playlist_container text-white" onClick={createPlaylist}>
+                                <Image src='/playlist_icon.svg' alt='playlist-icon' width={51} height={37} />
+                                <h5 className="m-0">{t('Create Playlist')}</h5>
+                            </div>
                         </div>
                     </div>
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
-                            <div key={index} className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                            <div key={index} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
                                 <div className="card-container text-white">
 
                                     {
                                         item.music.length > 0 ? (
-                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="rounded" width={200} height={200} />
+                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="w-100 object-fit-cover" width={200} height={200} />
                                         )
                                             :
                                             (
-                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="rounded" width={200} height={200} />
+                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="w-100 object-fit-cover" width={200} height={200} />
                                             )
                                     }
 

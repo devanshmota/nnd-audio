@@ -13,6 +13,7 @@ import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import NoMusicsFound from "./NoMusicsFound";
+import BreadCrumb from "./BreadCrumb";
 
 const OneLatestAlbum = ({ latestalbumid }) => {
 
@@ -70,6 +71,7 @@ const OneLatestAlbum = ({ latestalbumid }) => {
                     <ClipLoader color="#ffffff" />
                 </div>
             }
+            <BreadCrumb title={t('Latest Albums')} category={GetLanguage(language, CurrentAlbum)}/>
             <div className="row">
                 <div className="col-lg-12">
                     <div className="d-flex flex-column flex-lg-row align-items-center gap-4 py-4 brdr_btm">
@@ -79,7 +81,7 @@ const OneLatestAlbum = ({ latestalbumid }) => {
                                 {GetLanguage(language, CurrentAlbum)}
                             </h2>
                             {
-                                singleLatestAlbumData.length !== 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                                singleLatestAlbumData.length > 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
                             }
 
                         </div>

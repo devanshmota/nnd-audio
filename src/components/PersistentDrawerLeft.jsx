@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft({ children }) {
                 open={open}
                 sx={{
                     background: "#131825",
-                    height: "64px",
+                    height: "84px",
                 }}
             >
                 <Toolbar
@@ -174,7 +174,7 @@ export default function PersistentDrawerLeft({ children }) {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        height: "64px",
+                        height: "84px",
                     }}
                 >
 

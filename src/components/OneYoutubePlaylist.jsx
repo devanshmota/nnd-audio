@@ -2,14 +2,15 @@
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react"
-import { FaPlay } from "react-icons/fa";
-// import PlayVideoModal from "./PlayVideoModal";
+import BreadCrumb from "./BreadCrumb";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+
 
 const OneYoutubePlaylist = ({ playlistid }) => {
 
     const [playlistData, setPlaylistData] = useState([])
     const [InitialTrack, setInitialTrack] = useState(null)
-
 
     useEffect(() => {
 
@@ -35,8 +36,9 @@ const OneYoutubePlaylist = ({ playlistid }) => {
 
     return (
         <>
-            <div className="container text-white mt-5">
+            <div className="container text-white mt-4">
                 <div className="row gy-3 yt-heigth">
+                    <BreadCrumb title={t('Youtube Playlist')} category={t('Videos')} />
                     <div className="col-lg-8 d-flex flex-column gap-3">
                         <iframe
                             className="youtube_video"
@@ -52,8 +54,8 @@ const OneYoutubePlaylist = ({ playlistid }) => {
                                 playlistData.map((item, index) => (
                                     <div key={index} className={`d-flex align-items-center gap-3 p-3 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
                                         <Image src={item?.snippet?.thumbnails?.medium?.url} className="rounded mw-100 object-fit-cover" alt={item.snippet.title} width={100} height={60} onError={(e) => {
-            e.target.src = '/Audio_hedphone.svg'
-        }}/>
+                                            e.target.src = '/Audio_hedphone.svg'
+                                        }} />
                                         <p className="ply-item-title">{item.snippet.title}</p>
                                     </div>
                                 ))
@@ -66,4 +68,4 @@ const OneYoutubePlaylist = ({ playlistid }) => {
     )
 }
 
-export default OneYoutubePlaylist
+export default withTranslation()(OneYoutubePlaylist)

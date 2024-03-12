@@ -14,6 +14,7 @@ import toast from "react-hot-toast"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import NoMusicsFound from "./NoMusicsFound"
+import BreadCrumb from "./BreadCrumb"
 
 
 const OneUtsav = ({ utsavid }) => {
@@ -71,7 +72,7 @@ const OneUtsav = ({ utsavid }) => {
                     <ClipLoader color="#ffffff" />
                 </div>
             }
-
+            <BreadCrumb title={t('Utsav')} category={GetLanguage(language, CurrentAlbum)}/>
             <div className="row">
 
                 <div className="col-lg-12">
@@ -81,14 +82,17 @@ const OneUtsav = ({ utsavid }) => {
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
                             </h2>
-                            <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                            {
+                                singleUtsavData.length > 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
+                            }
+
                         </div>
                     </div>
                 </div>
             </div>
             <div className="row ">
                 {
-                    singleUtsavData.map((item, index) => (
+                    singleUtsavData.length > 0 && singleUtsavData.map((item, index) => (
 
                         <div key={index} className="col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
@@ -122,12 +126,9 @@ const OneUtsav = ({ utsavid }) => {
                     ))
                 }
             </div>
-
-
             {
                 !isLoading && singleUtsavData.length === 0 && <NoMusicsFound />
             }
-
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
         </div>
     )

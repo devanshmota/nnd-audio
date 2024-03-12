@@ -11,6 +11,7 @@ import Pagination from "./ReactPagination"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
+import BreadCrumb from "./BreadCrumb"
 
 
 const AllUtsavCard = () => {
@@ -30,7 +31,7 @@ const AllUtsavCard = () => {
             order: "asc",
             offset: offsetdata,
             onSuccess: (res) => {
-                if(res.data){   
+                if (res.data) {
                     setUtsav(res.data)
                 }
                 setTotal(res.total)
@@ -55,18 +56,18 @@ const AllUtsavCard = () => {
     }
 
     return (
-        <div className="container">
-            <div className="row mt-5">
+        <div className="container text-white">
+            <div className="row mt-4">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <h1 className="text-white text-center m-0">{t('Utsav')}</h1>
+                <BreadCrumb title={t('Utsav')}/>
                 {utsav.length > 0 && utsav.map((item) => (
-                    <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center align-items-center mt-5">
+                    <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center align-items-center mt-4">
                         <Link href={`/utsav-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="card-container text-white">
-                            <Image src={item.image} alt={item.eng_name} className="rounded-4" width={200} height={200} />
+                            <Image src={item.image} alt={item.eng_name} className="w-100 object-fit-cover" width={200} height={200} />
                             <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                         </Link>
                     </div>
@@ -76,7 +77,7 @@ const AllUtsavCard = () => {
             </div>
             {
                 utsav.length > 0 && (
-                    <div className="row mt-5">
+                    <div className="row mt-4">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>

@@ -8,20 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSigleArtistDataApi } from "@/redux/actions/Campaign";
 import GetLanguage from "./GetLanguage";
 import GetCatLanguage from "./GetCatLanguage";
-import Nodataviewall from "./Nodataviewall";
 import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice";
 import toast from "react-hot-toast";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import NoMusicsFound from "./NoMusicsFound";
+import BreadCrumb from "./BreadCrumb";
 
 const OneLyricist = ({ lyricistid }) => {
 
+    const { CurrentAlbum } = useSelector((state) => state.cachedata)
     const dispatch = useDispatch()
     const users = useSelector((state) => state.users)
     const token = users?.users?.token
     const { language } = useSelector((state) => state.language)
     const [singleLyricistData, setSingleLyricistData] = useState([])
-    const [lyricistDetails, setLyricistDetails] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
@@ -68,68 +69,62 @@ const OneLyricist = ({ lyricistid }) => {
                     <ClipLoader color="#ffffff" />
                 </div>
             }
-            {
-                singleLyricistData.length > 0 &&
-                (
-                    <>
-                        <div className="row">
+            <BreadCrumb title={t('Lyricists')} category={GetLanguage(language, CurrentAlbum)}/>
+            <div className="row">
+                <div className="col-lg-12">
+                    <div className="d-flex flex-column flex-lg-row align-items-center gap-4 py-4 brdr_btm">
+                        <Image src={CurrentAlbum?.image} alt="profile" width={220} height={220} className="prfl_img" />
+                        <div className="d-flex flex-column gap-4">
+                            <h2 className="m-0">
+                                {GetLanguage(language, CurrentAlbum)}
+                            </h2>
+                            {
+                                singleLyricistData.length > 0 && <button className="dwnl_ply_btn" onClick={handlePlayAll} >{t('Play All')}</button>
+                            }
 
-                            <div className="col-lg-12">
-                                <div className="d-flex flex-column flex-lg-row align-items-center gap-5">
-                                    <Image src={lyricistDetails?.image} alt="profile" width={220} height={220} className="prfl_img" />
-                                    <div className="d-flex flex-column gap-4">
-                                        <h2 className="m-0">
-                                            {GetLanguage(language, lyricistDetails)}
-                                        </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="row ">
+                {
+                    singleLyricistData.length > 0 && singleLyricistData.map((item, index) => (
 
-
-                                        <button className="dwnl_ply_btn" onClick={handlePlayAll} >{t('Play All')}</button>
-
+                        <div key={index} className="col-lg-6 mt-4">
+                            <div className="d-flex align-items-center justify-content-between text-white music_card">
+                                <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
+                                    <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
+                                    <div className="d-flex flex-column gap-2">
+                                        <h5 className="m-0 text-break title_rcnt_plyd">
+                                            {GetLanguage(language, item)}
+                                            {/* Hore Jule Naval Hindol */}
+                                        </h5>
+                                        <p className="text-rec-pld desc_rcnt_plyd">
+                                            {GetCatLanguage(language, item)}
+                                            {/* Kirtan */}
+                                        </p>
                                     </div>
+                                </div>
+                                <div className="d-flex align-items-center gap-2 gap-md-3">
+                                    <FaShareAlt className="icon_recent_plyd" />
+                                    {token && (
+                                        <>
+                                            {item.playlist.length > 0 ? (
+                                                <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                            ) : (
+                                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                                            )}
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
-                        <div className="row ">
-                            {
-                                singleLyricistData.map((item, index) => (
+                    ))
+                }
+            </div>
 
-                                    <div key={index} className="col-lg-6 mt-4">
-                                        <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                            <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
-                                                <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
-                                                <div className="d-flex flex-column gap-2">
-                                                    <h5 className="m-0 text-break title_rcnt_plyd">
-                                                        {GetLanguage(language, item)}
-                                                        {/* Hore Jule Naval Hindol */}
-                                                    </h5>
-                                                    <p className="text-rec-pld desc_rcnt_plyd">
-                                                        {GetCatLanguage(language, item)}
-                                                        {/* Kirtan */}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex align-items-center gap-2 gap-md-3">
-                                                <FaShareAlt className="icon_recent_plyd" />
-                                                {token && (
-                                                    <>
-                                                        {item.playlist.length > 0 ? (
-                                                            <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
-                                                        ) : (
-                                                            <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                                                        )}
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </>
-                )
-            }
             {
-                !isLoading && singleLyricistData.length === 0 && <Nodataviewall />
+                !isLoading && singleLyricistData.length === 0 && <NoMusicsFound />
             }
 
             <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />

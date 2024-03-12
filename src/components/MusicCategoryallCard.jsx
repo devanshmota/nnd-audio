@@ -2,15 +2,20 @@
 import { getMusicCategoryApi } from "@/redux/actions/Campaign"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
 import Link from "next/link"
+import BreadCrumb from "./BreadCrumb"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
+import { setBreadcrumbCategory } from "@/redux/reducer/CachedataSlice"
 
 
 const MusicCategoryallCard = () => {
 
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const [musicCategory, setMusicCategory] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -32,20 +37,26 @@ const MusicCategoryallCard = () => {
         })
     }, [])
 
+    const handleBreadcrumbCategory = (id) => {
+        const currentCategory = musicCategory.find((item) => item.id === id)
+        dispatch(setBreadcrumbCategory(currentCategory))
+    }
+
     return (
         <>
             <div className="container">
-                <div className="row">
+                <div className="row mt-4">
                     {isLoading &&
                         <div className='d-flex align-items-center justify-content-center py-2'>
                             <ClipLoader color="#ffffff" />
                         </div>
                     }
+                    <BreadCrumb title={t('Music Categories')}/>
                     {
                         musicCategory.length > 0 && musicCategory.map((item) => (
-                            <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
-                                <Link href={`/music-categories-all/${item.id}`} className="card-container text-white">
-                                    <Image src={item.image} alt={item.eng_name} className="rounded-4" width={200} height={200} />
+                            <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-4">
+                                <Link href={`/music-categories-all/${item.id}`} onClick={() => handleBreadcrumbCategory(item.id)} className="card-container text-white">
+                                    <Image src={item.image} alt={item.eng_name} className="w-100 object-fit-cover" width={200} height={200} />
                                     <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                                 </Link>
                             </div>
@@ -61,4 +72,4 @@ const MusicCategoryallCard = () => {
     );
 }
 
-export default MusicCategoryallCard
+export default withTranslation()(MusicCategoryallCard)

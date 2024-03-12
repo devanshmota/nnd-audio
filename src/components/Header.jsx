@@ -158,13 +158,9 @@ const Header = ({ open, handleDrawerOpen }) => {
                             <span>{language}</span>
                             <IoIosArrowDown />
                           </div>
-
-
                         </div>
-
                       </>
                     }
-
                   >
                     <Dropdown.Item eventKey="English" onClick={() => handleLanguageChange("en", "English")}>English</Dropdown.Item>
                     <Dropdown.Item eventKey="Gujarati" onClick={() => handleLanguageChange("gu", "Gujarati")}>Gujarati</Dropdown.Item>

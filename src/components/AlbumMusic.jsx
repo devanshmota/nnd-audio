@@ -9,13 +9,18 @@ import Nodataviewall from "./Nodataviewall"
 import Link from "next/link"
 import Pagination from './ReactPagination.jsx'
 import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
+import BreadCrumb from "./BreadCrumb"
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 const AlbumMusic = ({ categoryid }) => {
 
+
+    const { BreadcrumbCategory } = useSelector((state) => state.cachedata)
     const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const [albums, setAlbums] = useState([])
-    const [category, setCategory] = useState(null)
+    // const [category, setCategory] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
 
     const [total, setTotal] = useState(0);
@@ -30,7 +35,7 @@ const AlbumMusic = ({ categoryid }) => {
             onSuccess: (res) => {
                 if (res.data) {
                     setAlbums(res.data)
-                    setCategory(res.data[0])
+                    // setCategory(res.data[0])
                 }
                 setTotal(res.total)
                 setIsLoading(false)
@@ -53,18 +58,18 @@ const AlbumMusic = ({ categoryid }) => {
 
     return (
         <div className="container">
-            <div className="row mt-5">
+            <div className="row mt-4">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <h1 className="text-white text-center m-0">{category?.category}</h1>
+                <BreadCrumb title={t('Music Categories')} category={GetLanguage(language, BreadcrumbCategory)}/>
                 {
                     albums.length > 0 && albums.map((item) => (
-                        <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-5">
+                        <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-4">
                             <Link href={`/music-categories-all/${categoryid.slug}/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="card-container text-white">
-                                <Image src={item.image} alt={item.eng_name} className="rounded-4" width={200} height={200} />
+                                <Image src={item.image} alt={item.eng_name} className="w-100 object-fit-cover" width={200} height={200} />
                                 <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                             </Link> 
                         </div>
@@ -73,7 +78,7 @@ const AlbumMusic = ({ categoryid }) => {
             </div>
             {
                 albums.length > 0 && (
-                    <div className="row mt-5">
+                    <div className="row mt-4">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination'/>
                         </div>
@@ -88,4 +93,4 @@ const AlbumMusic = ({ categoryid }) => {
     )
 }
 
-export default AlbumMusic
+export default withTranslation()(AlbumMusic)
