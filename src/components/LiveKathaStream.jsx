@@ -93,7 +93,7 @@ const LiveKathaStream = ({liveKathaStream}) => {
                             slidesPerView: 3,
                         },
                         1200: {
-                            slidesPerView: 3,
+                            slidesPerView: 4,
                         },
                     }}
                     className='mySwiper w-100'
@@ -103,7 +103,7 @@ const LiveKathaStream = ({liveKathaStream}) => {
                             <SwiperSlide key={item.id} virtualIndex={index}>
                                 <div className="image-container">
 
-                                    <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} alt={`utsav_img`} className="rounded-4 opacity-50 mw-100 object-fit-cover" width={412} height={206} />
+                                    <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} alt={`utsav_img`} className="rounded-4 opacity-50 w-100 object-fit-cover aspectRatio_katha" layout="intrinsic" width={412} height={206} />
 
                                     <div className="overlay" onClick={() => handlePlay(item)}>
                                         <FaPlay className="play-button" />

@@ -48,10 +48,10 @@ const Lyricists = ({ lyricists }) => {
                 loop={false}
                 spaceBetween={30}
                 freeMode={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
+                // autoplay={{
+                //     delay: 2500,
+                //     disableOnInteraction: false,
+                // }}
                 modules={[Autoplay, Pagination]}
                 pagination={{
                     clickable: true
@@ -89,7 +89,7 @@ const Lyricists = ({ lyricists }) => {
                     lyricists.slice(0,10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                             <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center w-100">
-                                <Image src={item.image} width={150} height={150} className="artist_img" alt={item.eng_name} />
+                                <Image src={item.image} width={159.429} height={159.429} className="artist_img aspctRatio_music" layout='intrinsic' alt={item.eng_name}  />
                                 <h5 className="text-white text-center m-0 lyricist_heading">{GetFirstWord(GetLanguage(language, item))}</h5>
                             </Link>
                         </SwiperSlide>

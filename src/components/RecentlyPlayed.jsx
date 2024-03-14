@@ -34,7 +34,7 @@ const RecentlyPlayed = () => {
       getRecentlyPlayedMusicApi({
         onSuccess: (res) => {
           if (res.music) {
-            setRecentlyPlayed(res.music.slice(0, 6))
+            setRecentlyPlayed(res.music.slice(0, 9))
           }
           setIsLoading(false)
         },
@@ -79,12 +79,12 @@ const RecentlyPlayed = () => {
         <CategoryHeader
           title="Recently Played"
           link="/recently-played-all"
-          isShow={true}
+          isShow={recentlyPlayed.length > 8}
         />
         <div className="row gy-4 utsav_gap">
           {
             recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
-              <div key={item.id} className="col-lg-6">
+              <div key={item.id} className="col-xxl-4 col-lg-6">
                 <div className="d-flex align-items-center justify-content-between text-white music_card">
                   <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                     <Image src={item.album.image} alt={item.eng_title} className="rounded" width={80} height={80} />

@@ -34,10 +34,9 @@ const GetAlbumMusic = ({ albumid }) => {
 
         fetchSigleArtistDataApi({
             album_id: albumid.id,
-            is_guest: 0,
+            is_guest: token ? 0 : 1,
             onSuccess: (res) => {
                 setSingleAlbumData(res.data)
-                setAlbumDetails(res.data[0].album)
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -99,7 +98,7 @@ const GetAlbumMusic = ({ albumid }) => {
             <div className="row ">
                 {
                     singleAlbumData.map((item, index) => (
-                        <div key={index} className="col-lg-6 mt-4">
+                        <div key={index} className="col-xxl-4 col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
                                 <div className="d-flex align-items-center gap-3 cursor-pointer" onClick={() => handlePlayMusic(item.id)}>
                                     <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded-4" width={80} height={80} />

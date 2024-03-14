@@ -10,6 +10,7 @@ import RenamePlaylistModal from "./RenamePlaylistModal";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { MdPlaylistAdd } from "react-icons/md";
 
 const AllPlaylist = () => {
 
@@ -101,32 +102,24 @@ const AllPlaylist = () => {
     return (
         <>
             <div className="container text-white">
-
+                <button className="d-flex gap-2 align-items-center header_login_btn mt-4" onClick={createPlaylist}>
+                    <MdPlaylistAdd className="all_icons" />
+                    Create
+                </button>
                 <div className="row">
-                    <div className="col-12 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
-                        <div className="card-container text-white">
-                            <div className="playlist_container text-white" onClick={createPlaylist}>
-                                <Image src='/playlist_icon.svg' alt='playlist-icon' width={51} height={37} />
-                                <h5 className="m-0">{t('Create Playlist')}</h5>
-                            </div>
-                        </div>
-                    </div>
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
-                            <div key={index} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mus_cat_container">
+                            <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
                                 <div className="card-container text-white">
-
                                     {
                                         item.music.length > 0 ? (
-                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="w-100 object-fit-cover" width={200} height={200} />
+                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="view_all_images" layout="intrinsic" width={200} height={200} />
                                         )
                                             :
                                             (
-                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="w-100 object-fit-cover" width={200} height={200} />
+                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="view_all_images" layout="intrinsic" width={200} height={200} />
                                             )
                                     }
-
-
                                     <div className="d-flex align-items-center justify-content-between w-100">
 
                                         <div className="d-flex flex-column">
@@ -139,7 +132,6 @@ const AllPlaylist = () => {
                                             </Dropdown>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         ))

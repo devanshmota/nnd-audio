@@ -13,6 +13,8 @@ import { setMusicPlaylist } from '@/redux/reducer/MusicPlaylistSlice';
 
 const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLiked, ...props }) => {
 
+    const dispatch = useDispatch()
+    const { MusicPlaylist } = useSelector(state => state.MusicPlaylist)
     const users = useSelector((state) => state.users)
     const token = users?.users?.token
     const [playlist, setPlaylist] = useState([])
@@ -27,7 +29,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 onSuccess: (res) => {
                     if (res.data) {
                         setPlaylist(res.data)
-                        
+
                     }
                 },
                 onError: (e) => {
@@ -81,7 +83,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
     }
 
     const saved = () => {
-        
+
         const playlistsToDelete = prevSelectedPlaylists.filter(
             (prevId) => !selectedPlaylists.includes(prevId)
         );
@@ -93,8 +95,20 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                 onSuccess: (res) => {
                     if (res.error === false) {
                         toast.success(t('Deleted Successfully'));
-                        onHide()
                         setIsLiked(!isLiked)
+                        const updatedMusicPlaylist = MusicPlaylist.map(item => {
+                            if (item.id === selectedMusicId) {
+                                const playlistsToDelete = res.data.map(item => item.id);
+                                const updatedPlaylist = item.playlist.filter(playlist => !playlistsToDelete.includes(playlist.id));
+                                return {
+                                    ...item,
+                                    playlist: updatedPlaylist.length > 0 ? updatedPlaylist : []
+                                };
+                            }
+                            return item;
+                        });
+                        dispatch(setMusicPlaylist(updatedMusicPlaylist))
+                        onHide()
                     }
                 },
                 onError: (e) => {
@@ -115,6 +129,20 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                     if (res.error === false) {
                         toast.success(t('Saved Successfully'));
                         setIsLiked(!isLiked)
+                        const updatedMusicPlaylist = MusicPlaylist.map(item => {
+                            if (item.id === selectedMusicId) {
+                                const updatedPlaylist = [
+                                    ...item.playlist, // Keep the existing playlist
+                                    ...res.data.map(item => ({ title: item.title, id: item.id })) // Add new objects from res.data
+                                ];
+                                return {
+                                    ...item,
+                                    playlist: updatedPlaylist
+                                };
+                            }
+                            return item;
+                        });
+                        dispatch(setMusicPlaylist(updatedMusicPlaylist))
                         onHide()
                     }
                 },

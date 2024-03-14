@@ -8161,12 +8161,7 @@ h2.widget-title:after {
 	max-width: 100%;
 }
 
-.utshv_img {
-	object-fit: cover;
-	border-radius: 10px;
-	width: 100% !important;
-	height: 100% !important;
-}
+
 
 
 .titles_homepage {
@@ -8178,7 +8173,7 @@ h2.widget-title:after {
 	object-fit: cover;
 	border: 4px solid #8b0000;
 	width: 100%;
-	height: 50%;
+	box-sizing: border-box;
 }
 
 a {
@@ -8270,7 +8265,7 @@ select,
 	outline: none;
 	border-radius: 10px;
 	width: 100%;
-	padding-left: 40px;
+	padding-left: 45px;
 	padding-top: 7px;
 	padding-bottom: 7px;
 	padding-right: 7px;
@@ -8497,7 +8492,7 @@ select,
 	flex-direction: column;
 	align-items: center;
 	gap: 7px;
-	width: min-content;
+	width: 100%;
 }
 
 .lyricits-container img {
@@ -8600,7 +8595,7 @@ select,
 
 
 .about_us_container {
-	min-height: calc(100vh - 64px - 130px);
+	min-height: calc(100vh - 238px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -8752,7 +8747,7 @@ select,
 }
 
 .form_wrapper {
-	height: calc(100vh - 64px);
+	height: calc(100vh - 190px);
 }
 
 .save_cancel_btn {
@@ -8908,7 +8903,7 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 .nnd_logo {
-	height: 40px;
+	height: 45px;
 }
 
 .nnd_web {
@@ -9091,9 +9086,25 @@ input[type="range"] {
 .main {
 	margin-bottom: 105px;
 	overflow: auto;
-	min-height: calc(100vh - 169px);
-
+	min-height: calc(100vh - 190px);
 }
+
+.bgImage {
+	background-image: url('/Audio_hedphone_1.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	transition: background position 1s ease-out;
+}
+
+.bgImageOpen {
+	background-image: url('/Audio_hedphone_1.svg');
+	background-position: calc(50% + 87px);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	transition: background position 1s ease-in;
+}
+
 
 .loader {
 	height: 100vh;
@@ -9104,7 +9115,7 @@ input[type="range"] {
 
 .globalSearch {
 	display: block !important;
-	width: 100% !important;
+	width: 300px !important;
 }
 
 .usersName {
@@ -9139,7 +9150,7 @@ input[type="range"] {
 }
 
 .nomusic_height {
-	height: 527px;
+	height: 411px;
 }
 
 .breadcrumb-item.active {
@@ -9159,6 +9170,120 @@ input[type="range"] {
 	margin-bottom: 0 !important;
 }
 
-.css-gbv9pa-MuiPaper-root-MuiAppBar-root,.css-1dt959v{
+.css-gbv9pa-MuiPaper-root-MuiAppBar-root,
+.css-1dt959v {
 	width: 100% !important;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+	background: var(--primary-color) !important;
+	color: white !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+	background-color: var(--secondary-color) !important;
+}
+
+.swal2-popup {
+	z-index: 1200;
+}
+
+.no-border {
+	border: 0;
+}
+
+@media (min-width: 1400px) {
+
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl,
+	.container-xxl {
+		max-width: 1600px !important;
+	}
+}
+
+.view_all_images {
+	object-fit: cover;
+	width: 100%;
+	aspect-ratio: 1/1;
+}
+
+.album_height,
+.aspectRatio_katha {
+	aspect-ratio: 3/1.8;
+}
+
+.aspctRatio_music {
+	aspect-ratio: 2/2;
+}
+
+.aspectRatio_utsav {
+	aspect-ratio: 3/1.7;
+}
+
+.lyricsContainer {
+	position: absolute;
+	z-index: 1201;
+	bottom: 75px;
+	right: 85px;
+	background-color: var(--primary-color);
+	padding: 25px;
+	height: 350px;
+	width: 350px;
+	border-radius: 20px;
+	display: flex;
+	flex: column;
+	justify-content: space-between;
+}
+
+.lyricContent {
+	max-height: 377px;
+	overflow-y: scroll;
+}
+
+.lyrics_title {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.fontSize {
+	font-size: 14px;
+}
+
+.toggle {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background-color: #1f2431;
+	padding: 5px;
+	border-radius: 21.5px;
+}
+
+.toggle_item {
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.active_toggle {
+	background-color: var(--primary-color);
+	border-radius: 50%;
+	padding: 3px 6px;
+	color: var(--secondary-color);
+}
+
+.lyricContent::-webkit-scrollbar {
+	width: 5px !important;
+}
+
+/* Track */
+.lyricContent::-webkit-scrollbar-track {
+	border-radius: 10px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--primary-color) !important;
+	border-radius: 10px !important;
 }

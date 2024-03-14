@@ -80,7 +80,7 @@ const LatestAlbums = ({ LatestAlbums }) => {
                         slidesPerView: 2,
                     },
                     768: {
-                        slidesPerView: 3,
+                        slidesPerView: 2,
                     },
                     992: {
                         slidesPerView: 3,
@@ -97,7 +97,7 @@ const LatestAlbums = ({ LatestAlbums }) => {
 
                             <SwiperSlide key={item.id} virtualIndex={index}>
                                 <Link href={`/latest-albums/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                    <Image src={item.image} className="rounded-4 w-100 object-fit-cover" alt={item.eng_title} width={301.5} height={200} />
+                                    <Image src={item.image} className="rounded-4 w-100 object-fit-cover album_height" layout='intrinsic' alt={item.eng_title} width={412} height={206} />
                                     <h5 className='m-0 ellipsis-container text-white'>
                                         {GetLanguage(language, item)}
                                     </h5>

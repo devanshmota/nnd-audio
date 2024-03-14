@@ -54,9 +54,9 @@ const MusicCategoryallCard = () => {
                     <BreadCrumb title={t('Music Categories')}/>
                     {
                         musicCategory.length > 0 && musicCategory.map((item) => (
-                            <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 d-flex justify-content-center mt-4">
+                            <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
                                 <Link href={`/music-categories-all/${item.id}`} onClick={() => handleBreadcrumbCategory(item.id)} className="card-container text-white">
-                                    <Image src={item.image} alt={item.eng_name} className="w-100 object-fit-cover" width={200} height={200} />
+                                    <Image src={item.image} alt={item.eng_name} className="view_all_images" layout="intrinsic" width={200} height={200} />
                                     <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                                 </Link>
                             </div>

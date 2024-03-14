@@ -33,6 +33,7 @@ import { useDispatch } from 'react-redux';
 import { setSystemSettings } from '@/redux/reducer/SystemSettingsSlice.js';
 import Loader from './Loader.jsx';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const drawerWidth = 240;
 
@@ -192,8 +193,13 @@ export default function PersistentDrawerLeft({ children }) {
                         >
                             <MenuIcon className='menuIcon' />
                         </IconButton>
-                        <img src='/images/nnd_web.png' alt='nnd_logo' className='nnd_web' />
-                        <img src='/images/nnd_logo.png' alt='nnd_logo' className='nnd_logo' />
+
+                        <Link href="/">
+                            <img src='/images/nnd_web.png' alt='nnd_logo' className='nnd_web' />
+                        </Link>
+                        <Link href="/">
+                            <img src='/images/nnd_logo.png' alt='nnd_logo' className='nnd_logo' />
+                        </Link>
                     </div>
                     <Header />
                 </Toolbar>
@@ -212,8 +218,8 @@ export default function PersistentDrawerLeft({ children }) {
                 <I18nextProvider i18n={language}>
                     <DrawerHeader />
                     <FirebaseNotification />
-                    <div className='main nnd_scrollbar'>
-                        {children}
+                    <div className={`main ${open ? 'bgImageOpen' : 'bgImage'}`}>
+                            {children}
                     </div>
                 </I18nextProvider>
             </Main>

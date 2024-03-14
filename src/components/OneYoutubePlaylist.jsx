@@ -13,7 +13,6 @@ const OneYoutubePlaylist = ({ playlistid }) => {
     const [InitialTrack, setInitialTrack] = useState(null)
 
     useEffect(() => {
-
         const fetchPlaylistData = async () => {
             try {
                 const response = await axios.get(
@@ -49,10 +48,10 @@ const OneYoutubePlaylist = ({ playlistid }) => {
                         <h5 className="m-0">{InitialTrack?.snippet?.title}</h5>
                     </div>
                     <div className="col-lg-4 h-100 overflow-y-scroll">
-                        <div className="d-flex flex-column justify-content-center gap-2">
+                        <div className="d-flex flex-column justify-content-center gap-1">
                             {
                                 playlistData.map((item, index) => (
-                                    <div key={index} className={`d-flex align-items-center gap-3 p-3 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
+                                    <div key={index} className={`d-flex align-items-center gap-2 p-2 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
                                         <Image src={item?.snippet?.thumbnails?.medium?.url} className="rounded mw-100 object-fit-cover" alt={item.snippet.title} width={100} height={60} onError={(e) => {
                                             e.target.src = '/Audio_hedphone.svg'
                                         }} />

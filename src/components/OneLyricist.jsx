@@ -74,7 +74,7 @@ const OneLyricist = ({ lyricistid }) => {
                 <div className="col-lg-12">
                     <div className="d-flex flex-column flex-lg-row align-items-center gap-4 py-4 brdr_btm">
                         <Image src={CurrentAlbum?.image} alt="profile" width={220} height={220} className="prfl_img" />
-                        <div className="d-flex flex-column gap-4">
+                        <div className="d-flex flex-column align-items-center align-items-lg-start gap-4">
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
                             </h2>
@@ -90,7 +90,7 @@ const OneLyricist = ({ lyricistid }) => {
                 {
                     singleLyricistData.length > 0 && singleLyricistData.map((item, index) => (
 
-                        <div key={index} className="col-lg-6 mt-4">
+                        <div key={index} className="col-xxl-4 col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
                                 <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                                     <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />

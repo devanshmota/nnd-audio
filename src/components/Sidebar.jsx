@@ -3,17 +3,22 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-import { MdHome, MdPrivacyTip } from "react-icons/md";
-import { FaHeart } from 'react-icons/fa';
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import homeIcon from '../../public/homeIcon.svg'
+import recentPlayed from '../../public/Recent_Played_icon.svg'
+import youtubePlaylist from '../../public/Youtube Playlist_icon.svg'
+import termCondition from '../../public/term_and_condition.svg'
+import youtubeLiveVideos from '../../public/Youtube Live_videos.svg'
+import privacyPolicy from '../../public/privacy_policy_icon.svg'
+import aboutUs from '../../public/about_us.svg'
+import playlist from '../../public/mainPlaylist_icon_.svg'
+
 
 
 const Sidebar = ({ open }) => {
-
     const users = useSelector((state) => state.users)
     const token = users?.users?.token
-
     return (
         <>
             {/* <!---Side Menu Start---> */}
@@ -28,7 +33,7 @@ const Sidebar = ({ open }) => {
                                     <Link href='/'>
 
                                         <span className="nav_icon">
-                                            <MdHome className='home_icon_sidebar' />
+                                            <Image src={homeIcon} alt='home' width={25} height={22} />
                                         </span>
                                         <span className="nav_text">
                                             {t('Home')}
@@ -41,10 +46,22 @@ const Sidebar = ({ open }) => {
                                         <Link href='/recently-played-all'>
 
                                             <span className="nav_icon">
-                                                <Image src='/Recent_Played.svg' alt='' width={25} height={25} />
+                                                <Image src={recentPlayed} alt='recently played' width={25} height={25} />
                                             </span>
                                             <span className="nav_text">
                                                 {t('Recently Played')}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    token && <li>
+                                        <Link href='/playlist'>
+                                            <span className="nav_icon">
+                                                <Image src={playlist} alt='' width={25} height={25} />
+                                            </span>
+                                            <span className="nav_text">
+                                                {t('Playlist')}
                                             </span>
                                         </Link>
                                     </li>
@@ -53,7 +70,7 @@ const Sidebar = ({ open }) => {
                                     <Link href='/youtube-live-videos'>
 
                                         <span className="nav_icon">
-                                            <Image src='/Youtube_live_videos.svg' alt='' width={25} height={25} />
+                                            <Image src={youtubeLiveVideos} alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             {/* history */}
@@ -64,49 +81,45 @@ const Sidebar = ({ open }) => {
                                 <li>
                                     <Link href='/youtube-playlist'>
                                         <span className="nav_icon">
-                                            <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
+                                            <Image src={youtubePlaylist} alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
-                                            {/* create playlist */}
+                            
                                             {t('Youtube Playlist')}
                                         </span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <a href="" title="Purchased">
+                                <Link href='/term-conditions'>
+                                    <span className="nav_icon">
+                                        <Image src={termCondition} alt='' width={25} height={25} />
+                                    </span>
+                                    <span className="nav_text">
+    
+                                        {t('Term & Conditions')}
+                                    </span>
+                                </Link>
+                            </li>
+                                <li>
+                                    <Link href="/privacy-policy" title="Purchased">
                                         <span className="nav_icon">
-                                            <MdPrivacyTip className='icon_sidebar' />
+                                            <Image src={privacyPolicy} alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             {t('Privacy Policy')}
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <Link href='/about-us'>
                                         <span className="nav_icon">
-                                            <Image src='/About_us.svg' alt='' width={25} height={25} />
+                                            <Image src={aboutUs} alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
                                             {t('About Us')}
                                         </span>
                                     </Link>
-
                                 </li>
-
-                                {
-                                    token && <li>
-                                        <Link href='/playlist'>
-                                            <span className="nav_icon">
-                                                <Image src='/Youtube_Playlist.svg' alt='' width={25} height={25} />
-                                            </span>
-                                            <span className="nav_text">
-                                                {t('Playlist')}
-                                            </span>
-                                        </Link>
-                                    </li>
-                                }
-
 
                             </ul>
                         </div>

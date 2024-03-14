@@ -12,10 +12,13 @@ import OffCanvas from "./OffCanvas";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTrack, setIsPlaying, setIsLiked, resetState } from "@/redux/reducer/MusicPlaylistSlice";
 import GetLanguage from "./GetLanguage";
+import lyricsIcon from '../../public/lyrics.svg'
+import { setLyricsLanguage } from "@/redux/reducer/CachedataSlice";
 
 const Player = () => {
 
     const dispatch = useDispatch()
+    const { LyricsLanguage } = useSelector(state => state.cachedata);
     const { language } = useSelector((state) => state.language)
     const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist)
     const [volume, setVolume] = useState(0.5)
@@ -27,11 +30,13 @@ const Player = () => {
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null)
 
+    const [IsLyricsOpen, setIsLyricsOpen] = useState(false)
+    const [FontSize, setFontSize] = useState(14)
 
     // useEffect(() => {
     //     dispatch(resetState())
     // }, [])
-    
+
     useEffect(() => {
         dispatch(setIsPlaying(false))
     }, [])
@@ -106,6 +111,20 @@ const Player = () => {
         return null
     }
 
+    const handleLyrics = () => {
+        setIsLyricsOpen(!IsLyricsOpen)
+    }
+
+    const handleFontChange = (value) => {
+        setFontSize(value)
+    }
+
+    const setEng = () => {
+        dispatch(setLyricsLanguage('English'))
+    }
+    const setGuj = () => {
+        dispatch(setLyricsLanguage('Gujarati'))
+    }
 
     return (
         <>
@@ -140,7 +159,54 @@ const Player = () => {
                     <span>{formatTime(duration)}</span>
                 </div>
 
-                <div className="d-flex align-items-center gap-2">
+                <div className="position-relative d-flex align-items-center gap-3">
+
+                    {MusicPlaylist[currentTrack]?.eng_lyrics ? (
+                        <Image
+                            src={lyricsIcon}
+                            alt=""
+                            width={25}
+                            height={25}
+                            className="music_player_icon"
+                            onClick={handleLyrics}
+                        />
+                    ) : (
+                        IsLyricsOpen && setIsLyricsOpen(false) // Check if IsLyricsOpen is true before setting it to false
+                    )}
+
+                    {
+                        IsLyricsOpen && (
+                            <div className="lyricsContainer d-flex flex-column gap-3">
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <p className="lyrics_title">Lyrics</p>
+                                    <div className="toggle">
+                                        <span className={`toggle_item ${LyricsLanguage === 'English' ? "active_toggle" : ""}`} onClick={setEng}>en</span>
+                                        <span className={`toggle_item ${LyricsLanguage === 'Gujarati' ? "active_toggle" : ""}`} onClick={setGuj}>ગુજ</span>
+                                    </div>
+                                </div>
+
+                                <p className="lyricContent" style={{ fontSize: `${FontSize}px` }}>
+                                    {LyricsLanguage === 'English' ? MusicPlaylist[currentTrack]?.eng_lyrics : MusicPlaylist[currentTrack]?.guj_lyrics}
+                                </p>
+
+                                <div className="d-flex flex-column gap-1">
+                                    <center className="fontSize">Font Size ({FontSize}px)</center>
+                                    <center>
+                                        <input
+                                            type="range"
+                                            min="12"
+                                            max="22"
+                                            step="2"
+                                            value={FontSize}
+                                            className="w-100"
+                                            onChange={(e) => handleFontChange(e.target.value)}
+                                        />
+                                    </center>
+                                </div>
+                            </div>
+                        )
+                    }
+
 
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist?.length > 0 ? (
@@ -151,19 +217,21 @@ const Player = () => {
                                 <FaRegHeart className="icon_recent_plyd music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                             )
                     }
-                    {
-                        isMuted ? <BiSolidVolumeMute className="music_player_icon" onClick={toggleMute} /> : <BiSolidVolumeFull className="music_player_icon" onClick={toggleMute} />
-                    }
-                    <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={volume}
-                        onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-                    />
+                    <div className="d-flex align-items-center gap-1">
+                        {
+                            isMuted ? <BiSolidVolumeMute className="music_player_icon" onClick={toggleMute} /> : <BiSolidVolumeFull className="music_player_icon" onClick={toggleMute} />
+                        }
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                        />
+                    </div>
+
                 </div>
-                
             </div>
             {
                 MusicPlaylist?.length > 0 && currentTrack !== undefined &&

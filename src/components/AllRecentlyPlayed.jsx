@@ -53,7 +53,7 @@ const AllRecentlyPlayed = () => {
         }
         <BreadCrumb title={t('Recently Played')}/>
         {recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
-          <div key={index} className="col-lg-6 mt-4">
+          <div key={index} className="col-xxl-4 col-lg-6 mt-4">
             <div className="d-flex align-items-center justify-content-between text-white music_card">
               <div className="d-flex align-items-center gap-3">
                 <Image src={item.album.image} alt={item.eng_title} className="rounded" width={80} height={80} />

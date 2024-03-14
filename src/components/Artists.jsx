@@ -87,8 +87,8 @@ const Artists = ({ artists }) => {
                 {
                     artists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-2 align-items-center justify-content-between">
-                                <Image src={item.image} objectFit='cover' className='rounded-4 mw-100' alt={item.eng_name} width={159.429} height={159.429} />
+                            <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center justify-content-between">
+                                <Image src={item.image} className='rounded-4 w-100 object-fit-cover aspctRatio_music' alt={item.eng_name} layout='intrinsic' width={159.429} height={159.429} />
                                 <h5 className='m-0 text-center'>
                                     {GetFirstWord(GetLanguage(language, item))}
                                 </h5>

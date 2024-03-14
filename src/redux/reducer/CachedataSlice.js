@@ -8,7 +8,8 @@ const CachedataSlice = createSlice({
         searchQuery: '',
         fcmToken: '',
         CurrentAlbum: {},
-        BreadcrumbCategory: {}
+        BreadcrumbCategory: {},
+        LyricsLanguage: 'English'
     },
 
     reducers: {
@@ -24,8 +25,11 @@ const CachedataSlice = createSlice({
         setBreadcrumbCategory: (state, action) => {
             state.BreadcrumbCategory = action.payload;
         },
+        setLyricsLanguage: (state, action) => {
+            state.LyricsLanguage = action.payload;
+        }
     }
 })
 
 export default CachedataSlice;
-export const { setSearchQuery, setFcmToken, setCurrentAlbum, setBreadcrumbCategory } = CachedataSlice.actions;
+export const { setSearchQuery, setFcmToken, setCurrentAlbum, setBreadcrumbCategory, setLyricsLanguage } = CachedataSlice.actions;

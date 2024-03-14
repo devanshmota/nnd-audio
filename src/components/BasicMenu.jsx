@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PersonIcon from '@mui/icons-material/Person';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDecryptedText } from '@/decryption/decryption';
 import { useRouter } from 'next/navigation';
@@ -14,6 +13,8 @@ import toast from 'react-hot-toast';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import deleteIcon from '../../public/delete_icon.svg'
+import logoutIcon from '../../public/logout_icon.svg'
 
 
 export function BasicMenu() {
@@ -42,7 +43,10 @@ export function BasicMenu() {
         Swal.fire({
             title: t("Are you sure?"),
             text: t("You won't be able to revert this!"),
-            icon: "warning",
+            iconHtml: `<img src=${logoutIcon.src} width="88" height="88">`,
+            customClass: {
+                icon: 'no-border'
+              },
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -76,7 +80,10 @@ export function BasicMenu() {
         Swal.fire({
             title: t("Delete Account?"),
             text: t("You will permanently lose your Notification, Profile, & Favorite"),
-            icon: "warning",
+            iconHtml: `<img src=${deleteIcon.src} width="88" height="88">`,
+            customClass: {
+                icon: 'no-border'
+              },
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",

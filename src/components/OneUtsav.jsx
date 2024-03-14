@@ -94,7 +94,7 @@ const OneUtsav = ({ utsavid }) => {
                 {
                     singleUtsavData.length > 0 && singleUtsavData.map((item, index) => (
 
-                        <div key={index} className="col-lg-6 mt-4">
+                        <div key={index} className="col-xxl-4 col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
                                 <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
                                     <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />

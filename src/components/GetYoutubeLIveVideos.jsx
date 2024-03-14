@@ -45,10 +45,10 @@ const GetYoutubeLiveVideos = () => {
                         <h5 className="m-0">{InitialTrack?.title}</h5>
                     </div>
                     <div className="col-lg-4 h-100 overflow-y-scroll">
-                        <div className="d-flex flex-column justify-content-center gap-2">
+                        <div className="d-flex flex-column justify-content-center gap-1">
                             {
                                 playlistData.map((item, index) => (
-                                    <div key={index} className={`d-flex align-items-center gap-3 p-3 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
+                                    <div key={index} className={`d-flex align-items-center gap-2 p-2 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
                                         <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} className="rounded mw-100 object-fit-cover" alt={item.title} width={100} height={60} onError={(e) => {
                                             e.target.src = '/Audio_hedphone.svg'
                                         }} />

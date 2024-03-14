@@ -12,7 +12,7 @@ const AboutUs = () => {
             </div>
             <div className="container text-white text-center about_us_container">
                 <div className="row">
-                    <div className="col-sm-12 col-md-5 d-flex align-items-center justify-content-center">
+                    <div className="col-sm-12 col-lg-5 d-flex align-items-center justify-content-center">
                         <div className="about_img_div d-flex flex-column justify-content-center align-items-center gap-3">
                             <h3 className="m-0">{t("Published with the Blessings of")}</h3>
                             <div className=" d-flex flex-row flex-wrap justify-content-center gap-4 text-center">
@@ -24,11 +24,11 @@ const AboutUs = () => {
                         </div>
 
                     </div>
-                    <div className="col-sm-12 col-md-2">
+                    <div className="col-sm-12 col-lg-2">
 
                         <div className="vr about-divider"></div>
                     </div>
-                    <div className="col-sm-12 col-md-5 d-flex align-items-center justify-content-center">
+                    <div className="col-sm-12 col-lg-5 d-flex align-items-center justify-content-center">
                         <div className="d-flex flex-column justify-content-center gap-3">
                             <h3 className="m-0">{t('Published by')}</h3>
                             <div>
