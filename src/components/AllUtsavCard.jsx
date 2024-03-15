@@ -57,7 +57,7 @@ const AllUtsavCard = () => {
 
     return (
         <div className="container text-white">
-            <div className="row mt-4">
+            <div className="row mt-5">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
@@ -65,9 +65,9 @@ const AllUtsavCard = () => {
                 }
                 <BreadCrumb title={t('Utsav')}/>
                 {utsav.length > 0 && utsav.map((item) => (
-                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center align-items-center mt-4">
+                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center align-items-center mt-5">
                         <Link href={`/utsav-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="card-container text-white">
-                            <Image src={item.image} alt={item.eng_name} className="view_all_images" layout="intrinsic" width={200} height={200} />
+                            <Image src={item.image} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
                             <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                         </Link>
                     </div>
@@ -76,8 +76,8 @@ const AllUtsavCard = () => {
 
             </div>
             {
-                utsav.length > 0 && (
-                    <div className="row mt-5">
+                total > 12 && utsav.length > 0 && (
+                    <div className="row">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>

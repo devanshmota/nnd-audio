@@ -7,7 +7,7 @@ import BreadCrumb from '../../components/BreadCrumb.jsx'
 const AboutUs = () => {
     return (
         <>
-            <div className=" container mt-4">
+            <div className=" container my-5">
                 <BreadCrumb title={t('About us')} />
             </div>
             <div className="container text-white text-center about_us_container">

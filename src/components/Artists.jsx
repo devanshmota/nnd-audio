@@ -5,11 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
+import { setCurrentAlbum } from '@/redux/reducer/CachedataSlice';
 
 const Artists = ({ artists }) => {
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const artistRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
@@ -28,8 +30,10 @@ const Artists = ({ artists }) => {
             artistRef.current.swiper.slideNext();
         }
     };
-
-
+    const handleCurrentAlbum = (id) => {
+        const currentAlbum = artists.find((item) => item.id === id)
+        dispatch(setCurrentAlbum(currentAlbum))
+    }
     return (
         <div className="container d-flex flex-column">
             <CategoryHeader
@@ -87,7 +91,7 @@ const Artists = ({ artists }) => {
                 {
                     artists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <Link href={`/artists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center justify-content-between">
+                            <Link href={`/artists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="d-flex flex-column gap-3 align-items-center justify-content-between">
                                 <Image src={item.image} className='rounded-4 w-100 object-fit-cover aspctRatio_music' alt={item.eng_name} layout='intrinsic' width={159.429} height={159.429} />
                                 <h5 className='m-0 text-center'>
                                     {GetFirstWord(GetLanguage(language, item))}

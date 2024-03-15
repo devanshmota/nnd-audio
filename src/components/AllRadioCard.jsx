@@ -55,7 +55,7 @@ const AllRadioCard = () => {
     };
     return (
         <div className="container">
-            <div className="row mt-4">
+            <div className="row mt-5">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
@@ -63,7 +63,7 @@ const AllRadioCard = () => {
                 }
                 <BreadCrumb title={t('Radio 24x7')}/>
                 {radio.length > 0 && radio.map((item) => (
-                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
+                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                         <div onClick={() => handlePlayMusic(item.id)} className="lyricits-container text-white cursor-pointer">
                             <Image src={item.image} alt={item.eng_name} width={200} height={200} className="view_all_images" layout="intrinsic" />
                             <h6 className="m-0">{GetLanguage(language, item)}</h6>
@@ -74,8 +74,8 @@ const AllRadioCard = () => {
                 }
             </div>
             {
-                radio.length > 0 && (
-                    <div className="row mt-5">
+                total > 12 && radio.length > 0 && (
+                    <div className="row">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>

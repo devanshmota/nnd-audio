@@ -15,6 +15,9 @@ import { withTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
 import CategoryHeader from "./CategoryHeader";
+import heartFilled from '../../public/nnd/heart_Fill.svg'
+import heartIcon from '../../public/nnd/Heart_stork.svg'
+import shareIcon from '../../public/nnd/song_Share.svg'
 
 
 const RecentlyPlayed = () => {
@@ -94,16 +97,16 @@ const RecentlyPlayed = () => {
                     </div>
                   </div>
                   <div className="d-flex align-items-center gap-2 gap-md-3">
-                    <FaShareAlt className="icon_recent_plyd" onClick={copyToClip} />
-                    {
-                      item.playlist.length > 0 ? (
-                        <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
-                      )
-                        :
-                        (
-                          <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
-                        )
-                    }
+                    <Image src={shareIcon} width={24} height={24} className="icon_recent_plyd" onClick={copyToClip} />
+                    {token && (
+                      <>
+                        {item.playlist.length > 0 ? (
+                          <Image src={heartFilled} className="icon_recent_plyd" onClick={() => handleSave(item.id)} width={24} height={24} />
+                        ) : (
+                          <Image src={heartIcon} className="icon_recent_plyd" onClick={() => handleSave(item.id)} width={24} height={24} />
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

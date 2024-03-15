@@ -3,17 +3,24 @@ import { useRef, useState, useEffect } from "react";
 import ReactHowler from "react-howler";
 import { getDecryptedText } from "@/decryption/decryption";
 import Image from "next/image";
-import { MdSkipPrevious } from "react-icons/md";
-import { MdSkipNext } from "react-icons/md";
-import { IoIosPause, IoIosPlay } from "react-icons/io";
-import { BiSolidVolumeFull, BiSolidVolumeMute } from "react-icons/bi";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import OffCanvas from "./OffCanvas";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTrack, setIsPlaying, setIsLiked, resetState } from "@/redux/reducer/MusicPlaylistSlice";
 import GetLanguage from "./GetLanguage";
 import lyricsIcon from '../../public/lyrics.svg'
 import { setLyricsLanguage } from "@/redux/reducer/CachedataSlice";
+import heartFilled from '../../public/heart_fill.svg'
+import heartIcon from '../../public/nnd/Heart_stork.svg'
+import prevSongIcon from '../../public/nnd/Backword_Line_30px.svg'
+import pauseIcon from '../../public/nnd/Puash_Line_30px.svg'
+import playIcon from '../../public/nnd/Play_Line_30px.svg'
+import nextIcon from '../../public/nnd/Forword_Line_30px.svg'
+import volumeIcon from '../../public/nnd/volume on.svg'
+import volumeMute from '../../public/nnd/0ff.svg'
+
+
+
+
 
 const Player = () => {
 
@@ -21,6 +28,7 @@ const Player = () => {
     const { LyricsLanguage } = useSelector(state => state.cachedata);
     const { language } = useSelector((state) => state.language)
     const { MusicPlaylist, isPlaying, currentTrack, isLiked } = useSelector(state => state.MusicPlaylist)
+    const [issLiked, setIssLiked] = useState(false)
     const [volume, setVolume] = useState(0.5)
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
@@ -31,11 +39,22 @@ const Player = () => {
     const [selectedMusicId, setSelectedMusicId] = useState(null)
 
     const [IsLyricsOpen, setIsLyricsOpen] = useState(false)
-    const [FontSize, setFontSize] = useState(14)
+    const [FontSize, setFontSize] = useState(16)
+    const modalRef = useRef(null);
 
-    // useEffect(() => {
-    //     dispatch(resetState())
-    // }, [])
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                setIsLyricsOpen(false)
+            }
+        };
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        };
+    }, [IsLyricsOpen]);
 
     useEffect(() => {
         dispatch(setIsPlaying(false))
@@ -112,7 +131,7 @@ const Player = () => {
     }
 
     const handleLyrics = () => {
-        setIsLyricsOpen(!IsLyricsOpen)
+        setIsLyricsOpen(true)
     }
 
     const handleFontChange = (value) => {
@@ -128,24 +147,38 @@ const Player = () => {
 
     return (
         <>
+
             <div className="d-flex align-items-center justify-content-between w-100 text-white ms_player_wrapper">
-                <div className="d-flex gap-2">
-                    <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image} alt="song" className="rounded" width={50} height={50} />
-                    <div className="d-flex flex-column gap-1">
-                        <h5 className="text-white m-0 title_rcnt_plyd">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
-                        <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
+                <div className="d-flex flex-column justify-content-center">
+
+                    <div className="d-flex gap-2">
+                        <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image} alt="song" className="rounded" width={50} height={50} />
+                        <div className="d-flex flex-column gap-1">
+                            <h5 className="text-white m-0 title_rcnt_plyd">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
+                            <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
+                        </div>
                     </div>
+
+                    {
+                        MusicPlaylist[currentTrack]?.tags.length > 0 && <div className="song_tags">
+                            {
+                                MusicPlaylist[currentTrack]?.tags?.map(item => <span key={item.id}>{GetLanguage(language, item)}</span>)
+                            }
+                        </div>
+                    }
+
+
                 </div>
 
                 <div className="d-flex align-items-center gap-3">
 
-                    <MdSkipPrevious onClick={playPrev} className="music_player_icon" />
+                    <Image src={prevSongIcon} width={24} height={24} onClick={playPrev} className="music_player_icon" />
 
                     <div onClick={playPauseToggle} className="d-flex align-items-center">
-                        {isPlaying ? <IoIosPause className="music_player_icon" /> : <IoIosPlay className="music_player_icon" />}
+                        {isPlaying ? <Image src={pauseIcon} width={24} height={24} className="music_player_icon" /> : <Image src={playIcon} width={24} height={24} className="music_player_icon" />}
                     </div>
 
-                    <MdSkipNext onClick={playNext} className="music_player_icon" />
+                    <Image src={nextIcon} width={24} height={24} onClick={playNext} className="music_player_icon" />
                 </div>
 
                 <div className="d-flex align-items-center gap-1 w-50">
@@ -165,10 +198,11 @@ const Player = () => {
                         <Image
                             src={lyricsIcon}
                             alt=""
-                            width={25}
-                            height={25}
+                            width={24}
+                            height={24}
                             className="music_player_icon"
                             onClick={handleLyrics}
+                            title="Lyrics"
                         />
                     ) : (
                         IsLyricsOpen && setIsLyricsOpen(false) // Check if IsLyricsOpen is true before setting it to false
@@ -176,7 +210,7 @@ const Player = () => {
 
                     {
                         IsLyricsOpen && (
-                            <div className="lyricsContainer d-flex flex-column gap-3">
+                            <div className="lyricsContainer d-flex flex-column gap-3" ref={modalRef}>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <p className="lyrics_title">Lyrics</p>
                                     <div className="toggle">
@@ -206,20 +240,20 @@ const Player = () => {
                             </div>
                         )
                     }
-
-
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist?.length > 0 ? (
-                            <FaHeart className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
+
+
+                            <Image src={heartFilled} alt="heart" width={25} height={25} className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                         )
                             :
                             (
-                                <FaRegHeart className="icon_recent_plyd music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
+                                <Image src={heartIcon} className="icon_recent_plyd music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} width={25} height={25} />
                             )
                     }
-                    <div className="d-flex align-items-center gap-1">
+                    <div className="d-flex align-items-center gap-2">
                         {
-                            isMuted ? <BiSolidVolumeMute className="music_player_icon" onClick={toggleMute} /> : <BiSolidVolumeFull className="music_player_icon" onClick={toggleMute} />
+                            isMuted ? <Image src={volumeMute} width={24} height={24} className="music_player_icon" onClick={toggleMute} /> : <Image src={volumeIcon} width={24} height={24} className="music_player_icon" onClick={toggleMute} />
                         }
                         <input
                             type="range"
@@ -245,7 +279,7 @@ const Player = () => {
                     html5={true}
                 />
             }
-            <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIsLiked} isLiked={isLiked} />
+            <OffCanvas show={isOffCanvasOpen} onHide={() => setIsOffCanvasOpen(false)} handleSave={handleSave} selectedMusicId={selectedMusicId} setIsLiked={setIssLiked} isLiked={issLiked} />
         </>
     );
 };

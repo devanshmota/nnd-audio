@@ -35,9 +35,12 @@ const OneYoutubePlaylist = ({ playlistid }) => {
 
     return (
         <>
-            <div className="container text-white mt-4">
+            <div className="container text-white mt-5">
+                <div className="row mb-5">
+                    <BreadCrumb title={t('Youtube Playlist')} category={t('Videos')} link1='/youtube-playlist' />
+                </div>
                 <div className="row gy-3 yt-heigth">
-                    <BreadCrumb title={t('Youtube Playlist')} category={t('Videos')} />
+
                     <div className="col-lg-8 d-flex flex-column gap-3">
                         <iframe
                             className="youtube_video"

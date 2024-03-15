@@ -25,7 +25,7 @@ const AlbumMusic = ({ categoryid }) => {
 
     const [total, setTotal] = useState(0);
     const [offsetdata, setOffsetdata] = useState(0);
-    const limit = 12;
+    const limit = 18;
 
     useEffect(() => {
         getAlbumApi({
@@ -58,29 +58,32 @@ const AlbumMusic = ({ categoryid }) => {
 
     return (
         <div className="container">
-            <div className="row mt-4">
+            <div className="row mt-5">
+                <BreadCrumb title={t('Music Categories')} category={GetLanguage(language, BreadcrumbCategory)} link1='/music-categories-all' />
+            </div>
+            <div className="row mt-5 row_gap">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <BreadCrumb title={t('Music Categories')} category={GetLanguage(language, BreadcrumbCategory)}/>
+
                 {
                     albums.length > 0 && albums.map((item) => (
-                        <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
+                        <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center">
                             <Link href={`/music-categories-all/${categoryid.slug}/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="card-container text-white">
-                                <Image src={item.image} alt={item.eng_name} className="view_all_images" layout="intrinsic" width={200} height={200} />
+                                <Image src={item.image} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
                                 <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
-                            </Link> 
+                            </Link>
                         </div>
                     ))
                 }
             </div>
             {
-                albums.length > 0 && (
-                    <div className="row mt-5">
+                total > 12 && albums.length > 0 && (
+                    <div className="row">
                         <div className="col-12">
-                            <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination'/>
+                            <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>
                     </div>
                 )

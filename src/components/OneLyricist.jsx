@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
 import OffCanvas from "./OffCanvas";
-import { FaHeart, FaRegHeart, FaShareAlt } from "react-icons/fa";
 import Image from "next/image";
 import { ClipLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,9 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import NoMusicsFound from "./NoMusicsFound";
 import BreadCrumb from "./BreadCrumb";
+import heartFilled from '../../public/nnd/heart_Fill.svg'
+import heartIcon from '../../public/nnd/Heart_stork.svg'
+import shareIcon from '../../public/nnd/song_Share.svg'
 
 const OneLyricist = ({ lyricistid }) => {
 
@@ -61,19 +63,23 @@ const OneLyricist = ({ lyricistid }) => {
         dispatch(setIsPlaying(true))
         toast.success('Playing All')
     }
+    const copyToClip = async () => {
+        await navigator.clipboard.writeText(location.href)
+        toast.success(t('Link copied to clipboard'))
+    }
 
     return (
-        <div className="container text-white mt-4">
+        <div className="container text-white mt-5">
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>
                     <ClipLoader color="#ffffff" />
                 </div>
             }
-            <BreadCrumb title={t('Lyricists')} category={GetLanguage(language, CurrentAlbum)}/>
+            <BreadCrumb title={t('Lyricists')} category={GetLanguage(language, CurrentAlbum)} link1='/lyricists-all' />
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="d-flex flex-column flex-lg-row align-items-center gap-4 py-4 brdr_btm">
-                        <Image src={CurrentAlbum?.image} alt="profile" width={220} height={220} className="prfl_img" />
+                    <div className="d-flex flex-column flex-lg-row align-items-center gap-4 pb-4 pt-5 brdr_btm">
+                        <Image src={CurrentAlbum?.image} alt="profile" width={180} height={180} className="prfl_img" />
                         <div className="d-flex flex-column align-items-center align-items-lg-start gap-4">
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
@@ -106,13 +112,13 @@ const OneLyricist = ({ lyricistid }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center gap-2 gap-md-3">
-                                    <FaShareAlt className="icon_recent_plyd" />
+                                    <Image src={shareIcon} width={24} height={24} className="icon_recent_plyd" onClick={copyToClip} />
                                     {token && (
                                         <>
                                             {item.playlist.length > 0 ? (
-                                                <FaHeart className="icon_recent_plyd liked_rcnt" onClick={() => handleSave(item.id)} />
+                                                <Image src={heartFilled} className="icon_recent_plyd" onClick={() => handleSave(item.id)} width={24} height={24} />
                                             ) : (
-                                                <FaRegHeart className="icon_recent_plyd" onClick={() => handleSave(item.id)} />
+                                                <Image src={heartIcon} className="icon_recent_plyd" onClick={() => handleSave(item.id)} width={24} height={24} />
                                             )}
                                         </>
                                     )}

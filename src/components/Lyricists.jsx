@@ -4,13 +4,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
 import Image from 'next/image';
+import { setCurrentAlbum } from '@/redux/reducer/CachedataSlice';
 
 const Lyricists = ({ lyricists }) => {
 
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const lyricistsRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
@@ -29,7 +31,10 @@ const Lyricists = ({ lyricists }) => {
             lyricistsRef.current.swiper.slideNext();
         }
     };
-
+    const handleCurrentAlbum = (id) => {
+        const currentAlbum = lyricists.find((item) => item.id === id)
+        dispatch(setCurrentAlbum(currentAlbum))
+    }
 
     return (
         <div className="container d-flex flex-column">
@@ -88,7 +93,7 @@ const Lyricists = ({ lyricists }) => {
                 {
                     lyricists.slice(0,10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center w-100">
+                            <Link href={`/lyricists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="d-flex flex-column gap-3 align-items-center w-100">
                                 <Image src={item.image} width={159.429} height={159.429} className="artist_img aspctRatio_music" layout='intrinsic' alt={item.eng_name}  />
                                 <h5 className="text-white text-center m-0 lyricist_heading">{GetFirstWord(GetLanguage(language, item))}</h5>
                             </Link>

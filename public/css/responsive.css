@@ -62,6 +62,7 @@
         margin-top: 40px;
         padding: 9px 15px;
     }
+    
 }
 
 @media screen and (min-width: 576px) and (max-width: 991px) {
@@ -94,6 +95,9 @@
 
     .login_form {
         width: 22rem;
+    }
+    .bgImage{
+        background-size: 259px !important;
     }
 }
 
@@ -255,5 +259,11 @@
 
     .logo_icon_container {
         display: none !important;
+    }
+}
+
+@media (max-width: 680px){
+    .bgImage{
+        background-size: 350px;
     }
 }

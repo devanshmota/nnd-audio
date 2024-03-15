@@ -2,12 +2,20 @@
 import Link from 'next/link'
 import GetFirstWord from './GetFirstWord';
 import GetLanguage from './GetLanguage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CategoryHeader from './CategoryHeader';
 import Image from 'next/image';
+import { setCurrentAlbum } from '@/redux/reducer/CachedataSlice';
 
 const Utsav = ({ utsav }) => {
+
+    const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
+
+    const handleCurrentAlbum = (id) => {
+        const currentAlbum = utsav.find((item) => item.id === id)
+        dispatch(setCurrentAlbum(currentAlbum))
+    }
     return (
         <div className="container">
             <div className="container_arrow container-fluid p-0">
@@ -16,11 +24,11 @@ const Utsav = ({ utsav }) => {
                     link="/utsav-all"
                     isShow={utsav.length > 5}
                 />
-                <div className="row utsav_gap" id='utsav_images' >
+                <div className="row" id='utsav_images' >
                     {
                         utsav.slice(0, 6).map((item, index) => (
-                            <Link href={`/utsav-all/${item.id}`} key={index} className="col-12 col-md-4">
-                                <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+                            <Link href={`/utsav-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} key={index} className="col-12 col-md-4">
+                                <div className="d-flex flex-column gap-3 align-items-center justify-content-between">
                                     <Image src={item.image} className='rounded-4 w-100 object-fit-cover aspectRatio_utsav' layout='intrinsic' alt={`utsav_img_${index}`} width={400} height={200} />
                                     <h5 className='m-0 text-center'>
                                         {GetFirstWord(GetLanguage(language, item))}

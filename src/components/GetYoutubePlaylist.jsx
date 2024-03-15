@@ -27,11 +27,11 @@ const GetYoutubePlaylist = () => {
 
     return (
         <div className="container text-white">
-            <div className="row mt-4">
+            <div className="row mt-5">
             <BreadCrumb title={t('Youtube Playlist')}/>
                 {
                     youtubePlaylist.length > 0 && youtubePlaylist.map((item, index) => (
-                        <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
+                        <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                             <Link href={`/youtube-playlist/${item.playlist_id}`} className="card-container_youtube text-white">
                                 <Image src='/nnd_cd.png' alt='playlist' className="view_all_images spin-on-hover" layout="intrinsic" width={200} height={200} />
                                 <h6 className="m-0">{item.title}</h6>

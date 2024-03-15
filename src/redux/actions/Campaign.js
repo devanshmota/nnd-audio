@@ -426,12 +426,13 @@ export const saveMusicToPlaylistApi = ({
 export const getMusicCategoryApi = ({
     limit = null,
     order = "",
+    offset = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getMusicCategory(limit, order),
+            ...getMusicCategory(limit, order, offset),
             displayToast: false,
             onStart,
             onSuccess,
@@ -475,12 +476,13 @@ export const logoutApi = async ({
     );
 };
 export const getRecentlyPlayedMusicApi = ({
+    offset= null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getRecentlyPlayedMusic(),
+            ...getRecentlyPlayedMusic(offset),
             displayToast: false,
             onStart,
             onSuccess,

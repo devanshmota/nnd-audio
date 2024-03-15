@@ -32,9 +32,12 @@ const GetYoutubeLiveVideos = () => {
 
     return (
         <>
-            <div className="container text-white mt-4">
-                <div className="row gy-3 yt-heigth">
+            <div className="container text-white mt-5">
+                <div className="row mb-5">
                     <BreadCrumb title={t('Youtube Live Videos')} />
+                </div>
+                <div className="row gy-3 yt-heigth">
+
                     <div className="col-lg-8 d-flex flex-column gap-3">
                         <iframe
                             className="youtube_video"
@@ -49,7 +52,7 @@ const GetYoutubeLiveVideos = () => {
                             {
                                 playlistData.map((item, index) => (
                                     <div key={index} className={`d-flex align-items-center gap-2 p-2 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
-                                        <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} className="rounded mw-100 object-fit-cover" alt={item.title} width={100} height={60} onError={(e) => {
+                                        <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/hqdefault.jpg`} className="rounded mw-100 object-fit-cover yt_live_aspect" alt={item.title} width={100} height={60} onError={(e) => {
                                             e.target.src = '/Audio_hedphone.svg'
                                         }} />
                                         <p className="ply-item-title">{item.title}</p>

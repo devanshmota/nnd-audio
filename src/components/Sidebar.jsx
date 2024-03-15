@@ -66,6 +66,9 @@ const Sidebar = ({ open }) => {
                                         </Link>
                                     </li>
                                 }
+
+                                <hr className='sidebar_border' />
+
                                 <li>
                                     <Link href='/youtube-live-videos'>
 
@@ -84,22 +87,23 @@ const Sidebar = ({ open }) => {
                                             <Image src={youtubePlaylist} alt='' width={25} height={25} />
                                         </span>
                                         <span className="nav_text">
-                            
+
                                             {t('Youtube Playlist')}
                                         </span>
                                     </Link>
                                 </li>
+                                <hr className='sidebar_border'/>
                                 <li>
-                                <Link href='/term-conditions'>
-                                    <span className="nav_icon">
-                                        <Image src={termCondition} alt='' width={25} height={25} />
-                                    </span>
-                                    <span className="nav_text">
-    
-                                        {t('Term & Conditions')}
-                                    </span>
-                                </Link>
-                            </li>
+                                    <Link href='/term-conditions'>
+                                        <span className="nav_icon">
+                                            <Image src={termCondition} alt='' width={25} height={25} />
+                                        </span>
+                                        <span className="nav_text">
+
+                                            {t('Term & Conditions')}
+                                        </span>
+                                    </Link>
+                                </li>
                                 <li>
                                     <Link href="/privacy-policy" title="Purchased">
                                         <span className="nav_icon">

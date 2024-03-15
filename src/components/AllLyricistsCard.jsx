@@ -57,7 +57,7 @@ const AllLyricistsCard = () => {
 
     return (
         <div className="container">
-            <div className="row mt-4">
+            <div className="row mt-5">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
@@ -65,7 +65,7 @@ const AllLyricistsCard = () => {
                 }
                 <BreadCrumb title={t('Lyricists')}/>
                 {lyricists.length > 0 && lyricists.map((item) => (
-                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
+                    <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                         <Link href={`/lyricists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="lyricits-container text-white">
                             <Image src={item.image} alt={item.eng_name} width={200} height={200} className="view_all_images" layout="intrinsic" />
                             <h6 className="m-0">{GetLanguage(language, item)}</h6>
@@ -75,8 +75,8 @@ const AllLyricistsCard = () => {
                 }
             </div>
             {
-                lyricists.length > 0 && (
-                    <div className="row mt-5">
+                total > 12 && lyricists.length > 0 && (
+                    <div className="row">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
                         </div>

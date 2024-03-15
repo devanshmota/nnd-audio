@@ -11,6 +11,7 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { MdPlaylistAdd } from "react-icons/md";
+import BreadCrumb from "./BreadCrumb";
 
 const AllPlaylist = () => {
 
@@ -101,23 +102,28 @@ const AllPlaylist = () => {
 
     return (
         <>
-            <div className="container text-white">
-                <button className="d-flex gap-2 align-items-center header_login_btn mt-4" onClick={createPlaylist}>
-                    <MdPlaylistAdd className="all_icons" />
-                    Create
-                </button>
+            <div className="container text-white mt-5">
+
                 <div className="row">
+                    <BreadCrumb title={t('Playlist')} />
+                </div>
+                <div className="row">
+
+                    <div class="col-xl-2 col-lg-3 col-sm-4 col-6 playlist_container text-white mt-5" onClick={createPlaylist} >
+                        <Image alt="playlist-icon" loading="lazy" width={51} height={37} src="/playlist_icon.svg" />
+                        <h5 class="m-0">Create Playlist</h5>
+                    </div>
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
-                            <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
+                            <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                                 <div className="card-container text-white">
                                     {
                                         item.music.length > 0 ? (
-                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="view_all_images" layout="intrinsic" width={200} height={200} />
+                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
                                         )
                                             :
                                             (
-                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="view_all_images" layout="intrinsic" width={200} height={200} />
+                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
                                             )
                                     }
                                     <div className="d-flex align-items-center justify-content-between w-100">
