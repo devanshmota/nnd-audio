@@ -10,8 +10,8 @@ import RenamePlaylistModal from "./RenamePlaylistModal";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { MdPlaylistAdd } from "react-icons/md";
 import BreadCrumb from "./BreadCrumb";
+import noImg from '../../public/noImageFound.svg'
 
 const AllPlaylist = () => {
 
@@ -117,15 +117,11 @@ const AllPlaylist = () => {
                         playlist.length > 0 && playlist.map((item, index) => (
                             <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                                 <div className="card-container text-white">
-                                    {
-                                        item.music.length > 0 ? (
-                                            <Image src={item?.music[0]?.album?.image} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
-                                        )
-                                            :
-                                            (
-                                                <Image src='/Audio_hedphone.svg' alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
-                                            )
-                                    }
+
+
+                                    <Image src={item?.music[0]?.album?.image || noImg} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
+
+
                                     <div className="d-flex align-items-center justify-content-between w-100">
 
                                         <div className="d-flex flex-column">

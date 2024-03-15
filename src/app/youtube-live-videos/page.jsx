@@ -1,9 +1,6 @@
-import GetYoutubeLiveVideos from "@/components/GetYoutubeLIveVideos"
-
-
 const YoutubeLiveVideos = () => {
     return (
-        <GetYoutubeLiveVideos />
+        <div>YoutubeLiveVideos</div>
     )
 }
 

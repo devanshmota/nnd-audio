@@ -18,6 +18,7 @@ import heartFilled from '../../public/nnd/heart_Fill.svg'
 import heartIcon from '../../public/nnd/Heart_stork.svg'
 import shareIcon from '../../public/nnd/song_Share.svg'
 import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from "@/redux/reducer/MusicPlaylistSlice"
+import noImg from '../../public/noImageFound.svg'
 
 const AllRecentlyPlayed = () => {
 
@@ -88,7 +89,7 @@ const AllRecentlyPlayed = () => {
           <div key={index} className="col-xxl-4 col-lg-6 mt-5">
             <div className="d-flex align-items-center justify-content-between text-white music_card">
               <div className="d-flex align-items-center gap-3 cursor-pointer" onClick={() => handlePlayMusic(item.id)}>
-                <Image src={item.album.image} alt={item.eng_title} className="rounded" width={80} height={80} />
+                <Image src={item.album.image || noImg} alt={item.eng_title} className="rounded" width={80} height={80} />
                 <div className="d-flex flex-column gap-2">
                   <h5 className="m-0 text-break title_rcnt_plyd">{GetLanguage(language, item)}</h5>
                   <p className="text-rec-pld desc_rcnt_plyd">{GetCatLanguage(language, item)}</p>
@@ -112,7 +113,7 @@ const AllRecentlyPlayed = () => {
         }
       </div>
       {
-        total > 12 && recentlyPlayed.length > 0 && (
+        total > 18 && recentlyPlayed.length > 0 && (
           <div className="row">
             <div className="col-12">
               <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />

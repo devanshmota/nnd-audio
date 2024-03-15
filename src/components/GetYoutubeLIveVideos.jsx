@@ -6,18 +6,21 @@ import { getDecryptedText } from "@/decryption/decryption"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import BreadCrumb from "./BreadCrumb"
+import noImg from '../../public/noImageFound.svg'
 
-const GetYoutubeLiveVideos = () => {
+const GetYoutubeLiveVideos = ({ youtubeLiveid }) => {
 
     const [playlistData, setPlaylistData] = useState([])
     const [InitialTrack, setInitialTrack] = useState(null)
 
     useEffect(() => {
+
         getYoutubeLiveVideosApi({
             onSuccess: (res) => {
                 if (res.data) {
                     setPlaylistData(res?.data)
-                    setInitialTrack(res?.data[0])
+                    const foundTrack = res.data.find((item) => item.id === Number(youtubeLiveid.slug));
+                    setInitialTrack(foundTrack);
                 }
             },
             onError: (e) => {
@@ -29,6 +32,8 @@ const GetYoutubeLiveVideos = () => {
     const handlePlay = (item) => {
         setInitialTrack(item)
     }
+
+
 
     return (
         <>
@@ -52,9 +57,7 @@ const GetYoutubeLiveVideos = () => {
                             {
                                 playlistData.map((item, index) => (
                                     <div key={index} className={`d-flex align-items-center gap-2 p-2 rounded yt_playlist_item ${InitialTrack === item ? 'yt_playlist_item_active' : ''}`} onClick={() => handlePlay(item)}>
-                                        <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/hqdefault.jpg`} className="rounded mw-100 object-fit-cover yt_live_aspect" alt={item.title} width={100} height={60} onError={(e) => {
-                                            e.target.src = '/Audio_hedphone.svg'
-                                        }} />
+                                        <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg` || noImg} className="rounded mw-100 object-fit-cover yt_live_aspect" alt={item.title} width={100} height={60} />
                                         <p className="ply-item-title">{item.title}</p>
                                     </div>
                                 ))

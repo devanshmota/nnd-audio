@@ -8,18 +8,17 @@ import CategoryHeader from './CategoryHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import { setBreadcrumbCategory } from '@/redux/reducer/CachedataSlice';
+import noImg from '../../public/noImageFound.svg'
 
 
-
-
-const Music_categories = ({musicCategory}) => {
+const Music_categories = ({ musicCategory }) => {
 
     const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
     const musicRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-   
+
 
     const handlePrev = () => {
         if (musicRef.current && !isBeginning) {
@@ -99,7 +98,15 @@ const Music_categories = ({musicCategory}) => {
                                 musicCategory.slice(0, 10).map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                         <Link href={`/music-categories-all/${item.id}`} onClick={() => handleBreadcrumbCategory(item.id)} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image src={item.image} className='rounded-4 w-100 object-fit-cover aspctRatio_music' alt={item.eng_name} layout='intrinsic' width={159.429} height={159.429} />
+                                            <Image
+                                                src={item.image || noImg}
+                                                className='rounded-4 w-100 object-fit-cover aspctRatio_music'
+                                                alt={item.eng_name}
+                                                layout='intrinsic'
+                                                width={200}
+                                                height={200}
+                                                
+                                            />
                                             <h5 className='m-0 text-center text-white title_rcnt_plyd'>
                                                 {GetLanguage(language, item)}
                                             </h5>

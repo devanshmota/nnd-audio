@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import Link from 'next/link';
 import { setCurrentAlbum } from '@/redux/reducer/CachedataSlice';
+import noImg from '../../public/noImageFound.svg'
 
 
 const LatestAlbums = ({ LatestAlbums }) => {
@@ -97,7 +98,7 @@ const LatestAlbums = ({ LatestAlbums }) => {
 
                             <SwiperSlide key={item.id} virtualIndex={index}>
                                 <Link href={`/latest-albums/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                    <Image src={item.image} className="rounded-4 w-100 object-fit-cover album_height" layout='intrinsic' alt={item.eng_title} width={412} height={206} />
+                                    <Image src={item.image || noImg} className="rounded-4 w-100 object-fit-cover album_height" layout='intrinsic' alt={item.eng_title} width={412} height={206} />
                                     <h5 className='m-0 ellipsis-container text-white'>
                                         {GetLanguage(language, item)}
                                     </h5>

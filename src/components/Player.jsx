@@ -17,9 +17,10 @@ import playIcon from '../../public/nnd/Play_Line_30px.svg'
 import nextIcon from '../../public/nnd/Forword_Line_30px.svg'
 import volumeIcon from '../../public/nnd/volume on.svg'
 import volumeMute from '../../public/nnd/0ff.svg'
-
-
-
+import shareIcon from '../../public/nnd/song_Share.svg'
+import toast from "react-hot-toast";
+import { t } from 'i18next';
+import { withTranslation } from "react-i18next";
 
 
 const Player = () => {
@@ -145,6 +146,11 @@ const Player = () => {
         dispatch(setLyricsLanguage('Gujarati'))
     }
 
+    const copyToClip = async () => {
+        await navigator.clipboard.writeText(location.href)
+        toast.success(t('Link copied to clipboard'))
+    }
+
     return (
         <>
 
@@ -171,9 +177,7 @@ const Player = () => {
                 </div>
 
                 <div className="d-flex align-items-center gap-3">
-
                     <Image src={prevSongIcon} width={24} height={24} onClick={playPrev} className="music_player_icon" />
-
                     <div onClick={playPauseToggle} className="d-flex align-items-center">
                         {isPlaying ? <Image src={pauseIcon} width={24} height={24} className="music_player_icon" /> : <Image src={playIcon} width={24} height={24} className="music_player_icon" />}
                     </div>
@@ -198,8 +202,8 @@ const Player = () => {
                         <Image
                             src={lyricsIcon}
                             alt=""
-                            width={24}
-                            height={24}
+                            width={22}
+                            height={22}
                             className="music_player_icon"
                             onClick={handleLyrics}
                             title="Lyrics"
@@ -240,10 +244,9 @@ const Player = () => {
                             </div>
                         )
                     }
+                    <Image src={shareIcon} width={24} height={24} alt="shareIcon" onClick={copyToClip} />
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist?.length > 0 ? (
-
-
                             <Image src={heartFilled} alt="heart" width={25} height={25} className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />
                         )
                             :
@@ -284,4 +287,4 @@ const Player = () => {
     );
 };
 
-export default Player;
+export default withTranslation()(Player);

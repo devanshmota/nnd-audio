@@ -12,6 +12,7 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
 import BreadCrumb from "./BreadCrumb"
+import noImg from '../../public/noImageFound.svg'
 
 
 const AllLyricistsCard = () => {
@@ -67,7 +68,7 @@ const AllLyricistsCard = () => {
                 {lyricists.length > 0 && lyricists.map((item) => (
                     <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                         <Link href={`/lyricists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="lyricits-container text-white">
-                            <Image src={item.image} alt={item.eng_name} width={200} height={200} className="view_all_images" layout="intrinsic" />
+                            <Image src={item.image || noImg} alt={item.eng_name} width={200} height={200} className="view_all_images" layout="intrinsic" />
                             <h6 className="m-0">{GetLanguage(language, item)}</h6>
                         </Link>
                     </div>
@@ -75,7 +76,7 @@ const AllLyricistsCard = () => {
                 }
             </div>
             {
-                total > 12 && lyricists.length > 0 && (
+                total > 18 && lyricists.length > 0 && (
                     <div className="row">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />

@@ -1,5 +1,4 @@
 'use client'
-import { getDecryptedText } from "@/decryption/decryption"
 import { getYoutubePlaylistApi } from "@/redux/actions/Campaign"
 import Image from "next/image"
 import Link from "next/link"

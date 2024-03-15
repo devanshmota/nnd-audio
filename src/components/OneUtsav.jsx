@@ -17,6 +17,7 @@ import BreadCrumb from "./BreadCrumb"
 import heartFilled from '../../public/nnd/heart_Fill.svg'
 import heartIcon from '../../public/nnd/Heart_stork.svg'
 import shareIcon from '../../public/nnd/song_Share.svg'
+import noImg from '../../public/noImageFound.svg'
 
 
 const OneUtsav = ({ utsavid }) => {
@@ -83,7 +84,7 @@ const OneUtsav = ({ utsavid }) => {
 
                 <div className="col-lg-12">
                     <div className="d-flex flex-column flex-lg-row align-items-center gap-4 pb-4 py-5 brdr_btm">
-                        <Image src={CurrentAlbum?.image} alt="profile" width={180} height={180} className="prfl_img" />
+                        <Image src={CurrentAlbum?.image || noImg} alt="profile" width={180} height={180} className="prfl_img" />
                         <div className="d-flex flex-column gap-4">
                             <h2 className="m-0">
                                 {GetLanguage(language, CurrentAlbum)}
@@ -103,7 +104,7 @@ const OneUtsav = ({ utsavid }) => {
                         <div key={index} className="col-xxl-4 col-lg-6 mt-4">
                             <div className="d-flex align-items-center justify-content-between text-white music_card">
                                 <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
-                                    <Image src={item.album.image} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
+                                    <Image src={item.album.image || noImg} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
                                     <div className="d-flex flex-column gap-2">
                                         <h5 className="m-0 text-break title_rcnt_plyd">
                                             {GetLanguage(language, item)}

@@ -1,32 +1,20 @@
 'use client'
 import { useState, useRef } from "react";
-import { FaPlay } from "react-icons/fa";
-import PlayLiveVideoModal from "./PlayLiveVideoModal";
 import { getDecryptedText } from "@/decryption/decryption";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay,Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import CategoryHeader from "./CategoryHeader";
 import Image from "next/image";
+import Link from "next/link";
+import noImg from '../../public/noImageFound.svg'
 
 
-const LiveKathaStream = ({liveKathaStream}) => {
+const LiveKathaStream = ({ liveKathaStream }) => {
 
     const liveKathaStreamRef = useRef();
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    const [videoDetails, setVideoDetails] = useState({
-        videoid: '',
-        title: ''
-    });
-    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-    const handlePlay = (item) => {
-        setVideoDetails({
-            videoid: item.video_id,
-            title: item.title
-        });
-        setIsVideoModalOpen(true);
-    };
 
     const handlePrev = () => {
         if (liveKathaStreamRef.current && !isBeginning) {
@@ -101,21 +89,23 @@ const LiveKathaStream = ({liveKathaStream}) => {
                     <div className="container d-flex flex-column">
                         {liveKathaStream.slice(0, 10).map((item, index) => (
                             <SwiperSlide key={item.id} virtualIndex={index}>
-                                <div className="image-container">
-
-                                    <Image src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg`} alt={`utsav_img`} className="rounded-4 opacity-50 w-100 object-fit-cover aspectRatio_katha" layout="intrinsic" width={412} height={206} />
-
-                                    <div className="overlay" onClick={() => handlePlay(item)}>
-                                        <FaPlay className="play-button" />
-                                    </div>
-                                </div>
+                                <Link href={`/youtube-live-videos/${item.id}`}>
+                                    <Image
+                                        src={`https://img.youtube.com/vi/${getDecryptedText(item.video_id)}/mqdefault.jpg` || noImg}
+                                        alt={`utsav_img`}
+                                        className="rounded-4 w-100 object-fit-cover aspectRatio_katha"
+                                        layout="intrinsic"
+                                        width={412}
+                                        height={206}
+                                    />
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </div>
                 </Swiper>
 
             </div>
-            <PlayLiveVideoModal show={isVideoModalOpen} onHide={() => setIsVideoModalOpen(false)} videoDetails={videoDetails} />
+
         </>
     );
 };

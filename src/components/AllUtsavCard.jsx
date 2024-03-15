@@ -12,6 +12,7 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
 import BreadCrumb from "./BreadCrumb"
+import noImg from '../../public/noImageFound.svg'
 
 
 const AllUtsavCard = () => {
@@ -67,7 +68,7 @@ const AllUtsavCard = () => {
                 {utsav.length > 0 && utsav.map((item) => (
                     <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center align-items-center mt-5">
                         <Link href={`/utsav-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="card-container text-white">
-                            <Image src={item.image} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
+                            <Image src={item.image || noImg} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
                             <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
                         </Link>
                     </div>
@@ -76,7 +77,7 @@ const AllUtsavCard = () => {
 
             </div>
             {
-                total > 12 && utsav.length > 0 && (
+                total > 18 && utsav.length > 0 && (
                     <div className="row">
                         <div className="col-12">
                             <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />

@@ -70,7 +70,7 @@ const Sidebar = ({ open }) => {
                                 <hr className='sidebar_border' />
 
                                 <li>
-                                    <Link href='/youtube-live-videos'>
+                                    <Link href='/youtube-live-videos/0'>
 
                                         <span className="nav_icon">
                                             <Image src={youtubeLiveVideos} alt='' width={25} height={25} />

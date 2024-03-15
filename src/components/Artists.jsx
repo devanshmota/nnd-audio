@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
 import { setCurrentAlbum } from '@/redux/reducer/CachedataSlice';
+import noImg from '../../public/noImageFound.svg'
 
 const Artists = ({ artists }) => {
     const dispatch = useDispatch()
@@ -92,7 +93,7 @@ const Artists = ({ artists }) => {
                     artists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                             <Link href={`/artists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} className="d-flex flex-column gap-3 align-items-center justify-content-between">
-                                <Image src={item.image} className='rounded-4 w-100 object-fit-cover aspctRatio_music' alt={item.eng_name} layout='intrinsic' width={159.429} height={159.429} />
+                                <Image src={item.image || noImg} className='rounded-4 w-100 object-fit-cover aspctRatio_music' alt={item.eng_name} layout='intrinsic' width={159.429} height={159.429} />
                                 <h5 className='m-0 text-center'>
                                     {GetFirstWord(GetLanguage(language, item))}
                                 </h5>

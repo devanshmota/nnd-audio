@@ -2185,7 +2185,7 @@ h1.footer_title:after {
 /*====Player Css Start====*/
 .ms_player_wrapper {
 	background-color: var(--primary-color);
-	padding: 15px 30px;
+	padding: 20px 30px;
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
@@ -8998,18 +8998,18 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 .pagination li a {
-    position: relative;
-    display: block;
-    padding: 8px 16px;
-    text-align: center;
-    margin: 0 5px;
-    color: #000;
-    background-color: transparent;
-    border: 1px solid #404451;
-    border-radius: 5px;
-    transition: all 0.5s ease-out 0s;
-    font-size: 14px;
-    text-decoration: none;
+	position: relative;
+	display: block;
+	padding: 8px 16px;
+	text-align: center;
+	margin: 0 5px;
+	color: #000;
+	background-color: transparent;
+	border: 1px solid #404451;
+	border-radius: 5px;
+	transition: all 0.5s ease-out 0s;
+	font-size: 14px;
+	text-decoration: none;
 }
 
 .pagination li a:hover {
@@ -9079,7 +9079,7 @@ input[type="range"] {
 }
 
 .main {
-	margin-bottom: 105px;
+	margin-bottom: 150px;
 	overflow: auto;
 	min-height: calc(100vh - 190px);
 }
@@ -9271,31 +9271,41 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 	width: 5px !important;
 }
 
-button.swal2-cancel.swal2-styled.swal2-default-outline{
-	background-color: white;
+button.swal2-cancel.swal2-styled.swal2-default-outline {
+	background-color: white !important;
 	color: var(--secondary-color);
 }
 
-.song_tags{
+.song_tags {
 	display: flex;
 	align-items: center;
 	gap: 5px;
 	margin-top: 1rem;
 }
+
 .song_tags span {
-    padding: 2px 10px;
-    background-color: #212635;
-    border: 1px solid grey;
-    font-size: 14px;
-    border-radius: 30px;
-    max-width: 260px;
+	padding: 2px 10px;
+	background-color: #212635;
+	border: 1px solid grey;
+	font-size: 14px;
+	border-radius: 30px;
+	max-width: 260px;
 }
 
-.sidebar_border{
+.sidebar_border {
 	color: #404451;
-    opacity: 1;
+	opacity: 1;
 }
 
-.row_gap{
-	gap: 32px 0;
+.row_gap {
+	gap: 60px 0;
+}
+
+div:where(.swal2-container).swal2-backdrop-show,
+div:where(.swal2-container).swal2-noanimation {
+	backdrop-filter: blur(5px);
+}
+
+.show {
+    backdrop-filter: blur(5px);
 }

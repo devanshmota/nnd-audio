@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
 import GetFirstWord from './GetFirstWord';
 import { setCurrentTrack, setIsPlaying, setMusicPlaylist } from '@/redux/reducer/MusicPlaylistSlice';
+import noImg from '../../public/noImageFound.svg'
 
 
 const Radio = ({ radio }) => {
@@ -92,16 +93,14 @@ const Radio = ({ radio }) => {
             >
                 {
                     radio.slice(0, 10).map((item, index) => (
-                        
                             <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
                                 <div onClick={() => handlePlayMusic(item.id)} className="d-flex flex-column gap-3 align-items-center w-100 cursor-pointer">
-                                    <Image src={item.image} className="artist_img aspctRatio_music" alt={item.eng_title} width={150} height={150} layout='intrinsic' />
+                                    <Image src={item.image || noImg} className="artist_img aspctRatio_music" alt={item.eng_title} width={150} height={150} layout='intrinsic' />
                                     <h5 className="text-white text-center m-0">
                                         {GetFirstWord(GetLanguage(language, item))}
                                     </h5>
                                 </div>
-                            </SwiperSlide>
-                            
+                            </SwiperSlide> 
                     ))
                 }
             </Swiper>
