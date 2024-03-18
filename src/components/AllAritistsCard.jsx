@@ -13,6 +13,7 @@ import { withTranslation } from "react-i18next";
 import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
 import BreadCrumb from "./BreadCrumb"
 import noImg from '../../public/noImageFound.svg'
+import Card from "./Card"
 
 
 const AllAritistsCard = () => {
@@ -58,20 +59,15 @@ const AllAritistsCard = () => {
 
     return (
         <div className="container">
-            <div className="row mt-5">
+            <div className="row mt-5 row_gap">
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <BreadCrumb title={t('Artists')}/>
-                {artists.length > 0 && artists.map((item) => (
-                    <Link href={`/artists-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
-                        <div className="card-container text-white">
-                            <Image src={item.image || noImg} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
-                            <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
-                        </div>
-                    </Link>
+                <BreadCrumb title={t('Artists')} />
+                {artists.length > 0 && artists.map((item, index) => (
+                    <Card key={index} href={`/artists-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                 ))
 
                 }

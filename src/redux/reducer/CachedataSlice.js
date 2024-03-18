@@ -2,13 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
+
 const CachedataSlice = createSlice({
     name: 'cachedata',
     initialState: {
         searchQuery: '',
         fcmToken: '',
-        CurrentAlbum: {},
-        BreadcrumbCategory: {},
         LyricsLanguage: 'English'
     },
 
@@ -19,12 +18,6 @@ const CachedataSlice = createSlice({
         setFcmToken: (state, action) => {
             state.fcmToken = action.payload;
         },
-        setCurrentAlbum: (state, action) => {
-            state.CurrentAlbum = action.payload;
-        },
-        setBreadcrumbCategory: (state, action) => {
-            state.BreadcrumbCategory = action.payload;
-        },
         setLyricsLanguage: (state, action) => {
             state.LyricsLanguage = action.payload;
         }
@@ -32,4 +25,4 @@ const CachedataSlice = createSlice({
 })
 
 export default CachedataSlice;
-export const { setSearchQuery, setFcmToken, setCurrentAlbum, setBreadcrumbCategory, setLyricsLanguage } = CachedataSlice.actions;
+export const { setSearchQuery, setFcmToken, setLyricsLanguage } = CachedataSlice.actions;

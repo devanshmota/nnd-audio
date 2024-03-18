@@ -13,10 +13,7 @@ const Utsav = ({ utsav }) => {
     const dispatch = useDispatch()
     const { language } = useSelector((state) => state.language)
 
-    const handleCurrentAlbum = (id) => {
-        const currentAlbum = utsav.find((item) => item.id === id)
-        dispatch(setCurrentAlbum(currentAlbum))
-    }
+ 
     return (
         <div className="container">
             <div className="container_arrow container-fluid p-0">
@@ -28,7 +25,7 @@ const Utsav = ({ utsav }) => {
                 <div className="row" id='utsav_images' >
                     {
                         utsav.slice(0, 6).map((item, index) => (
-                            <Link href={`/utsav-all/${item.id}`} onClick={() => handleCurrentAlbum(item.id)} key={index} className="col-12 col-md-4">
+                            <Link href={`/utsav-all/${item.id}`} key={index} className="col-12 col-md-4">
                                 <div className="d-flex flex-column gap-3 align-items-center justify-content-between">
                                     <Image src={item.image || noImg} className='rounded-4 w-100 object-fit-cover aspectRatio_utsav' layout='intrinsic' alt={`utsav_img_${index}`} width={400} height={200} />
                                     <h5 className='m-0 text-center'>

@@ -7,8 +7,8 @@ import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
-import { setBreadcrumbCategory } from '@/redux/reducer/CachedataSlice';
 import noImg from '../../public/noImageFound.svg'
+import MusicCatAndArtists from './MusicCatAndArtists';
 
 
 const Music_categories = ({ musicCategory }) => {
@@ -32,10 +32,7 @@ const Music_categories = ({ musicCategory }) => {
             musicRef.current.swiper.slideNext();
         }
     };
-    const handleBreadcrumbCategory = (id) => {
-        const currentCategory = musicCategory.find((item) => item.id === id)
-        dispatch(setBreadcrumbCategory(currentCategory))
-    }
+
 
     return (
         <div className="container d-flex flex-column">
@@ -97,20 +94,7 @@ const Music_categories = ({ musicCategory }) => {
                             {
                                 musicCategory.slice(0, 10).map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                                        <Link href={`/music-categories-all/${item.id}`} onClick={() => handleBreadcrumbCategory(item.id)} className="w-100 d-flex flex-column gap-2 align-items-center justify-content-between">
-                                            <Image
-                                                src={item.image || noImg}
-                                                className='rounded-4 w-100 object-fit-cover aspctRatio_music'
-                                                alt={item.eng_name}
-                                                layout='intrinsic'
-                                                width={200}
-                                                height={200}
-                                                
-                                            />
-                                            <h5 className='m-0 text-center text-white title_rcnt_plyd'>
-                                                {GetLanguage(language, item)}
-                                            </h5>
-                                        </Link>
+                                        <MusicCatAndArtists href={`/music-categories-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                                     </SwiperSlide>
                                 ))
                             }

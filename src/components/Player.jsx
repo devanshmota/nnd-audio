@@ -166,7 +166,7 @@ const Player = () => {
                     </div>
 
                     {
-                        MusicPlaylist[currentTrack]?.tags.length > 0 && <div className="song_tags">
+                        MusicPlaylist[currentTrack]?.tags?.length > 0 && <div className="song_tags">
                             {
                                 MusicPlaylist[currentTrack]?.tags?.map(item => <span key={item.id}>{GetLanguage(language, item)}</span>)
                             }

@@ -11,6 +11,8 @@ import noImg from '../../public/noImageFound.svg'
 
 const SearchFunctionality = () => {
 
+    const users = useSelector((state) => state.users)
+    const token = users?.users?.token
     const { language } = useSelector((state) => state.language)
     const [options, setOptions] = useState([]);
     const { searchQuery } = useSelector((state) => state.cachedata)
@@ -19,7 +21,7 @@ const SearchFunctionality = () => {
     useEffect(() => {
 
         globalSearchApi({
-            is_guest: 1,
+            is_guest: token ? 0 : 1,
             search: searchQuery,
             onSuccess: (res) => {
                 setOptions(generateOptions(res));

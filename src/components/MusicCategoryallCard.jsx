@@ -10,9 +10,9 @@ import Link from "next/link"
 import BreadCrumb from "./BreadCrumb"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
-import { setBreadcrumbCategory } from "@/redux/reducer/CachedataSlice"
 import Pagination from './ReactPagination.jsx'
 import noImg from '../../public/noImageFound.svg'
+import Card from "./Card"
 
 
 const MusicCategoryallCard = () => {
@@ -51,15 +51,12 @@ const MusicCategoryallCard = () => {
         window.scrollTo(0, 0);
     };
 
-    const handleBreadcrumbCategory = (id) => {
-        const currentCategory = musicCategory.find((item) => item.id === id)
-        dispatch(setBreadcrumbCategory(currentCategory))
-    }
+
 
     return (
         <>
             <div className="container">
-                <div className="row mt-4">
+                <div className="row mt-5 row_gap">
                     {isLoading &&
                         <div className='d-flex align-items-center justify-content-center py-2'>
                             <ClipLoader color="#ffffff" />
@@ -67,13 +64,8 @@ const MusicCategoryallCard = () => {
                     }
                     <BreadCrumb title={t('Music Categories')} />
                     {
-                        musicCategory.length > 0 && musicCategory.map((item) => (
-                            <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-4">
-                                <Link href={`/music-categories-all/${item.id}`} onClick={() => handleBreadcrumbCategory(item.id)} className="card-container text-white">
-                                    <Image src={item.image || noImg} alt={item.eng_name} className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
-                                    <h6 className="m-0 align-self-baseline">{GetLanguage(language, item)}</h6>
-                                </Link>
-                            </div>
+                        musicCategory.length > 0 && musicCategory.map((item, index) => (
+                            <Card key={index} href={`/music-categories-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                         ))
                     }
                 </div>

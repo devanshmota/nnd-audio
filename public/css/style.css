@@ -8840,12 +8840,6 @@ select,
 	cursor: pointer;
 }
 
-.nodata-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 87vh;
-}
 
 .css-zza0ns-MuiBadge-badge,
 .css-1871dw3 {
@@ -9031,9 +9025,6 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 
-input[type="range"] {
-	accent-color: #d8690b;
-}
 
 .img_cont {
 	position: relative;
@@ -9307,5 +9298,18 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 .show {
-    backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
+}
+
+.nodata_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 248px);
+	gap: 10px;
+}
+
+.song_gap {
+	gap: 25px 0;
 }

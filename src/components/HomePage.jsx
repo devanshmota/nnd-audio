@@ -13,14 +13,20 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getHomeApi } from '@/redux/actions/Campaign';
 import Loader from './Loader';
+import { useSelector } from 'react-redux';
+
 
 const HomePage = () => {
+
+  const users = useSelector((state) => state.users)
+  const token = users?.users?.token
   const [Home, setHome] = useState([])
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
     getHomeApi({
-      is_guest: 1,
+      is_guest: token ? 0 : 1,
       onSuccess: (res) => {
         if (res) {
           setHome(res)
