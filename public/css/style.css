@@ -42,7 +42,6 @@ Author: Kamleshyadav
 
 body {
 	margin: 0;
-	font-family: 'Josefin Sans', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 24px;
@@ -58,24 +57,7 @@ body {
 }
 
 /*====Normal Css Start====*/
-/* h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-	margin-bottom: 0;
-	font-family: inherit;
-	font-weight: 600;
-	line-height: 1.2;
-	color: #3bc8e7;
-} */
+
 
 a {
 	color: #3bc8e7;
@@ -9410,6 +9392,10 @@ input[type="range"] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+	line-height: normal !important;
 }
 
 

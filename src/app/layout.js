@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import { Inter, Poppins } from 'next/font/google'
 import '../../public/css/style.css'
 import '../../public/css/responsive.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -6,6 +6,8 @@ import Providers from '@/redux/store/Providers';
 import PersistentDrawerLeft from '@/components/PersistentDrawerLeft';
 
 const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] })
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,11 +19,11 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Providers>
-            <PersistentDrawerLeft>
-              {children}
-            </PersistentDrawerLeft>
+          <PersistentDrawerLeft>
+            {children}
+          </PersistentDrawerLeft>
         </Providers>
       </body>
     </html>

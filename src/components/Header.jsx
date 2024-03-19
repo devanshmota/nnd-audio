@@ -31,6 +31,18 @@ const Header = ({ open, handleDrawerOpen }) => {
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
 
+  // useEffect(() => {
+  //   if (language === 'Gujarati') {
+  //     document.querySelectorAll('*').forEach(element => {
+  //       const currentElementFontSize = parseFloat(window.getComputedStyle(element).fontSize);
+  //       const newElementFontSize = currentElementFontSize + 5;
+  //       element.style.fontSize = `${newElementFontSize}px`;
+  //     });
+  //   } else {
+  //     document.body.style.fontSize = 'inherit';
+  //   }
+  // }, [language])
+
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -145,7 +157,7 @@ const Header = ({ open, handleDrawerOpen }) => {
 
                   </MenuItem>
                 ) : (
-                  <MenuItem onClick={handleLoginSignup} className="text-white">{t('Login/Sign Up')}</MenuItem>
+                  <MenuItem onClick={handleLoginSignup} className="text-white h4">{t('Login/Sign Up')}</MenuItem>
                 )}
                 <MenuItem>
                   <DropdownButton
