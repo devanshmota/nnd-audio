@@ -21,7 +21,7 @@ const AllRadioCard = () => {
 
     const [total, setTotal] = useState(0);
     const [offsetdata, setOffsetdata] = useState(0);
-    const limit = 12;
+    const limit = 18;
 
     useEffect(() => {
         getRadioApi({

@@ -11,6 +11,7 @@ import NoMusicsFound from "./NoMusicsFound"
 import BreadCrumb from "./BreadCrumb"
 import SongPageHeader from "./SongPageHeader"
 import SongCard from "./SongCard"
+import Pagination from './ReactPagination.jsx'
 
 
 
@@ -25,12 +26,19 @@ const OneArtist = ({ artistid }) => {
     const [isLiked, setIsLiked] = useState(false)
     const [selectedMusicId, setSelectedMusicId] = useState(null);
 
+    const [total, setTotal] = useState(0);
+    const [offsetdata, setOffsetdata] = useState(0);
+    const limit = 18;
+
     useEffect(() => {
         fetchSigleArtistDataApi({
             artist_id: artistid.slug,
             is_guest: token ? 0 : 1,
+            offset: offsetdata,
+            limit: limit,
             onSuccess: (res) => {
                 setSingleArtistData(res.data)
+                setTotal(res.total)
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -38,16 +46,22 @@ const OneArtist = ({ artistid }) => {
                 setIsLoading(false)
             }
         })
-    }, [isLiked, selectedMusicId])
+    }, [isLiked, selectedMusicId, offsetdata])
 
     const handleSave = (musicId) => {
         setSelectedMusicId(musicId);
         setIsOffCanvasOpen(true)
     }
 
+    const handlePageChange = (selectedPage) => {
+        const newOffset = selectedPage.selected * limit;
+        setOffsetdata(newOffset);
+        window.scrollTo(0, 0);
+    };
+
     return (
         <div className="container text-white mt-5">
-            <BreadCrumb title={t('Artists')} category={GetLanguage(language, singleArtistData[0]?.artist)} link1='/artists-all' />
+
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>
                     <ClipLoader color="#ffffff" />
@@ -56,16 +70,23 @@ const OneArtist = ({ artistid }) => {
             {
                 singleArtistData.length > 0 &&
                 <>
-
+                    <BreadCrumb title={t('Artists')} category={GetLanguage(language, singleArtistData[0]?.artist)} link1='/artists' />
                     <SongPageHeader playlist={singleArtistData} src={singleArtistData[0]?.artist?.image} title={GetLanguage(language, singleArtistData[0]?.artist)} />
-
                     <div className="row song_gap mt-4">
                         <SongCard data={singleArtistData} handleSave={handleSave} />
                     </div>
                 </>
             }
 
-
+            {
+                total > 18 && singleArtistData.length > 0 && (
+                    <div className="row">
+                        <div className="col-12">
+                            <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
+                        </div>
+                    </div>
+                )
+            }
 
             {
                 !isLoading && singleArtistData.length === 0 && <NoMusicsFound />

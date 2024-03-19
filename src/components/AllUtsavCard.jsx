@@ -1,17 +1,14 @@
 'use client'
 import { getUtsavApi } from "@/redux/actions/Campaign"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
-import Link from "next/link"
 import Nodataviewall from "./Nodataviewall"
 import Pagination from "./ReactPagination"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import BreadCrumb from "./BreadCrumb"
-import noImg from '../../public/noImageFound.svg'
 import Card from "./Card"
 
 
@@ -24,7 +21,7 @@ const AllUtsavCard = () => {
 
     const [total, setTotal] = useState(0);
     const [offsetdata, setOffsetdata] = useState(0);
-    const limit = 12;
+    const limit = 18;
 
     useEffect(() => {
         getUtsavApi({
@@ -63,7 +60,7 @@ const AllUtsavCard = () => {
                 }
                 <BreadCrumb title={t('Utsav')} />
                 {utsav.length > 0 && utsav.map((item, index) => (
-                    <Card key={index} href={`/utsav-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
+                    <Card key={index} href={`/utsav/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                 ))
                 }
 

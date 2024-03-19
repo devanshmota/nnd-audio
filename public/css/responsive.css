@@ -189,6 +189,10 @@
     .register_form {
         width: 22rem;
     }
+    .progress_container{
+        display: none;
+    }
+
 }
 
 @media (max-width: 992px) {
@@ -216,6 +220,9 @@
 
     .basic_menu {
         background-color: transparent !important;
+    }
+    .icons_player{
+        display: none !important;
     }
 }
 
@@ -255,8 +262,6 @@
         padding-right: 20px;
     }
 
-
-
     .logo_icon_container {
         display: none !important;
     }
@@ -267,3 +272,6 @@
         background-size: 350px;
     }
 }
+
+
+

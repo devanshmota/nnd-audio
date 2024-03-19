@@ -193,7 +193,7 @@ export const updatePlaylist = (title, id) => {
         authorizationHeader: true,
     }
 }
-export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, category_id, is_guest) => {
+export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, category_id, is_guest, offset, limit) => {
     return {
         url: `${GET_SINGLE_ARTIST}`,
         method: "GET",
@@ -204,6 +204,8 @@ export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id,
             album_id: album_id,
             category_id: category_id,
             is_guest: is_guest,
+            offset: offset,
+            limit: limit
         },
         authorizationHeader: true,
     }
@@ -231,12 +233,13 @@ export const saveMusicToPlaylist = (id, music_id) => {
         authorizationHeader: true,
     }
 }
-export const getRecentlyPlayedMusic = (offset) => {
+export const getRecentlyPlayedMusic = (offset, limit) => {
     return {
         url: `${RECENTLY_PLAYED_MUSIC}`,
         method: "GET",
         params: {
-            offset: offset
+            offset: offset,
+            limit:limit
         },
         authorizationHeader: true,
 

@@ -154,11 +154,11 @@ const Player = () => {
     return (
         <>
 
-            <div className="d-flex align-items-center justify-content-between w-100 text-white ms_player_wrapper">
-                <div className="d-flex flex-column justify-content-center">
+            <div className="music_player_container ms_player_wrapper">
+                <div className="d-flex flex-column justify-content-center song_detail">
 
-                    <div className="d-flex gap-2">
-                        <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image} alt="song" className="rounded" width={50} height={50} />
+                    <div className="d-flex align-items-center gap-2">
+                        <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image || MusicPlaylist[currentTrack]?.img} alt="song" className="rounded" width={50} height={50} />
                         <div className="d-flex flex-column gap-1">
                             <h5 className="text-white m-0 title_rcnt_plyd">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack])}</h5>
                             <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
@@ -185,7 +185,7 @@ const Player = () => {
                     <Image src={nextIcon} width={24} height={24} onClick={playNext} className="music_player_icon" />
                 </div>
 
-                <div className="d-flex align-items-center gap-1 w-50">
+                <div className="progress_container">
                     <span>{formatTime(currentTime)}</span>
                     <progress
                         value={currentTime}
@@ -196,7 +196,7 @@ const Player = () => {
                     <span>{formatTime(duration)}</span>
                 </div>
 
-                <div className="position-relative d-flex align-items-center gap-3">
+                <div className="icons_player">
 
                     {MusicPlaylist[currentTrack]?.eng_lyrics ? (
                         <Image
@@ -267,7 +267,6 @@ const Player = () => {
                             onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                         />
                     </div>
-
                 </div>
             </div>
             {

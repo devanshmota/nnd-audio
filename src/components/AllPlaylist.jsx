@@ -12,6 +12,7 @@ import { withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import BreadCrumb from "./BreadCrumb";
 import noImg from '../../public/noImageFound.svg'
+import Link from "next/link";
 
 const AllPlaylist = () => {
 
@@ -109,14 +110,14 @@ const AllPlaylist = () => {
                 </div>
                 <div className="row">
 
-                    <div class="col-xl-2 col-lg-3 col-sm-4 col-6 playlist_container text-white mt-5" onClick={createPlaylist} >
+                    <div className="col-xl-2 col-lg-3 col-sm-4 col-6 playlist_container text-white mt-5" onClick={createPlaylist} >
                         <Image alt="playlist-icon" loading="lazy" width={51} height={37} src="/playlist_icon.svg" />
-                        <h5 class="m-0">Create Playlist</h5>
+                        <h5 className="m-0">Create Playlist</h5>
                     </div>
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
                             <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
-                                <div className="card-container text-white">
+                                <Link href={`/playlist/${item.id}`} className="card-container text-white">
 
 
                                     <Image src={item?.music[0]?.album?.image || noImg} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
@@ -134,7 +135,7 @@ const AllPlaylist = () => {
                                             </Dropdown>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         ))
                     }

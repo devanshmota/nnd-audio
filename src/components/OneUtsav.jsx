@@ -11,6 +11,7 @@ import SongPageHeader from "./SongPageHeader"
 import SongCard from "./SongCard"
 import { useSelector } from "react-redux"
 import OffCanvas from "./OffCanvas"
+import Pagination from './ReactPagination.jsx'
 
 const OneUtsav = ({ utsavid }) => {
 
@@ -23,12 +24,19 @@ const OneUtsav = ({ utsavid }) => {
     const [selectedMusicId, setSelectedMusicId] = useState(null);
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false)
 
+    const [total, setTotal] = useState(0);
+    const [offsetdata, setOffsetdata] = useState(0);
+    const limit = 18;
+
     useEffect(() => {
         fetchSigleArtistDataApi({
             utsav_id: utsavid.slug,
             is_guest: token ? 0 : 1,
+            offset: offsetdata,
+            limit: limit,
             onSuccess: (res) => {
                 setSingleUtsavData(res.data)
+                setTotal(res.total)
                 setIsLoading(false)
             },
             onError: (e) => {
@@ -36,16 +44,21 @@ const OneUtsav = ({ utsavid }) => {
                 setIsLoading(false)
             }
         })
-    }, [isLiked, selectedMusicId])
+    }, [isLiked, selectedMusicId, offsetdata])
 
     const handleSave = (musicId) => {
         setSelectedMusicId(musicId);
         setIsOffCanvasOpen(true)
     }
+    const handlePageChange = (selectedPage) => {
+        const newOffset = selectedPage.selected * limit;
+        setOffsetdata(newOffset);
+        window.scrollTo(0, 0);
+    };
 
     return (
         <div className="container text-white mt-5">
-            <BreadCrumb link1='/utsav-all' title={t('Utsav')} category={GetLanguage(language, singleUtsavData[0]?.utsav)} />
+
 
             {isLoading &&
                 <div className='d-flex align-items-center justify-content-center py-2'>
@@ -56,12 +69,21 @@ const OneUtsav = ({ utsavid }) => {
             {
                 singleUtsavData.length > 0 &&
                 <>
+                    <BreadCrumb link1='/utsav' title={t('Utsav')} category={GetLanguage(language, singleUtsavData[0]?.utsav)} />
                     <SongPageHeader playlist={singleUtsavData} src={singleUtsavData[0]?.utsav.image} title={GetLanguage(language, singleUtsavData[0]?.utsav)} />
-
                     <div className="row song_gap mt-4">
                         <SongCard data={singleUtsavData} handleSave={handleSave} />
                     </div>
                 </>
+            }
+            {
+                total > 18 && singleUtsavData.length > 0 && (
+                    <div className="row">
+                        <div className="col-12">
+                            <Pagination pageCount={Math.ceil(total / limit)} onPageChange={handlePageChange} className='reactPagination' />
+                        </div>
+                    </div>
+                )
             }
             {
                 !isLoading && singleUtsavData.length === 0 && <NoMusicsFound />

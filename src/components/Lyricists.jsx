@@ -41,7 +41,7 @@ const Lyricists = ({ lyricists }) => {
                 onNext={handleNext}
                 isBeginning={isBeginning}
                 isEnd={isEnd}
-                link="/lyricists-all"
+                link="/lyricists"
                 isShow={lyricists.length > 6}
             />
             <Swiper
@@ -90,7 +90,7 @@ const Lyricists = ({ lyricists }) => {
                 {
                     lyricists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <Link href={`/lyricists-all/${item.id}`} className="d-flex flex-column gap-3 align-items-center w-100">
+                            <Link href={`/lyricists/${item.id}`} className="d-flex flex-column gap-3 align-items-center w-100">
                                 <Image src={item.image || noImg} width={159} height={159} className="artist_img aspctRatio_music" layout='intrinsic' alt={item.eng_name} />
                                 <h5 className="text-white text-center m-0 lyricist_heading">{GetFirstWord(GetLanguage(language, item))}</h5>
                             </Link>

@@ -17,7 +17,7 @@ const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
                 {notifications?.length > 0 &&
                     notifications?.map((item) => (
                         Object.keys(item.category).length > 0 ? (
-                            <Link href={`/music-categories-all/${item.category.id}`}
+                            <Link href={`/music-categories/${item.category.id}`}
                                 className='d-flex align-items-center gap-2 ntfc_card mb-4' key={item.id}>
                                 <Image
                                     src={item.type === 'category' ? item.category.image : item.type === 'album' ? item.album.image : item.type === 'artist' ? item.artist.image : item.type === 'utsav' ? item.utsav.image : "/images/nnd_logo.png"}

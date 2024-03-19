@@ -61,7 +61,6 @@ const RenamePlaylistModal = ({ show, onHide, initialRenameValue, initialPlaylist
                     </div>
                     <button type="submit">{t('Update')}</button>
                 </form>
-
             </Modal.Body>
         </Modal>
     )

@@ -1,10 +1,10 @@
 'use client'
 import Modal from 'react-bootstrap/Modal';
-import { MdOutlineEmail, MdPhone, MdTempleBuddhist } from "react-icons/md";
+import { MdOutlineEmail, MdTempleBuddhist } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
+import { FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
-import { FaUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import { getCountriesApi, getTemplesApi, postUserApi } from '@/redux/actions/Campaign';
 import { auth } from './Firebase'
@@ -14,6 +14,9 @@ import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { FaAngleDown } from "react-icons/fa";
 import toast from 'react-hot-toast';
+import { IoFlagOutline } from "react-icons/io5";
+import { FiPhone } from "react-icons/fi";
+import { MdOutlineTempleBuddhist } from "react-icons/md";
 
 const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
     const dispatch = useDispatch();
@@ -183,13 +186,13 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                             <div className="row gy-4">
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
-                                        <FaUser className="all_icons" />
+                                        <FaRegUser className="all_icons" />
                                         <input name='firstName' value={formInfo.firstName} onChange={handleChange} type="text" placeholder={t('First Name')} required />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
-                                        <FaUser className="all_icons" />
+                                        <FaRegUser className="all_icons" />
                                         <input
                                             type="text"
                                             name='lastName'
@@ -237,7 +240,7 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                                 ))
                                             }
                                         </select>
-                                        <FaFlag className="all_icons" />
+                                        <IoFlagOutline className="all_icons" />
                                         <FaAngleDown className='down_Arrow'/>
                                     </div>
                                 </div>
@@ -261,13 +264,13 @@ const RegisterModal = ({ show, onHide, onLoginClick, ...props }) => {
                                             }
                                         </select>
                                         <FaAngleDown className='down_Arrow'/>
-                                        <MdTempleBuddhist className="all_icons" />
+                                        <MdOutlineTempleBuddhist className="all_icons" />
                                     </div>
                                 </div>
 
                                 <div className="col-sm-6">
                                     <div className="input_with_icon">
-                                        <MdPhone className="all_icons" />
+                                        <FiPhone className="all_icons" />
                                         <input type="tel" pattern='[0-9]{10}' placeholder={t("Phone Number")} name='phoneNumber'
                                             value={formInfo.phoneNumber}
                                             onChange={handleChange} required />

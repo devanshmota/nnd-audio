@@ -125,12 +125,14 @@ export const fetchSigleArtistDataApi = ({
     album_id = null,
     category_id = null,
     is_guest = null,
+    offset = null,
+    limit = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest),
+            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest, offset, limit),
             displayToast: false,
             onStart,
             onSuccess,
@@ -477,12 +479,13 @@ export const logoutApi = async ({
 };
 export const getRecentlyPlayedMusicApi = ({
     offset= null,
+    limit = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...getRecentlyPlayedMusic(offset),
+            ...getRecentlyPlayedMusic(offset, limit),
             displayToast: false,
             onStart,
             onSuccess,

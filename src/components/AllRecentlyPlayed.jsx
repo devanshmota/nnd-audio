@@ -20,12 +20,13 @@ const AllRecentlyPlayed = () => {
 
   const [total, setTotal] = useState(0);
   const [offsetdata, setOffsetdata] = useState(0);
-  const limit = 12;
+  const limit = 18;
 
   useEffect(() => {
 
     getRecentlyPlayedMusicApi({
       offset: offsetdata,
+      limit: limit,
       onSuccess: (res) => {
         if (res.music) {
           setRecentlyPlayed(res.music)
@@ -53,19 +54,19 @@ const AllRecentlyPlayed = () => {
 
 
   return (
-    <div className="container text-white">
-      <div className="row mt-5">
-
-        <BreadCrumb title={t('Recently Played')} />
+    <div className="container text-white mt-5">
+  
         {isLoading &&
           <div className='d-flex align-items-center justify-content-center py-2'>
             <ClipLoader color="#ffffff" />
           </div>
         }
-        <div className="row song_gap mt-5">
+        <BreadCrumb title={t('Recently Played')} />
+
+        <div className="row mt-5">
           <SongCard data={recentlyPlayed} handleSave={handleSave} />
         </div>
-      </div>
+     
       {
         total > 18 && recentlyPlayed.length > 0 && (
           <div className="row">

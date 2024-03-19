@@ -23,7 +23,7 @@ const AllLyricistsCard = () => {
 
     const [total, setTotal] = useState(0);
     const [offsetdata, setOffsetdata] = useState(0);
-    const limit = 12;
+    const limit = 18;
 
     useEffect(() => {
         getLyricistsApi({
@@ -61,7 +61,7 @@ const AllLyricistsCard = () => {
                 <BreadCrumb title={t('Lyricists')} />
                 {lyricists.length > 0 && lyricists.map((item) => (
                     <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
-                        <Link href={`/lyricists-all/${item.id}`} className="lyricits-container text-white">
+                        <Link href={`/lyricists/${item.id}`} className="lyricits-container text-white">
                             <Image src={item.image || noImg} alt={item.eng_name} width={200} height={200} className="view_all_images" layout="intrinsic" />
                             <h6 className="m-0">{GetLanguage(language, item)}</h6>
                         </Link>

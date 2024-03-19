@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
@@ -43,7 +43,7 @@ const Sidebar = ({ open }) => {
 
                                 {
                                     token && <li >
-                                        <Link href='/recently-played-all'>
+                                        <Link href='/recently-played'>
 
                                             <span className="nav_icon">
                                                 <Image src={recentPlayed} alt='recently played' width={25} height={25} />
@@ -124,7 +124,6 @@ const Sidebar = ({ open }) => {
                                         </span>
                                     </Link>
                                 </li>
-
                             </ul>
                         </div>
                     </div >

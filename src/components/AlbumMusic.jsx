@@ -6,12 +6,10 @@ import { useDispatch, useSelector } from "react-redux"
 import GetLanguage from "./GetLanguage"
 import { ClipLoader } from "react-spinners"
 import Nodataviewall from "./Nodataviewall"
-import Link from "next/link"
 import Pagination from './ReactPagination.jsx'
 import BreadCrumb from "./BreadCrumb"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
-import noImg from '../../public/noImageFound.svg'
 import Card from "./Card"
 
 const AlbumMusic = ({ categoryid }) => {
@@ -52,7 +50,7 @@ const AlbumMusic = ({ categoryid }) => {
     return (
         <div className="container">
             <div className="row mt-5">
-                <BreadCrumb title={t('Music Categories')} category={t(albums[0]?.category)} link1='/music-categories-all' />
+                <BreadCrumb title={t('Music Categories')} category={t(albums[0]?.category)} link1='/music-categories' />
             </div>
             <div className="row mt-5 row_gap">
                 {isLoading &&
@@ -64,7 +62,7 @@ const AlbumMusic = ({ categoryid }) => {
                 {
                     albums.length > 0 && albums.map((item, index) => (
 
-                        <Card key={index} href={`/music-categories-all/${categoryid.slug}/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
+                        <Card key={index} href={`/music-categories/${categoryid.slug}/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                     ))
                 }
             </div>

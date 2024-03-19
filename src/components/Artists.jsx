@@ -36,7 +36,7 @@ const Artists = ({ artists }) => {
                 onNext={handleNext}
                 isBeginning={isBeginning}
                 isEnd={isEnd}
-                link="/artists-all"
+                link="/artists"
                 isShow={artists.length > 6}
             />
             <Swiper
@@ -86,7 +86,7 @@ const Artists = ({ artists }) => {
                     artists.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
 
-                            <MusicCatAndArtists href={`/artists-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetFirstWord(GetLanguage(language, item))} />
+                            <MusicCatAndArtists href={`/artists/${item.id}`} src={item.image} alt={item.eng_name} title={GetFirstWord(GetLanguage(language, item))} />
 
 
                         </SwiperSlide>

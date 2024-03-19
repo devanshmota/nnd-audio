@@ -57,7 +57,7 @@ const RecentlyPlayed = () => {
       <div className="container">
         <CategoryHeader
           title="Recently Played"
-          link="/recently-played-all"
+          link="/recently-played"
           isShow={recentlyPlayed.length > 8}
         />
         <div className="row song_gap">

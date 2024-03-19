@@ -22,7 +22,7 @@ const SongPageHeader = ({ src, title, playlist }) => {
       <div className="col-lg-12">
         <div className="d-flex flex-column flex-lg-row align-items-center gap-4 pb-4 py-5 brdr_btm">
           <Image src={src || noImg} alt="profile" width={180} height={180} className="prfl_img" />
-          <div className="d-flex flex-column gap-4">
+          <div className="d-flex flex-column align-items-center align-items-lg-start gap-4">
             <h2 className="m-0">{title} </h2>
             <button className="dwnl_ply_btn" onClick={handlePlayAll}>{t('Play All')}</button>
           </div>

@@ -43,7 +43,7 @@ const Radio = ({ radio }) => {
                 onNext={handleNext}
                 isBeginning={isBeginning}
                 isEnd={isEnd}
-                link="/radio-all"
+                link="/radio"
                 isShow={radio.length > 6}
             />
 

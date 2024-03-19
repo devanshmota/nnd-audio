@@ -1,13 +1,10 @@
 'use client'
-import Image from 'next/image';
-import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import CategoryHeader from './CategoryHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import GetLanguage from './GetLanguage';
-import noImg from '../../public/noImageFound.svg'
 import MusicCatAndArtists from './MusicCatAndArtists';
 
 
@@ -42,7 +39,7 @@ const Music_categories = ({ musicCategory }) => {
                 onNext={handleNext}
                 isBeginning={isBeginning}
                 isEnd={isEnd}
-                link="/music-categories-all"
+                link="/music-categories"
                 isShow={musicCategory.length > 6}
             />
 
@@ -94,7 +91,7 @@ const Music_categories = ({ musicCategory }) => {
                             {
                                 musicCategory.slice(0, 10).map((item, index) => (
                                     <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                                        <MusicCatAndArtists href={`/music-categories-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
+                                        <MusicCatAndArtists href={`/music-categories/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                                     </SwiperSlide>
                                 ))
                             }

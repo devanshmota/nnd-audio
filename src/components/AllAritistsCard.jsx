@@ -1,18 +1,14 @@
 'use client'
 import { getArtistsApi } from "@/redux/actions/Campaign"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import GetLanguage from "./GetLanguage"
 import { useDispatch, useSelector } from "react-redux"
 import { ClipLoader } from "react-spinners"
-import Link from "next/link"
 import Nodataviewall from "./Nodataviewall"
 import Pagination from "./ReactPagination"
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
-import { setCurrentAlbum } from "@/redux/reducer/CachedataSlice"
 import BreadCrumb from "./BreadCrumb"
-import noImg from '../../public/noImageFound.svg'
 import Card from "./Card"
 
 
@@ -24,7 +20,7 @@ const AllAritistsCard = () => {
 
     const [total, setTotal] = useState(0);
     const [offsetdata, setOffsetdata] = useState(0);
-    const limit = 12;
+    const limit = 18;
 
     useEffect(() => {
         getArtistsApi({
@@ -51,10 +47,7 @@ const AllAritistsCard = () => {
         setOffsetdata(newOffset);
         window.scrollTo(0, 0);
     };
-    const handleCurrentAlbum = (id) => {
-        const currentAlbum = artists.find((item) => item.id === id)
-        dispatch(setCurrentAlbum(currentAlbum))
-    }
+ 
 
 
     return (
@@ -67,7 +60,7 @@ const AllAritistsCard = () => {
                 }
                 <BreadCrumb title={t('Artists')} />
                 {artists.length > 0 && artists.map((item, index) => (
-                    <Card key={index} href={`/artists-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
+                    <Card key={index} href={`/artists/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                 ))
 
                 }

@@ -65,7 +65,7 @@ const MusicCategoryallCard = () => {
                     <BreadCrumb title={t('Music Categories')} />
                     {
                         musicCategory.length > 0 && musicCategory.map((item, index) => (
-                            <Card key={index} href={`/music-categories-all/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
+                            <Card key={index} href={`/music-categories/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                         ))
                     }
                 </div>
