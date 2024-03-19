@@ -108,12 +108,16 @@ const AllPlaylist = () => {
                 <div className="row">
                     <BreadCrumb title={t('Playlist')} />
                 </div>
+
                 <div className="row">
 
-                    <div className="col-xl-2 col-lg-3 col-sm-4 col-6 playlist_container text-white mt-5" onClick={createPlaylist} >
-                        <Image alt="playlist-icon" loading="lazy" width={51} height={37} src="/playlist_icon.svg" />
-                        <h5 className="m-0">Create Playlist</h5>
+                    <div className="col-xl-2 col-lg-3 col-sm-4 col-6 text-white mt-5" onClick={createPlaylist} >
+                        <div className="playlist_container">
+                            <Image alt="playlist-icon" loading="lazy" width={30} height={30} layout="intrinsic" src="/playlist_icon.svg" />
+                            <h6 className="m-0 text-center font-small">Create Playlist</h6>
+                        </div>
                     </div>
+
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
                             <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">

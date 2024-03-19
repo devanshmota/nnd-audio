@@ -487,9 +487,9 @@ body.loaded .ms_loader {
 }
 
 .ms_nav_wrapper {
-    display: flex;
-    align-items: center;
-    height: 65vh;
+	display: flex;
+	align-items: center;
+	height: 65vh;
 }
 
 .ms_nav_wrapper ul {
@@ -8252,7 +8252,7 @@ select,
 	border: 1px solid #404451;
 }
 
-.login_form select option{
+.login_form select option {
 	background-color: #212635;
 }
 
@@ -8598,12 +8598,12 @@ select,
 }
 
 .playlist_container {
-	width: 242.66px;
-	height: 289.84px;
+	width: 100%;
+	height: auto;
 	background-color: #1a212bd1;
 	display: flex;
 	flex-direction: column;
-	gap: 18px;
+	gap: 7px;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
@@ -9084,8 +9084,8 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 .globalSearch {
-    display: table-cell !important;
-    width: 400px !important;
+	display: table-cell !important;
+	width: 400px !important;
 }
 
 .usersName {
@@ -9352,7 +9352,7 @@ input[type="range"] {
 	border-radius: 16px;
 }
 
-.song_detail{
+.song_detail {
 	max-width: 20%;
 }
 
@@ -9361,14 +9361,15 @@ input[type="range"] {
 	padding: 5px 15px;
 	border-radius: 5px;
 }
-.icons_player{
+
+.icons_player {
 	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
 
-.music_player_container{
+.music_player_container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -9376,7 +9377,7 @@ input[type="range"] {
 	color: white;
 }
 
-.progress_container{
+.progress_container {
 	display: flex;
 	align-items: center;
 	width: 50%;
@@ -9384,18 +9385,58 @@ input[type="range"] {
 }
 
 .volume_value {
-    position: absolute;
-    font-size: 12px;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: absolute;
+	font-size: 12px;
+	bottom: 15px;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	line-height: normal !important;
 }
 
+.ant-slider-mark-text {
+	color: white !important;
+}
+
+.ant-slider-track {
+	background-color: var(--secondary-color) !important;
+	height: 6px !important;
+}
+
+.ant-slider-rail {
+    background-color: #fefefe !important;
+	height: 6px !important;
+}
+
+.ant-slider-handle::after{
+	box-shadow: 0 0 0 2px var(--secondary-color) !important;
+	background-color: var(--secondary-color) !important;
+}
+
+.ant-slider-dot{
+	border: none !important;
+	inset-block-start: -1px !important;
+	background-color: #d9d9d9 !important;
+}
+
+.ant-slider-mark::before,
+.ant-slider-mark::after {
+  display: none !important;
+}
 

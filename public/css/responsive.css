@@ -182,9 +182,6 @@
 
 
 @media (max-width: 576px) {
-    .playlist_container {
-        height: 244px;
-    }
 
     .register_form {
         width: 22rem;

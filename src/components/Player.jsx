@@ -21,6 +21,7 @@ import shareIcon from '../../public/nnd/song_Share.svg'
 import toast from "react-hot-toast";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import { Slider } from "antd";
 
 
 const Player = () => {
@@ -151,6 +152,15 @@ const Player = () => {
         toast.success(t('Link copied to clipboard'))
     }
 
+    const marks = {
+        12: '12',
+        14: '14',
+        16: '16',
+        18: '18',
+        20: '20',
+        22: '22'
+      };
+
     return (
         <>
 
@@ -230,15 +240,9 @@ const Player = () => {
                                 <div className="d-flex flex-column gap-1">
                                     <center className="fontSize">Font Size ({FontSize}px)</center>
                                     <center>
-                                        <input
-                                            type="range"
-                                            min="12"
-                                            max="22"
-                                            step="2"
-                                            value={FontSize}
-                                            className="w-100"
-                                            onChange={(e) => handleFontChange(e.target.value)}
-                                        />
+                                       
+
+                                        <Slider marks={marks} step={null} min={12} max={22} defaultValue={16} onChange={handleFontChange} dots={false} />
                                     </center>
                                 </div>
                             </div>
