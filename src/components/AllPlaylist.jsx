@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import BreadCrumb from "./BreadCrumb";
 import noImg from '../../public/noImageFound.svg'
 import Link from "next/link";
+import NoPlaylist from "./NoPlaylist";
 
 const AllPlaylist = () => {
 
@@ -24,6 +25,7 @@ const AllPlaylist = () => {
     const [initialRenameValue, setInitialRenameValue] = useState('');
     const [initialPlaylistid, setInitialPlaylistid] = useState(null)
     const [isGetPlaylist, setIsGetPlaylist] = useState(false)
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (token) {
@@ -32,9 +34,11 @@ const AllPlaylist = () => {
                     if (res.data) {
                         setPlaylist(res.data)
                     }
+                    setIsLoading(false)
                 },
                 onError: (e) => {
                     console.log(e)
+                    setIsLoading(false)
                 }
             })
             setIsGetPlaylist(false)
@@ -121,25 +125,26 @@ const AllPlaylist = () => {
                     {
                         playlist.length > 0 && playlist.map((item, index) => (
                             <div key={index} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
-                                <Link href={`/playlist/${item.id}`} className="card-container text-white">
+                                <div className="card-container text-white">
 
-
-                                    <Image src={item?.music[0]?.album?.image || noImg} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
+                                    <Link href={`/playlist/${item.id}`} className="d-flex flex-column">
+                                        <Image src={item?.music[0]?.album?.image || noImg} alt='playlist' className="rounded-4 view_all_images" layout="intrinsic" width={200} height={200} />
+                                    </Link>
 
 
                                     <div className="d-flex align-items-center justify-content-between w-100">
 
-                                        <div className="d-flex flex-column">
+                                        <Link href={`/playlist/${item.id}`} className="d-flex flex-column">
                                             <h6 className="m-0">{item.title}</h6>
                                             <p className="text-rec-pld">{item?.music?.length} {t('Songs')}</p>
-                                        </div>
-                                        <div>
-                                            <Dropdown menu={menuProps(item.id)} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                                                <Button className="plylist_drp_btn"><BsThreeDotsVertical /></Button>
-                                            </Dropdown>
-                                        </div>
+                                        </Link>
+
+                                        <Dropdown menu={menuProps(item.id)} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                                            <Button className="plylist_drp_btn"><BsThreeDotsVertical /></Button>
+                                        </Dropdown>
+
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         ))
                     }
@@ -147,6 +152,9 @@ const AllPlaylist = () => {
             </div>
             <CreatePlaylistModal show={isPlaylistModalVisible} onHide={() => setIsPlaylistModalVisible(false)} handleCreatePlaylistSuccess={handleCreatePlaylistSuccess} />
             <RenamePlaylistModal show={isRenameModalVisible} onHide={() => setIsRenameModalVisible(false)} initialRenameValue={initialRenameValue} initialPlaylistid={initialPlaylistid} handleRenameSuccess={handleRenameSuccess} setIsGetPlaylist={setIsGetPlaylist} />
+            {
+                !isLoading && playlist.length === 0 && <NoPlaylist />
+            }
         </>
     )
 }

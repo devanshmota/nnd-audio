@@ -91,6 +91,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
 
     return (
         <>
+            
             <Modal
                 className='form_container'
                 show={show}
@@ -99,6 +100,7 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                data-backdrop="static"
             >
 
                 <Modal.Body >

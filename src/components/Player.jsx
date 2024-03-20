@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
 import { Slider } from "antd";
+import Link from "next/link";
 
 
 const Player = () => {
@@ -159,14 +160,13 @@ const Player = () => {
         18: '18',
         20: '20',
         22: '22'
-      };
+    };
 
     return (
         <>
 
             <div className="music_player_container ms_player_wrapper">
                 <div className="d-flex flex-column justify-content-center song_detail">
-
                     <div className="d-flex align-items-center gap-2">
                         <Image src={MusicPlaylist && MusicPlaylist[currentTrack]?.album?.image || MusicPlaylist[currentTrack]?.image || MusicPlaylist[currentTrack]?.img} alt="song" className="rounded" width={50} height={50} />
                         <div className="d-flex flex-column gap-1">
@@ -174,16 +174,15 @@ const Player = () => {
                             <p className="text-rec-pld">{MusicPlaylist && GetLanguage(language, MusicPlaylist[currentTrack]?.category)}</p>
                         </div>
                     </div>
-
                     {
                         MusicPlaylist[currentTrack]?.tags?.length > 0 && <div className="song_tags">
                             {
-                                MusicPlaylist[currentTrack]?.tags?.map(item => <span key={item.id}>{GetLanguage(language, item)}</span>)
+                                MusicPlaylist[currentTrack]?.tags?.map(item =>
+                                    <Link href={`/music/${item.id}`} key={item.id}>{GetLanguage(language, item)}</Link>
+                                )
                             }
                         </div>
                     }
-
-
                 </div>
 
                 <div className="d-flex align-items-center gap-3">
@@ -240,7 +239,7 @@ const Player = () => {
                                 <div className="d-flex flex-column gap-1">
                                     <center className="fontSize">Font Size ({FontSize}px)</center>
                                     <center>
-                                       
+
 
                                         <Slider marks={marks} step={null} min={12} max={22} defaultValue={16} onChange={handleFontChange} dots={false} />
                                     </center>

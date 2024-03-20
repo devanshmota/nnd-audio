@@ -193,7 +193,7 @@ export const updatePlaylist = (title, id) => {
         authorizationHeader: true,
     }
 }
-export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, category_id, is_guest, offset, limit) => {
+export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id, category_id, is_guest, offset, limit, tags) => {
     return {
         url: `${GET_SINGLE_ARTIST}`,
         method: "GET",
@@ -205,7 +205,8 @@ export const fetchSigleArtistData = (artist_id, lyricist_id, utsav_id, album_id,
             category_id: category_id,
             is_guest: is_guest,
             offset: offset,
-            limit: limit
+            limit: limit,
+            tags: tags
         },
         authorizationHeader: true,
     }

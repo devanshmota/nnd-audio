@@ -127,12 +127,13 @@ export const fetchSigleArtistDataApi = ({
     is_guest = null,
     offset = null,
     limit = null,
+    tags = null,
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(
         apiCallBegan({
-            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest, offset, limit),
+            ...fetchSigleArtistData(artist_id, lyricist_id, utsav_id, album_id,category_id, is_guest, offset, limit, tags),
             displayToast: false,
             onStart,
             onSuccess,

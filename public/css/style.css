@@ -8210,7 +8210,8 @@ button.header_login_btn {
 	width: 30rem;
 	color: white;
 	background-color: var(--primary-color);
-	border-radius: 10px;
+	border-radius: 36px;
+	border: 2px solid white;
 }
 
 
@@ -8781,7 +8782,7 @@ select,
 }
 
 .modal {
-	z-index: 1200 !important;
+	z-index: 1201 !important;
 }
 
 .md-delete {
@@ -9148,6 +9149,7 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 div:where(.swal2-container) div:where(.swal2-popup) {
 	background: var(--primary-color) !important;
 	color: white !important;
+	border-radius: 36px !important;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
@@ -9256,15 +9258,26 @@ button.swal2-cancel.swal2-styled.swal2-default-outline {
 	align-items: center;
 	gap: 5px;
 	margin-top: 1rem;
+	overflow-x: auto;
 }
 
-.song_tags span {
+.song_tags a {
 	padding: 2px 10px;
 	background-color: #212635;
 	border: 1px solid grey;
 	font-size: 14px;
 	border-radius: 30px;
-	max-width: 260px;
+	white-space: nowrap;
+}
+
+.song_tags::-webkit-scrollbar {
+	width: 3px;
+}
+
+.song_tags::-webkit-scrollbar-track {
+	height: 1px;
+	background-color: #212635;
+	/* Color of the scrollbar track */
 }
 
 .sidebar_border {
@@ -9294,6 +9307,14 @@ div:where(.swal2-container).swal2-noanimation {
 	gap: 10px;
 }
 
+.noplaylist_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
 .song_gap {
 	gap: 25px 0;
 }
@@ -9308,6 +9329,8 @@ input[type="range"] {
 	background: #ccc;
 	border-radius: 16px;
 }
+
+
 
 input[type="range"]::-webkit-slider-runnable-track {
 	height: 13px;
@@ -9420,16 +9443,16 @@ h6 {
 }
 
 .ant-slider-rail {
-    background-color: #fefefe !important;
+	background-color: #fefefe !important;
 	height: 6px !important;
 }
 
-.ant-slider-handle::after{
+.ant-slider-handle::after {
 	box-shadow: 0 0 0 2px var(--secondary-color) !important;
 	background-color: var(--secondary-color) !important;
 }
 
-.ant-slider-dot{
+.ant-slider-dot {
 	border: none !important;
 	inset-block-start: -1px !important;
 	background-color: #d9d9d9 !important;
@@ -9437,6 +9460,18 @@ h6 {
 
 .ant-slider-mark::before,
 .ant-slider-mark::after {
-  display: none !important;
+	display: none !important;
 }
 
+.fade {
+	transform: translateY(-50%) !important;
+	transition: transform 0.3s ease !important;
+}
+
+.show {
+	transform: translateY(0%) !important;
+}
+
+.modal-backdrop {
+	transition: none !important;
+}
