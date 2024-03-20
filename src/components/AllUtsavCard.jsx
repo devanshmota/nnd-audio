@@ -53,12 +53,12 @@ const AllUtsavCard = () => {
     return (
         <div className="container text-white">
             <div className="row mt-5 row_gap">
+                <BreadCrumb title={t('Utsav')} />
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <BreadCrumb title={t('Utsav')} />
                 {utsav.length > 0 && utsav.map((item, index) => (
                     <Card key={index} href={`/utsav/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />
                 ))

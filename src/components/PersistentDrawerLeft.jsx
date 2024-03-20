@@ -155,6 +155,19 @@ export default function PersistentDrawerLeft({ children }) {
         })
     }, [])
 
+    useEffect(() => {
+        const handleResize = () => {
+          if (window.innerWidth < 768) {
+            setOpen(false);
+          }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
     if (isLoading) {
         return <Loader />
     }

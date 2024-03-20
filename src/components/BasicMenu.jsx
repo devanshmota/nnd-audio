@@ -46,7 +46,7 @@ export function BasicMenu() {
             iconHtml: `<img src=${logoutIcon.src} width="88" height="88">`,
             customClass: {
                 icon: 'no-border'
-              },
+            },
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -83,7 +83,7 @@ export function BasicMenu() {
             iconHtml: `<img src=${deleteIcon.src} width="88" height="88">`,
             customClass: {
                 icon: 'no-border'
-              },
+            },
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -91,37 +91,31 @@ export function BasicMenu() {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-
-
-                    try {
-                        const user = auth.currentUser;
-                        if (user) {
-                            user.delete().then(() => {
-                                console.log('Account deleted successfully');
+                    const user = auth.currentUser;
+                    if (user) {
+                        user.delete().then(() => {
+                            console.log('Account deleted successfully');
+                            deleteAccountApi({
+                                onSuccess: (res) => {
+                                    if (res.error === false) {
+                                        Swal.fire({
+                                            title: t("Deleted!"),
+                                            text: t(res.message),
+                                            icon: "success"
+                                        });
+                                        dispatch(setUsers({}));
+                                        router.push('/');
+                                    }
+                                },
+                                onError: (e) => {
+                                    console.log(e);
+                                    toast.error(t("Failed to delete account."));
+                                }
                             });
-                        } else {
-                            toast.error(t('No user found'));
-                        }
-                    } catch (error) {
-                        toast.error(error.message);
+                        });
+                    } else {
+                        toast.error(t('No user found'));
                     }
-                    deleteAccountApi({
-                        onSuccess: (res) => {
-                            if (res.error === false) {
-                                Swal.fire({
-                                    title: t("Deleted!"),
-                                    text: t(res.message),
-                                    icon: "success"
-                                });
-                                dispatch(setUsers({}));
-                                router.push('/');
-                            }
-                        },
-                        onError: (e) => {
-                            console.log(e);
-                            toast.error(res.error);
-                        }
-                    });
                 }
             })
     }

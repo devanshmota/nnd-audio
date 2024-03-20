@@ -53,12 +53,12 @@ const AllLyricistsCard = () => {
     return (
         <div className="container">
             <div className="row mt-5">
+                <BreadCrumb title={t('Lyricists')} />
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <BreadCrumb title={t('Lyricists')} />
                 {lyricists.length > 0 && lyricists.map((item) => (
                     <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                         <Link href={`/lyricists/${item.id}`} className="lyricits-container text-white">

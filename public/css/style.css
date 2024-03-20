@@ -489,7 +489,7 @@ body.loaded .ms_loader {
 .ms_nav_wrapper {
 	display: flex;
 	align-items: center;
-	height: 65vh;
+	margin-top: 60px;
 }
 
 .ms_nav_wrapper ul {
@@ -6870,8 +6870,7 @@ h2.widget-title:after {
 	}
 
 	.ms_player_wrapper {
-		z-index: 10000;
-		height: 70px;
+		z-index: 1200;
 	}
 
 	.jp-gui.jp-interface.flex-wrap {
@@ -8958,7 +8957,7 @@ input.ant-input.css-1b0bdye.ant-input-outlined {
 }
 
 .pagination li.pagination__link--active a {
-	background-color: var(--primary-color);
+	background-color: var(--secondary-color);
 	color: #ffffff;
 }
 
@@ -9150,6 +9149,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 	background: var(--primary-color) !important;
 	color: white !important;
 	border-radius: 36px !important;
+	border: 2px solid white !important;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
@@ -9292,6 +9292,10 @@ button.swal2-cancel.swal2-styled.swal2-default-outline {
 div:where(.swal2-container).swal2-backdrop-show,
 div:where(.swal2-container).swal2-noanimation {
 	backdrop-filter: blur(5px);
+}
+
+div:where(.swal2-container){
+	z-index: 1200 !important;
 }
 
 .show {
@@ -9472,6 +9476,18 @@ h6 {
 	transform: translateY(0%) !important;
 }
 
-.modal-backdrop {
+.modal-backdrop,.offcanvas-backdrop {
 	transition: none !important;
+}
+.all_playlist_container{
+	max-height: 100%;
+	overflow-y: scroll;
+}
+
+.addPlay_cont{
+	height: 93%;
+}
+
+.dropdown-menu.show{
+	inset: 38px 0 auto auto !important;
 }

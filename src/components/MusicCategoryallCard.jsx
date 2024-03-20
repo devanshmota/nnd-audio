@@ -57,12 +57,12 @@ const MusicCategoryallCard = () => {
         <>
             <div className="container">
                 <div className="row mt-5 row_gap">
+                    <BreadCrumb title={t('Music Categories')} />
                     {isLoading &&
                         <div className='d-flex align-items-center justify-content-center py-2'>
                             <ClipLoader color="#ffffff" />
                         </div>
                     }
-                    <BreadCrumb title={t('Music Categories')} />
                     {
                         musicCategory.length > 0 && musicCategory.map((item, index) => (
                             <Card key={index} href={`/music-categories/${item.id}`} src={item.image} alt={item.eng_name} title={GetLanguage(language, item)} />

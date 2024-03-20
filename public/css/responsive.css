@@ -189,6 +189,9 @@
     .progress_container{
         display: none;
     }
+    .song_detail{
+        max-width: 50%;
+    }
 
 }
 

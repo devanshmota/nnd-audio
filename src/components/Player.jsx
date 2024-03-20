@@ -247,7 +247,7 @@ const Player = () => {
                             </div>
                         )
                     }
-                    <Image src={shareIcon} width={24} height={24} alt="shareIcon" onClick={copyToClip} />
+                    <Image src={shareIcon} width={24} height={24} alt="shareIcon" onClick={copyToClip} className="cursor-pointer" />
                     {
                         MusicPlaylist && MusicPlaylist[currentTrack]?.playlist?.length > 0 ? (
                             <Image src={heartFilled} alt="heart" width={25} height={25} className="icon_recent_plyd liked_rcnt music_player_icon" onClick={() => handleSave(MusicPlaylist && MusicPlaylist[currentTrack]?.id)} />

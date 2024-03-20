@@ -1,10 +1,8 @@
 'use client'
-import { MdPhone, MdTempleBuddhist } from "react-icons/md";
-import { FaAngleDown, FaFlag, FaRegEyeSlash, FaTransgenderAlt } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { MdOutlineEmail, MdOutlineTempleBuddhist} from "react-icons/md";
+import { FaAngleDown, FaRegUser, FaTransgenderAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { getCountriesApi, getTemplesApi, getUserDetailsApi, logoutApi, updateProfileApi } from "@/redux/actions/Campaign";
+import { getCountriesApi, getTemplesApi, updateProfileApi } from "@/redux/actions/Campaign";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +10,8 @@ import { setUsers } from "@/redux/reducer/UsersSlice";
 import { getDecryptedText } from "@/decryption/decryption";
 import { t } from 'i18next';
 import { withTranslation } from "react-i18next";
+import { IoFlagOutline } from "react-icons/io5";
+import { FiPhone } from "react-icons/fi";
 
 
 const GetProfile = () => {
@@ -169,7 +169,7 @@ const GetProfile = () => {
                                 <label htmlFor="firstName">{t('First Name')}</label>
                                 <div className="input_with_icon">
 
-                                    <FaUser className="all_icons" />
+                                    <FaRegUser className="all_icons" />
                                     <input name='firstName' id="firstName" value={formInfo.firstName} onChange={handleChange} type="text" placeholder={t("Enter your first name")} required />
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ const GetProfile = () => {
                             <div className="d-flex flex-column gap-1 w-100">
                                 <label htmlFor="lastName">{t('Last Name')}</label>
                                 <div className="input_with_icon">
-                                    <FaUser className="all_icons" />
+                                    <FaRegUser className="all_icons" />
                                     <input
                                         type="text"
                                         name='lastName'
@@ -206,7 +206,7 @@ const GetProfile = () => {
                                         <option value="male" name="gender">Male</option>
                                         <option value="female" name="gender">Female</option>
                                     </select>
-                                    <FaAngleDown className='down_Arrow'/>
+                                    <FaAngleDown className='down_Arrow' />
                                 </div>
                             </div>
                         </div>
@@ -214,7 +214,7 @@ const GetProfile = () => {
                             <div className="d-flex flex-column gap-1 w-100">
                                 <label htmlFor="email">{t('Email')}</label>
                                 <div className="input_with_icon">
-                                    <MdEmail className="all_icons" />
+                                    <MdOutlineEmail className="all_icons" />
                                     <input
                                         type="email"
                                         name='email'
@@ -240,8 +240,8 @@ const GetProfile = () => {
                                             ))
                                         }
                                     </select>
-                                    <FaFlag className="all_icons" />
-                                    <FaAngleDown className='down_Arrow'/>
+                                    <IoFlagOutline className="all_icons" />
+                                    <FaAngleDown className='down_Arrow' />
                                 </div>
                             </div>
                         </div>
@@ -249,7 +249,7 @@ const GetProfile = () => {
                             <div className="d-flex flex-column gap-1 w-100">
                                 <label htmlFor="phoneNumber">{t('Phone Number')}</label>
                                 <div className="input_with_icon">
-                                    <MdPhone className="all_icons" />
+                                    <FiPhone className="all_icons" />
                                     <input type="tel" pattern='[0-9]{10}' placeholder={t("Phone Number")} name='phoneNumber' id="phoneNumber"
                                         value={formInfo.phoneNumber}
                                         onChange={handleChange} required />
@@ -278,8 +278,8 @@ const GetProfile = () => {
                                             )
                                         }
                                     </select>
-                                    <MdTempleBuddhist className="all_icons" />
-                                    <FaAngleDown className='down_Arrow'/>
+                                    <MdOutlineTempleBuddhist className="all_icons" />
+                                    <FaAngleDown className='down_Arrow' />
                                 </div>
                             </div>
                         </div>

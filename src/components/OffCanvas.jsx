@@ -160,10 +160,11 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
         <>
             <Offcanvas placement="end" show={show} onHide={onHide} {...props}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{t('Add to playlist')}</Offcanvas.Title>
+                    <Offcanvas.Title></Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <div className='d-flex flex-column gap-3 h-100'>
+                    <h5 className='mb-4'>{t('Add to playlist')}</h5>
+                    <div className='d-flex flex-column gap-3 addPlay_cont'>
                         <div className="playlist_container_canvas text-white" onClick={handleCreateClick} >
                             <Image src='/playlist_icon.svg' alt='playlist-icon' width={28} height={14} />
                             <p className="m-0 text-small">{t('Create Playlist')}</p>
@@ -180,7 +181,7 @@ const OffCanvas = ({ show, handleSave, onHide, selectedMusicId, isLiked, setIsLi
                             </form>
                         }
 
-                        <div className="container">
+                        <div className="container all_playlist_container">
                             <div className="row">
 
                                 {

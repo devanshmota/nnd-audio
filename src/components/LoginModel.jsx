@@ -39,11 +39,9 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                         checkLoginApi({
                             uid: auth.user.uid,
                             onSuccess: (res) => {
-                                if (res.error === false) {
-
+                                if (res.registered === true) {
                                     toast.success(res.message)
                                     disptach(setUsers(res))
-
                                     updateFcmIdApi({
                                         fcm_id: fcmToken,
                                         onSuccess: (res) => {
@@ -59,23 +57,20 @@ const LoginModel = ({ show, onHide, onRegisterClick, onForgotPasswordClick, ...p
                                         password: ''
                                     })
                                     onHide()
-
                                 }
-
-
                             },
-                            onError: (error) => {
-                                toast.error(error.message)
+                            onError: (e) => {
+                                toast.error(e.message)
                             }
                         })
-
                     }
                     else {
                         toast.error(t('Email is not verified'))
                     }
                 }
+                
             })
-            .catch((error) => toast.error(error.message))
+            .catch((e) => toast.error(e.message))
     }
 
     const handleRegisterClick = () => {

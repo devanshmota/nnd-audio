@@ -55,18 +55,18 @@ const AllRecentlyPlayed = () => {
 
   return (
     <div className="container text-white mt-5">
-  
-        {isLoading &&
-          <div className='d-flex align-items-center justify-content-center py-2'>
-            <ClipLoader color="#ffffff" />
-          </div>
-        }
-        <BreadCrumb title={t('Recently Played')} />
 
-        <div className="row mt-5">
-          <SongCard data={recentlyPlayed} handleSave={handleSave} />
+      <BreadCrumb title={t('Recently Played')} />
+      {isLoading &&
+        <div className='d-flex align-items-center justify-content-center py-2'>
+          <ClipLoader color="#ffffff" />
         </div>
-     
+      }
+
+      <div className="row mt-5">
+        <SongCard data={recentlyPlayed} handleSave={handleSave} />
+      </div>
+
       {
         total > 18 && recentlyPlayed.length > 0 && (
           <div className="row">

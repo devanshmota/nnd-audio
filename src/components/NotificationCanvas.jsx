@@ -11,9 +11,11 @@ const NotificationCanvas = ({ show, onHide, notifications, ...props }) => {
     return (
         <Offcanvas placement="end" show={show} onHide={onHide} {...props}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{t('Notifications')}</Offcanvas.Title>
+                <Offcanvas.Title></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+
+                <h5 className='mb-4'>{t('Notifications')}</h5>
                 {notifications?.length > 0 &&
                     notifications?.map((item) => (
                         Object.keys(item.category).length > 0 ? (

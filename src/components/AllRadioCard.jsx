@@ -57,12 +57,12 @@ const AllRadioCard = () => {
     return (
         <div className="container">
             <div className="row mt-5">
+                <BreadCrumb title={t('Radio 24x7')} />
                 {isLoading &&
                     <div className='d-flex align-items-center justify-content-center py-2'>
                         <ClipLoader color="#ffffff" />
                     </div>
                 }
-                <BreadCrumb title={t('Radio 24x7')}/>
                 {radio.length > 0 && radio.map((item) => (
                     <div key={item.id} className="col-xl-2 col-lg-3 col-sm-4 col-6 d-flex justify-content-center mt-5">
                         <div onClick={() => handlePlayMusic(item.id)} className="lyricits-container text-white cursor-pointer">

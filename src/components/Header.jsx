@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoginModel from "./LoginModel";
 import RegisterModal from "./RegisterModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
@@ -19,7 +19,7 @@ import { withTranslation } from "react-i18next";
 import { IoIosArrowDown } from "react-icons/io";
 
 
-const Header = ({ open, handleDrawerOpen }) => {
+const Header = () => {
 
   const dispatch = useDispatch()
   const users = useSelector((state) => state.users)
@@ -31,17 +31,6 @@ const Header = ({ open, handleDrawerOpen }) => {
   const [isForgotPasswordVisible, setIsForgotPasswordVisible] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // useEffect(() => {
-  //   if (language === 'Gujarati') {
-  //     document.querySelectorAll('*').forEach(element => {
-  //       const currentElementFontSize = parseFloat(window.getComputedStyle(element).fontSize);
-  //       const newElementFontSize = currentElementFontSize + 5;
-  //       element.style.fontSize = `${newElementFontSize}px`;
-  //     });
-  //   } else {
-  //     document.body.style.fontSize = 'inherit';
-  //   }
-  // }, [language])
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);

@@ -27,7 +27,7 @@ const HomePage = () => {
   useEffect(() => {
     getHomeApi({
       is_guest: token ? 0 : 1,
-      onSuccess: (res) => {
+      onSuccess: (res) => { 
         if (res) {
           setHome(res)
         }

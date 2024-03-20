@@ -38,39 +38,39 @@ const SongCard = ({ data, handleSave }) => {
 
     return (
         <>
-            
-                {
-                    data.map((item, index) => (
-                        <div key={index} className="col-xxl-4 col-lg-6">
-                            <div className="d-flex align-items-center justify-content-between text-white music_card">
-                                <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
-                                    <Image src={item.album.image || noImg} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
-                                    <div className="d-flex flex-column gap-2">
-                                        <h5 className="m-0 text-break title_rcnt_plyd">
-                                            {GetLanguage(language, item)}
 
-                                        </h5>
-                                        <p className="text-rec-pld desc_rcnt_plyd">
-                                            {GetCatLanguage(language, item)}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="d-flex align-items-center gap-2 gap-md-3">
-                                    <Image src={shareIcon} width={24} height={24} className="icon_recent_plyd" onClick={copyToClip} />
-                                    {token && (
-                                        <>
-                                            {item.playlist.length > 0 ? (
-                                                <Image src={heartFilled} className="icon_recent_plyd" onClick={() => handleLike(item.id)} width={24} height={24} />
-                                            ) : (
-                                                <Image src={heartIcon} className="icon_recent_plyd" onClick={() => handleLike(item.id)} width={24} height={24} />
-                                            )}
-                                        </>
-                                    )}
+            {
+                data.map((item, index) => (
+                    <div key={index} className="col-xxl-4 col-lg-6">
+                        <div className="d-flex align-items-center justify-content-between text-white music_card">
+                            <div onClick={() => handlePlayMusic(item.id)} className="d-flex align-items-center gap-3 cursor-pointer">
+                                <Image src={item.album.image || noImg} alt='jula_shree_ghanshyam' className="rounded" width={80} height={80} />
+                                <div className="d-flex flex-column gap-2">
+                                    <h5 className="m-0 text-break title_rcnt_plyd">
+                                        {GetLanguage(language, item)}
+
+                                    </h5>
+                                    <p className="text-rec-pld desc_rcnt_plyd">
+                                        {GetCatLanguage(language, item)}
+                                    </p>
                                 </div>
                             </div>
+                            <div className="d-flex align-items-center gap-2 gap-md-3">
+                                <Image src={shareIcon} width={24} height={24} className="icon_recent_plyd" onClick={copyToClip} />
+                                {token && (
+                                    <>
+                                        {item.playlist.length > 0 ? (
+                                            <Image src={heartFilled} className="icon_recent_plyd" onClick={() => handleLike(item.id)} width={24} height={24} />
+                                        ) : (
+                                            <Image src={heartIcon} className="icon_recent_plyd" onClick={() => handleLike(item.id)} width={24} height={24} />
+                                        )}
+                                    </>
+                                )}
+                            </div>
                         </div>
-                    ))
-                }
+                    </div>
+                ))
+            }
         </>
     )
 }

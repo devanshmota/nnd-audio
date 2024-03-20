@@ -25,9 +25,6 @@ const FirebaseNotification = ({ children }) => {
       }
     };
     fetchToken();
-    // onMessage(messaging, (payload) => {
-    //   console.log('Message received:', payload);
-    // });
   }, [])
 
   useEffect(() => {
