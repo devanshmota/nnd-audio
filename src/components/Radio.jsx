@@ -93,7 +93,7 @@ const Radio = ({ radio }) => {
                 {
                     radio.slice(0, 10).map((item, index) => (
                         <SwiperSlide key={item.id} virtualIndex={index} className='d-flex align-items-center justify-content-sm-start justify-content-center'>
-                            <div onClick={() => handlePlayMusic(item.id)} className="d-flex flex-column gap-3 align-items-center w-100 cursor-pointer">
+                            <div onClick={() => handlePlayMusic(item.id)} className="d-flex flex-column gap-2 align-items-center w-100 cursor-pointer">
                                 <Image src={item.image || noImg} className="artist_img aspctRatio_music" alt={item.eng_title} width={200} height={200} layout='intrinsic' />
                                 <h5 className="text-white text-center m-0">
                                     {GetFirstWord(GetLanguage(language, item))}
